@@ -3,22 +3,3 @@ debug: false
 server:
   port: 8190
 
-spring:
-  datasource:
-    type: org.apache.commons.dbcp2.BasicDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/mihuantang?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&useSSL=false&socketTimeout=30000&connectTimeout=3000
-    username: mihuantang
-    password: mihuan@9
-    dbcp2:
-      validation-query: SELECT 1
-      pool-prepared-statements: true
-    platform: mysql
-    schema: classpath:sql/schema.sql
-    initialization-mode: always
-  thymeleaf:
-    cache: false
-
-calf:
-  passoword-salt: 呵呵呵23#￥
-  path-upload: /www/mihuantang/upload

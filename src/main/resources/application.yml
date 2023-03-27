@@ -1,7 +1,7 @@
 #
 spring:
   application:
-    name: calf
+    name: liens
   profiles:
     active: dev
   cache:
@@ -12,17 +12,5 @@ spring:
     multipart:
       max-file-size: 10MB
 
-mybatis:
-  configuration:
-    mapUnderscoreToCamelCase: true
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-calf:
-  passoword-salt: hehehe
-  path-upload: /zhy
-  theme:
-    name: pure
-    fragments:
-      recommend: common/recommend
-      work: common/work-show
 

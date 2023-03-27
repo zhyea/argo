@@ -2,7 +2,7 @@ debug: false
 
 spring:
   application:
-    name: calf
+    name: liens-admin
   profiles:
     active: dev
   thymeleaf:

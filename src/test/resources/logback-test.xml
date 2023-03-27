@@ -15,7 +15,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.chobit" level="ERROR" additivity="false">
+    <logger name="com.zhyea" level="ERROR" additivity="false">
         <appender-ref ref="ROLLING_FILE"/>
     </logger>
 

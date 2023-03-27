@@ -1,0 +1,19 @@
+[Unit]
+Description=Liens Service
+Documentation=https://liens.chobit.org
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/path_to_boot
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=always
+StandOutput=syslog
+
+StandError=inherit
+
+[Install]
+WantedBy=multi-user.target
+
+# the file should be placed at /usr/lib/systemd/system/

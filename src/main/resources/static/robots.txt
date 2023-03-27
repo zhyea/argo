@@ -1,6 +1,2 @@
 User-agent: *
-Disallow: /admin
-Disallow: /login
-Disallow: /logout
-Disallow: /upload
-Disallow: /static
+Disallow: /*

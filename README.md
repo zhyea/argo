@@ -1,12 +1,12 @@
-# Linka
+# Liens
 
 ---
 
-Linka营销系统
+Liens营销系统
 
 ## Install
 
-启动文件是`tiger.service`。
+启动文件是`liens.service`。
 
 启动文件需要被置于如下路径：
 
@@ -20,20 +20,20 @@ Linka营销系统
 # 修改 service 文件之后需要刷新 Systemd
 sudo systemctl daemon-reload
 
-# 使 Calf 开机自启
-sudo systemctl enable tiger
+# 使 Liens 开机自启
+sudo systemctl enable liens
 
-# 启动 Calf
-sudo service tiger start
+# 启动 Liens
+sudo service liens start
 
-# 重启 Calf
-sudo service tiger restart
+# 重启 Liens
+sudo service liens restart
 
-# 停止 Calf
-sudo service tiger stop
+# 停止 Liens
+sudo service liens stop
 
-# 查看 Calf 的运行状态
-sudo service tiger status
+# 查看 Liens 的运行状态
+sudo service liens status
 ```
 
 ## Domain
@@ -42,7 +42,7 @@ sudo service tiger status
 
 ```shell script
 # 添加 Nginx 源
-sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+sudo rpm -Uvh https://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 
 # 安装 Nginx
 sudo yum install -y nginx
@@ -54,13 +54,13 @@ sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
 ```
 
-将配置文件tiger.conf移动到如下位置
+将配置文件liens.conf移动到如下位置
 
 ```text
 /etc/nginx/conf.d/
 ```
 
-修改tiger.conf文件中的域名和端口信息。
+修改liens.conf文件中的域名和端口信息。
 
 然后执行如下操作：
 
