@@ -1,0 +1,15 @@
+debug: false
+
+spring:
+  application:
+    name: cm-business
+  profiles:
+    active: dev
+  sql:
+    init:
+      mode: never
+      schema-locations: schema.sql
+
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
