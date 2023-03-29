@@ -1,9 +1,9 @@
-package org.chobit.cm.tools;
+package com.zhyea.biz.liens.tools;
 
 
-import org.chobit.cm.spring.response.ApiException;
+import com.zhyea.biz.liens.spring.response.ApiErrorCode;
+import com.zhyea.biz.liens.spring.response.ApiException;
 
-import static org.chobit.cm.spring.response.ApiErrorCode.BAD_REQUEST;
 import static org.chobit.common.utils.StrKit.isBlank;
 
 /**
@@ -21,7 +21,7 @@ public final class Args {
      */
     public static void check(boolean result, String errMsg) {
         if (result) {
-            throw new ApiException(BAD_REQUEST, errMsg);
+            throw new ApiException(ApiErrorCode.BAD_REQUEST, errMsg);
         }
     }
 
@@ -117,7 +117,7 @@ public final class Args {
                 return;
             }
         }
-        throw new ApiException(BAD_REQUEST, errMsg);
+        throw new ApiException(ApiErrorCode.BAD_REQUEST, errMsg);
     }
 
 
@@ -137,7 +137,7 @@ public final class Args {
                 return;
             }
         }
-        throw new ApiException(BAD_REQUEST, errMsg);
+        throw new ApiException(ApiErrorCode.BAD_REQUEST, errMsg);
     }
 
 

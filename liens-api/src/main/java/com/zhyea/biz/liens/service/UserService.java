@@ -1,13 +1,13 @@
-package org.chobit.cm.service;
+package com.zhyea.biz.liens.service;
 
-import org.chobit.cm.common.constants.UserState;
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.common.model.PageReq;
-import org.chobit.cm.common.model.PageResult;
-import org.chobit.cm.service.feign.UserFeignApi;
-import org.chobit.cm.tools.Args;
-import org.chobit.cm.tools.DES;
-import org.chobit.cm.tools.MailSender;
+import com.zhyea.biz.liens.common.constants.UserState;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.common.model.PageReq;
+import com.zhyea.biz.liens.common.model.PageResult;
+import com.zhyea.biz.liens.service.feign.UserFeignApi;
+import com.zhyea.biz.liens.tools.Args;
+import com.zhyea.biz.liens.tools.DES;
+import com.zhyea.biz.liens.tools.MailSender;
 import org.chobit.common.codec.MD5;
 import org.chobit.common.concurrent.Threads;
 import org.slf4j.Logger;
@@ -20,8 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.chobit.cm.common.constants.UserState.INIT;
-import static org.chobit.cm.common.constants.UserState.VERIFIED;
 import static org.chobit.common.utils.StrKit.isBlank;
 import static org.chobit.common.utils.StrKit.toLong;
 
@@ -99,7 +97,7 @@ public class UserService {
 
 
     public void reInform() {
-        List<User> users = userApi.findByState(INIT);
+        List<User> users = userApi.findByState(UserState.INIT);
         for (User user : users) {
             inform(user);
             userApi.updateState(user.getId(), UserState.INFORMED);
@@ -136,7 +134,7 @@ public class UserService {
         if (null == user) {
             return null;
         }
-        userApi.updateState(user.getId(), VERIFIED);
+        userApi.updateState(user.getId(), UserState.VERIFIED);
         return user;
     }
 

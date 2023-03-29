@@ -1,4 +1,4 @@
-package org.chobit.cm.biz.tools;
+package com.zhyea.biz.liens.tools;
 
 import org.springframework.context.ApplicationContext;
 

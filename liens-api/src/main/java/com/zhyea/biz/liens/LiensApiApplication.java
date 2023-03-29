@@ -1,4 +1,4 @@
-package org.chobit.cm;
+package com.zhyea.biz.liens;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -23,11 +23,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableEurekaClient
 @EnableCaching
 @SpringBootApplication
-public class CmApiApplication {
+public class LiensApiApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(CmApiApplication.class, args);
+        SpringApplication.run(LiensApiApplication.class, args);
     }
 
 

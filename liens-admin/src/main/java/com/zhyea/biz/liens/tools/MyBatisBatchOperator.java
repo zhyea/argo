@@ -1,4 +1,4 @@
-package org.chobit.cm.biz.tools;
+package com.zhyea.biz.liens.tools;
 
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;

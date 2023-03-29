@@ -1,4 +1,4 @@
-package org.chobit.cm.biz.spring;
+package com.zhyea.biz.liens.spring;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;

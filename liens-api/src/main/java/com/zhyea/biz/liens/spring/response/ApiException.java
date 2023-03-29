@@ -1,4 +1,4 @@
-package org.chobit.cm.spring.response;
+package com.zhyea.biz.liens.spring.response;
 
 /**
  * @author robin

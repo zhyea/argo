@@ -2,7 +2,7 @@ debug: false
 
 spring:
   application:
-    name: cm-business
+    name: liens-admin
   profiles:
     active: dev
   sql:

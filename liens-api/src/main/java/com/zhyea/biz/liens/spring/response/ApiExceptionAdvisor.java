@@ -1,7 +1,7 @@
-package org.chobit.cm.spring.response;
+package com.zhyea.biz.liens.spring.response;
 
 
-import org.chobit.cm.common.model.ResultWrapper;
+import com.zhyea.biz.liens.common.model.ResultWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static org.chobit.cm.spring.response.ApiErrorCode.BAD_REQUEST;
-import static org.chobit.cm.spring.response.ApiErrorCode.MISSING_PARAMETER;
+import static com.zhyea.biz.liens.spring.response.ApiErrorCode.BAD_REQUEST;
+import static com.zhyea.biz.liens.spring.response.ApiErrorCode.MISSING_PARAMETER;
 
 
 /**

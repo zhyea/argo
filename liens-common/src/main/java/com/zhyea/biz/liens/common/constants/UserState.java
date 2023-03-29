@@ -1,4 +1,4 @@
-package org.chobit.cm.common.constants;
+package com.zhyea.biz.liens.common.constants;
 
 public enum UserState {
 

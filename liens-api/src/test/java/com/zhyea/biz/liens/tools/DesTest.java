@@ -1,4 +1,4 @@
-package org.chobit.cm.tools;
+package com.zhyea.biz.liens.tools;
 
 import org.junit.jupiter.api.Test;
 

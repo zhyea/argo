@@ -1,7 +1,7 @@
-package org.chobit.cm.dao;
+package com.zhyea.biz.liens.dao;
 
+import com.zhyea.biz.liens.common.entity.User;
 import org.apache.ibatis.annotations.*;
-import org.chobit.cm.common.entity.User;
 
 import java.util.List;
 

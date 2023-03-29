@@ -1,8 +1,8 @@
-package org.chobit.cm.biz;
+package com.zhyea.biz.liens;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.chobit.cm.biz.tools.BeanKit;
+import com.zhyea.biz.liens.tools.BeanKit;
 import org.chobit.common.json.LocalDateTimeModule;
 import org.chobit.common.utils.JsonKit;
 import org.springframework.beans.BeansException;

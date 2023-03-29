@@ -1,10 +1,10 @@
-package org.chobit.cm.biz;
+package com.zhyea.biz.liens;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.chobit.cm.biz.tools.BeanKit;
+import com.zhyea.biz.liens.tools.BeanKit;
 import org.chobit.common.json.LocalDateTimeModule;
 import org.chobit.common.utils.JsonKit;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,7 +14,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author robin
@@ -22,14 +21,13 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaClient
 @EnableCaching
 @SpringBootApplication
-@ComponentScan({"org.chobit.cm"})
 @MapperScan({"org.chobit.cm"})
-public class CmBizApplication {
+public class LiensAdminApplication {
 
 
     public static void main(String[] args) {
         prepare();
-        ApplicationContext ctx = SpringApplication.run(CmBizApplication.class, args);
+        ApplicationContext ctx = SpringApplication.run(LiensAdminApplication.class, args);
         BeanKit.init(ctx);
         System.out.println("应用启动成功...");
     }

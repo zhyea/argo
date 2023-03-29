@@ -1,6 +1,6 @@
-package org.chobit.cm.spring.response;
+package com.zhyea.biz.liens.spring.response;
 
-import org.chobit.cm.common.model.ResultWrapper;
+import com.zhyea.biz.liens.common.model.ResultWrapper;
 import org.chobit.common.utils.JsonKit;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;

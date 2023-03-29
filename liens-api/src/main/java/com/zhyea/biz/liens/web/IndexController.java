@@ -1,4 +1,4 @@
-package org.chobit.cm.web;
+package com.zhyea.biz.liens.web;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

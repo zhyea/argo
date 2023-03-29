@@ -1,7 +1,7 @@
-package org.chobit.cm;
+package com.zhyea.biz.liens;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.chobit.cm.common.model.ResultWrapper;
+import com.zhyea.biz.liens.common.model.ResultWrapper;
 import org.chobit.common.utils.JsonKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;

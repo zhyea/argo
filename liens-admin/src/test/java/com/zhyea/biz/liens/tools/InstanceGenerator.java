@@ -1,6 +1,6 @@
-package org.chobit.cm.biz.tools;
+package com.zhyea.biz.liens.tools;
 
-import org.chobit.cm.common.entity.User;
+import com.zhyea.biz.liens.common.entity.User;
 import org.chobit.common.tools.ShortCode;
 import org.chobit.common.utils.StrKit;
 

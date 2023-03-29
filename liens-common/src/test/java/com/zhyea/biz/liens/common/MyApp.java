@@ -1,4 +1,4 @@
-package org.chobit.cm.common;
+package com.zhyea.biz.liens.common;
 
 public class MyApp {
 }

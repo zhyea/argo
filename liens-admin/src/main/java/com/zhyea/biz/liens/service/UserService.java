@@ -1,14 +1,14 @@
-package org.chobit.cm.biz.service;
+package com.zhyea.biz.liens.service;
 
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.chobit.cm.biz.tools.MyBatisBatchOperator;
-import org.chobit.cm.common.constants.UserState;
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.common.model.PageReq;
-import org.chobit.cm.common.model.PageResult;
-import org.chobit.cm.dao.UserMapper;
+import com.zhyea.biz.liens.common.model.PageReq;
+import com.zhyea.biz.liens.tools.MyBatisBatchOperator;
+import com.zhyea.biz.liens.common.constants.UserState;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.common.model.PageResult;
+import com.zhyea.biz.liens.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;

@@ -1,7 +1,7 @@
-package org.chobit.cm.spring;
+package com.zhyea.biz.liens.spring;
 
 
-import org.chobit.cm.service.UserService;
+import com.zhyea.biz.liens.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;

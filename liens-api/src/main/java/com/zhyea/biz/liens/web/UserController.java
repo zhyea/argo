@@ -1,11 +1,11 @@
-package org.chobit.cm.web;
+package com.zhyea.biz.liens.web;
 
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.common.model.PageReq;
-import org.chobit.cm.common.model.PageResult;
-import org.chobit.cm.service.UserService;
-import org.chobit.cm.spring.response.ResponseWrapperBody;
-import org.chobit.cm.tools.Args;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.common.model.PageReq;
+import com.zhyea.biz.liens.common.model.PageResult;
+import com.zhyea.biz.liens.service.UserService;
+import com.zhyea.biz.liens.spring.response.ResponseWrapperBody;
+import com.zhyea.biz.liens.tools.Args;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

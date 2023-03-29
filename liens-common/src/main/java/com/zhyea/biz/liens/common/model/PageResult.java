@@ -1,4 +1,4 @@
-package org.chobit.cm.common.model;
+package com.zhyea.biz.liens.common.model;
 
 import java.util.Collection;
 import java.util.LinkedList;

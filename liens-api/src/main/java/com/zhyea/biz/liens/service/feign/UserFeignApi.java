@@ -1,10 +1,10 @@
-package org.chobit.cm.service.feign;
+package com.zhyea.biz.liens.service.feign;
 
+import com.zhyea.biz.liens.common.constants.UserState;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.common.model.PageReq;
+import com.zhyea.biz.liens.common.model.PageResult;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import org.chobit.cm.common.constants.UserState;
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.common.model.PageReq;
-import org.chobit.cm.common.model.PageResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

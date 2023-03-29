@@ -1,12 +1,12 @@
-package org.chobit.cm.api;
+package com.zhyea.biz.liens.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.chobit.cm.ApiTestBase;
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.common.model.PageReq;
-import org.chobit.cm.common.model.PageResult;
-import org.chobit.cm.tools.DES;
-import org.chobit.cm.tools.InstanceGenerator;
+import com.zhyea.biz.liens.tools.InstanceGenerator;
+import com.zhyea.biz.liens.ApiTestBase;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.common.model.PageReq;
+import com.zhyea.biz.liens.common.model.PageResult;
+import com.zhyea.biz.liens.tools.DES;
 import org.chobit.common.model.ParamMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;

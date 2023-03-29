@@ -1,8 +1,8 @@
-package org.chobit.cm.service;
+package com.zhyea.biz.liens.service;
 
-import org.chobit.cm.TestBase;
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.service.feign.UserFeignApi;
+import com.zhyea.biz.liens.TestBase;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.service.feign.UserFeignApi;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

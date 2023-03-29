@@ -1,6 +1,6 @@
-package org.chobit.cm;
+package com.zhyea.biz.liens;
 
-import org.chobit.cm.tools.Args;
+import com.zhyea.biz.liens.tools.Args;
 
 public class MyApp {
 

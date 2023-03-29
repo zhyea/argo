@@ -2,7 +2,7 @@ debug: false
 #
 spring:
   application:
-    name: cm-api
+    name: liens-api
   profiles:
     active: dev
 #

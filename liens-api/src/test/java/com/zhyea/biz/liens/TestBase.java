@@ -1,4 +1,4 @@
-package org.chobit.cm;
+package com.zhyea.biz.liens;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

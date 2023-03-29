@@ -4,5 +4,5 @@ ENV SPRING_PROFILES_ACTIVE prod
 
 EXPOSE 8087
 VOLUME /tmp
-ADD target/*.jar cm-business.jar
-ENTRYPOINT ["java","-jar","/cm-business.jar"]
+ADD target/*.jar liens-admin.jar
+ENTRYPOINT ["java","-jar","/liens-admin.jar"]

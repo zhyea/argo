@@ -1,9 +1,9 @@
-package org.chobit.cm.biz.service;
+package com.zhyea.biz.liens.service;
 
-import org.chobit.cm.biz.TestBase;
-import org.chobit.cm.common.entity.User;
-import org.chobit.cm.common.model.PageReq;
-import org.chobit.cm.common.model.PageResult;
+import com.zhyea.biz.liens.TestBase;
+import com.zhyea.biz.liens.common.entity.User;
+import com.zhyea.biz.liens.common.model.PageReq;
+import com.zhyea.biz.liens.common.model.PageResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.chobit.cm.biz.tools.InstanceGenerator.genUsers;
+import static com.zhyea.biz.liens.tools.InstanceGenerator.genUsers;
 
 
 public class UserServiceTest extends TestBase {
