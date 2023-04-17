@@ -3,6 +3,3 @@ server:
   port: 8088
 #
 #
-eureka:
-  instance:
-    hostname: localhost
