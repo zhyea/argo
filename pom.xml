@@ -95,11 +95,12 @@
 
 
     <modules>
-        <module>liens-api</module>
-        <module>liens-admin</module>
         <module>liens-common</module>
-        <module>liens-balance</module>
+        <module>liens-model</module>
+        <module>liens-admin</module>
+        <module>liens-api</module>
         <module>liens-gateway</module>
+        <module>liens-balance</module>
     </modules>
 
 </project>
