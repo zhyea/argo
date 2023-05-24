@@ -3,6 +3,10 @@ package com.zhyea.biz.liens.tools;
 import org.springframework.context.ApplicationContext;
 
 /**
+ * Spring Bean 获取工具包
+ * <p>
+ * 主要用于需要使用静态方式获取Bean的场景
+ *
  * @author robin
  */
 public final class BeanKit {
@@ -24,6 +28,7 @@ public final class BeanKit {
     public static <T> T get(Class<T> c) {
         return context.getBean(c);
     }
+
 
     private BeanKit() {
     }

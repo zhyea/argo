@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zhyea.biz.liens.tools.BeanKit;
-import org.chobit.common.json.LocalDateTimeModule;
-import org.chobit.common.utils.JsonKit;
+import org.chobit.commons.json.LocalDateTimeModule;
+import org.chobit.commons.utils.JsonKit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,6 +14,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 /**
+ * 启动类
+ *
  * @author robin
  */
 @EnableCaching
@@ -27,7 +29,6 @@ public class LiensAdminApplication {
         BeanKit.init(ctx);
         System.out.println("应用启动成功...");
     }
-
 
 
     private static void prepare() {

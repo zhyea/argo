@@ -22,11 +22,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.chobit.common</groupId>
-            <artifactId>zhy-utils</artifactId>
-            <version>[0.1, )</version>
-        </dependency>
     </dependencies>
 
     <build>
