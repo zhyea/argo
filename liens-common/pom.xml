@@ -22,6 +22,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.chobit.commons</groupId>
+            <artifactId>common-model</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
