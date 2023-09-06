@@ -22,8 +22,11 @@ public class LiensAdminApplication {
 
     public static void main(String[] args) {
         prepare();
+
         ApplicationContext ctx = SpringApplication.run(LiensAdminApplication.class, args);
+
         BeanKit.init(ctx);
+
         System.out.println("应用启动成功...");
     }
 
