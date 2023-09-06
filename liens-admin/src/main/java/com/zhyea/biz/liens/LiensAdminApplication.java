@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 /**
- * 启动类
+ * Liens Admin 启动类
  *
  * @author robin
  */

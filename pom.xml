@@ -129,6 +129,7 @@
         <module>liens-api</module>
         <module>liens-gateway</module>
         <module>liens-balance</module>
+        <module>liens-cms</module>
     </modules>
 
 </project>
