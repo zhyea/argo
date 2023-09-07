@@ -48,7 +48,7 @@ public enum UserTypeEnum implements CodeDescEnum {
     }
 
     @Override
-    public Integer getCode() {
+    public int getCode() {
         return this.code;
     }
 }
