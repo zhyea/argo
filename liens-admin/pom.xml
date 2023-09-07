@@ -44,11 +44,16 @@
             <groupId>com.zhyea.biz</groupId>
             <artifactId>liens-common</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+
         <!-- 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,7 +79,7 @@
             </plugin>
         </plugins>
 
-        <finalName>cm-api</finalName>
+        <finalName>liens-admin</finalName>
     </build>
 
 </project>
