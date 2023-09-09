@@ -45,6 +45,10 @@
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <!-- 测试 -->
         <dependency>

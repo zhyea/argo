@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
 @ResponseBody
-public @interface ResponseWrapperBody {
+public @interface ResponseWrapper {
 
 
 

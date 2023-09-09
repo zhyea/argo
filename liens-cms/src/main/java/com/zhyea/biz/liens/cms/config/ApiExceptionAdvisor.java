@@ -1,6 +1,8 @@
 package com.zhyea.biz.liens.cms.config;
 
 
+import lombok.extern.slf4j.Slf4j;
+import org.chobit.commons.enums.CommonStatusCode;
 import org.chobit.commons.model.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 
+/**
+ * @author robin
+ */
+@Slf4j
 @ControllerAdvice
 public class ApiExceptionAdvisor {
-
-
-    private static final Logger logger = LoggerFactory.getLogger(ApiExceptionAdvisor.class);
 
 
     /**
@@ -35,7 +38,7 @@ public class ApiExceptionAdvisor {
 
         if (e instanceof MissingServletRequestParameterException) {
             String parameterName = ((MissingServletRequestParameterException) e).getParameterName();
-            r.setCode(1000);
+            r.setCode(CommonStatusCode.FAIL.code);
             r.setMsg("请求参数错误，参数名:" + parameterName);
         }
         logger.error("发现内部异常：{}", r.getMsg(), e);

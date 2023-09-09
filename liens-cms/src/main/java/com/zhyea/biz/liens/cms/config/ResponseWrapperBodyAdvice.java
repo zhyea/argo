@@ -1,8 +1,9 @@
 package com.zhyea.biz.liens.cms.config;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micrometer.core.lang.NonNullApi;
+import io.micrometer.core.lang.Nullable;
 import org.chobit.commons.model.Result;
+import org.chobit.commons.utils.JsonKit;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.MediaType;
@@ -19,22 +20,24 @@ import java.lang.annotation.Annotation;
 /**
  * @author zhangrui137
  */
+@NonNullApi
 @RestControllerAdvice
 public class ResponseWrapperBodyAdvice implements ResponseBodyAdvice<Object> {
 
 
-    private static final Class<? extends Annotation> ANNOTATION_TYPE = ResponseWrapperBody.class;
+    private static final Class<? extends Annotation> ANNOTATION_TYPE = ResponseWrapper.class;
 
 
     @Override
     public boolean supports(MethodParameter returnType,
                             Class<? extends HttpMessageConverter<?>> converterType) {
-        return AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ANNOTATION_TYPE) || returnType.hasMethodAnnotation(ANNOTATION_TYPE);
+        return AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ANNOTATION_TYPE)
+                || returnType.hasMethodAnnotation(ANNOTATION_TYPE);
     }
 
 
     @Override
-    public Object beforeBodyWrite(Object body,
+    public Object beforeBodyWrite(@Nullable Object body,
                                   MethodParameter returnType,
                                   MediaType selectedContentType,
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
@@ -44,11 +47,7 @@ public class ResponseWrapperBodyAdvice implements ResponseBodyAdvice<Object> {
             return body;
         }
         if (selectedConverterType.equals(StringHttpMessageConverter.class)) {
-            try {
-                return new ObjectMapper().writeValueAsString(new Result<>(body));
-            } catch (JsonProcessingException e) {
-                return "";
-            }
+            return JsonKit.toJson(new Result<>(body));
         }
         return new Result<>(body);
     }

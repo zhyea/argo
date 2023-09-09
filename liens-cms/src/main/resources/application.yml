@@ -1,0 +1,25 @@
+debug: false
+
+spring:
+  application:
+    name: liens-cms
+  profiles:
+    active: dev
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  info:
+    build:
+      enabled: true

@@ -1,6 +1,6 @@
 package com.zhyea.biz.liens.cms.controller;
 
-import com.zhyea.biz.liens.cms.config.ResponseWrapperBody;
+import com.zhyea.biz.liens.cms.config.ResponseWrapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author robin
  */
-@ResponseWrapperBody
+@ResponseWrapper
 @RestController
 @RequestMapping("")
 public class IndexController {
