@@ -1,7 +1,5 @@
 package com.zhyea.biz.liens.cms.config;
 
-import io.micrometer.core.lang.NonNullApi;
-import io.micrometer.core.lang.Nullable;
 import org.chobit.commons.model.Result;
 import org.chobit.commons.utils.JsonKit;
 import org.springframework.core.MethodParameter;
@@ -20,9 +18,8 @@ import java.lang.annotation.Annotation;
 /**
  * @author zhangrui137
  */
-@NonNullApi
 @RestControllerAdvice
-public class ResponseWrapperBodyAdvice implements ResponseBodyAdvice<Object> {
+public class ResponseWrapperAdvice implements ResponseBodyAdvice<Object> {
 
 
     private static final Class<? extends Annotation> ANNOTATION_TYPE = ResponseWrapper.class;
@@ -37,7 +34,7 @@ public class ResponseWrapperBodyAdvice implements ResponseBodyAdvice<Object> {
 
 
     @Override
-    public Object beforeBodyWrite(@Nullable Object body,
+    public Object beforeBodyWrite(Object body,
                                   MethodParameter returnType,
                                   MediaType selectedContentType,
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
