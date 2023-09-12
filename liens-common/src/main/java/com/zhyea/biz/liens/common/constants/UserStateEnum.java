@@ -5,7 +5,7 @@ import org.chobit.commons.contract.CodeDescEnum;
 /**
  * 用户状态
  *
- * @author rui.zhang
+ * @author robin
  */
 public enum UserStateEnum implements CodeDescEnum {
 

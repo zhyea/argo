@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * Liens CMS 启动类
  *
- * @author rui.zhang
+ * @author robin
  */
 @EnableCaching
 @SpringBootApplication
