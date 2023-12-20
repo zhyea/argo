@@ -1,6 +1,6 @@
 package com.zhyea.biz.liens.cms.config;
 
-import org.chobit.commons.model.Result;
+import org.chobit.commons.model.response.Result;
 import org.chobit.commons.utils.JsonKit;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -9,6 +9,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.lang.NonNullApi;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -32,9 +34,9 @@ public class ResponseWrapperAdvice implements ResponseBodyAdvice<Object> {
                 || returnType.hasMethodAnnotation(ANNOTATION_TYPE);
     }
 
-
+    
     @Override
-    public Object beforeBodyWrite(Object body,
+    public Object beforeBodyWrite(@Nullable Object body,
                                   MethodParameter returnType,
                                   MediaType selectedContentType,
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,

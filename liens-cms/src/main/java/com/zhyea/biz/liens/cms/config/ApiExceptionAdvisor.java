@@ -3,7 +3,7 @@ package com.zhyea.biz.liens.cms.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.enums.CommonStatusCode;
-import org.chobit.commons.model.Result;
+import org.chobit.commons.model.response.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
