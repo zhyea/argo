@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-    <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
+        <artifactId>argo</artifactId>
         <groupId>com.zhyea.biz</groupId>
-        <artifactId>liens</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>liens-admin</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>argo-cms</artifactId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,17 +39,16 @@
         <!-- others -->
         <dependency>
             <groupId>com.zhyea.biz</groupId>
-            <artifactId>liens-common</artifactId>
+            <artifactId>argo-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
-
 
         <!-- 测试 -->
         <dependency>
@@ -79,7 +75,7 @@
             </plugin>
         </plugins>
 
-        <finalName>liens-admin</finalName>
+        <finalName>liens-cms</finalName>
     </build>
 
 </project>

@@ -1,4 +1,4 @@
-# Liens
+# Argo
 
 用户管理功能
 
@@ -9,12 +9,12 @@
 ### 1. 获取源码
 
 ```shell
-git clone git@github.com:zhyea/liens.git
+git clone git@github.com:zhyea/argo.git
 ```
 或者
 
 ```shell
-wget https://github.com/zhyea/liens/archive/refs/heads/main.zip
+wget https://github.com/zhyea/argo/archive/refs/heads/main.zip
 unzip main.zip
 mv liens-main liens
 ```

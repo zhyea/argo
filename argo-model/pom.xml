@@ -12,7 +12,7 @@
         <version>0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>liens-balance</artifactId>
+    <artifactId>argo-model</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -22,11 +22,6 @@
     </properties>
 
     <dependencies>
-        <!--database-->
-        <dependency>
-            <groupId>com.zhyea.biz</groupId>
-            <artifactId>liens-common</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

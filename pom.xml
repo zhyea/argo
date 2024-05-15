@@ -8,11 +8,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.11</version>
+        <version>2.7.18</version>
     </parent>
 
     <groupId>com.zhyea.biz</groupId>
-    <artifactId>liens</artifactId>
+    <artifactId>argo</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -78,7 +78,7 @@
             <!-- project -->
             <dependency>
                 <groupId>com.zhyea.biz</groupId>
-                <artifactId>liens-common</artifactId>
+                <artifactId>argo-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- tools -->
@@ -123,13 +123,13 @@
 
 
     <modules>
-        <module>liens-common</module>
-        <module>liens-model</module>
-        <module>liens-admin</module>
-        <module>liens-api</module>
-        <module>liens-gateway</module>
-        <module>liens-balance</module>
-        <module>liens-cms</module>
+        <module>argo-common</module>
+        <module>argo-model</module>
+        <module>argo-admin</module>
+        <module>argo-api</module>
+        <module>argo-gateway</module>
+        <module>argo-balance</module>
+        <module>argo-cms</module>
     </modules>
 
 </project>
