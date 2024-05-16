@@ -1,8 +1,7 @@
 package com.zhyea.biz.argo;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.chobit.common.model.ResultWrapper;
-import org.chobit.common.utils.JsonKit;
+import org.chobit.commons.utils.JsonKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
@@ -14,7 +13,6 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.Map;
 
-import static org.chobit.common.utils.JsonKit.toJson;
 
 
 public abstract class ApiTestBase extends TestBase {
@@ -34,7 +32,7 @@ public abstract class ApiTestBase extends TestBase {
 
     protected <T> String testPost(String path, Map<String, String> headers, T entity) {
         path = buildPath(path);
-        System.out.println(toJson(entity));
+        System.out.println(JsonKit.toJson(entity));
         ResponseEntity<String> response = restTemplate.postForEntity(path, new HttpEntity<>(entity, headers(headers)), String.class);
         return response.getBody();
     }
@@ -48,7 +46,7 @@ public abstract class ApiTestBase extends TestBase {
             map.add(e.getKey(), e.getValue());
         }
 
-        System.out.println(toJson(params));
+        System.out.println(JsonKit.toJson(params));
         ResponseEntity<String> response = restTemplate.postForEntity(path, new HttpEntity<>(map, headers(headers)), String.class);
         return response.getBody();
     }
@@ -56,7 +54,7 @@ public abstract class ApiTestBase extends TestBase {
 
     protected <T> String testPut(String path, Map<String, String> headers, T param) {
         path = buildPath(path);
-        System.out.println(toJson(param));
+        System.out.println(JsonKit.toJson(param));
         ResponseEntity<String> response = restTemplate.exchange(path, HttpMethod.PUT, new HttpEntity<>(param, headers(headers)), String.class);
         return response.getBody();
     }
