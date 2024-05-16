@@ -127,8 +127,6 @@
         <module>argo-model</module>
         <module>argo-admin</module>
         <module>argo-api</module>
-        <module>argo-gateway</module>
-        <module>argo-balance</module>
         <module>argo-cms</module>
     </modules>
 

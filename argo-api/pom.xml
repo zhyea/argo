@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>com.zhyea.biz</groupId>
-        <artifactId>liens</artifactId>
+        <artifactId>argo</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
 

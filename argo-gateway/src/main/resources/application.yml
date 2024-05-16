@@ -1,8 +1,0 @@
-#
-spring:
-  application:
-    name: liens-gateway
-  profiles:
-    active: dev
-#
-#

@@ -15,7 +15,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.zhyea.biz.liens" level="INFO" additivity="false">
+    <logger name="com.zhyea.biz.argo" level="INFO" additivity="false">
         <appender-ref ref="ROLLING_FILE"/>
     </logger>
 
