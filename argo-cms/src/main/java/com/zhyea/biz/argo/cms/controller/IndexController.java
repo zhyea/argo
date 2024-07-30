@@ -1,6 +1,5 @@
 package com.zhyea.biz.argo.cms.controller;
 
-import com.zhyea.biz.argo.cms.config.ResponseWrapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author robin
  */
-@ResponseWrapper
 @RestController
 @RequestMapping("")
 public class IndexController {

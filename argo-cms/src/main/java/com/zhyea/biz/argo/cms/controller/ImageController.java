@@ -2,7 +2,6 @@ package com.zhyea.biz.argo.cms.controller;
 
 
 import com.zhyea.biz.argo.cms.biz.ImageBiz;
-import com.zhyea.biz.argo.cms.config.ResponseWrapper;
 import com.zhyea.biz.argo.cms.model.ImageInf;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import java.util.List;
  *
  * @author robin
  */
-@ResponseWrapper
 @RestController
 @RequestMapping("/img")
 public class ImageController {
