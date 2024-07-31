@@ -1,0 +1,6 @@
+
+Would skip repository zero/
+logs/
+target/
+*.iml
+.idea/
