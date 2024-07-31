@@ -21,7 +21,6 @@ public class ArgoAdminApplication {
 
 
     public static void main(String[] args) {
-        prepare();
 
         ApplicationContext ctx = SpringApplication.run(ArgoAdminApplication.class, args);
 
@@ -30,18 +29,4 @@ public class ArgoAdminApplication {
         System.out.println("应用启动成功...");
     }
 
-
-    private static void prepare() {
-        JsonKit.mapper().registerModule(new LocalDateTimeModule());
-    }
-
-
-    @Bean
-    public ObjectMapper mapper() {
-        ObjectMapper mapper = JsonKit.mapper();
-
-        mapper.registerModule(new LocalDateTimeModule());
-
-        return mapper;
-    }
 }

@@ -12,9 +12,9 @@ import org.springframework.context.ApplicationContextAware;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestBase implements ApplicationContextAware {
 
-    @Override
-    public void setApplicationContext(ApplicationContext context) throws BeansException {
-        ObjectMapper mapper = JsonKit.mapper();
-        mapper.registerModule(new LocalDateTimeModule());
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext context) throws BeansException {
+		ObjectMapper mapper = JsonKit.mapper();
+		mapper.registerModule(new LocalDateTimeModule());
+	}
 }

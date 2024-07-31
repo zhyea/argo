@@ -1,7 +1,5 @@
 package com.zhyea.argo;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import org.chobit.commons.model.response.Result;
 import org.chobit.commons.utils.JsonKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -108,24 +106,4 @@ public abstract class ApiTestBase extends TestBase {
         }
         return result;
     }
-
-
-    protected <T> T fromResult(String json, Class<T> clazz) {
-        System.out.println(json);
-        Result<Object> resultWrapper = JsonKit.fromJson(json, new TypeReference<Result<Object>>() {
-        });
-        String content = JsonKit.toJson(resultWrapper.getContent());
-        return JsonKit.fromJson(content, clazz);
-    }
-
-
-    protected <T> T fromResult(String json, TypeReference<T> t) {
-        System.out.println(json);
-        Result<Object> resultWrapper = JsonKit.fromJson(json, new TypeReference<Result<Object>>() {
-        });
-        String content = JsonKit.toJson(resultWrapper.getContent());
-        return JsonKit.fromJson(content, t);
-    }
-
-
 }
