@@ -11,8 +11,8 @@
         <version>2.7.18</version>
     </parent>
 
-    <groupId>com.zhyea.biz</groupId>
-    <artifactId>argo</artifactId>
+    <groupId>com.zhyea.argo</groupId>
+    <artifactId>argo-server</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -23,11 +23,10 @@
         <java.version>1.8</java.version>
 
         <!-- dependency version -->
-        <ali.druid.version>1.2.16</ali.druid.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <lombok.version>1.18.30</lombok.version>
-        <zhy-commons.version>0.1.1</zhy-commons.version>
+        <zhy-commons.version>0.1.3.3</zhy-commons.version>
         <junit.version>5.9.3</junit.version>
     </properties>
 
@@ -53,31 +52,9 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <!-- database -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${ali.druid.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${ali.druid.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-extension</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
             <!-- project -->
             <dependency>
-                <groupId>com.zhyea.biz</groupId>
+                <groupId>com.zhyea.argo</groupId>
                 <artifactId>argo-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -117,7 +94,6 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
