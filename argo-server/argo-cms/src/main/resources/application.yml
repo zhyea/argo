@@ -2,15 +2,9 @@ debug: false
 
 spring:
   application:
-    name: liens-cms
+    name: argo-cms
   profiles:
     active: dev
-  sql:
-    init:
-      mode: always
-      schema-locations: classpath:schema.sql
-
-
 
 management:
   endpoints:
