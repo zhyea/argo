@@ -37,6 +37,18 @@ public class ComponentDefineEntity extends BaseEntity {
 
 
 	/**
+	 * 业务数据连接
+	 */
+	private String dataUrl;
+
+
+	/**
+	 * 业务数据解析规则
+	 */
+	private String dataParseRule;
+
+
+	/**
 	 * 组件备注
 	 */
 	private String remark;

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * entity
+ * base entity
  *
  * @author robin
  */
@@ -35,7 +35,7 @@ public abstract class BaseEntity {
 	 * 创建时间
 	 */
 	private Date createTime;
-	
+
 
 	/**
 	 * 更新时间

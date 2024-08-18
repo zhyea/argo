@@ -1,4 +1,4 @@
-package com.zhyea.argo.model;
+package com.zhyea.argo.constants;
 
 import org.chobit.commons.contract.CodeDescEnum;
 
