@@ -11,7 +11,13 @@ public enum MetaComponentTypeEnum {
 	/**
 	 * 字符串
 	 */
-	STRING
+	STRING,
+
+
+	/**
+	 * 图片
+	 */
+	IMAGE,
 
 
 }
