@@ -53,6 +53,10 @@
             <artifactId>argo-common</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.zhyea.argo</groupId>
+            <artifactId>argo-model</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
         </dependency>

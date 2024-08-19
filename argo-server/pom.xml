@@ -58,6 +58,11 @@
                 <artifactId>argo-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.zhyea.argo</groupId>
+                <artifactId>argo-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- tools -->
             <dependency>
                 <groupId>org.projectlombok</groupId>

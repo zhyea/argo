@@ -1,4 +1,4 @@
-package com.zhyea.argo.model;
+package com.zhyea.argo.cms.model.item;
 
 import lombok.Data;
 
