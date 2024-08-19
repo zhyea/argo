@@ -5,7 +5,7 @@ package com.zhyea.argo.cms.constants;
  *
  * @author robin
  */
-public enum MetaComponentTypeEnum {
+public enum ComponentTypeEnum {
 
 
 	/**
@@ -18,6 +18,12 @@ public enum MetaComponentTypeEnum {
 	 * 图片
 	 */
 	IMAGE,
+
+
+	/**
+	 * 组合类型
+	 */
+	COMBINE,
 
 
 }
