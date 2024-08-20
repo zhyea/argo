@@ -9,7 +9,7 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class ComponentDefineEntity extends BaseEntity {
+public class ComponentEntity extends BaseEntity {
 
 
 	/**
@@ -37,15 +37,9 @@ public class ComponentDefineEntity extends BaseEntity {
 
 
 	/**
-	 * 业务数据连接
+	 * 数据来源模式
 	 */
-	private String dataUrl;
-
-
-	/**
-	 * 业务数据解析规则
-	 */
-	private String dataParseRule;
+	private Integer dataSourceMode;
 
 
 	/**

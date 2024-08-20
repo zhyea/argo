@@ -33,6 +33,12 @@ public class ComponentPropEntity extends BaseEntity {
 
 
 	/**
+	 * 属性值选择器
+	 */
+	private String propValueSelector;
+
+
+	/**
 	 * 属性生效周期类型
 	 */
 	private Integer effectPeriodType;
