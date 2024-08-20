@@ -14,18 +14,39 @@ import java.time.LocalDateTime;
 public class ComponentPropEntity extends BaseEntity {
 
 
+	/**
+	 * 组件ID
+	 */
 	private Integer componentId;
 
 
-	private String prop;
+	/**
+	 * 属性key
+	 */
+	private String propKey;
 
 
+	/**
+	 * 属性值
+	 */
 	private String propValue;
 
 
-	private LocalDateTime startTime;
+	/**
+	 * 属性生效周期类型
+	 */
+	private Integer effectPeriodType;
 
 
-	private LocalDateTime endTime;
+	/**
+	 * 属性生效开始时间
+	 */
+	private LocalDateTime effectStartTime;
+
+
+	/**
+	 * 属性生效结束时间
+	 */
+	private LocalDateTime effectEndTime;
 
 }
