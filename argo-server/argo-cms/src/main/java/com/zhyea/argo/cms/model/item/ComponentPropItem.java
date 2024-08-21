@@ -25,12 +25,6 @@ public class ComponentPropItem {
 
 
 	/**
-	 * 属性生效周期类型
-	 */
-	private Integer effectPeriodType;
-
-
-	/**
 	 * 备注
 	 */
 	private String remark;

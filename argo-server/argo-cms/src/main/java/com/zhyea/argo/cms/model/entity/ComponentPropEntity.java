@@ -38,6 +38,11 @@ public class ComponentPropEntity extends BaseEntity {
 	private String propValueSelector;
 
 
+	/**
+	 * 属性生效周期类型
+	 */
+	private Integer effectPeriodType;
+
 
 	/**
 	 * 属性生效开始时间
