@@ -23,15 +23,17 @@ public class ComponentPropItem {
 	private String name;
 
 
+
+	/**
+	 * 属性生效周期类型
+	 */
+	private Integer effectPeriodType;
+
+
 	/**
 	 * 备注
 	 */
 	private String remark;
 
-
-	/**
-	 * 是否是可变的
-	 */
-	private Integer changeable;
 
 }
