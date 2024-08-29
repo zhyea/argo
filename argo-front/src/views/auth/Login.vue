@@ -3,34 +3,42 @@
 <template>
 
 	<div class="login-register-container">
+
 		<div class="container right-panel-active" ref="containerRef">
-			<div class="container__form container--signup">
-				<el-form action="#" class="form" id="form1">
-					<h2 class="form-title">Register</h2>
+
+			<div class="container-form container-register">
+
+				<el-form action="#" class="form" id="registerForm">
+					<h2 class="form-title">注册</h2>
 					<el-input size="large" type="text" placeholder="User" class="input"/>
-					<el-input size="large" type="email" placeholder="Email" class="input"/>
+					<el-input size="large" type="text" placeholder="Email" class="input"/>
 					<el-input size="large" type="password" placeholder="Password" class="input"/>
 					<el-button size="large" class="btn" @click="submitSignUp">Submit</el-button>
 				</el-form>
 			</div>
 
-			<div class="container__form container--signin">
-				<el-form action="#" class="form" id="form2">
-					<h2 class="form-title">Login</h2>
-					<el-input size="large" type="email" placeholder="Email" class="input"/>
+			<div class="container-form container-login">
+
+				<el-form ref="authFormRef"
+				         :model="authForm"
+				         :rules="authRules"
+				         status-icon label-width="auto" class="form" action="#" id="loginForm">
+					<h2 class="form-title">登录</h2>
+					<el-input size="large" type="text" placeholder="Email" class="input"/>
 					<el-input size="large" type="password" placeholder="Password" class="input"/>
 					<a href="#" class="link">Forgot your password?</a>
 					<el-button size="large" class="btn" @click="submitSignIn">Submit</el-button>
 				</el-form>
 			</div>
 
-			<div class="container__overlay">
+			<div class="container-overlay">
 				<div class="overlay">
-					<div class="overlay__panel overlay--left">
-						<el-button size="large" round class="btn" id="signIn" @click="handleSignIn">Login</el-button>
+					<div class="overlay-panel overlay-left">
+						<el-button size="large" round class="btn" id="signUp" @click="handleRegister">Register
+						</el-button>
 					</div>
-					<div class="overlay__panel overlay--right">
-						<el-button size="large" round class="btn" id="signUp" @click="handleSignUp">Register</el-button>
+					<div class="overlay-panel overlay--right">
+						<el-button size="large" round class="btn" id="signIn" @click="handleLogin">Login</el-button>
 					</div>
 				</div>
 			</div>
@@ -111,12 +119,12 @@ const authRules = {
 const containerRef = ref()
 
 
-const handleSignIn = () => {
+const handleRegister = () => {
 	containerRef.value.classList.remove("right-panel-active");
 }
 
 
-const handleSignUp = () => {
+const handleLogin = () => {
 	containerRef.value.classList.add("right-panel-active");
 }
 
@@ -140,6 +148,8 @@ const submitSignIn = (e) => {
 	--blue: #0367a6;
 	--lightblue: #008997;
 	--button-radius: 0.7rem;
+	height: 60vh;
+	width: 60vw;
 }
 
 .container {
@@ -168,38 +178,38 @@ const submitSignIn = (e) => {
 }
 
 
-.container__form {
+.container-form {
 	height: 100%;
 	position: absolute;
 	top: 0;
 	transition: all 0.6s ease-in-out;
 }
 
-.container--signin {
+.container-register {
 	left: 0;
 	width: 50%;
 	z-index: 2;
 }
 
-.container.right-panel-active .container--signin {
+.container.right-panel-active .container-register {
 	transform: translateX(100%);
 }
 
-.container--signup {
+.container-login {
 	left: 0;
 	opacity: 0;
 	width: 50%;
 	z-index: 1;
 }
 
-.container.right-panel-active .container--signup {
+.container.right-panel-active .container-login {
 	animation: show 0.6s;
 	opacity: 1;
 	transform: translateX(100%);
 	z-index: 5;
 }
 
-.container__overlay {
+.container-overlay {
 	height: 100%;
 	left: 50%;
 	overflow: hidden;
@@ -210,7 +220,7 @@ const submitSignIn = (e) => {
 	z-index: 100;
 }
 
-.container.right-panel-active .container__overlay {
+.container.right-panel-active .container-overlay {
 	transform: translateX(-100%);
 }
 
@@ -229,7 +239,7 @@ const submitSignIn = (e) => {
 	transform: translateX(50%);
 }
 
-.overlay__panel {
+.overlay-panel {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
@@ -243,11 +253,11 @@ const submitSignIn = (e) => {
 	width: 50%;
 }
 
-.overlay--left {
+.overlay-left {
 	transform: translateX(-20%);
 }
 
-.container.right-panel-active .overlay--left {
+.container.right-panel-active .overlay-left {
 	transform: translateX(0);
 }
 
@@ -301,7 +311,6 @@ const submitSignIn = (e) => {
 .input {
 	background-color: #fff;
 	border: none;
-	//padding: 0.9rem 0.9rem;
 	margin: 0.5rem 0;
 	width: 100%;
 }
