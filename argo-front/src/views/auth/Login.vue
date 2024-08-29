@@ -6,7 +6,7 @@
 		<div class="container right-panel-active" ref="containerRef">
 			<div class="container__form container--signup">
 				<el-form action="#" class="form" id="form1">
-					<h2 class="form__title">Register</h2>
+					<h2 class="form-title">Register</h2>
 					<el-input size="large" type="text" placeholder="User" class="input"/>
 					<el-input size="large" type="email" placeholder="Email" class="input"/>
 					<el-input size="large" type="password" placeholder="Password" class="input"/>
@@ -16,7 +16,7 @@
 
 			<div class="container__form container--signin">
 				<el-form action="#" class="form" id="form2">
-					<h2 class="form__title">Login</h2>
+					<h2 class="form-title">Login</h2>
 					<el-input size="large" type="email" placeholder="Email" class="input"/>
 					<el-input size="large" type="password" placeholder="Password" class="input"/>
 					<a href="#" class="link">Forgot your password?</a>
@@ -38,45 +38,45 @@
 	</div>
 
 
-<!--
-	<div class="login-right-warp">
-		<div class="login-right-warp-title">Login</div>
+	<!--
+		<div class="login-right-warp">
+			<div class="login-right-warp-title">Login</div>
 
-		<div class="login-right-warp-form">
+			<div class="login-right-warp-form">
 
-			<div class="login-right-warp-form_title">用户名登录</div>
+				<div class="login-right-warp-form_title">用户名登录</div>
 
-			<el-form ref="authFormRef"
-			         :model="authForm"
-			         :rules="authRules"
-			         status-icon label-width="auto" class="login-form">
+				<el-form ref="authFormRef"
+						 :model="authForm"
+						 :rules="authRules"
+						 status-icon label-width="auto" class="login-form">
 
-				<el-form-item prop="username">
-					<el-input v-model="authForm.username"
-					          placeholder="请输入账号"
-					          autocomplete="off"
-					          :prefix-icon="User"/>
-				</el-form-item>
+					<el-form-item prop="username">
+						<el-input v-model="authForm.username"
+								  placeholder="请输入账号"
+								  autocomplete="off"
+								  :prefix-icon="User"/>
+					</el-form-item>
 
-				<el-form-item prop="password">
-					<el-input v-model="authForm.password"
-					          type="password"
-					          autocomplete="off"
-					          placeholder="请输入密码"
-					          :prefix-icon="Lock"/>
-				</el-form-item>
+					<el-form-item prop="password">
+						<el-input v-model="authForm.password"
+								  type="password"
+								  autocomplete="off"
+								  placeholder="请输入密码"
+								  :prefix-icon="Lock"/>
+					</el-form-item>
 
 
-				<el-form-item>
-					<el-button type="primary" @click="submitForm(authFormRef)">登录</el-button>
-				</el-form-item>
-			</el-form>
+					<el-form-item>
+						<el-button type="primary" @click="submitForm(authFormRef)">登录</el-button>
+					</el-form-item>
+				</el-form>
 
-			<div class="login-msg">
-				* 温馨提示：建议使用谷歌、Microsoft Edge上浏览器，360浏览器请使用极速模式
+				<div class="login-msg">
+					* 温馨提示：建议使用谷歌、Microsoft Edge上浏览器，360浏览器请使用极速模式
+				</div>
 			</div>
-		</div>
-	</div>-->
+		</div>-->
 
 </template>
 
@@ -108,9 +108,7 @@ const authRules = {
 };
 
 
-
-
-const containerRef=ref()
+const containerRef = ref()
 
 
 const handleSignIn = () => {
@@ -134,35 +132,30 @@ const submitSignIn = (e) => {
 </script>
 
 
-<style scoped>
+<style lang="less" scoped>
 
-.login-register-container{
+.login-register-container {
 	--white: #e9e9e9;
 	--gray: #333;
 	--blue: #0367a6;
 	--lightblue: #008997;
 	--button-radius: 0.7rem;
-	height: 66vh;
-	width: 96vw;
 }
 
 .container {
-
 	background-color: var(--white);
 	border-radius: var(--button-radius);
-	box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25),
-	0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
+	box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25), 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
 	height: 50vh;
 	width: 50vw;
 	overflow: hidden;
 	position: relative;
 	left: 30vw;
-	top:10vh
-
+	top: 10vh
 }
 
 
-.form__title {
+.form-title {
 	font-weight: 300;
 	margin: 0 0 1.25rem;
 }
@@ -222,7 +215,7 @@ const submitSignIn = (e) => {
 }
 
 .overlay {
-	background: var(--lightblue) url("../../assets/images/loginbg.jpg") no-repeat fixed center;
+	background: var(--lightblue) url("../../assets/auth-background.png") no-repeat fixed center;
 	background-size: cover;
 	height: 100%;
 	left: -100%;
