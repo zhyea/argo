@@ -19,13 +19,30 @@
 
 			<div class="container-form container-login">
 
-				<el-form ref="authFormRef"
-				         :model="authForm"
-				         :rules="authRules"
+				<el-form ref="loginFormRef"
+				         :model="loginForm"
+				         :rules="loginRules"
 				         status-icon label-width="auto" class="form" action="#" id="loginForm">
+
 					<h2 class="form-title">登录</h2>
-					<el-input size="large" type="text" placeholder="Email" class="input"/>
-					<el-input size="large" type="password" placeholder="Password" class="input"/>
+
+					<el-form-item prop="username">
+						<el-input v-model="loginForm.username"
+						          placeholder="用户名"
+						          autocomplete="off"
+						          :prefix-icon="User" class="input"/>
+					</el-form-item>
+
+
+					<el-form-item prop="password">
+						<el-input v-model="loginForm.password"
+						          type="password"
+						          autocomplete="off"
+						          placeholder="入密码"
+						          :prefix-icon="Lock" class="input"/>
+					</el-form-item>
+
+
 					<a href="#" class="link">Forgot your password?</a>
 					<el-button size="large" class="btn" @click="submitSignIn">Submit</el-button>
 				</el-form>
@@ -34,57 +51,24 @@
 			<div class="container-overlay">
 				<div class="overlay">
 					<div class="overlay-panel overlay-left">
-						<el-button size="large" round class="btn" id="signUp" @click="handleRegister">Register
+						<el-button size="large" round class="btn"
+						           id="signUp"
+						           @click="handleRegister">
+							注册
 						</el-button>
 					</div>
 					<div class="overlay-panel overlay--right">
-						<el-button size="large" round class="btn" id="signIn" @click="handleLogin">Login</el-button>
+						<el-button size="large" round class="btn"
+						           id="signIn"
+						           @click="handleLogin">
+							登录
+						</el-button>
 					</div>
 				</div>
 			</div>
+			<!--   end of form container   -->
 		</div>
 	</div>
-
-
-	<!--
-		<div class="login-right-warp">
-			<div class="login-right-warp-title">Login</div>
-
-			<div class="login-right-warp-form">
-
-				<div class="login-right-warp-form_title">用户名登录</div>
-
-				<el-form ref="authFormRef"
-						 :model="authForm"
-						 :rules="authRules"
-						 status-icon label-width="auto" class="login-form">
-
-					<el-form-item prop="username">
-						<el-input v-model="authForm.username"
-								  placeholder="请输入账号"
-								  autocomplete="off"
-								  :prefix-icon="User"/>
-					</el-form-item>
-
-					<el-form-item prop="password">
-						<el-input v-model="authForm.password"
-								  type="password"
-								  autocomplete="off"
-								  placeholder="请输入密码"
-								  :prefix-icon="Lock"/>
-					</el-form-item>
-
-
-					<el-form-item>
-						<el-button type="primary" @click="submitForm(authFormRef)">登录</el-button>
-					</el-form-item>
-				</el-form>
-
-				<div class="login-msg">
-					* 温馨提示：建议使用谷歌、Microsoft Edge上浏览器，360浏览器请使用极速模式
-				</div>
-			</div>
-		</div>-->
 
 </template>
 
@@ -96,18 +80,18 @@ import {User, Lock} from '@element-plus/icons-vue';
 
 
 const router = useRouter();
-const authFormRef = ref();
+const loginFormRef = ref();
 
 
-const authForm = ref({
+const loginForm = ref({
 	username: '',
 	password: '',
 });
 
 
-const authRules = {
+const loginRules = {
 	username: [
-		{required: true, message: '请输入账号', trigger: 'blur'},
+		{required: true, message: '请输入用户名', trigger: 'blur'},
 	],
 	password: [
 		{required: true, message: '请输入密码', trigger: 'blur'},
@@ -147,21 +131,20 @@ const submitSignIn = (e) => {
 	--gray: #333;
 	--blue: #0367a6;
 	--lightblue: #008997;
+	--deepgreen: #2b4b6b;
 	--button-radius: 0.7rem;
-	height: 60vh;
-	width: 60vw;
+	height: 50vh;
+	width: 50vw;
 }
 
 .container {
-	background-color: var(--white);
+	background-color: var(--deepgreen);
 	border-radius: var(--button-radius);
 	box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25), 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
 	height: 50vh;
 	width: 50vw;
 	overflow: hidden;
 	position: relative;
-	left: 30vw;
-	top: 10vh
 }
 
 
@@ -187,19 +170,19 @@ const submitSignIn = (e) => {
 
 .container-register {
 	left: 0;
+	opacity: 0;
 	width: 50%;
 	z-index: 2;
 }
 
-.container.right-panel-active .container-register {
-	transform: translateX(100%);
-}
-
 .container-login {
 	left: 0;
-	opacity: 0;
 	width: 50%;
 	z-index: 1;
+}
+
+.container.right-panel-active .container-register {
+	transform: translateX(100%);
 }
 
 .container.right-panel-active .container-login {
@@ -312,6 +295,10 @@ const submitSignIn = (e) => {
 	background-color: #fff;
 	border: none;
 	margin: 0.5rem 0;
+	width: 100%;
+}
+
+.el-form-item {
 	width: 100%;
 }
 
