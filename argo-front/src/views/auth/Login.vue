@@ -13,7 +13,7 @@
 					<el-input size="large" type="text" placeholder="User" class="input"/>
 					<el-input size="large" type="text" placeholder="Email" class="input"/>
 					<el-input size="large" type="password" placeholder="Password" class="input"/>
-					<el-button size="large" class="btn" @click="submitSignUp">Submit</el-button>
+					<el-button size="large" class="btn" @click="submitSignUp">提交</el-button>
 				</el-form>
 			</div>
 
@@ -38,28 +38,26 @@
 						<el-input v-model="loginForm.password"
 						          type="password"
 						          autocomplete="off"
-						          placeholder="入密码"
+						          placeholder="密码"
 						          :prefix-icon="Lock" class="input"/>
 					</el-form-item>
 
 
-					<a href="#" class="link">Forgot your password?</a>
-					<el-button size="large" class="btn" @click="submitSignIn">Submit</el-button>
+					<a href="#" class="link">忘记密码?</a>
+					<el-button size="large" class="btn" @click="submitSignIn">提交</el-button>
 				</el-form>
 			</div>
 
 			<div class="container-overlay">
 				<div class="overlay">
 					<div class="overlay-panel overlay-left">
-						<el-button size="large" round class="btn"
-						           id="signUp"
+						<el-button id="signUp" size="large" round class="btn"
 						           @click="handleRegister">
 							注册
 						</el-button>
 					</div>
 					<div class="overlay-panel overlay--right">
-						<el-button size="large" round class="btn"
-						           id="signIn"
+						<el-button id="signIn" size="large" round class="btn"
 						           @click="handleLogin">
 							登录
 						</el-button>
@@ -132,19 +130,22 @@ const submitSignIn = (e) => {
 	--blue: #0367a6;
 	--lightblue: #008997;
 	--deepgreen: #2b4b6b;
-	--button-radius: 0.7rem;
-	height: 50vh;
-	width: 50vw;
+	--button-radius: 3px;
+
+	height: 360px;
+	width: 720px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .container {
 	background-color: var(--deepgreen);
-	border-radius: var(--button-radius);
 	box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25), 0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
-	height: 50vh;
-	width: 50vw;
+	height: 100%;
+	width: 100%;
 	overflow: hidden;
-	position: relative;
 }
 
 
@@ -182,12 +183,12 @@ const submitSignIn = (e) => {
 }
 
 .container.right-panel-active .container-register {
+	animation: show 0.6s;
+	opacity: 0;
 	transform: translateX(100%);
 }
 
 .container.right-panel-active .container-login {
-	animation: show 0.6s;
-	opacity: 1;
 	transform: translateX(100%);
 	z-index: 5;
 }
@@ -291,11 +292,16 @@ const submitSignIn = (e) => {
 	text-align: center;
 }
 
+.el-input {
+	border-radius: 0;
+}
+
 .input {
 	background-color: #fff;
 	border: none;
 	margin: 0.5rem 0;
 	width: 100%;
+	border-radius: 0;
 }
 
 .el-form-item {
