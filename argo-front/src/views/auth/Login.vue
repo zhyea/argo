@@ -83,7 +83,7 @@
 							注册
 						</el-button>
 					</div>
-					<div class="overlay-panel overlay--right">
+					<div class="overlay-panel overlay-right">
 						<el-button id="signIn" size="large" round class="btn"
 						           @click="handleLogin">
 							登录
@@ -133,6 +133,14 @@ const loginRules = {
 };
 
 
+const checkConfirmPassword = (rule, value, callback) => {
+	if (value !== registerForm.value.password) {
+		callback(new Error('两次输入的密码不一致'))
+	} else {
+		callback()
+	}
+}
+
 const registerRules = {
 	username: [
 		{required: true, message: '请输入用户名', trigger: 'blur'},
@@ -144,6 +152,7 @@ const registerRules = {
 	confirmPassword: [
 		{required: true, message: '请再次输入密码', trigger: 'blur'},
 		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+		{validator: checkConfirmPassword, trigger: 'blur'}
 	],
 };
 
@@ -228,6 +237,7 @@ const submitLogin = (e) => {
 
 .container-login {
 	left: 0;
+	opacity: 0;
 	width: 50%;
 	z-index: 1;
 }
@@ -240,6 +250,7 @@ const submitLogin = (e) => {
 
 .container.right-panel-active .container-login {
 	transform: translateX(100%);
+	opacity: 1;
 	z-index: 5;
 }
 
@@ -295,12 +306,12 @@ const submitLogin = (e) => {
 	transform: translateX(0);
 }
 
-.overlay--right {
+.overlay-right {
 	right: 0;
 	transform: translateX(0);
 }
 
-.container.right-panel-active .overlay--right {
+.container.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
 
