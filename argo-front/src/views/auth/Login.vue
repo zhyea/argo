@@ -79,13 +79,13 @@
 				<div class="overlay">
 					<div class="overlay-panel overlay-left">
 						<el-button id="signUp" size="large" round class="btn"
-						           @click="handleRegister">
+						           @click="switchToRegister">
 							注册
 						</el-button>
 					</div>
 					<div class="overlay-panel overlay-right">
 						<el-button id="signIn" size="large" round class="btn"
-						           @click="handleLogin">
+						           @click="switchToLogin">
 							登录
 						</el-button>
 					</div>
@@ -104,7 +104,6 @@ import {useRouter} from 'vue-router';
 import {User, Lock} from '@element-plus/icons-vue';
 
 
-const router = useRouter();
 const loginFormRef = ref();
 const registerFormRef = ref();
 
@@ -160,14 +159,19 @@ const registerRules = {
 const containerRef = ref()
 
 
-const handleRegister = () => {
+const switchToRegister = () => {
 	containerRef.value.classList.remove("right-panel-active");
 }
 
 
-const handleLogin = () => {
+const switchToLogin = () => {
 	containerRef.value.classList.add("right-panel-active");
 }
+
+
+
+const router = useRouter();
+
 
 const submitRegister = (e) => {
 	e.preventDefault()
@@ -231,6 +235,7 @@ const submitLogin = (e) => {
 
 .container-register {
 	left: 0;
+	opacity: 1;
 	width: 50%;
 	z-index: 2;
 }
