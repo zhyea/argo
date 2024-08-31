@@ -87,6 +87,7 @@ button:focus-visible {
 
 .el-input__wrapper {
 	background-color: transparent !important;
+	border-radius: 0 !important;
 }
 
 .el-menu__wrap {

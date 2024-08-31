@@ -8,12 +8,41 @@
 
 			<div class="container-form container-register">
 
-				<el-form action="#" class="form" id="registerForm">
+
+				<el-form ref="registerFormRef"
+				         :model="registerForm"
+				         :rules="registerRules"
+				         status-icon label-width="auto" class="form" action="#" id="registerForm">
+
 					<h2 class="form-title">注册</h2>
-					<el-input size="large" type="text" placeholder="User" class="input"/>
-					<el-input size="large" type="text" placeholder="Email" class="input"/>
-					<el-input size="large" type="password" placeholder="Password" class="input"/>
-					<el-button size="large" class="btn" @click="submitSignUp">提交</el-button>
+
+					<el-form-item prop="username">
+						<el-input v-model="registerForm.username"
+						          placeholder="用户名"
+						          autocomplete="off"
+						          :prefix-icon="User" class="input"/>
+					</el-form-item>
+
+
+					<el-form-item prop="password">
+						<el-input v-model="registerForm.password"
+						          type="password"
+						          autocomplete="off"
+						          placeholder="密码"
+						          :prefix-icon="Lock" class="input"/>
+					</el-form-item>
+
+
+					<el-form-item prop="confirmPassword">
+						<el-input v-model="registerForm.confirmPassword"
+						          type="password"
+						          autocomplete="off"
+						          placeholder="确认密码"
+						          :prefix-icon="Lock" class="input"/>
+					</el-form-item>
+
+
+					<el-button size="large" class="btn" @click="submitRegister">提交</el-button>
 				</el-form>
 			</div>
 
@@ -42,9 +71,7 @@
 						          :prefix-icon="Lock" class="input"/>
 					</el-form-item>
 
-
-					<a href="#" class="link">忘记密码?</a>
-					<el-button size="large" class="btn" @click="submitSignIn">提交</el-button>
+					<el-button size="large" class="btn" @click="submitLogin">提交</el-button>
 				</el-form>
 			</div>
 
@@ -79,11 +106,19 @@ import {User, Lock} from '@element-plus/icons-vue';
 
 const router = useRouter();
 const loginFormRef = ref();
+const registerFormRef = ref();
 
 
 const loginForm = ref({
 	username: '',
 	password: '',
+});
+
+
+const registerForm = ref({
+	username: '',
+	password: '',
+	confirmPassword: '',
 });
 
 
@@ -93,6 +128,21 @@ const loginRules = {
 	],
 	password: [
 		{required: true, message: '请输入密码', trigger: 'blur'},
+		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+	],
+};
+
+
+const registerRules = {
+	username: [
+		{required: true, message: '请输入用户名', trigger: 'blur'},
+	],
+	password: [
+		{required: true, message: '请输入密码', trigger: 'blur'},
+		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+	],
+	confirmPassword: [
+		{required: true, message: '请再次输入密码', trigger: 'blur'},
 		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
 	],
 };
@@ -110,11 +160,11 @@ const handleLogin = () => {
 	containerRef.value.classList.add("right-panel-active");
 }
 
-const submitSignUp = (e) => {
+const submitRegister = (e) => {
 	e.preventDefault()
 }
 
-const submitSignIn = (e) => {
+const submitLogin = (e) => {
 	e.preventDefault()
 }
 
@@ -146,12 +196,13 @@ const submitSignIn = (e) => {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+	border-radius: 6px;
 }
 
 
 .form-title {
 	font-weight: 300;
-	margin: 0 0 1.25rem;
+	margin: 0 0 24px;
 }
 
 .link {
@@ -171,7 +222,6 @@ const submitSignIn = (e) => {
 
 .container-register {
 	left: 0;
-	opacity: 0;
 	width: 50%;
 	z-index: 2;
 }
@@ -183,7 +233,7 @@ const submitSignIn = (e) => {
 }
 
 .container.right-panel-active .container-register {
-	animation: show 0.6s;
+	animation: show 1s;
 	opacity: 0;
 	transform: translateX(100%);
 }
@@ -270,7 +320,7 @@ const submitSignIn = (e) => {
 }
 
 .form > .btn {
-	margin-top: 1.5rem;
+	margin-top: 9px;
 }
 
 .btn:active {
@@ -287,7 +337,7 @@ const submitSignIn = (e) => {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 3rem;
+	padding: 0 27px;
 	height: 100%;
 	text-align: center;
 }
@@ -299,7 +349,7 @@ const submitSignIn = (e) => {
 .input {
 	background-color: #fff;
 	border: none;
-	margin: 0.5rem 0;
+	margin: 3px 0;
 	width: 100%;
 	border-radius: 0;
 }
