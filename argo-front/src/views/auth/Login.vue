@@ -65,10 +65,17 @@
 
 					<el-form-item prop="password">
 						<el-input v-model="loginForm.password"
-						          type="password"
 						          autocomplete="off"
 						          placeholder="密码"
-						          :prefix-icon="Lock" class="input"/>
+						          :type="showPwd ? 'text' : 'password'"
+						          :prefix-icon="Lock" class="input">
+							<template #suffix>
+									<span @click="showPwd = !showPwd">
+										<el-icon v-if="showPwd"><View/></el-icon>
+										<el-icon v-else><Hide/></el-icon>
+									</span>
+							</template>
+						</el-input>
 					</el-form-item>
 
 					<el-button size="large" class="btn" @click="submitLogin">提交</el-button>
@@ -101,11 +108,14 @@
 <script setup>
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
-import {User, Lock} from '@element-plus/icons-vue';
+import {User, Lock, View, Hide} from '@element-plus/icons-vue';
+import {useAuthStore} from '@/store/auth';
 
 
 const loginFormRef = ref();
 const registerFormRef = ref();
+//密码图标显示标识
+const showPwd = ref(false)
 
 
 const loginForm = ref({
@@ -127,17 +137,13 @@ const loginRules = {
 	],
 	password: [
 		{required: true, message: '请输入密码', trigger: 'blur'},
-		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+		{min: 5, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
 	],
 };
 
 
-const checkConfirmPassword = (rule, value, callback) => {
-	if (value !== registerForm.value.password) {
-		callback(new Error('两次输入的密码不一致'))
-	} else {
-		callback()
-	}
+const validatePassword = (rule, value, callback) => {
+	return (value === registerForm.value.password);
 }
 
 const registerRules = {
@@ -151,7 +157,7 @@ const registerRules = {
 	confirmPassword: [
 		{required: true, message: '请再次输入密码', trigger: 'blur'},
 		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
-		{validator: checkConfirmPassword, trigger: 'blur'}
+		{validator: validatePassword, message: '两次输入的密码不一致', trigger: 'blur'},
 	],
 };
 
@@ -161,16 +167,18 @@ const containerRef = ref()
 
 const switchToRegister = () => {
 	containerRef.value.classList.remove("right-panel-active");
+	loginFormRef.value.resetFields();
 }
 
 
 const switchToLogin = () => {
 	containerRef.value.classList.add("right-panel-active");
+	registerFormRef.value.resetFields();
 }
 
 
-
 const router = useRouter();
+const authStore = useAuthStore();
 
 
 const submitRegister = (e) => {
@@ -178,7 +186,19 @@ const submitRegister = (e) => {
 }
 
 const submitLogin = (e) => {
-	e.preventDefault()
+	loginFormRef.value.validate((valid) => {
+		if (valid) {
+			const formData = {...loginForm.value,}
+			authStore.useLogin(formData).then(() => {
+				console.log('login success')
+				//router.push()
+			}).catch(() => {
+				console.log('login fail')
+			})
+		} else {
+			return false
+		}
+	})
 }
 
 
@@ -275,7 +295,7 @@ const submitLogin = (e) => {
 }
 
 .overlay {
-	background: var(--lightblue) url("../../assets/auth-background.png") no-repeat fixed center;
+	background: var(--lightblue) url("/argo-navis-3.jpg") no-repeat fixed center;
 	background-size: cover;
 	height: 100%;
 	left: -100%;
