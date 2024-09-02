@@ -6,6 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static org.chobit.commons.utils.StrKit.uuid;
+
 /**
  * session信息拦截器
  *
@@ -17,9 +19,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
-		System.out.println(Thread.currentThread().getId() + " ------------------BEGIN " + request.getRequestedSessionId());
-
+		String sessionId = request.getSession(true).getId();
+		System.out.println(Thread.currentThread().getId() + " ------------------BEGIN " + sessionId);
 		return true;
 	}
 
@@ -35,7 +36,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-
+		response.setHeader("sessionId", uuid());
 		System.out.println(Thread.currentThread().getId() + " ------------------END  " + request.getRequestedSessionId());
 	}
 }
