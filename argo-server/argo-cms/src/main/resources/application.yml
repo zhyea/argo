@@ -6,6 +6,15 @@ spring:
   profiles:
     active: dev
 
+server:
+  port: 1127
+  servlet:
+    session:
+      cookie:
+        http-only: false
+        secure: false
+
+
 management:
   endpoints:
     web:
@@ -17,3 +26,6 @@ management:
   info:
     build:
       enabled: true
+
+rw:
+  wrapExcept: true

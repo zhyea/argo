@@ -37,6 +37,11 @@
             <artifactId>caffeine</artifactId>
         </dependency>
 
+        <!--support-->
+        <dependency>
+            <groupId>org.chobit.spring</groupId>
+            <artifactId>zhy-spring-boot-autoconfigure</artifactId>
+        </dependency>
         <!--database-->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -59,6 +64,10 @@
         <dependency>
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.chobit.commons</groupId>
+            <artifactId>common-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
