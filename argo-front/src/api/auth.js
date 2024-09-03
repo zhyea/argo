@@ -11,8 +11,6 @@ export function doLogin(data) {
 		API.LOGIN,
 		{
 			...data,
-		}, {
-			withCredentials: true
 		})
 
 }

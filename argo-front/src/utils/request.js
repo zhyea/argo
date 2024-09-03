@@ -3,8 +3,8 @@ import {ElMessage} from "element-plus";
 import router from '@/router/index.js'
 import {config} from "@/config/index.js";
 
-axios.defaults.withCredentials = true
-axios.defaults.crossDomain = true
+// axios.defaults.withCredentials = true
+// axios.defaults.crossDomain = true
 
 //1. 创建axios对象
 const axiosInst = axios.create({
@@ -14,7 +14,6 @@ const axiosInst = axios.create({
 	// 请求头
 	headers: {
 		"Content-Type": "application/json;charset=UTF-8",
-		"Cookie": "111111111"
 	},
 });
 

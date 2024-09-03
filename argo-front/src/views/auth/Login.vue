@@ -41,6 +41,12 @@
 						          :prefix-icon="Lock" class="input"/>
 					</el-form-item>
 
+					<el-form-item prop="invitationCode">
+						<el-input v-model="registerForm.invitationCode"
+						          placeholder="邀请码"
+						          autocomplete="off"
+						          :prefix-icon="Promotion" class="input"/>
+					</el-form-item>
 
 					<el-button size="large" class="btn" @click="submitRegister">提交</el-button>
 				</el-form>
@@ -108,7 +114,7 @@
 <script setup>
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
-import {User, Lock, View, Hide} from '@element-plus/icons-vue';
+import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
 import {useAuthStore} from '@/store/auth';
 
 
@@ -128,6 +134,7 @@ const registerForm = ref({
 	username: '',
 	password: '',
 	confirmPassword: '',
+	invitationCode: '',
 });
 
 
@@ -158,6 +165,10 @@ const registerRules = {
 		{required: true, message: '请再次输入密码', trigger: 'blur'},
 		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
 		{validator: validatePassword, message: '两次输入的密码不一致', trigger: 'blur'},
+	],
+	invitationCode: [
+		{required: true, message: '请输入邀请码', trigger: 'blur'},
+		{min: 7, max: 9, message: '邀请码长度在7到9个字符', trigger: 'blur'},
 	],
 };
 

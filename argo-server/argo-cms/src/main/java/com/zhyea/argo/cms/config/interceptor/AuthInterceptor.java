@@ -15,15 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthInterceptor implements HandlerInterceptor {
 
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
 
-		String path = request.getRequestURI();
+        String path = request.getRequestURI();
 
-		logger.info("Mocko Request, path:{}", path);
+        logger.info("Mocko Request, path:{}, sessionId:{}", path, request.getSession().getId());
 
 
-		return true;
-	}
+        return true;
+    }
 }

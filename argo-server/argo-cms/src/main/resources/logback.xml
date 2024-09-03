@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [sessionId] [%thread] %-5level %logger{64} - %msg%n"/>
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/cm-biz.log</file>
+        <file>logs/argo-cms.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/liens-cms.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/argo-cms.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.zhyea.biz.argo" level="INFO" additivity="false">
+    <logger name="com.zhyea.argo" level="INFO">
         <appender-ref ref="ROLLING_FILE"/>
     </logger>
 
