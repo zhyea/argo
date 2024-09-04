@@ -17,9 +17,9 @@
 					<el-menu class="el-menu-vertical"
 					         :collapse="collapsed"
 					         :router="true"
+					         :collapse-transition="false"
 					         background-color="#263238"
 					         text-color="#afb5bd"
-					         :collapse-transition="false"
 					         active-text-color="#ffffff">
 						<nav-item v-for="item in menuItems" :item="item" :key="item.id"/>
 					</el-menu>
@@ -32,7 +32,7 @@
 <script setup>
 
 import NavItem from '@/component/layout/NavItem.vue'
-import Assassin from "@/component/icons/Assassin.vue";
+import Assassin from "@/component/icons/argo-logo.vue";
 
 defineProps({
 	collapsed: Boolean,

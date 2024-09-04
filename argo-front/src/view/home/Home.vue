@@ -1,11 +1,11 @@
 <template>
 	<el-container class="home_container">
 
-		<sidebar :collapsed="isCollapsed"
-		         :menu-items="homeMenuItem"/>
+		<sidebar :collapsed="collapseFlag"
+		         :menu-items="menuItems"/>
 
 		<el-container direction="vertical">
-			<head-bar :collapsed="isCollapsed" @menu="changeMenuStatus"/>
+			<head-bar :collapsed="collapseFlag" @menu="changeMenuState"/>
 			<el-main>
 				<router-view></router-view>
 			</el-main>
@@ -20,13 +20,13 @@ import {ref} from 'vue'
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
 
-import homeMenuItem from '@/view/home/menu'
+import menuItems from '@/view/home/menu'
 
 
-let isCollapsed = ref(false)
+let collapseFlag = ref(false)
 
-function changeMenuStatus(status) {
-	isCollapsed.value = status
+function changeMenuState(status) {
+	collapseFlag.value = status
 }
 </script>
 
