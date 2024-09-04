@@ -6,7 +6,7 @@
 					ARGO 内容管理
 				</div>
 				<div class="mini" v-else>
-					<ArgoLogo/>
+					111<ArgoLogo/>
 				</div>
 			</div>
 
@@ -30,7 +30,7 @@
 <script setup>
 
 import MenuItem from '@/component/layout/MenuItem.vue'
-import ArgoLogo from "@/component/icons/IconCommunity.vue";
+import ArgoLogo from "@/component/icons/argo-logo.vue";
 
 defineProps({
 	collapsed: Boolean,

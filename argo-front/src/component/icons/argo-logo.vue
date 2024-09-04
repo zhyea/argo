@@ -1,16 +1,12 @@
-<!-- This icon is from <https://github.com/Templarian/MaterialDesign>, distributed under Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0) license-->
+<!-- icon -->
 <template>
-	<svg xmlns="http://www.w3.org/2000/svg"
-	     aria-hidden="true"
-	     role="img"
-	     width="36"
-	     height="36"
-	     viewBox="0 0 36 36"
-	     class="iconify iconify--mdi"
-	     preserveAspectRatio="xMidYMid meet">
+	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor">
 
-		<g transform="translate(0.000000,183.000000) scale(0.100000,-0.100000)"
-		   fill="#FFFFFF" stroke="none">
+		<g>
+			<path
+				d="M10 3.22l-.61-.6a5.5 5.5 0 0 0-7.666.105 5.5 5.5 0 0 0-.114 7.665L10 18.78l8.39-8.4a5.5 5.5 0 0 0-.114-7.665 5.5 5.5 0 0 0-7.666-.105l-.61.61z"
+			/>
+
 			<path d="M920 1455 c0 -27 1 -28 24 -19 24 9 20 44 -4 44 -15 0 -20 -7 -20
 -25z"/>
 			<path d="M1235 1444 c-165 -19 -621 -82 -646 -90 -15 -4 -15 -10 3 -67 40
@@ -25,5 +21,3 @@ c47 73 67 307 40 466 -16 90 -40 151 -61 155 -6 1 -23 0 -40 -1z"/>
 		</g>
 	</svg>
 </template>
-<script setup lang="ts">
-</script>
