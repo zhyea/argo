@@ -42,6 +42,6 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
-        logger.info("{} ------------------END {}, {}", Thread.currentThread().getId(), request.getRequestedSessionId(), request.getSession().getId());
+        logger.info("{} ------------------END {}, {}", Thread.currentThread().getId(), request.getSession().getId(), request.getRequestedSessionId());
     }
 }
