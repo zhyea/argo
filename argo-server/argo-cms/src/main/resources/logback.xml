@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [sessionId] [%thread] %-5level %logger{64} - %msg%n"/>
+    <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{64} - %msg%n"/>
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
