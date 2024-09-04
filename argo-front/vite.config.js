@@ -40,6 +40,7 @@ export default defineConfig({
 
 	resolve: {
 		alias: {
+			// 配置路径别名
 			'@': fileURLToPath(new URL('./src', import.meta.url))
 		}
 	}

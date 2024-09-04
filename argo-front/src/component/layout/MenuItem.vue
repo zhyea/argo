@@ -1,9 +1,8 @@
 <template>
-	
+
 	<!-- parent -->
-	<el-sub-menu
-		:index="props.item.uri"
-		v-if="props.item.children">
+	<el-sub-menu v-if="props.item.children"
+	             :index="props.item.uri">
 
 		<template #title>
 			<el-icon v-if="props.item.icon">
@@ -21,12 +20,12 @@
 				{{ child.name }}
 			</el-menu-item>
 		</template>
+
 	</el-sub-menu>
 
 	<!-- children -->
-	<el-menu-item
-		:index="props.item.uri"
-		v-else>
+	<el-menu-item v-else
+	              :index="props.item.uri">
 		<el-icon v-if="props.item.icon">
 			<component :is="icon(props.item.icon)"/>
 		</el-icon>

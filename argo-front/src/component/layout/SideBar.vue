@@ -3,12 +3,10 @@
 		<div class="sidebar-box">
 			<div class="logo-box">
 				<div class="normal" v-if="!collapsed">
-					Mocko Server
+					ARGO 内容管理
 				</div>
 				<div class="mini" v-else>
-					<el-icon>
-						<Assassin/>
-					</el-icon>
+					<ArgoLogo/>
 				</div>
 			</div>
 
@@ -21,7 +19,7 @@
 					         background-color="#263238"
 					         text-color="#afb5bd"
 					         active-text-color="#ffffff">
-						<nav-item v-for="item in menuItems" :item="item" :key="item.id"/>
+						<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
 					</el-menu>
 				</el-scrollbar>
 			</div>
@@ -31,8 +29,8 @@
 
 <script setup>
 
-import NavItem from '@/component/layout/NavItem.vue'
-import Assassin from "@/component/icons/argo-logo.vue";
+import MenuItem from '@/component/layout/MenuItem.vue'
+import ArgoLogo from "@/component/icons/IconCommunity.vue";
 
 defineProps({
 	collapsed: Boolean,

@@ -46,7 +46,6 @@ axiosInst.interceptors.response.use(
 		} else if (code === 100) {
 			// 执行跳转到登录页
 			sessionStorage.removeItem(config.TOKEN)
-			sessionStorage.removeItem(config.isLogin)
 			router.push({name: config.loginRouteName}).then(() => {
 				console.log(name)
 			})

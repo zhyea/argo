@@ -7,7 +7,7 @@
 		<el-container direction="vertical">
 			<head-bar :collapsed="collapseFlag" @menu="changeMenuState"/>
 			<el-main>
-				<router-view></router-view>
+				<router-view/>
 			</el-main>
 		</el-container>
 
