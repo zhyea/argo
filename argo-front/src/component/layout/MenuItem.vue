@@ -12,7 +12,7 @@
 		</template>
 
 		<template v-for="child in props.item.children">
-			<nav-item v-if="child.children" :item="child" :key="child"/>
+			<menu-item v-if="child.children" :item="child" :key="child"/>
 			<el-menu-item v-else :index="child.uri" :key="child.uri">
 				<el-icon v-if="child.icon">
 					<component :is="icon(child.icon)"/>

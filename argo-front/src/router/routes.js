@@ -1,5 +1,3 @@
-import authRoutes from '@/view/auth/routes'
-
 import HomePage from "@/view/home/Home.vue";
 import LoginPage from "@/view/auth/Login.vue"
 import NotFoundPage from '@/view/error/NotFound.vue'
