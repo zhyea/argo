@@ -1,6 +1,9 @@
 package com.zhyea.argo.cms.constants;
 
 
+/**
+ * @author robin
+ */
 public interface SystemConstants {
 
 

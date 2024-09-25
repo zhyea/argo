@@ -1,4 +1,11 @@
 package com.zhyea.argo.cms.model.entity;
 
-public class AppPageEntity {
+import com.zhyea.argo.model.entity.BaseEntity;
+import lombok.Data;
+
+/**
+ * @author robin
+ */
+@Data
+public class AppPageEntity extends BaseEntity {
 }
