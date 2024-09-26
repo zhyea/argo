@@ -14,20 +14,19 @@ public class ComponentPropItem {
 	/**
 	 * 属性
 	 */
-	private String prop;
+	private String propKey;
 
 
 	/**
-	 * 名称
+	 * 属性描述
 	 */
-	private String name;
-
+	private String propDesc;
 
 
 	/**
-	 * 备注
+	 * 是否必填
 	 */
-	private String remark;
+	private Boolean required;
 
 
 }

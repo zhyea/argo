@@ -14,8 +14,10 @@ create table if not exists cms_component_define
 
     name          varchar(64)  not null default '' comment '名称',
     icon          varchar(64)  not null default '' comment '图标',
-    type          int          not null default 0 comment '类型',
-    props         tinytext     not null default '{}' comment '属性',
+    type          tinyint      not null default 0 comment '类型',
+    scope         tinyint      not null default 0 comment '作用域',
+    props         tinytext     not null default '[]' comment '属性',
+    bind_data     tinyint      not null default 0 comment '是否绑定数据',
     remark        varchar(128) not null default '' comment '备注',
 
     operator_code varchar(32)  not null default 0 comment '操作人ID',
