@@ -31,15 +31,21 @@ public class ComponentEntity extends BaseEntity {
 
 
 	/**
+	 * 作用域
+	 */
+	private Integer scope;
+
+
+	/**
 	 * 属性
 	 */
 	private String props;
 
 
 	/**
-	 * 数据来源模式
+	 * 是否绑定数据
 	 */
-	private Integer dataSourceMode;
+	private Integer bindData;
 
 
 	/**
