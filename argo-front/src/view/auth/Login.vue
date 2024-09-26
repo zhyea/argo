@@ -12,7 +12,7 @@
 				<el-form ref="registerFormRef"
 				         :model="registerForm"
 				         :rules="registerRules"
-				         status-icon label-width="auto" class="form" action="#" id="registerForm">
+				         status-icon label-width="0" class="form" action="#" id="registerForm">
 
 					<h2 class="form-title">注册</h2>
 
@@ -57,7 +57,7 @@
 				<el-form ref="loginFormRef"
 				         :model="loginForm"
 				         :rules="loginRules"
-				         status-icon label-width="auto" class="form" action="#" id="loginForm">
+				         status-icon label-width="0" class="form" action="#" id="loginForm">
 
 					<h2 class="form-title">登录</h2>
 
