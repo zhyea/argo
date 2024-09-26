@@ -63,6 +63,7 @@
                 <artifactId>argo-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <!-- tools -->
             <dependency>
                 <groupId>org.projectlombok</groupId>

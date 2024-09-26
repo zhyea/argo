@@ -22,4 +22,10 @@ public class ComponentInstanceEntity extends BaseEntity {
 	 * 数据链接
 	 */
 	private String dataUrl;
+
+
+	/**
+	 * 备注
+	 */
+	private String remark;
 }
