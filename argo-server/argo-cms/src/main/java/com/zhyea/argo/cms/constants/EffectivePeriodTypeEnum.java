@@ -7,7 +7,7 @@ import org.chobit.commons.contract.CodeDescEnum;
  *
  * @author robin
  */
-public enum EffectPeriodTypeEnum implements CodeDescEnum {
+public enum EffectivePeriodTypeEnum implements CodeDescEnum {
 
 
 	/**
@@ -29,7 +29,7 @@ public enum EffectPeriodTypeEnum implements CodeDescEnum {
 	public final String desc;
 
 
-	EffectPeriodTypeEnum(int code, String desc) {
+	EffectivePeriodTypeEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}

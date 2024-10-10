@@ -8,7 +8,7 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class FcdPropItem {
+public class FcmPropItem {
 
 
 	/**
@@ -21,6 +21,12 @@ public class FcdPropItem {
 	 * 属性描述
 	 */
 	private String propDesc;
+
+
+	/**
+	 * 属性类型
+	 */
+	private Integer propType;
 
 
 	/**

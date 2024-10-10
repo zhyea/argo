@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
  * @author robin
  */
 @Data
-public class FcdInstPropEntity extends BaseEntity {
+public class FciPropEntity extends BaseEntity {
 
 
     /**
      * 组件实例ID
      */
-    private Long fcdInstId;
+    private Long fciId;
 
 
     /**
@@ -36,6 +36,7 @@ public class FcdInstPropEntity extends BaseEntity {
      * 属性值选择器
      */
     private String propValueSelector;
+
 
 
     /**

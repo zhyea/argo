@@ -9,7 +9,7 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class FcdEntity extends BaseEntity {
+public class FcmEntity extends BaseEntity {
 
 
     /**

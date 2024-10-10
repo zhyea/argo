@@ -3,29 +3,23 @@ package com.zhyea.argo.cms.constants;
 import org.chobit.commons.contract.CodeDescEnum;
 
 /**
- * 组件数据来源
+ * 组件属性类型
  *
  * @author robin
  */
-public enum FcdDataSourceEnum implements CodeDescEnum {
+public enum FciPropTypeEnum implements CodeDescEnum {
 
 
 	/**
-	 * 常量
+	 * 简单属性
 	 */
-	DIRECT(1, "常量"),
+	SIMPLE(1, "简单属性"),
 
 
 	/**
-	 * 远程获取
+	 * 级联属性
 	 */
-	REMOTE(2, "远程获取"),
-
-
-	/**
-	 * 组合模式
-	 */
-	COMBO(3, "组合模式"),
+	CASCADE(2, "级联属性"),
 	;
 
 
@@ -35,7 +29,7 @@ public enum FcdDataSourceEnum implements CodeDescEnum {
 	public final String desc;
 
 
-	FcdDataSourceEnum(int code, String desc) {
+	FciPropTypeEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -45,6 +39,7 @@ public enum FcdDataSourceEnum implements CodeDescEnum {
 	public int getCode() {
 		return code;
 	}
+
 
 	@Override
 	public String getDesc() {

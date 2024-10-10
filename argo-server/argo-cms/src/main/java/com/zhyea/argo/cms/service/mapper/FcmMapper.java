@@ -3,10 +3,10 @@ package com.zhyea.argo.cms.service.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 组件数据处理类
+ * 组件模型 mapper
  *
  * @author robin
  */
 @Mapper
-public interface FcdMapper {
+public interface FcmMapper {
 }

@@ -25,9 +25,9 @@ public class AppPageEntity extends BaseEntity {
 
 
     /**
-     * 页名称
+     * 页面名称
      */
-    private String name;
+    private String pageName;
 
 
     /**

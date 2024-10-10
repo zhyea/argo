@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * @author robin
  */
 @Service
-public class ComponentService {
+public class FcmService {
 
 
 

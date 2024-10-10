@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * @author robin
  */
 @Data
-public class FcdInstEntity extends BaseEntity {
+public class FciEntity extends BaseEntity {
 
 
     /**
@@ -23,7 +23,7 @@ public class FcdInstEntity extends BaseEntity {
     /**
      * 组件ID
      */
-    private Integer fcdId;
+    private Integer fcmId;
 
 
     /**
