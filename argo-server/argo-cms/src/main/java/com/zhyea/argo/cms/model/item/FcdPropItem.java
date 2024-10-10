@@ -8,7 +8,7 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class ComponentPropItem {
+public class FcdPropItem {
 
 
 	/**

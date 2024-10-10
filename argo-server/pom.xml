@@ -26,7 +26,7 @@
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <lombok.version>1.18.30</lombok.version>
-        <zhy-commons.version>0.1.3.3</zhy-commons.version>
+        <zhy-commons.version>0.1.3.5</zhy-commons.version>
         <junit.version>5.9.3</junit.version>
     </properties>
 
@@ -75,7 +75,7 @@
             <dependency>
                 <groupId>org.chobit.spring</groupId>
                 <artifactId>zhy-spring-boot-autoconfigure</artifactId>
-                <version>0.0.2</version>
+                <version>0.0.3</version>
             </dependency>
 
             <dependency>

@@ -3,22 +3,29 @@ package com.zhyea.argo.cms.constants;
 import org.chobit.commons.contract.CodeDescEnum;
 
 /**
- * 组件作用域
+ * 组件数据来源
  *
  * @author robin
  */
-public enum ComponentScopeEnum implements CodeDescEnum {
-
-	/**
-	 * 全局
-	 */
-	GLOBAL(1, "全局"),
+public enum FcdDataSourceEnum implements CodeDescEnum {
 
 
 	/**
-	 * 应用内
+	 * 常量
 	 */
-	APP(2, "应用内"),
+	DIRECT(1, "常量"),
+
+
+	/**
+	 * 远程获取
+	 */
+	REMOTE(2, "远程获取"),
+
+
+	/**
+	 * 组合模式
+	 */
+	COMBO(3, "组合模式"),
 	;
 
 
@@ -28,7 +35,7 @@ public enum ComponentScopeEnum implements CodeDescEnum {
 	public final String desc;
 
 
-	ComponentScopeEnum(int code, String desc) {
+	FcdDataSourceEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}

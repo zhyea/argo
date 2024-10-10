@@ -13,34 +13,34 @@ import java.util.Date;
 public abstract class BaseEntity {
 
 
-	/**
-	 * 记录ID
-	 */
-	private Integer id;
+    /**
+     * 记录ID
+     */
+    private Long id;
 
 
-	/**
-	 * 操作人code
-	 */
-	private String operatorCode;
+    /**
+     * 操作人code
+     */
+    private String operatorCode;
 
 
-	/**
-	 * 删除标记
-	 */
-	private Integer deleted;
+    /**
+     * 删除标记
+     */
+    private Integer deleted;
 
 
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
 
-	/**
-	 * 更新时间
-	 */
-	private Date updateTime;
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 
 
 }

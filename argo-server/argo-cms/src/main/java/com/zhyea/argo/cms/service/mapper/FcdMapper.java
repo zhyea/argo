@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author robin
  */
 @Mapper
-public interface ComponentMapper {
+public interface FcdMapper {
 }
