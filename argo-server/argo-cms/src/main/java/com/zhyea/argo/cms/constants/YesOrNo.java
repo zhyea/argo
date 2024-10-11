@@ -3,23 +3,23 @@ package com.zhyea.argo.cms.constants;
 import org.chobit.commons.contract.CodeDescEnum;
 
 /**
- * 组件作用域
+ * 是或否枚举
  *
  * @author robin
  */
-public enum FciScopeEnum implements CodeDescEnum {
+public enum YesOrNo implements CodeDescEnum {
 
 
 	/**
-	 * 全局组件
+	 * 是
 	 */
-	GLOBAL(1, "全局"),
+	YES(1, "是"),
 
 
 	/**
-	 * 应用组件
+	 * 否
 	 */
-	APP(2, "应用"),
+	NO(0, "否"),
 	;
 
 
@@ -29,7 +29,7 @@ public enum FciScopeEnum implements CodeDescEnum {
 	public final String desc;
 
 
-	FciScopeEnum(int code, String desc) {
+	YesOrNo(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -40,6 +40,7 @@ public enum FciScopeEnum implements CodeDescEnum {
 		return code;
 	}
 
+	
 	@Override
 	public String getDesc() {
 		return desc;

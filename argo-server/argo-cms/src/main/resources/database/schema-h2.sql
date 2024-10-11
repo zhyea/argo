@@ -7,7 +7,7 @@
 --
 -- 组件模型
 --
-create table if not exists argo_cms_fcm
+create table if not exists ag_cms_fcm
 (
     id             int          not null default 0 auto_increment comment 'id',
 
@@ -31,7 +31,7 @@ create table if not exists argo_cms_fcm
 --
 -- 应用信息
 --
-create table if not exists argo_cms_app
+create table if not exists ag_cms_app
 (
     id            int          not null default 0 auto_increment comment 'id',
 
@@ -51,7 +51,7 @@ create table if not exists argo_cms_app
 --
 -- 应用页面信息
 --
-create table if not exists argo_cms_app_page
+create table if not exists ag_cms_app_page
 (
     id            bigint       not null default 0 auto_increment comment 'id',
 
@@ -73,7 +73,7 @@ create table if not exists argo_cms_app_page
 --
 -- 组件实例
 --
-create table if not exists argo_cms_fci
+create table if not exists ag_cms_fci
 (
     id                    bigint       not null default 0 auto_increment comment 'id',
 
@@ -98,7 +98,7 @@ create table if not exists argo_cms_fci
 --
 -- 组件实例属性
 --
-create table if not exists argo_cms_fci_prop
+create table if not exists ag_cms_fci_prop
 (
     id                    int          not null default 0 auto_increment comment 'id',
 

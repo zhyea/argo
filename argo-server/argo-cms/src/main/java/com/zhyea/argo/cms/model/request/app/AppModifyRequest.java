@@ -1,6 +1,8 @@
-package com.zhyea.argo.cms.model.request;
+package com.zhyea.argo.cms.model.request.app;
 
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 应用更新请求
@@ -14,6 +16,7 @@ public class AppModifyRequest extends AppAddRequest {
 	/**
 	 * 应用id
 	 */
-	private Integer appId;
+	@NotNull(message = "应用id不能为空")
+	private Long appId;
 
 }
