@@ -12,22 +12,22 @@ import lombok.Data;
 public class AppEntity extends BaseEntity {
 
 
-    /**
-     * 应用名称
-     */
-    private String appName;
+	/**
+	 * 应用名称
+	 */
+	private String appName;
 
 
-    /**
-     * 应用icon地址
-     */
-    private String icon;
+	/**
+	 * 应用icon地址
+	 */
+	private String icon;
 
 
-    /**
-     * 应用描述
-     */
-    private String remark;
+	/**
+	 * 应用描述
+	 */
+	private String remark;
 
 
 }
