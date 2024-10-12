@@ -1,25 +1,25 @@
-package com.zhyea.argo.cms.constants;
+package com.zhyea.argo.cms.constants.enums;
 
 import org.chobit.commons.contract.CodeDescEnum;
 
 /**
- * 是或否枚举
+ * 组件属性类型
  *
  * @author robin
  */
-public enum YesOrNo implements CodeDescEnum {
+public enum FciPropTypeEnum implements CodeDescEnum {
 
 
 	/**
-	 * 是
+	 * 简单属性
 	 */
-	YES(1, "是"),
+	SIMPLE(1, "简单属性"),
 
 
 	/**
-	 * 否
+	 * 级联属性
 	 */
-	NO(0, "否"),
+	CASCADE(2, "级联属性"),
 	;
 
 
@@ -29,7 +29,7 @@ public enum YesOrNo implements CodeDescEnum {
 	public final String desc;
 
 
-	YesOrNo(int code, String desc) {
+	FciPropTypeEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -40,7 +40,7 @@ public enum YesOrNo implements CodeDescEnum {
 		return code;
 	}
 
-	
+
 	@Override
 	public String getDesc() {
 		return desc;

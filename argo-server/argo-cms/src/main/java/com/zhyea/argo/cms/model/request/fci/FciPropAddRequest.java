@@ -1,6 +1,6 @@
 package com.zhyea.argo.cms.model.request.fci;
 
-import com.zhyea.argo.cms.constants.EffectivePeriodTypeEnum;
+import com.zhyea.argo.cms.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import lombok.Data;
 import org.chobit.commons.validation.EnumVal;

@@ -1,25 +1,26 @@
-package com.zhyea.argo.cms.constants;
+package com.zhyea.argo.cms.constants.enums;
 
 import org.chobit.commons.contract.CodeDescEnum;
 
 /**
- * 组件作用域
+ * 开关标记枚举
  *
  * @author robin
  */
-public enum FcScopeEnum implements CodeDescEnum {
+public enum SwitchFlagEnum implements CodeDescEnum {
 
 
 	/**
-	 * 全局组件
+	 * 开启
 	 */
-	GLOBAL(1, "全局"),
+	open(1, "开启"),
 
 
 	/**
-	 * 应用组件
+	 * 关闭
 	 */
-	APP(2, "应用"),
+	closed(2, "关闭"),
+
 	;
 
 
@@ -29,7 +30,7 @@ public enum FcScopeEnum implements CodeDescEnum {
 	public final String desc;
 
 
-	FcScopeEnum(int code, String desc) {
+	SwitchFlagEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -37,11 +38,12 @@ public enum FcScopeEnum implements CodeDescEnum {
 
 	@Override
 	public int getCode() {
-		return code;
+		return this.code;
 	}
+
 
 	@Override
 	public String getDesc() {
-		return desc;
+		return this.desc;
 	}
 }

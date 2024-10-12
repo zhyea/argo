@@ -1,4 +1,4 @@
-package com.zhyea.argo.cms.constants;
+package com.zhyea.argo.cms.constants.enums;
 
 import org.chobit.commons.contract.CodeDescEnum;
 
