@@ -5,12 +5,12 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 /**
- * 应用更新请求
+ * 应用页面查询请求
  *
  * @author robin
  */
 @Data
-public class AppModifyRequest extends AppAddRequest {
+public class AppPageQueryRequest {
 
 
 	/**
@@ -18,5 +18,12 @@ public class AppModifyRequest extends AppAddRequest {
 	 */
 	@NotNull(message = "应用id不能为空")
 	private Long appId;
+
+
+	/**
+	 * 关键字
+	 */
+	private String keyword;
+
 
 }

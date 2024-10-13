@@ -3,7 +3,7 @@ package com.zhyea.argo.cms.convert;
 import com.zhyea.argo.cms.model.entity.AppPageEntity;
 import com.zhyea.argo.cms.model.item.AppPageItem;
 import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
-import com.zhyea.argo.cms.model.request.app.AppPageModifyRequest;
+import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -35,7 +35,7 @@ public interface AppPageConverter {
 	 * @return 实体
 	 */
 	@Mapping(source = "pageId", target = "id")
-	AppPageEntity modifyRequest2Entity(AppPageModifyRequest modifyRequest);
+	AppPageEntity modifyRequest2Entity(AppPageEditRequest modifyRequest);
 
 
 	/**

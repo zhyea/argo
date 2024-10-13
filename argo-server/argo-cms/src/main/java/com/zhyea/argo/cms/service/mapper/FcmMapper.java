@@ -50,7 +50,7 @@ public interface FcmMapper {
 	 * @return 组件模型记录
 	 */
 	@Select("select * from ag_cms_fcm where id=#{id}")
-	FcmEntity getById(@Param("id") int id);
+	FcmEntity getById(@Param("id") Long id);
 
 
 	/**
@@ -60,7 +60,7 @@ public interface FcmMapper {
 	 * @return 影响行数
 	 */
 	@Update("update ag_cms_fcm set deleted=1 where id=#{id}")
-	int deleteById(@Param("id") int id);
+	int deleteById(@Param("id") Long id);
 
 
 	/**

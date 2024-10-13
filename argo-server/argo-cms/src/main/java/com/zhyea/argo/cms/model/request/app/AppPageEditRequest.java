@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class AppPageModifyRequest extends AppPageAddRequest {
+public class AppPageEditRequest extends AppPageAddRequest {
 
 
 	/**

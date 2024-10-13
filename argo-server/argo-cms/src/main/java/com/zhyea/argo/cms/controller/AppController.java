@@ -1,0 +1,92 @@
+package com.zhyea.argo.cms.controller;
+
+import com.zhyea.argo.cms.model.item.AppItem;
+import com.zhyea.argo.cms.model.request.app.AppAddRequest;
+import com.zhyea.argo.cms.model.request.app.AppIdRelateRequest;
+import com.zhyea.argo.cms.model.request.app.AppEditRequest;
+import com.zhyea.argo.cms.service.AppService;
+import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+/**
+ * 应用相关接口
+ *
+ * @author robin
+ */
+@ResponseWrapper
+@RestController
+@RequestMapping("/app")
+public class AppController {
+
+
+	public final AppService appService;
+
+	@Autowired
+	public AppController(AppService appService) {
+		this.appService = appService;
+	}
+
+	/**
+	 * 新增应用记录
+	 *
+	 * @param request 应用信息
+	 * @return 应用id
+	 */
+	@PostMapping("/add")
+	public Long add(@RequestBody @Valid AppAddRequest request) {
+		return appService.add(request);
+	}
+
+
+	/**
+	 * 修改应用记录
+	 *
+	 * @param request 应用信息
+	 * @return 影响行数
+	 */
+	@PostMapping("/modify")
+	public boolean modify(@RequestBody @Valid AppEditRequest request) {
+		return appService.modify(request);
+	}
+
+
+	/**
+	 * 根据id获取应用信息
+	 *
+	 * @param request 应用id相关请求
+	 * @return 应用信息
+	 */
+	@PostMapping("/get")
+	public AppItem getById(@RequestBody @Valid AppIdRelateRequest request) {
+		return appService.get(request.getAppId());
+	}
+
+
+	/**
+	 * 根据id删除应用信息
+	 *
+	 * @param request 请求信息
+	 * @return 是否删除成功
+	 */
+	@PostMapping("/delete")
+	public boolean deleteById(@RequestBody @Valid AppIdRelateRequest request) {
+		return appService.delete(request.getAppId());
+	}
+
+
+	/**
+	 * 获取所有应用信息
+	 *
+	 * @return 应用记录
+	 */
+	@GetMapping("/all")
+	public List<AppItem> findAll() {
+		return appService.findAll();
+	}
+
+
+}

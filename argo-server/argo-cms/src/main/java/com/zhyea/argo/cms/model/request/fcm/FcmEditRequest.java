@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class FcmModifyRequest extends FcmAddRequest {
+public class FcmEditRequest extends FcmAddRequest {
 
 
 	/**

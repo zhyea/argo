@@ -26,5 +26,12 @@ management:
     build:
       enabled: true
 
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**.xml
+
+
 rw:
   wrapExcept: true

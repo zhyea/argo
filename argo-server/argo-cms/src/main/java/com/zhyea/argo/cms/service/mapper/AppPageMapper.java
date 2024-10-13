@@ -49,7 +49,7 @@ public interface AppPageMapper {
 	 * @return 应用页面记录
 	 */
 	@Select("select * from ag_cms_app_page where id=#{id}")
-	AppPageEntity getById(@Param("id") int id);
+	AppPageEntity getById(@Param("id") Long id);
 
 
 	/**
@@ -59,7 +59,7 @@ public interface AppPageMapper {
 	 * @return 影响行数
 	 */
 	@Update("update ag_cms_app_page set deleted=1 where id=#{id}")
-	int deleteById(@Param("id") int id);
+	int deleteById(@Param("id") Long id);
 
 
 	/**
@@ -68,8 +68,7 @@ public interface AppPageMapper {
 	 * @param appId 应用id
 	 * @return 应用页面记录集合
 	 */
-	@Select("select * from ag_cms_app_page where app_id=#{appId}")
-	List<AppPageEntity> getByAppId(@Param("appId") int appId);
+	List<AppPageEntity> query(@Param("appId") Long appId, @Param("keyword") String keyword);
 
 
 }

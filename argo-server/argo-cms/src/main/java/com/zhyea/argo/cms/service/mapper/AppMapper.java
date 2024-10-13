@@ -49,7 +49,7 @@ public interface AppMapper {
 	 * @return 应用记录
 	 */
 	@Select("select * from ag_cms_app where id=#{id}")
-	AppEntity getById(@Param("id") int id);
+	AppEntity getById(@Param("id") Long id);
 
 
 	/**
@@ -59,7 +59,7 @@ public interface AppMapper {
 	 * @return 影响行数
 	 */
 	@Update("update ag_cms_app set deleted=1 where id=#{id}")
-	int deleteById(@Param("id") int id);
+	int deleteById(@Param("id") Long id);
 
 
 	/**
@@ -67,7 +67,7 @@ public interface AppMapper {
 	 *
 	 * @return 应用记录列表
 	 */
-	@Select("select * from ag_cms_app where deleted=#{deleted}")
+	@Select("select * from ag_cms_app where deleted=0")
 	List<AppEntity> findAll();
 
 

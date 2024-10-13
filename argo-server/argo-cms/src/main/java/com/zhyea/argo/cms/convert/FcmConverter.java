@@ -3,7 +3,7 @@ package com.zhyea.argo.cms.convert;
 import com.zhyea.argo.cms.model.entity.FcmEntity;
 import com.zhyea.argo.cms.model.item.FcmItem;
 import com.zhyea.argo.cms.model.request.fcm.FcmAddRequest;
-import com.zhyea.argo.cms.model.request.fcm.FcmModifyRequest;
+import com.zhyea.argo.cms.model.request.fcm.FcmEditRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -27,7 +27,7 @@ public interface FcmConverter {
 	 * @return 实体对象
 	 */
 	@Mapping(target = "props", source = "props", qualifiedByName = "toJson")
-	FcmEntity addRequestToEntity(FcmAddRequest request);
+	FcmEntity addRequest2Entity(FcmAddRequest request);
 
 
 	/**
@@ -38,7 +38,7 @@ public interface FcmConverter {
 	 */
 	@Mapping(target = "props", source = "props", qualifiedByName = "toJson")
 	@Mapping(target = "id", source = "fcmId")
-	FcmEntity modifyRequestToEntity(FcmModifyRequest request);
+	FcmEntity editRequest2Entity(FcmEditRequest request);
 
 
 	/**
@@ -49,7 +49,7 @@ public interface FcmConverter {
 	 */
 	@Mapping(target = "props", source = "props", qualifiedByName = "toPropItems")
 	@Mapping(target = "fcmId", source = "id")
-	FcmItem entityToItem(FcmEntity entity);
+	FcmItem entity2Item(FcmEntity entity);
 
 
 	/**
@@ -58,6 +58,6 @@ public interface FcmConverter {
 	 * @param entity 实体对象列表
 	 * @return Item对象列表
 	 */
-	List<FcmItem> entityListToItemList(List<FcmEntity> entity);
+	List<FcmItem> entityList2ItemList(List<FcmEntity> entity);
 
 }

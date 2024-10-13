@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.zhyea.argo.cms.service.mapper.AppPageMapper">
+
+
+    <select id="query"
+            resultType="com.zhyea.argo.cms.model.entity.AppPageEntity">
+        select * from ag_cms_app_page where app_id=#{appId} and deleted=0
+        <if test="null != keyword and keyword != ''">
+            and (
+            t.page_code = #{keyword}
+            or t.page_name like concat('%', #{keyword}, '%')
+            or m.remark like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </select>
+
+</mapper>
