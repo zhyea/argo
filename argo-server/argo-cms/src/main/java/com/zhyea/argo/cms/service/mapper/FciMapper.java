@@ -72,7 +72,6 @@ public interface FciMapper {
      * @param pageCode 页面code
      * @return 组件实例列表
      */
-    @Select("select * from ag_cms_fci where page_id=#{pageId} and deleted=0")
     List<FciEntity> findByPageCode(@Param("pageId") String pageCode);
 
 

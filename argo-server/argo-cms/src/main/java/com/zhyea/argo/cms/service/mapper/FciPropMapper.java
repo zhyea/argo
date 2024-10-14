@@ -42,7 +42,7 @@ public interface FciPropMapper {
 			"effective_end_time=#{e.effectiveEndTime}, remark=#{e.remark}",
 			"where id=#{e.id}"
 	})
-	int modify(@Param("e") FciPropEntity entity);
+	int edit(@Param("e") FciPropEntity entity);
 
 
 	/**
@@ -52,7 +52,7 @@ public interface FciPropMapper {
 	 * @return 组件属性记录
 	 */
 	@Select("select * from ag_cms_fci_prop where id=#{id}")
-	FciPropEntity getById(@Param("id") int id);
+	FciPropEntity getById(@Param("id") Long id);
 
 
 	/**
@@ -62,7 +62,7 @@ public interface FciPropMapper {
 	 * @return 删除条数
 	 */
 	@Update("update ag_cms_fci_prop set deleted=1 where id=#{id}")
-	int deleteById(@Param("id") int id);
+	int deleteById(@Param("id") Long id);
 
 
 	/**
@@ -72,7 +72,7 @@ public interface FciPropMapper {
 	 * @return 组件属性记录
 	 */
 	@Select("select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=1")
-	List<FciPropEntity> findByFciId(@Param("fciId") int fciId);
+	List<FciPropEntity> findByFciId(@Param("fciId") Long fciId);
 
 
 }

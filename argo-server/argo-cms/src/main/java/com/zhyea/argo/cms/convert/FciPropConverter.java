@@ -3,7 +3,7 @@ package com.zhyea.argo.cms.convert;
 import com.zhyea.argo.cms.model.entity.FciPropEntity;
 import com.zhyea.argo.cms.model.item.FciPropItem;
 import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
-import com.zhyea.argo.cms.model.request.fci.FciPropModifyRequest;
+import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -35,7 +35,7 @@ public interface FciPropConverter {
 	 * @return 实体
 	 */
 	@Mapping(target = "id", source = "propId")
-	FciPropEntity modifyRequestToEntity(FciPropModifyRequest request);
+	FciPropEntity editRequestToEntity(FciPropEditRequest request);
 
 
 	/**

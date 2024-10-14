@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class FciPropModifyRequest extends FciPropAddRequest {
+public class FciPropEditRequest extends FciPropAddRequest {
 
 
 	/**

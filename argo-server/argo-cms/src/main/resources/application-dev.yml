@@ -4,8 +4,8 @@ spring:
   sql:
     init:
       mode: EMBEDDED
-      schema-locations: classpath:/db/schema_h2.sql
-      data-locations: classpath:/db/data_h2.sql
+      schema-locations: classpath:/database/schema-h2.sql
+      # data-locations: classpath:/database/data-h2.sql
   datasource:
     type: org.apache.commons.dbcp2.BasicDataSource
     driver-class-name: org.h2.Driver
