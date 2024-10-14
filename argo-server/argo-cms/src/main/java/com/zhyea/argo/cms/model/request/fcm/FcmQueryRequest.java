@@ -1,6 +1,7 @@
 package com.zhyea.argo.cms.model.request.fcm;
 
 import lombok.Data;
+import org.chobit.commons.model.request.BasePageRequest;
 
 /**
  * 查询组件模型查询请求
@@ -8,7 +9,13 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class FcmQueryRequest {
+public class FcmQueryRequest extends BasePageRequest {
+
+
+	/**
+	 * 应用id
+	 */
+	private Long appId;
 
 
 	/**

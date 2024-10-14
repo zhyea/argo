@@ -78,8 +78,7 @@ public interface FcmMapper {
 	 *
 	 * @return 组件模型列表
 	 */
-	@Select("select * from ag_cms_fcm")
-	List<FcmEntity> findAll();
+	List<FcmEntity> query(@Param("appId")Long appId, @Param("keyword")String keyword);
 
 
 }
