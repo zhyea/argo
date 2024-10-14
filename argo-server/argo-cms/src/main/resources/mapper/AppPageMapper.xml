@@ -6,14 +6,15 @@
 <mapper namespace="com.zhyea.argo.cms.service.mapper.AppPageMapper">
 
 
+    <!-- 根据应用ID和关键字查询页面信息 -->
     <select id="query"
             resultType="com.zhyea.argo.cms.model.entity.AppPageEntity">
         select * from ag_cms_app_page where app_id=#{appId} and deleted=0
         <if test="null != keyword and keyword != ''">
             and (
-            t.page_code = #{keyword}
-            or t.page_name like concat('%', #{keyword}, '%')
-            or m.remark like concat('%', #{keyword}, '%')
+            page_code = #{keyword}
+            or page_name like concat('%', #{keyword}, '%')
+            or remark like concat('%', #{keyword}, '%')
             )
         </if>
     </select>

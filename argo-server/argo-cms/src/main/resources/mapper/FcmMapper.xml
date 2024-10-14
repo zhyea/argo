@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -7,6 +6,7 @@
 <mapper namespace="com.zhyea.argo.cms.service.mapper.FcmMapper">
 
 
+    <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query"
             resultType="com.zhyea.argo.cms.model.entity.FcmEntity">
         select * from ag_cms_fcm where deleted=0
@@ -16,8 +16,8 @@
 
         <if test="null != keyword and keyword != ''">
             and (
-            t.name like concat('%', #{keyword}, '%')
-            or m.remark like concat('%', #{keyword}, '%')
+            name like concat('%', #{keyword}, '%')
+            or remark like concat('%', #{keyword}, '%')
             )
         </if>
     </select>
