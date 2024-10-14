@@ -1,6 +1,6 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.cms.model.entity.FciPropEntity;
+import com.zhyea.argo.model.entity.FciPropEntity;
 import com.zhyea.argo.cms.model.item.FciPropItem;
 import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;

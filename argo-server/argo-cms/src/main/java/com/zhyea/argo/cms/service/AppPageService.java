@@ -1,13 +1,13 @@
 package com.zhyea.argo.cms.service;
 
-import com.zhyea.argo.cms.constants.NumConstants;
+import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.cms.convert.AppPageConverter;
-import com.zhyea.argo.cms.model.entity.AppPageEntity;
+import com.zhyea.argo.model.entity.AppPageEntity;
 import com.zhyea.argo.cms.model.item.AppPageItem;
 import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageQueryRequest;
-import com.zhyea.argo.cms.service.mapper.AppPageMapper;
+import com.zhyea.argo.mapper.AppPageMapper;
 import org.chobit.commons.tools.ShortCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

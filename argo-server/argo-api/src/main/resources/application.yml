@@ -2,7 +2,7 @@ debug: false
 #
 spring:
   application:
-    name: liens-api
+    name: argo-api
   profiles:
     active: dev
 #

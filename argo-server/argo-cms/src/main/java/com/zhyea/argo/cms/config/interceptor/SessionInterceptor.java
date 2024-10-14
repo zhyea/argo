@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.zhyea.argo.cms.constants.SystemConstants.SESSION_ID;
+import static com.zhyea.argo.constants.SystemConstants.SESSION_ID;
 import static org.chobit.commons.utils.StrKit.isBlank;
 
 /**

@@ -48,11 +48,6 @@
 
         <!--database-->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
         </dependency>
@@ -63,7 +58,6 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.4.7</version>
         </dependency>
 
         <!-- others -->
@@ -73,7 +67,7 @@
         </dependency>
         <dependency>
             <groupId>com.zhyea.argo</groupId>
-            <artifactId>argo-model</artifactId>
+            <artifactId>argo-data</artifactId>
         </dependency>
         <dependency>
             <groupId>org.chobit.commons</groupId>
@@ -154,7 +148,7 @@
             </plugin>
         </plugins>
 
-        <finalName>liens-cms</finalName>
+        <finalName>argo-cms</finalName>
     </build>
 
 </project>

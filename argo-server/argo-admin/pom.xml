@@ -30,6 +30,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+
         <!--cache config-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -39,6 +41,25 @@
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
         </dependency>
+
+        <!--database-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+
         <!-- others -->
         <dependency>
             <groupId>com.zhyea.argo</groupId>
@@ -87,7 +108,7 @@
             </plugin>
         </plugins>
 
-        <finalName>liens-admin</finalName>
+        <finalName>argo-admin</finalName>
     </build>
 
 </project>

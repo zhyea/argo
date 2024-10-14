@@ -1,25 +1,15 @@
-package com.zhyea.argo.cms.model.item;
+package com.zhyea.argo.model.entity;
 
-import com.zhyea.argo.constants.enums.FcScopeEnum;
-import com.zhyea.argo.constants.enums.FcmTypeEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
+import com.zhyea.argo.constants.enums.*;
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * 组件模型信息
+ * 组件定义
  *
  * @author robin
  */
 @Data
-public class FcmItem {
-
-
-	/**
-	 * 组件模型ID
-	 */
-	private Long fcmId;
+public class FcmEntity extends BaseEntity {
 
 
 	/**
@@ -59,7 +49,7 @@ public class FcmItem {
 	/**
 	 * 属性
 	 */
-	private List<FcmPropItem> props;
+	private String props;
 
 
 	/**

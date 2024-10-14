@@ -3,14 +3,14 @@ package com.zhyea.argo.cms.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhyea.argo.cms.constants.NumConstants;
+import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.cms.convert.FciConverter;
-import com.zhyea.argo.cms.model.entity.FciEntity;
+import com.zhyea.argo.model.entity.FciEntity;
 import com.zhyea.argo.cms.model.item.FciItem;
 import com.zhyea.argo.cms.model.request.fci.FciAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciEditRequest;
 import com.zhyea.argo.cms.model.request.fci.FciQueryRequest;
-import com.zhyea.argo.cms.service.mapper.FciMapper;
+import com.zhyea.argo.mapper.FciMapper;
 import org.chobit.commons.model.response.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

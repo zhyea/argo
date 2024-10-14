@@ -1,16 +1,18 @@
-package com.zhyea.argo.cms.model.item;
+package com.zhyea.argo.model.entity;
 
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
 /**
- * 组件实例信息
+ * 组件实例
  *
  * @author robin
  */
-public class FciItem {
+@Data
+public class FciEntity extends BaseEntity {
 
 
 	/**
@@ -63,5 +65,4 @@ public class FciItem {
 	 * 备注
 	 */
 	private String remark;
-
 }

@@ -1,8 +1,8 @@
 package com.zhyea.argo.cms.model.request.fcm;
 
-import com.zhyea.argo.cms.constants.enums.FcScopeEnum;
-import com.zhyea.argo.cms.constants.enums.FcmTypeEnum;
-import com.zhyea.argo.cms.constants.enums.YesOrNo;
+import com.zhyea.argo.constants.enums.FcScopeEnum;
+import com.zhyea.argo.constants.enums.FcmTypeEnum;
+import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.cms.model.item.FcmPropItem;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import lombok.Data;
