@@ -2,6 +2,7 @@ package com.zhyea.argo.model.entity;
 
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
+import com.zhyea.argo.model.BaseEntity;
 import lombok.Data;
 
 import java.time.LocalDateTime;

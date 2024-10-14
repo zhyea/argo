@@ -1,4 +1,4 @@
-package com.zhyea.argo.model.entity;
+package com.zhyea.argo.model;
 
 import lombok.Data;
 

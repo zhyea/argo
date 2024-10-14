@@ -1,5 +1,6 @@
 package com.zhyea.argo.model.entity;
 
+import com.zhyea.argo.model.BaseEntity;
 import lombok.Data;
 
 /**
