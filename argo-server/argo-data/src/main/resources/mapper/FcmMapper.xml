@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.zhyea.argo.mapper.FcmMapper">
+<mapper namespace="com.zhyea.argo.mapper.cms.FcmMapper">
 
 
     <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query"
-            resultType="com.zhyea.argo.model.entity.FcmEntity">
+            resultType="com.zhyea.argo.entity.cms.FcmEntity">
         select * from ag_cms_fcm where deleted=0
         <if test="null != appId">
             and app_id=#{appId}

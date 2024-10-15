@@ -147,8 +147,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
-        <finalName>argo-cms</finalName>
     </build>
 
 </project>

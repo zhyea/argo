@@ -2,11 +2,11 @@ package com.zhyea.argo.cms.service;
 
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.cms.convert.AppConverter;
-import com.zhyea.argo.model.entity.AppEntity;
+import com.zhyea.argo.entity.cms.AppEntity;
 import com.zhyea.argo.cms.model.item.AppItem;
 import com.zhyea.argo.cms.model.request.app.AppAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppEditRequest;
-import com.zhyea.argo.mapper.AppMapper;
+import com.zhyea.argo.mapper.cms.AppMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -60,14 +60,32 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
 
+        <!--support-->
+        <dependency>
+            <groupId>org.chobit.spring</groupId>
+            <artifactId>zhy-spring-boot-autoconfigure</artifactId>
+        </dependency>
+
         <!-- others -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.zhyea.argo</groupId>
             <artifactId>argo-common</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.zhyea.argo</groupId>
+            <artifactId>argo-data</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.chobit.commons</groupId>
+            <artifactId>common-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

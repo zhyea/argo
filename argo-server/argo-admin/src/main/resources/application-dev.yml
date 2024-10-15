@@ -11,8 +11,9 @@ spring:
       pool-prepared-statements: true
   sql:
     init:
-      mode: always
-      schema-locations: classpath:schema.sql
+      mode: EMBEDDED
+      schema-locations: classpath:/database/schema-h2.sql
+      data-locations: classpath:/database/data-h2.sql
 
 eureka:
   client:

@@ -2,11 +2,11 @@ package com.zhyea.argo.cms.service;
 
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.cms.convert.FciPropConverter;
-import com.zhyea.argo.model.entity.FciPropEntity;
+import com.zhyea.argo.entity.cms.FciPropEntity;
 import com.zhyea.argo.cms.model.item.FciPropItem;
 import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
-import com.zhyea.argo.mapper.FciPropMapper;
+import com.zhyea.argo.mapper.cms.FciPropMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

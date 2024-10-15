@@ -111,7 +111,6 @@
         <module>argo-common</module>
         <module>argo-data</module>
         <module>argo-admin</module>
-        <module>argo-api</module>
         <module>argo-cms</module>
     </modules>
 
