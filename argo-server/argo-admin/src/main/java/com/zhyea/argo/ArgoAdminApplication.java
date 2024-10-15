@@ -5,12 +5,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Argo Admin 启动类
  *
  * @author robin
  */
+@EnableTransactionManagement
 @EnableCaching
 @SpringBootApplication
 public class ArgoAdminApplication {
