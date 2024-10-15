@@ -2,7 +2,6 @@ package com.zhyea.argo.cms.config;
 
 import com.zhyea.argo.cms.config.interceptor.AuthInterceptor;
 import com.zhyea.argo.cms.config.interceptor.SessionInterceptor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -11,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @author robin
  */
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
 

@@ -11,7 +11,6 @@ spring:
       schema-locations: classpath:schema.sql
 
 
-
 management:
   endpoints:
     web:
@@ -32,9 +31,12 @@ mybatis:
   mapper-locations: classpath*:mapper/**.xml
 
 
-argo:
-  password:
-    salt: 123456
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 
 rw:
   wrapExcept: false
