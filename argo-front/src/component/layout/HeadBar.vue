@@ -99,7 +99,7 @@ function logout() {
 			type: 'warning',
 		}
 	).then(() => {
-		authStore.logoutHandle()
+		authStore.useLogout()
 			.then(() => {
 				router.push({
 					name: 'Login'
@@ -107,8 +107,8 @@ function logout() {
 			})
 	}).catch(() => {
 		//用户点击了取消
-		ElMessage.success({
-			message: '取消退出',
+		ElMessage.error({
+			message: '请求退出异常',
 		})
 	})
 }

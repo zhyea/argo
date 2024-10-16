@@ -2,7 +2,7 @@
 	<el-container class="home_container">
 
 		<sidebar :collapsed="collapseFlag"
-		         :menu-items="menuItems"/>
+		         :menu-items="menuItems.home"/>
 
 		<el-container direction="vertical">
 			<head-bar :collapsed="collapseFlag" @menu="changeMenuState"/>

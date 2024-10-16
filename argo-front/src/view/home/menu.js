@@ -1,21 +1,40 @@
-export default [
-	{
-		name: 'Home',
-		icon: 'Platform',
-		uri: '/home',
+export default {
 
-		children: [{
-			name: '应用',
+	home: [
+		{
+			name: 'Home',
+			icon: 'Platform',
+			uri: '/home',
+
+			children: [{
+				name: '应用列表',
+				icon: 'menu',
+				uri: '/app-list',
+			}, {
+				name: '组件模型',
+				icon: 'user',
+				uri: '/fcm-list',
+			}, {
+				name: '系统设置',
+				icon: 'setting',
+				uri: '#',
+			}],
+		},
+	],
+
+	app: [
+		{
+			name: '组件模型',
 			icon: 'menu',
-			uri: '/project-list',
+			uri: '/fcm-list',
 		}, {
-			name: '用户',
+			name: '组件实例',
 			icon: 'user',
-			uri: '/users',
-		}, {
-			name: '设置',
-			icon: 'setting',
+			uri: '/fci-list',
+		},{
+			name: '用户组',
+			icon:'setting',
 			uri: '#',
-		}],
-	},
-]
+		}
+	],
+}
