@@ -1,6 +1,7 @@
 package com.zhyea.argo;
 
 import com.zhyea.argo.tools.BeanKit;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author robin
  */
+@Slf4j
 @EnableTransactionManagement
 @EnableCaching
 @SpringBootApplication
@@ -24,7 +26,7 @@ public class ArgoAdminApplication {
 
 		BeanKit.init(ctx);
 
-		System.out.println("应用启动成功...");
+		logger.info("argo admin server has started ...");
 	}
 
 }

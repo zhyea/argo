@@ -13,6 +13,7 @@ import org.chobit.commons.utils.StrKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -49,6 +50,7 @@ public class UserLoginAction {
 	 * @param password 密码
 	 * @return true 登陆成功， false 登录失败
 	 */
+	@Transactional
 	public String doLogin(String username, String password) {
 
 		// 密码加盐后查询记录校验
