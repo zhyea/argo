@@ -13,7 +13,7 @@
 			<div class="nav-box">
 				<el-scrollbar height="100%">
 					<el-menu class="el-menu-vertical"
-					         :collapse="!collapsed"
+					         :collapse="collapsed"
 					         :router="true"
 					         :collapse-transition="false"
 					         background-color="#263238"
