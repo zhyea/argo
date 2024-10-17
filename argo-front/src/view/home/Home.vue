@@ -1,8 +1,6 @@
 <template>
 	<el-container class="home_container">
 
-		<el-icon><Edit /></el-icon>
-
 		<sidebar :collapsed="collapseFlag"
 		         :menu-items="menuItems.home"/>
 

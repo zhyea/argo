@@ -3,7 +3,7 @@ export default {
 	home: [
 		{
 			name: 'Home',
-			icon: 'House',
+			icon: 'HomeFilled',
 			uri: '/home',
 
 			children: [{
@@ -12,11 +12,11 @@ export default {
 				uri: '/app-list',
 			}, {
 				name: '组件模型',
-				icon: 'Van',
+				icon: 'Cpu',
 				uri: '/fcm-list',
 			}, {
 				name: '系统设置',
-				icon: 'Operation',
+				icon: 'Setting',
 				uri: '#',
 			}],
 		},

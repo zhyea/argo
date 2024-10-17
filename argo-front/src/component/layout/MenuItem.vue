@@ -6,7 +6,7 @@
 
 		<template #title>
 			<el-icon v-if="props.item.icon">
-				<component :is="icon(props.item.icon)"/>
+				<component :is="props.item.icon"/>
 			</el-icon>
 			<span>{{ props.item.name }}</span>
 		</template>
@@ -15,7 +15,7 @@
 			<menu-item v-if="child.children" :item="child" :key="child"/>
 			<el-menu-item v-else :index="child.uri" :key="child.uri">
 				<el-icon v-if="child.icon">
-					<component :is="icon(child.icon)"/>
+					<component :is="child.icon"/>
 				</el-icon>
 				{{ child.name }}
 			</el-menu-item>
@@ -27,7 +27,7 @@
 	<el-menu-item v-else
 	              :index="props.item.uri">
 		<el-icon v-if="props.item.icon">
-			<component :is="icon(props.item.icon)"/>
+			<component :is="props.item.icon"/>
 		</el-icon>
 		<span>{{ props.item.name }}</span>
 	</el-menu-item>
@@ -43,9 +43,6 @@ const props = defineProps({
 	}
 })
 
-const icon = computed(() => (name) => {
-	return name
-})
 </script>
 
 <style scoped lang="less">
