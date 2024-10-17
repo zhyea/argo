@@ -7,6 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
 
@@ -35,7 +36,9 @@ export default defineConfig({
 		}),
 
 		// ElementPlus按需引入
-		ElementPlus()
+		ElementPlus(),
+		// 图标
+		Icons(),
 	],
 
 	resolve: {

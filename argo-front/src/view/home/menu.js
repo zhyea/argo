@@ -3,20 +3,20 @@ export default {
 	home: [
 		{
 			name: 'Home',
-			icon: 'Platform',
+			icon: 'House',
 			uri: '/home',
 
 			children: [{
 				name: '应用列表',
-				icon: 'menu',
+				icon: 'Grid',
 				uri: '/app-list',
 			}, {
 				name: '组件模型',
-				icon: 'user',
+				icon: 'Van',
 				uri: '/fcm-list',
 			}, {
 				name: '系统设置',
-				icon: 'setting',
+				icon: 'Operation',
 				uri: '#',
 			}],
 		},
@@ -33,7 +33,7 @@ export default {
 			uri: '/fci-list',
 		},{
 			name: '用户组',
-			icon:'setting',
+			icon:'User',
 			uri: '#',
 		}
 	],
