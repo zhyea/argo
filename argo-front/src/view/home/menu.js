@@ -3,7 +3,7 @@ export default {
 	home: [
 		{
 			name: 'Home',
-			icon: 'HomeFilled',
+			icon: 'Platform',
 			uri: '/home',
 
 			children: [{

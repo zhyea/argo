@@ -34,7 +34,6 @@
 </template>
 
 <script setup>
-import {computed} from 'vue'
 
 const props = defineProps({
 	item: {
@@ -42,6 +41,9 @@ const props = defineProps({
 		required: true
 	}
 })
+
+
+
 
 </script>
 
