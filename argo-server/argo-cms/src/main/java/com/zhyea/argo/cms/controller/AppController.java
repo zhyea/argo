@@ -19,7 +19,7 @@ import java.util.List;
  */
 @ResponseWrapper
 @RestController
-@RequestMapping("/app")
+@RequestMapping("/cms/app")
 public class AppController {
 
 

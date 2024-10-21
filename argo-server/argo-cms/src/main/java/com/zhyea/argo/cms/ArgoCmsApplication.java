@@ -3,19 +3,16 @@ package com.zhyea.argo.cms;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Argo CMS 启动类
  *
  * @author robin
  */
-@ComponentScan("com.zhyea.argo")
+//@ComponentScan("com.zhyea.argo")
 @Slf4j
-@EnableCaching
-@SpringBootApplication
+//@EnableCaching
+//@SpringBootApplication
 public class ArgoCmsApplication {
 
 

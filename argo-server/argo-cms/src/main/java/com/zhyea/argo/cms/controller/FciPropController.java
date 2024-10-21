@@ -24,7 +24,7 @@ import java.util.List;
  */
 @ResponseWrapper
 @RestController
-@RequestMapping("/fci/prop")
+@RequestMapping("/cms/fci/prop")
 public class FciPropController {
 
 

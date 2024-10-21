@@ -47,6 +47,11 @@
                 <artifactId>argo-data</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.zhyea.argo</groupId>
+                <artifactId>argo-cms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- database -->
             <dependency>

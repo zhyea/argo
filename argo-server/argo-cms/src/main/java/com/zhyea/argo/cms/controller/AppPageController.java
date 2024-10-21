@@ -17,7 +17,7 @@ import java.util.List;
  */
 @ResponseWrapper
 @RestController
-@RequestMapping("/app/page")
+@RequestMapping("/cms/app/page")
 public class AppPageController {
 
 

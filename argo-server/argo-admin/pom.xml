@@ -80,6 +80,10 @@
             <artifactId>argo-data</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.zhyea.argo</groupId>
+            <artifactId>argo-cms</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.chobit.commons</groupId>
             <artifactId>common-utils</artifactId>
         </dependency>

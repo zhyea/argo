@@ -18,7 +18,7 @@ import java.util.List;
 
 @ResponseWrapper
 @RestController
-@RequestMapping("/fci")
+@RequestMapping("/cms/fci")
 public class FciController {
 
 

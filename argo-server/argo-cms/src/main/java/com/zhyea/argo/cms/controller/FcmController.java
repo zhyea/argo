@@ -23,7 +23,7 @@ import javax.validation.Valid;
  */
 @ResponseWrapper
 @RestController
-@RequestMapping("/fcm")
+@RequestMapping("/cms/fcm")
 public class FcmController {
 
 
