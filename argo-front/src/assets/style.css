@@ -78,7 +78,7 @@ button:focus-visible {
 }
 
 .el-input {
-	font-size: 6px;
+	font-size: 12px;
 }
 
 .el-tooltip__trigger:focus-visible {

@@ -47,9 +47,9 @@ export const useAuthStore = defineStore('auth', {
 		// logout function
 		async useLogout() {
 			return new Promise((resolve, reject) => {
+				this.removeToken()
 				return doLogout()
 					.then(response => {
-						this.removeToken()
 						resolve()
 					}).catch(error => {
 						reject(error)

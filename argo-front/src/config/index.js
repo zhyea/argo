@@ -6,8 +6,6 @@ export const config = {
 
 	// auth
 	TOKEN: 'token',
-	isLogin: 'isLogin',
-
 }
 
 

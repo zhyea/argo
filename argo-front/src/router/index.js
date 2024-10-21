@@ -14,13 +14,15 @@ const router = createRouter({
 //全局守卫  访问非Login界面时，验证是否已登录
 router.beforeEach((to, from, next) => {
 
-	//判断是否已登录 查sessionStorage中是否有isLogin信息
-	let isLogin = sessionStorage.getItem(config.TOKEN)
+	//判断是否已登录 查sessionStorage中是否有token信息
+	let token = sessionStorage.getItem(config.TOKEN)
 
-	if (to.name !== config.loginRouteName && !isLogin) {
+	console.log(token)
+
+	if (to.name !== config.loginRouteName && !token) {
 		// 未登录，跳转到登录页
 		next({name: config.loginRouteName});
-	} else if (to.name === config.loginRouteName && isLogin) {
+	} else if (to.name === config.loginRouteName && token) {
 		// 已登录，不允许进入登录页，否则去Home页
 		next({name: config.homeRouteName});
 	} else {

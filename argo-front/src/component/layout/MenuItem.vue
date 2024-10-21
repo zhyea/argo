@@ -1,19 +1,19 @@
 <template>
 
 	<!-- parent -->
-	<el-sub-menu v-if="props.item.children"
-	             :index="props.item.uri">
+	<el-sub-menu v-if="prop.item.children"
+	             :index="prop.item.index">
 
 		<template #title>
-			<el-icon v-if="props.item.icon">
-				<component :is="props.item.icon"/>
+			<el-icon v-if="prop.item.icon">
+				<component :is="prop.item.icon"/>
 			</el-icon>
-			<span>{{ props.item.name }}</span>
+			<span>{{ prop.item.name }}</span>
 		</template>
 
-		<template v-for="child in props.item.children">
+		<template v-for="child in prop.item.children">
 			<menu-item v-if="child.children" :item="child" :key="child"/>
-			<el-menu-item v-else :index="child.uri" :key="child.uri">
+			<el-menu-item v-else :index="child.index" :key="child.uri">
 				<el-icon v-if="child.icon">
 					<component :is="child.icon"/>
 				</el-icon>
@@ -25,17 +25,17 @@
 
 	<!-- children -->
 	<el-menu-item v-else
-	              :index="props.item.uri">
-		<el-icon v-if="props.item.icon">
-			<component :is="props.item.icon"/>
+	              :index="prop.item.index">
+		<el-icon v-if="prop.item.icon">
+			<component :is="prop.item.icon"/>
 		</el-icon>
-		<span>{{ props.item.name }}</span>
+		<span>{{ prop.item.name }}</span>
 	</el-menu-item>
 </template>
 
 <script setup>
 
-const props = defineProps({
+const prop = defineProps({
 	item: {
 		type: Object,
 		required: true
