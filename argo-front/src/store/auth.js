@@ -1,7 +1,7 @@
 // auth store
 
 import {defineStore} from 'pinia'
-import {doLogin, doLogout, setHttpToken, removeHttpToken} from '@/api/auth'
+import {doLogin, doLogout, setHttpToken, removeHttpToken, doPing} from '@/api/auth'
 import {config} from '@/config/index.js'
 
 
@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
 
 
 		// remove token function
-		removeToken(token) {
+		removeToken() {
 			this.token = ''
 			sessionStorage.removeItem(config.TOKEN)
 			removeHttpToken()
@@ -50,12 +50,23 @@ export const useAuthStore = defineStore('auth', {
 				this.removeToken()
 				return doLogout()
 					.then(response => {
-						resolve()
+						console.log(response)
+						resolve(response)
 					}).catch(error => {
 						reject(error)
 					})
 			})
 		},
+
+
+		// ping function
+		async usePing() {
+			return new Promise((resolve, reject) => {
+				return doPing().catch(error => {
+					this.removeToken()
+				})
+			})
+		}
 
 		// add more actions here...
 	}

@@ -18,4 +18,7 @@ export const API = {
 	// Logout url
 	LOGOUT: '/logout',
 
+	// Ping url
+	PING: '/ping',
+
 }

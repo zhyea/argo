@@ -2,6 +2,8 @@ import HomePage from "@/view/home/Home.vue";
 import LoginPage from "@/view/auth/Login.vue"
 import NotFoundPage from '@/view/error/NotFound.vue'
 
+import appRoutes from '@/view/app/routes'
+
 
 const routes = [
 	{
@@ -11,7 +13,9 @@ const routes = [
 		meta: {
 			title: '首页',
 		},
-		children: [],
+		children: [
+			...appRoutes,
+		],
 	}, {
 		name: 'Login',
 		path: '/login',

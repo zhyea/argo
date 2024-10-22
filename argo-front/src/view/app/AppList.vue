@@ -6,7 +6,7 @@
 		     @click="goToAppPage(item.appId)">
 
 			<div class="app-icon">
-				{{ item.icon }}
+				<img :src="item.icon" alt="item.appName" class="app-icon-img"/>
 			</div>
 
 			<div class="app-title">
@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+import {ref} from 'vue'
 
 import {getAppList} from "@/api/app.js";
 import {useRouter} from "vue-router";
@@ -52,7 +53,7 @@ const router = useRouter();
 
 // 跳转到应用页面
 const goToAppPage = (appId) => {
-	router.push({name: 'MethodList', query: {'appId': appId}, replace: true})
+	router.push({name: 'AppPage', query: {'appId': appId}, replace: true})
 }
 </script>
 
@@ -74,6 +75,7 @@ const goToAppPage = (appId) => {
 		padding: 0;
 		height: 90px;
 		width: 90px;
+		overflow: hidden;
 		border: 3px solid #42b983;
 		border-radius: 50%;
 		background-color: #FFFFFF;
@@ -82,6 +84,14 @@ const goToAppPage = (appId) => {
 		font-size: 36px;
 		font-weight: bold;
 		color: #42b983;
+	}
+
+	.app-icon-img {
+		display: block;
+		margin: 0;
+		padding: 0;
+		width: 80px;
+		height: 80px;
 	}
 
 	.app-title {
@@ -93,6 +103,7 @@ const goToAppPage = (appId) => {
 		overflow: hidden;
 		text-align: center;
 		font-family: 'Monospaced', 'serif';
+		font-weight: bolder;
 		color: #1a1a1a;
 	}
 }

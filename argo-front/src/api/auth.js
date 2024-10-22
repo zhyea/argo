@@ -24,6 +24,11 @@ export function doLogout() {
 }
 
 
+export function doPing(){
+
+}
+
+
 /**
  * 设置token
  */
