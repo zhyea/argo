@@ -1,32 +1,30 @@
 <template>
-	<el-container class="app-container">
-		<!--表单信息-->
-		<el-form status-icon
-		         label-position="right" label-suffix=":"
-		         :model="appForm" ref="appFormRef" :rules="appFormRules"
-		         label-with="90px" class="app-form">
+	<!--表单信息-->
+	<el-form
+	         :model="appForm" ref="appFormRef" :rules="appFormRules"
+	         label-suffix=":" label-width="90px"
+	         class="app-form" status-icon >
 
-			<el-form-item label="应用ID" prop="appId">
-				<el-input v-model="appForm.appId"/>
-			</el-form-item>
+		<el-form-item label="应用ID" prop="appId">
+			<el-input v-model="appForm.appId"/>
+		</el-form-item>
 
-			<el-form-item label="应用名称" prop="appName">
-				<el-input v-model="appForm.appName"/>
-			</el-form-item>
+		<el-form-item label="应用名称" prop="appName">
+			<el-input v-model="appForm.appName"/>
+		</el-form-item>
 
-			<el-form-item label="应用图标" prop="icon">
-				<el-input v-model="appForm.icon"/>
-			</el-form-item>
+		<el-form-item label="应用图标" prop="icon">
+			<el-input v-model="appForm.icon"/>
+		</el-form-item>
 
-			<el-form-item label="备注" prop="remark">
-				<el-input type="textarea" v-model="appForm.remark" :autosize="{ minRows: 4,}"/>
-			</el-form-item>
+		<el-form-item label="备注" prop="remark">
+			<el-input type="textarea" v-model="appForm.remark" :autosize="{ minRows: 4,}"/>
+		</el-form-item>
 
-			<el-form-item>
-				<el-button type="primary" @click="onSubmit">提交</el-button>
-			</el-form-item>
-		</el-form>
-	</el-container>
+		<el-form-item>
+			<el-button type="primary" @click="onSubmit">提交</el-button>
+		</el-form-item>
+	</el-form>
 </template>
 
 <script setup>
@@ -55,11 +53,18 @@ const appFormRules = {
 	],
 }
 
+
+// 提交app编辑信息
+function onSubmit() {
+
+}
+
 </script>
 
 <style scoped lang="less">
 .app-form {
 	width: 100%;
+	max-width: 900px;
 	padding: 30px;
 }
 </style>
