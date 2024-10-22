@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author robin
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/ping")
 public class ApiController {
 
     @GetMapping("/ping")
