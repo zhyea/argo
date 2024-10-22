@@ -20,9 +20,9 @@ public interface AppMapper {
 	 * @param app 应用信息
 	 */
 	@Insert({
-			"insert into ag_cms_app (app_name, icon, remark)",
+			"insert into ag_cms_app (app_code, app_name, icon, remark)",
 			"values",
-			"(#{e.appName}, #{e.icon}, #{e.remark})"
+			"(#{e.appCode}, #{e.appName}, #{e.icon}, #{e.remark})"
 	})
 	@Options(useGeneratedKeys = true)
 	void add(@Param("e") AppEntity app);
@@ -36,7 +36,7 @@ public interface AppMapper {
 	 */
 	@Update({
 			"update ag_cms_app set",
-			"app_name=#{e.appName}, icon=#{e.icon}, remark=#{e.remark}",
+			"app_code=#{e.appCode}, app_name=#{e.appName}, icon=#{e.icon}, remark=#{e.remark}",
 			"where id=#{e.id}"
 	})
 	int modify(@Param("e") AppEntity app);

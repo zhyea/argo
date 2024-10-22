@@ -15,6 +15,13 @@ public class AppAddRequest extends BaseOperateRequest {
 
 
 	/**
+	 * 应用ID
+	 */
+	@NotBlank(message = "应用ID不能为空")
+	private String appCode;
+
+
+	/**
 	 * 应用名称
 	 */
 	@NotBlank(message = "应用名称不能为空")

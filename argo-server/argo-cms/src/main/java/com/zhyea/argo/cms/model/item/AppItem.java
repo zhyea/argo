@@ -18,6 +18,12 @@ public class AppItem {
 
 
 	/**
+	 * 应用Code
+	 */
+	private String appCode;
+
+
+	/**
 	 * 应用名称
 	 */
 	private String appName;
