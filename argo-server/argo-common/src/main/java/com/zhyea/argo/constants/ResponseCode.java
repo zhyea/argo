@@ -8,7 +8,7 @@ import org.chobit.commons.contract.CodeDescEnum;
  * 1xxxx api
  * 2xxxx mock
  * 3xxxx 权限
- * 4xxxx 业务
+ * 4xxxx CMS
  *
  * @author robin
  */
@@ -34,9 +34,9 @@ public enum ResponseCode implements CodeDescEnum {
 
 
 	/**
-	 * 未定义错误
+	 * 参数错误
 	 */
-	ARGUMENT_ERROR(10000, "参数错误错误"),
+	ARGUMENT_ERROR(10000, "参数错误"),
 
 
 	/**
@@ -44,12 +44,13 @@ public enum ResponseCode implements CodeDescEnum {
 	 */
 	USER_LOGIN_INFO_ERROR(30000, "用户名或密码错误"),
 
+	CONFIRM_PASSWORD_NOT_MATCH(30001, "确认密码与密码不一致"),
+
 
 	/**
-	 * 确认密码与密码不一致
+	 * CMS app相关问题
 	 */
-	CONFIRM_PASSWORD_NOT_MATCH(30001, "确认密码与密码不一致"),
-	;
+	APP_DUPLICATE_ERROR(40100, "应用已存在");
 
 
 	public final int code;
@@ -71,6 +72,6 @@ public enum ResponseCode implements CodeDescEnum {
 
 	@Override
 	public int getCode() {
-		return 0;
+		return code;
 	}
 }

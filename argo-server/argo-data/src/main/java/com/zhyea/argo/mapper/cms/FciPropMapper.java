@@ -26,6 +26,7 @@ public interface FciPropMapper {
 			"(#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.propValueSelector},",
 			"#{e.switchFlag}, #{e.effectivePeriodType}, #{e.effectiveStartTime}, #{e.effectiveEndTime}, #{e.remark})"
 	})
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") FciPropEntity entity);
 
 

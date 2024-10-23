@@ -24,7 +24,7 @@ public interface FcmMapper {
 			"values",
 			"(#{e.scope}, #{e.appId}, #{e.name}, #{e.icon}, #{e.type}, #{e.props}, #{e.dataBindFlag}, #{e.remark})"
 	})
-	@Options(useGeneratedKeys = true)
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") FcmEntity entity);
 
 
@@ -78,7 +78,7 @@ public interface FcmMapper {
 	 *
 	 * @return 组件模型列表
 	 */
-	List<FcmEntity> query(@Param("appId")Long appId, @Param("keyword")String keyword);
+	List<FcmEntity> query(@Param("appId") Long appId, @Param("keyword") String keyword);
 
 
 }

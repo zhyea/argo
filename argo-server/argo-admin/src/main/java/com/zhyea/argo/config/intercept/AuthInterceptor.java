@@ -1,6 +1,6 @@
 package com.zhyea.argo.config.intercept;
 
-import com.zhyea.argo.except.ArgoAdminException;
+import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.tools.AuthContext;
 import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.utils.ObjKit;
@@ -36,7 +36,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		if (isBlank(token) || ObjKit.nonEquals(token, AuthContext.getToken())) {
 			logger.info("Mocko Request is blocked, clientToken:{}, serverToken:{} ", token, AuthContext.getToken());
-			throw new ArgoAdminException(USER_AUTH_ERROR);
+			throw new ArgoServerException(USER_AUTH_ERROR);
 		}
 
 		return true;

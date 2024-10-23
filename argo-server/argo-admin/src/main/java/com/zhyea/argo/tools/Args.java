@@ -2,7 +2,7 @@ package com.zhyea.argo.tools;
 
 
 import com.zhyea.argo.constants.ResponseCode;
-import com.zhyea.argo.except.ArgoAdminException;
+import com.zhyea.argo.except.ArgoServerException;
 
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ public final class Args {
                                    String other,
                                    ResponseCode responseCode) {
         if (!Objects.equals(str, other)) {
-            throw new ArgoAdminException(responseCode);
+            throw new ArgoServerException(responseCode);
         }
     }
 

@@ -24,7 +24,7 @@ public interface AppMapper {
 			"values",
 			"(#{e.appCode}, #{e.appName}, #{e.icon}, #{e.remark})"
 	})
-	@Options(useGeneratedKeys = true)
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") AppEntity app);
 
 
@@ -71,4 +71,12 @@ public interface AppMapper {
 	List<AppEntity> findAll();
 
 
+	/**
+	 * 根据应用编码获取应用集合
+	 *
+	 * @param appCode 应用编码
+	 * @return appCode对应的应用集合
+	 */
+	@Select("select * from ag_cms_app where app_code=#{appCode}")
+	List<AppEntity> findByAppCode(@Param("appCode") String appCode);
 }

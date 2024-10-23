@@ -2,7 +2,7 @@ package com.zhyea.argo.action;
 
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.entity.adm.UserEntity;
-import com.zhyea.argo.except.ArgoAdminException;
+import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.mapper.adm.UserMapper;
 import com.zhyea.argo.model.item.UserItem;
 import com.zhyea.argo.service.UserService;
@@ -58,7 +58,7 @@ public class UserLoginAction {
 		UserEntity user = userService.getByUserPwd(username, password);
 
 		if (null == user) {
-			throw new ArgoAdminException(ResponseCode.USER_LOGIN_INFO_ERROR);
+			throw new ArgoServerException(ResponseCode.USER_LOGIN_INFO_ERROR);
 		}
 
 		// 重置上次登录时间

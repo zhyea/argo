@@ -1,12 +1,15 @@
 package com.zhyea.argo.cms.service;
 
-import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.cms.convert.AppConverter;
-import com.zhyea.argo.entity.cms.AppEntity;
 import com.zhyea.argo.cms.model.item.AppItem;
 import com.zhyea.argo.cms.model.request.app.AppAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppEditRequest;
+import com.zhyea.argo.constants.NumConstants;
+import com.zhyea.argo.constants.ResponseCode;
+import com.zhyea.argo.entity.cms.AppEntity;
+import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.mapper.cms.AppMapper;
+import org.chobit.commons.utils.Collections2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +41,11 @@ public class AppService {
 	 * @return 应用id
 	 */
 	public Long add(AppAddRequest request) {
+		List<AppEntity> appList = appMapper.findByAppCode(request.getAppCode());
+		if (Collections2.isNotEmpty(appList)) {
+			throw new ArgoServerException(ResponseCode.APP_DUPLICATE_ERROR);
+		}
+
 		AppEntity entity = appConverter.addRequest2Entity(request);
 		appMapper.add(entity);
 		return entity.getId();

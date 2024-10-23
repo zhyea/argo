@@ -1,7 +1,8 @@
-package com.zhyea.argo.except;
+package com.zhyea.argo.cms.except;
 
 import com.zhyea.argo.constants.ResponseCode;
 import lombok.Getter;
+import org.chobit.commons.contract.CodeDescEnum;
 import org.chobit.spring.autoconfigure.rw.exception.RwException;
 
 /**
@@ -10,17 +11,17 @@ import org.chobit.spring.autoconfigure.rw.exception.RwException;
  * @author robin
  */
 @Getter
-public class ArgoAdminException extends RwException {
+public class ArgoCmsException extends RwException {
 
 
 	private static final long serialVersionUID = 7773203247174587636L;
 
 
-	public ArgoAdminException(ResponseCode code) {
-		super(code.code, code.msg);
+	public ArgoCmsException(CodeDescEnum code) {
+		super(code.getCode(), code.getDesc());
 	}
 
-	public ArgoAdminException(ResponseCode code, Throwable t) {
+	public ArgoCmsException(ResponseCode code, Throwable t) {
 		super(code.code, code.msg, t);
 	}
 

@@ -1,7 +1,7 @@
 package com.zhyea.argo.config;
 
 import com.zhyea.argo.constants.ResponseCode;
-import com.zhyea.argo.except.ArgoAdminException;
+import com.zhyea.argo.except.ArgoServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.model.response.Result;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -37,8 +37,8 @@ public class ApiExceptionAdvisor {
      * @return 封装后的异常返回值
      */
     @ResponseBody
-    @ExceptionHandler(ArgoAdminException.class)
-    public Object mockoServerExceptionHandler(ArgoAdminException e) {
+    @ExceptionHandler(ArgoServerException.class)
+    public Object mockoServerExceptionHandler(ArgoServerException e) {
 
         Result<?> r = new Result<>(e.getCode());
         r.setMsg(e.getMessage());
