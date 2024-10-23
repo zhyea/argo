@@ -35,7 +35,7 @@ create table if not exists ag_cms_app
 (
     id            int          not null default 0 auto_increment comment 'id',
 
-    app_code      varchar(16)  not null default '' comment '应用编码',
+    app_code      varchar(32)  not null default '' comment '应用编码',
     app_name      varchar(64)  not null default '' comment '应用名称',
     icon          varchar(64)  not null default '' comment '图标',
     remark        varchar(128) not null default '' comment '备注',
