@@ -3,6 +3,7 @@ import LoginPage from "@/view/auth/Login.vue"
 import NotFoundPage from '@/view/error/NotFound.vue'
 
 import appRoutes from '@/view/app/routes'
+import fcmRoutes from '@/view/fcm/routes'
 
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
 		},
 		children: [
 			...appRoutes,
+			...fcmRoutes,
 		],
 	}, {
 		name: 'Login',
