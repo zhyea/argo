@@ -48,9 +48,9 @@ public class AppController {
 	 * @param request 应用信息
 	 * @return 影响行数
 	 */
-	@PostMapping("/modify")
-	public boolean modify(@RequestBody @Valid AppEditRequest request) {
-		return appService.modify(request);
+	@PostMapping("/edit")
+	public boolean edit(@RequestBody @Valid AppEditRequest request) {
+		return appService.edit(request);
 	}
 
 

@@ -58,7 +58,7 @@ public class AppService {
 	 * @param request 应用信息
 	 * @return 影响行数
 	 */
-	public boolean modify(AppEditRequest request) {
+	public boolean edit(AppEditRequest request) {
 		AppEntity entity = appConverter.editRequest2Entity(request);
 		int count = appMapper.modify(entity);
 		return NumConstants.ONE == count;
