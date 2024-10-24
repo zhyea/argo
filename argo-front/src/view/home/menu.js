@@ -49,8 +49,8 @@ export default {
 				uri: '/user-add',
 			}, {
 				name: '个人信息维护',
-				index: 'self-maintain',
-				uri: '/self-maintain',
+				index: 'self-info',
+				uri: '/self-info',
 			}]
 		}, {
 			name: '系统设置',

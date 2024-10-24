@@ -2,12 +2,12 @@ import request from "@/utils/request.js";
 
 
 // 获取模型列表
-export function findFcmList(pageReq) {
+export function findFcmList(appId, keyword, pageInfo) {
 	return request.post('/cms/fcm/list', {
-		appId: pageReq.appId,
-		keyword: pageReq.keyword,
-		pageNo: pageReq.pageNo,
-		pageSize: pageReq.pageSize,
+		appId: appId,
+		keyword: keyword,
+		pageNo: pageInfo.pageNo,
+		pageSize: pageInfo.pageSize,
 	})
 }
 
