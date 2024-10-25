@@ -3,7 +3,7 @@
 	<el-form
 		:model="appForm" ref="appFormRef" :rules="appFormRules"
 		label-suffix=":" label-width="90px"
-		class="app-form" status-icon>
+		class="fcm-form" status-icon>
 
 		<el-form-item prop="appId">
 			<el-input type="hidden" v-model="appForm.id"/>
@@ -101,7 +101,7 @@ const maintainApp = (maintainMethod, formData) => {
 </script>
 
 <style scoped lang="less">
-.app-form {
+.fcm-form {
 	width: 100%;
 	max-width: 900px;
 	padding: 30px;

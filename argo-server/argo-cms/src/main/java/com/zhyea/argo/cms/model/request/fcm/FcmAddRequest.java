@@ -52,6 +52,12 @@ public class FcmAddRequest extends BaseOperateRequest {
 
 
 	/**
+	 * 应用ID
+	 */
+	private String appId;
+
+
+	/**
 	 * 属性
 	 */
 	@NotEmpty(message = "组件属性不能为空")

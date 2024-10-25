@@ -18,7 +18,7 @@
 			<el-table :data="fcmListData" border style="width: 100%">
 				<el-table-column type="index" width="50"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="name" label="名称"/>
-				<el-table-column show-overflow-tooltip min-width=120 prop="type" label="类型"/>
+				<el-table-column show-overflow-tooltip min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="appName" label="应用"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="dataBindFlag" label="绑定数据"/>
@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import {useRoute} from "vue-router";
 import {findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
@@ -109,7 +109,7 @@ function handleDelete(row) {
 
 
 // 枚举数据
-const enumMap = ref({})
+const enumMap = ref()
 
 // 页面渲染前执行一些必要的操作
 onMounted(() => {
@@ -117,8 +117,45 @@ onMounted(() => {
 	loadEnums(enumMap)
 })
 
+
+function mapTypeEnum(row, column, cellValue, index) {
+	row.type = mapEnum('FcmTypeEnum', row.type)
+}
+
+
+function mapEnum(enumType, enumCode) {
+	return enumMap.value[enumType][enumCode]
+}
+
 </script>
 
 <style scoped lang="less">
 
+.table-container {
+	margin: 0;
+	padding: 12px;
+	background-color: #2b4b6b;
+}
+
+.table-header, .table-body, .table-footer {
+	display: block;
+	margin: 0;
+	padding: 12px;
+	background-color: #FFFFFF;
+	border: #535bf2 1px solid;
+}
+
+
+.table-header, .table-body {
+	margin-bottom: 9px;
+}
+
+.table-header {
+	padding-top: 24px;
+}
+
+
+.table-button {
+	padding-bottom: 9px;
+}
 </style>

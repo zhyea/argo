@@ -18,20 +18,20 @@ import java.util.Map;
 public class CommonAction {
 
 
-    /**
-     * 将枚举转换为Map结构，便于前端使用
-     *
-     * @return 枚举对应的Map结构
-     */
-    public Map<String, Map<Integer, String>> enumMap() {
-        Map<String, Map<Integer, String>> enumMap = new HashMap<>(16);
+	/**
+	 * 将枚举转换为Map结构，便于前端使用
+	 *
+	 * @return 枚举对应的Map结构
+	 */
+	public Map<String, Map<Integer, String>> enumMap() {
+		Map<String, Map<Integer, String>> enumMap = new HashMap<>(16);
 
-        enumMap.put("FcmTypeEnum", EnumKit.mapOf(FcmTypeEnum.class));
-        enumMap.put("FcScopeEnum", EnumKit.mapOf(FcScopeEnum.class));
-        enumMap.put("YesOrNo", EnumKit.mapOf(YesOrNo.class));
+		enumMap.put(FcmTypeEnum.class.getSimpleName(), EnumKit.mapOf(FcmTypeEnum.class));
+		enumMap.put(FcScopeEnum.class.getSimpleName(), EnumKit.mapOf(FcScopeEnum.class));
+		enumMap.put(YesOrNo.class.getSimpleName(), EnumKit.mapOf(YesOrNo.class));
 
-        return enumMap;
-    }
+		return enumMap;
+	}
 
 
 }
