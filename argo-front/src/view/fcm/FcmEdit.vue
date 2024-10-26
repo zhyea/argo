@@ -1,7 +1,7 @@
 <template>
 	<!--表单信息-->
 	<el-form
-		:model="fcmForm" ref="fcmFormRef" :rules="appFormRules"
+		:model="fcmForm" ref="fcmFormRef" :rules="fcmFormRules"
 		label-suffix=":" label-width="90px"
 		class="fcm-form" status-icon>
 
@@ -10,11 +10,11 @@
 		</el-form-item>
 
 		<el-form-item label="名称" prop="name">
-			<el-input v-model="fcmForm.name"/>
+			<el-input id="name" v-model="fcmForm.name"/>
 		</el-form-item>
 
 		<el-form-item label="类型" prop="type">
-			<el-radio-group v-model="fcmForm.type">
+			<el-radio-group id="type" v-model="fcmForm.type">
 				<el-radio v-for="e in fcmTypeEnum"
 				          :value="e[0]">
 					{{ e[1] }}
@@ -23,7 +23,7 @@
 		</el-form-item>
 
 		<el-form-item label="作用域" prop="scope">
-			<el-radio-group v-model="fcmForm.scope">
+			<el-radio-group id="scope" v-model="fcmForm.scope">
 				<el-radio v-for="e in fcScopeEnum"
 				          :value="e[0]">
 					{{ e[1] }}
@@ -31,10 +31,9 @@
 			</el-radio-group>
 		</el-form-item>
 
-		<el-form-item label="应用" v-if="'2'===fcmForm.scope" prop="appId">
-			<el-select v-model="fcmForm.appCode"
-			           filterable remote
-			           :remote-method="fetchApps">
+		<el-form-item label="应用" v-if="2===fcmForm.scope" prop="appCode">
+			<el-select id="appCode" v-model="fcmForm.appCode"
+			           filterable remote :remote-method="fetchApps">
 				<el-option v-for="e in appList"
 				           :key="e.appCode"
 				           :label="e.appName"
@@ -43,7 +42,7 @@
 		</el-form-item>
 
 		<el-form-item label="绑定数据" prop="dataBindFlag">
-			<el-switch v-model="fcmForm.dataBindFlag"
+			<el-switch id="dataBindFlag" v-model="fcmForm.dataBindFlag"
 			           inline-prompt size="large"
 			           active-text="是" active-value="1"
 			           inactive-text="否" inactive-value="0"
@@ -51,11 +50,11 @@
 		</el-form-item>
 
 		<el-form-item label="图标" prop="icon">
-			<el-input v-model="fcmForm.icon"/>
+			<el-input id="icon" v-model="fcmForm.icon"/>
 		</el-form-item>
 
 		<el-form-item label="备注" prop="remark">
-			<el-input type="textarea" v-model="fcmForm.remark" :autosize="{ minRows: 4,}"/>
+			<el-input id="remark" type="textarea" v-model="fcmForm.remark" :autosize="{ minRows: 4,}"/>
 		</el-form-item>
 
 		<el-form-item>
@@ -65,12 +64,12 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onBeforeMount} from "vue";
+import {ref, onMounted} from "vue";
 
 import {loadEnums} from "@/api/common.js";
 import {findAppList} from "@/api/app.js";
-import {ElMessage} from "element-plus";
 import {addFcm, editFcm} from "@/api/fcm.js";
+import {submitForm} from "@/utils/common.js";
 
 
 // fcm 表单数据
@@ -78,8 +77,8 @@ const fcmForm = ref({
 	fcmId: '',
 	name: '',
 	icon: '',
-	type: '1',
-	scope: '1',
+	type: 1,
+	scope: 1,
 	appCode: '',
 	dataBindFlag: '',
 	remark: '',
@@ -91,13 +90,19 @@ const fcmFormRef = ref()
 
 
 // fcm 表单验证规则
-const appFormRules = {
+const fcmFormRules = {
 	name: [
 		{required: true, message: '请输入组件模型名称', trigger: 'blur'},
 	],
 	type: [
-		{required: true, message: '请输入组件模型类型', trigger: 'blur'},
+		{required: true, message: '请选择组件模型类型', trigger: 'blur'},
 	],
+	scope: [
+		{required: true, message: '请选择组件模型作用域', trigger: 'blur'},
+	],
+	dataBindFlag: [
+		{required: true, message: '绑定数据标记必填', trigger: 'blur'}
+	]
 }
 
 
@@ -109,7 +114,7 @@ const fcmTypeEnum = ref()
 const fcScopeEnum = ref()
 
 // 页面渲染前执行一些必要的操作
-onBeforeMount(() => {
+onMounted(() => {
 	// 加载枚举数据
 	loadEnums(allEnumMap, () => {
 		fcmTypeEnum.value = allEnumMap.value.get('FcmTypeEnum')
@@ -136,7 +141,7 @@ const fetchApps = async () => {
 const isFcmFormSubmitted = ref(false)
 
 
-// 提交app编辑信息
+// 提交fcm编辑信息
 function submitFcmForm() {
 	const formData = {...fcmForm.value}
 	let maintainMethod = addFcm
@@ -145,28 +150,7 @@ function submitFcmForm() {
 		maintainMethod = editFcm
 	}
 
-	maintainApp(maintainMethod, formData)
-}
-
-
-// 维护应用信息
-const maintainApp = (maintainMethod, formData) => {
-	fcmFormRef.value.validate((valid) => {
-		if (!valid) return
-
-		isFcmFormSubmitted.value = true
-
-		maintainMethod(formData, maintainMethod).then(response => {
-			if (response.data) {
-				ElMessage.success({
-					message: '保存成功',
-					duration: 1500,
-				})
-			}
-		}).catch(() => {
-			isFcmFormSubmitted.value = false
-		})
-	})
+	submitForm(fcmFormRef, formData, isFcmFormSubmitted, maintainMethod)
 }
 
 </script>

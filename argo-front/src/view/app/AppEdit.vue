@@ -10,19 +10,19 @@
 		</el-form-item>
 
 		<el-form-item label="应用ID" prop="appCode">
-			<el-input v-model="appForm.appCode"/>
+			<el-input id="appCode" v-model="appForm.appCode"/>
 		</el-form-item>
 
 		<el-form-item label="应用名称" prop="appName">
-			<el-input v-model="appForm.appName"/>
+			<el-input id="appName" v-model="appForm.appName"/>
 		</el-form-item>
 
 		<el-form-item label="应用图标" prop="icon">
-			<el-input v-model="appForm.icon"/>
+			<el-input id="icon" v-model="appForm.icon"/>
 		</el-form-item>
 
 		<el-form-item label="备注" prop="remark">
-			<el-input type="textarea" v-model="appForm.remark" :autosize="{ minRows: 4,}"/>
+			<el-input id="remark" type="textarea" v-model="appForm.remark" :autosize="{ minRows: 4,}"/>
 		</el-form-item>
 
 		<el-form-item>
