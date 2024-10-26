@@ -19,9 +19,11 @@
 				<el-table-column type="index" width="50"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="name" label="名称"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
-				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"/>
+				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"
+				                 :formatter="mapScopeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="appName" label="应用"/>
-				<el-table-column show-overflow-tooltip min-width=120 prop="dataBindFlag" label="绑定数据"/>
+				<el-table-column show-overflow-tooltip min-width=60 prop="dataBindFlag" label="绑定数据"
+				                 :formatter="mapDataBindFlag" align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=136>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">
@@ -109,22 +111,39 @@ function handleDelete(row) {
 
 
 // 枚举数据
-const enumMap = ref()
+const allEnumsMap = ref()
 
 // 页面渲染前执行一些必要的操作
 onMounted(() => {
 	// 加载枚举数据
-	loadEnums(enumMap)
+	loadEnums(allEnumsMap)
+	// 加载页面数据
+	loadFcmListData()
 })
 
 
 function mapTypeEnum(row, column, cellValue, index) {
-	row.type = mapEnum('FcmTypeEnum', row.type)
+	return mapEnum('FcmTypeEnum', row.type)
+}
+
+
+function mapScopeEnum(row, column, cellValue, index) {
+	return mapEnum('FcScopeEnum', row.scope)
+}
+
+
+function mapDataBindFlag(row, column, cellValue, index) {
+	return mapEnum('YesOrNo', row.dataBindFlag)
 }
 
 
 function mapEnum(enumType, enumCode) {
-	return enumMap.value[enumType][enumCode]
+	let enumMap = allEnumsMap.value.get(enumType)
+	let result
+	if (enumMap) {
+		result = enumMap.get(enumCode)
+	}
+	return result ? result : ''
 }
 
 </script>

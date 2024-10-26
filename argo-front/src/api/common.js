@@ -11,10 +11,15 @@ export function loadEnums(enumRef, resolve) {
 
 		let result = new Map()
 
-		new Map(Object.entries(res.data)).forEach((v, k) => {
-			result.set(k, new Map(Object.entries(v)));
+		new Map(Object.entries(res.data)).forEach((val, key) => {
+			let m = new Map()
+			new Map(Object.entries(val)).forEach((v, k) => {
+				m.set(parseInt(k), v)
+			})
+
+			result.set(key, m);
 		})
-		
+
 		enumRef.value = result;
 
 		if (resolve) {
