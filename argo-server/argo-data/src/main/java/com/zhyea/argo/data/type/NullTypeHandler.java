@@ -1,4 +1,4 @@
-package com.zhyea.argo.config.mybatis;
+package com.zhyea.argo.data.type;
 
 
 import org.apache.ibatis.type.BaseTypeHandler;

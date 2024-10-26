@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zhyea.argo.mapper.cms.FciMapper">
+<mapper namespace="com.zhyea.argo.data.mapper.cms.FciMapper">
 
 
     <!-- 根据应用id获取组件实例 -->
     <select id="findByAppId"
-            resultType="com.zhyea.argo.entity.cms.FciEntity">
+            resultType="com.zhyea.argo.data.entity.cms.FciEntity">
         select ci.* from ag_cms_fci ci left join ag_cms_app_page p on ci.page_id=p.id
         where deleted=0
         <if test="null != appId">
@@ -23,7 +23,7 @@
 
     <!-- 根据页面编码获取组件实例 -->
     <select id="findByPageCode"
-            resultType="com.zhyea.argo.entity.cms.FciEntity">
+            resultType="com.zhyea.argo.data.entity.cms.FciEntity">
         select ci.* from ag_cms_fci ci left join ag_cms_app_page p on ci.page_id=p.id
         where deleted=0 and p.page_code=#{pageCode}
     </select>

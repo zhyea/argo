@@ -1,6 +1,6 @@
-package com.zhyea.argo.mapper.cms;
+package com.zhyea.argo.data.mapper.cms;
 
-import com.zhyea.argo.entity.cms.FciEntity;
+import com.zhyea.argo.data.entity.cms.FciEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

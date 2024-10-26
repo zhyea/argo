@@ -1,6 +1,6 @@
-package com.zhyea.argo.mapper.cms;
+package com.zhyea.argo.data.mapper.cms;
 
-import com.zhyea.argo.entity.cms.AppPageEntity;
+import com.zhyea.argo.data.entity.cms.AppPageEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

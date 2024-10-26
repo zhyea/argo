@@ -1,7 +1,7 @@
-package com.zhyea.argo.entity.cms;
+package com.zhyea.argo.data.entity.cms;
 
 import com.zhyea.argo.constants.enums.*;
-import com.zhyea.argo.entity.BaseEntity;
+import com.zhyea.argo.data.entity.BaseEntity;
 import lombok.Data;
 
 /**
@@ -24,7 +24,7 @@ public class FcmEntity extends BaseEntity {
 	/**
 	 * 应用ID
 	 */
-	private String appId;
+	private String appCode;
 
 
 	/**

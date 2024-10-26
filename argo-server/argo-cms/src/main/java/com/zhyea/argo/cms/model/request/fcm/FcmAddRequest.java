@@ -54,7 +54,7 @@ public class FcmAddRequest extends BaseOperateRequest {
 	/**
 	 * 应用ID
 	 */
-	private String appId;
+	private String appCode;
 
 
 	/**

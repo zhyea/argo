@@ -1,6 +1,6 @@
-package com.zhyea.argo.entity.cms;
+package com.zhyea.argo.data.entity.cms;
 
-import com.zhyea.argo.entity.BaseEntity;
+import com.zhyea.argo.data.entity.BaseEntity;
 import lombok.Data;
 
 /**

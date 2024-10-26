@@ -1,7 +1,7 @@
 package com.zhyea.argo.service;
 
-import com.zhyea.argo.entity.adm.UserEntity;
-import com.zhyea.argo.mapper.adm.UserMapper;
+import com.zhyea.argo.data.entity.adm.UserEntity;
+import com.zhyea.argo.data.mapper.adm.UserMapper;
 import com.zhyea.argo.model.request.UserAddRequest;
 import com.zhyea.argo.tools.Args;
 import lombok.extern.slf4j.Slf4j;

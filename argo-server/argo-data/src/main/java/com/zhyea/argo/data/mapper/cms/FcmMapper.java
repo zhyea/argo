@@ -1,6 +1,6 @@
-package com.zhyea.argo.mapper.cms;
+package com.zhyea.argo.data.mapper.cms;
 
-import com.zhyea.argo.entity.cms.FcmEntity;
+import com.zhyea.argo.data.entity.cms.FcmEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -20,9 +20,16 @@ public interface FcmMapper {
 	 * @param entity 组件模型数据
 	 */
 	@Insert({
-			"insert into ag_cms_fcm (scope, app_id, name, icon, type, props, data_bind_flag, remark)",
+			"insert into ag_cms_fcm (scope, app_code, name, icon, type, props, data_bind_flag, remark)",
 			"values",
-			"(#{e.scope}, #{e.appId}, #{e.name}, #{e.icon}, #{e.type}, #{e.props}, #{e.dataBindFlag}, #{e.remark})"
+			"(#{e.scope}, ",
+			"#{e.appCode, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"#{e.name}, ",
+			"#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"#{e.type}, ",
+			"#{e.props, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"#{e.dataBindFlag}, ",
+			"#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler})"
 	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") FcmEntity entity);
@@ -36,8 +43,14 @@ public interface FcmMapper {
 	 */
 	@Update({
 			"update ag_cms_fcm set",
-			"scope=#{e.scope}, app_id=#{e.appId}, name=#{e.name}, icon=#{e.icon}, type=#{e.type}, ",
-			"props=#{e.props}, data_bind_flag=#{e.dataBindFlag}, remark=#{e.remark}",
+			"scope=#{e.scope}, ",
+			"app_code=#{e.appCode, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"name=#{e.name}, ",
+			"icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"type=#{e.type}, ",
+			"props=#{e.props, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"data_bind_flag=#{e.dataBindFlag}, ",
+			"remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}",
 			"where id=#{e.id}"
 	})
 	int modify(@Param("e") FcmEntity entity);

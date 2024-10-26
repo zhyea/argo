@@ -1,6 +1,6 @@
-package com.zhyea.argo.mapper.adm;
+package com.zhyea.argo.data.mapper.adm;
 
-import com.zhyea.argo.entity.adm.UserEntity;
+import com.zhyea.argo.data.entity.adm.UserEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;

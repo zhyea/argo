@@ -1,6 +1,6 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.entity.cms.AppEntity;
+import com.zhyea.argo.data.entity.cms.AppEntity;
 import com.zhyea.argo.cms.model.item.AppItem;
 import com.zhyea.argo.cms.model.request.app.AppAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppEditRequest;

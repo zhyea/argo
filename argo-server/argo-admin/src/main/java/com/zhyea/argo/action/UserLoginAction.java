@@ -1,9 +1,9 @@
 package com.zhyea.argo.action;
 
 import com.zhyea.argo.constants.ResponseCode;
-import com.zhyea.argo.entity.adm.UserEntity;
+import com.zhyea.argo.data.entity.adm.UserEntity;
 import com.zhyea.argo.except.ArgoServerException;
-import com.zhyea.argo.mapper.adm.UserMapper;
+import com.zhyea.argo.data.mapper.adm.UserMapper;
 import com.zhyea.argo.model.item.UserItem;
 import com.zhyea.argo.service.UserService;
 import com.zhyea.argo.tools.AuthContext;

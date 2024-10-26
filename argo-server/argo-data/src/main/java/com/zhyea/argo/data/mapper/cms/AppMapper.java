@@ -1,6 +1,6 @@
-package com.zhyea.argo.mapper.cms;
+package com.zhyea.argo.data.mapper.cms;
 
-import com.zhyea.argo.entity.cms.AppEntity;
+import com.zhyea.argo.data.entity.cms.AppEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -22,7 +22,9 @@ public interface AppMapper {
 	@Insert({
 			"insert into ag_cms_app (app_code, app_name, icon, remark)",
 			"values",
-			"(#{e.appCode}, #{e.appName}, #{e.icon}, #{e.remark})"
+			"(#{e.appCode}, #{e.appName}, ",
+			"#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler},",
+			"#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler})"
 	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") AppEntity app);
@@ -36,7 +38,9 @@ public interface AppMapper {
 	 */
 	@Update({
 			"update ag_cms_app set",
-			"app_code=#{e.appCode}, app_name=#{e.appName}, icon=#{e.icon}, remark=#{e.remark}",
+			"app_code=#{e.appCode}, app_name=#{e.appName}, ",
+			"icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}",
 			"where id=#{e.id}"
 	})
 	int modify(@Param("e") AppEntity app);
