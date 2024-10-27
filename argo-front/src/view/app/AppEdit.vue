@@ -35,6 +35,7 @@
 import {ref} from "vue";
 import {addApp, editApp} from "@/api/app.js";
 import {ElMessage} from "element-plus";
+import {submitForm} from "@/utils/common.js";
 
 // app 表单数据
 const appForm = ref({
@@ -74,29 +75,9 @@ function submitAppForm() {
 		maintainMethod = editApp
 	}
 
-	maintainApp(maintainMethod, formData)
+	submitForm(appFormRef, formData, isAppFormSubmitted, maintainMethod)
 }
 
-
-// 维护应用信息
-const maintainApp = (maintainMethod, formData) => {
-	appFormRef.value.validate((valid) => {
-		if (!valid) return
-
-		isAppFormSubmitted.value = true
-
-		maintainMethod(formData, maintainMethod).then(response => {
-			if (response.data) {
-				ElMessage.success({
-					message: '保存成功',
-					duration: 1500,
-				})
-			}
-		}).catch(() => {
-			isAppFormSubmitted.value = false
-		})
-	})
-}
 
 </script>
 
