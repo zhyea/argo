@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 public class FciPageCodeRequest {
 
 
-    @NotBlank(message = "页面编码不能为空")
-    private String pageCode;
+	@NotBlank(message = "页面编码不能为空")
+	private String pageCode;
 
 }

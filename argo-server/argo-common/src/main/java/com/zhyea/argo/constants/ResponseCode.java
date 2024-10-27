@@ -16,6 +16,11 @@ public enum ResponseCode implements CodeDescEnum {
 
 
 	/**
+	 * 成功
+	 */
+	SUCCESS(0, "成功"),
+
+	/**
 	 * 暂停
 	 */
 	SUSPEND(99, "暂停"),

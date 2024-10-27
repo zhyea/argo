@@ -1,13 +1,16 @@
 package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.cms.model.item.AppPageItem;
-import com.zhyea.argo.cms.model.request.app.*;
+import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
+import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
+import com.zhyea.argo.cms.model.request.app.AppPageIdRelateRequest;
+import com.zhyea.argo.cms.model.request.app.AppPageQueryRequest;
 import com.zhyea.argo.cms.service.AppPageService;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -37,7 +40,7 @@ public class AppPageController {
      * @return 应用页面记录id
      */
     @PostMapping("/add")
-    public Long add(@RequestBody @Valid AppPageAddRequest request) {
+    public Long add(@RequestBody @Validated AppPageAddRequest request) {
         return appPageService.add(request);
     }
 
@@ -49,7 +52,7 @@ public class AppPageController {
      * @return 是否修改成功
      */
     @PostMapping("/edit")
-    public boolean modify(@RequestBody @Valid AppPageEditRequest request) {
+    public boolean modify(@RequestBody @Validated AppPageEditRequest request) {
         return appPageService.modify(request);
     }
 
@@ -61,7 +64,7 @@ public class AppPageController {
      * @return 应用页面信息
      */
     @PostMapping("/get")
-    public AppPageItem get(@RequestBody @Valid AppPageIdRelateRequest request) {
+    public AppPageItem get(@RequestBody @Validated AppPageIdRelateRequest request) {
         return appPageService.get(request.getPageId());
     }
 
@@ -73,7 +76,7 @@ public class AppPageController {
      * @return 是否删除成功
      */
     @PostMapping("/delete")
-    public boolean delete(@RequestBody @Valid AppPageIdRelateRequest request) {
+    public boolean delete(@RequestBody @Validated AppPageIdRelateRequest request) {
         return appPageService.delete(request.getPageId());
     }
 
@@ -85,7 +88,7 @@ public class AppPageController {
      * @return 应用页面列表
      */
     @PostMapping("/list")
-    public List<AppPageItem> findByAppId(@RequestBody @Valid AppPageQueryRequest request) {
+    public List<AppPageItem> findByAppId(@RequestBody @Validated AppPageQueryRequest request) {
         return appPageService.findByAppId(request);
     }
 

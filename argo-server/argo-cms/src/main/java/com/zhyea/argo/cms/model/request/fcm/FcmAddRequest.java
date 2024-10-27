@@ -1,13 +1,14 @@
 package com.zhyea.argo.cms.model.request.fcm;
 
+import com.zhyea.argo.cms.model.item.FcmPropItem;
+import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.FcScopeEnum;
 import com.zhyea.argo.constants.enums.FcmTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
-import com.zhyea.argo.cms.model.item.FcmPropItem;
-import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import lombok.Data;
 import org.chobit.commons.validation.EnumVal;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -60,6 +61,7 @@ public class FcmAddRequest extends BaseOperateRequest {
 	/**
 	 * 属性
 	 */
+	@Valid
 	@NotEmpty(message = "组件属性不能为空")
 	private List<FcmPropItem> props;
 

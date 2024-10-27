@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 应用页面新增请求
  *
@@ -13,7 +14,6 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class AppPageAddRequest extends BaseOperateRequest {
-
 
 
 	@NotNull(message = "应用ID不能为空")

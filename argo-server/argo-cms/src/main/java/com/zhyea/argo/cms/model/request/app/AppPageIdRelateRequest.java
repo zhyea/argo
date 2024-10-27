@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 应用页面ID相关请求
  *

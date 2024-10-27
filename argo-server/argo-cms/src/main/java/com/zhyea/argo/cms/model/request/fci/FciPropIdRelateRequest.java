@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 属性ID相关请求
  *

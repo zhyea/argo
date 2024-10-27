@@ -4,12 +4,14 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 组件实例修改请求
+ *
  * @author robin
  */
 @Data
-public class FciEditRequest extends FciAddRequest{
+public class FciEditRequest extends FciAddRequest {
 
 
 	/**

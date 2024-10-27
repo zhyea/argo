@@ -2,14 +2,14 @@ package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.cms.model.item.AppItem;
 import com.zhyea.argo.cms.model.request.app.AppAddRequest;
-import com.zhyea.argo.cms.model.request.app.AppIdRelateRequest;
 import com.zhyea.argo.cms.model.request.app.AppEditRequest;
+import com.zhyea.argo.cms.model.request.app.AppIdRelateRequest;
 import com.zhyea.argo.cms.service.AppService;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -37,7 +37,7 @@ public class AppController {
 	 * @return 应用id
 	 */
 	@PostMapping("/add")
-	public Long add(@RequestBody @Valid AppAddRequest request) {
+	public Long add(@RequestBody @Validated AppAddRequest request) {
 		return appService.add(request);
 	}
 
@@ -49,7 +49,7 @@ public class AppController {
 	 * @return 影响行数
 	 */
 	@PostMapping("/edit")
-	public boolean edit(@RequestBody @Valid AppEditRequest request) {
+	public boolean edit(@RequestBody @Validated AppEditRequest request) {
 		return appService.edit(request);
 	}
 
@@ -61,7 +61,7 @@ public class AppController {
 	 * @return 应用信息
 	 */
 	@PostMapping("/get")
-	public AppItem getById(@RequestBody @Valid AppIdRelateRequest request) {
+	public AppItem getById(@RequestBody @Validated AppIdRelateRequest request) {
 		return appService.get(request.getAppId());
 	}
 
@@ -73,7 +73,7 @@ public class AppController {
 	 * @return 是否删除成功
 	 */
 	@PostMapping("/delete")
-	public boolean deleteById(@RequestBody @Valid AppIdRelateRequest request) {
+	public boolean deleteById(@RequestBody @Validated AppIdRelateRequest request) {
 		return appService.delete(request.getAppId());
 	}
 

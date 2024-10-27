@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 应用页面查询请求
  *

@@ -7,7 +7,7 @@ import org.chobit.commons.contract.CodeDescEnum;
  *
  * @author robin
  */
-public enum FciPropTypeEnum implements CodeDescEnum {
+public enum FcmPropTypeEnum implements CodeDescEnum {
 
 
 	/**
@@ -29,7 +29,7 @@ public enum FciPropTypeEnum implements CodeDescEnum {
 	public final String desc;
 
 
-	FciPropTypeEnum(int code, String desc) {
+	FcmPropTypeEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}

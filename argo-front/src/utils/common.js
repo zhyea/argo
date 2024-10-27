@@ -22,16 +22,21 @@ export function submitForm(formRef,
 
 		submitFlag.value = true
 
+		let isSuccess = false
 		maintainMethod(formData, maintainMethod).then(response => {
 			if (response.data) {
 				ElMessage.success({
 					message: '保存成功',
 					duration: 1500,
 				})
+
+				isSuccess = true
 			}
-		}).catch(() => {
-			submitFlag.value = false
 		})
+
+		if (!isSuccess) {
+			submitFlag.value = false
+		}
 
 		if (extraAction) {
 			extraAction()

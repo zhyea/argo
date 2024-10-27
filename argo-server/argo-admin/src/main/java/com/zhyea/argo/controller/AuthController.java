@@ -21,30 +21,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
 
-    private final UserLoginAction loginAction;
+	private final UserLoginAction loginAction;
 
-    public AuthController(UserLoginAction loginAction) {
-        this.loginAction = loginAction;
-    }
-
-
-    @PostMapping("/login")
-    public String login(@Validated @RequestBody UserLoginRequest request) {
-        return loginAction.doLogin(request.getUsername(), request.getPassword());
-    }
+	public AuthController(UserLoginAction loginAction) {
+		this.loginAction = loginAction;
+	}
 
 
-    @PostMapping("/logout")
-    public boolean logout() {
-        AuthContext.clear();
-        return true;
-    }
+	@PostMapping("/login")
+	public String login(@RequestBody @Validated UserLoginRequest request) {
+		return loginAction.doLogin(request.getUsername(), request.getPassword());
+	}
 
 
-    @RequestMapping("/ping")
-    public String ping() {
-        return "Medea";
-    }
+	@PostMapping("/logout")
+	public boolean logout() {
+		AuthContext.clear();
+		return true;
+	}
+
+
+	@RequestMapping("/ping")
+	public String ping() {
+		return "Medea";
+	}
 
 
 }

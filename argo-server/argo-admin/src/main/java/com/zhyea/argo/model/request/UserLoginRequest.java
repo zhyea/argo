@@ -14,21 +14,21 @@ import java.io.Serializable;
 public class UserLoginRequest implements Serializable {
 
 
-    private static final long serialVersionUID = -5351030703447170573L;
+	private static final long serialVersionUID = -5351030703447170573L;
 
 
-    /**
-     * 用户名
-     */
-    @NotBlank(message = "用户名不可为空")
-    private String username;
+	/**
+	 * 用户名
+	 */
+	@NotBlank(message = "用户名不可为空")
+	private String username;
 
 
-    /**
-     * 密码
-     */
-    @NotBlank(message = "密码不可为空")
-    private String password;
+	/**
+	 * 密码
+	 */
+	@NotBlank(message = "密码不可为空")
+	private String password;
 
 
 }

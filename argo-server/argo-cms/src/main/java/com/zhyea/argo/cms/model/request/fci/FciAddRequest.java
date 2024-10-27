@@ -1,13 +1,15 @@
 package com.zhyea.argo.cms.model.request.fci;
 
-import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
+import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import org.chobit.commons.validation.EnumVal;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
+ * 组件实例新增请求
+ *
  * @author robin
  */
 public class FciAddRequest extends BaseOperateRequest {

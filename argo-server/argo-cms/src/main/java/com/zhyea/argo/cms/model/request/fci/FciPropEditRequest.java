@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * FCI属性修改请求
  *

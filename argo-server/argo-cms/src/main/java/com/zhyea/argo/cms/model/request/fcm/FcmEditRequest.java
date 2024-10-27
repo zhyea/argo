@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 组件模型更新请求
  *

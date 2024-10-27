@@ -9,12 +9,11 @@ import com.zhyea.argo.cms.service.FcmService;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 /**
  * 组件模型相关接口
@@ -43,7 +42,7 @@ public class FcmController {
      * @return 新增的组件模型id
      */
     @PostMapping("/add")
-    public Long add(@RequestBody @Valid FcmAddRequest request) {
+    public Long add(@RequestBody @Validated FcmAddRequest request) {
         return fcmService.add(request);
     }
 
@@ -55,7 +54,7 @@ public class FcmController {
      * @return 是否修改成功
      */
     @PostMapping("/edit")
-    public boolean edit(@RequestBody @Valid FcmEditRequest request) {
+    public boolean edit(@RequestBody @Validated FcmEditRequest request) {
         return fcmService.edit(request);
     }
 
@@ -67,7 +66,7 @@ public class FcmController {
      * @return 组件模型
      */
     @PostMapping("/get")
-    public FcmItem getFcmItem(@RequestBody @Valid FcmIdRelateRequest request) {
+    public FcmItem getFcmItem(@RequestBody @Validated FcmIdRelateRequest request) {
         return fcmService.getById(request.getFcmId());
     }
 
@@ -79,7 +78,7 @@ public class FcmController {
      * @return 是否删除成功
      */
     @PostMapping("/delete")
-    public boolean delete(@RequestBody @Valid FcmIdRelateRequest request) {
+    public boolean delete(@RequestBody @Validated FcmIdRelateRequest request) {
         return fcmService.deleteById(request.getFcmId());
     }
 
@@ -91,7 +90,7 @@ public class FcmController {
      * @return 组件模型列表
      */
     @PostMapping("/list")
-    public PageResult<FcmItem> findByPage(@RequestBody @Valid FcmQueryRequest request) {
+    public PageResult<FcmItem> findByPage(@RequestBody @Validated FcmQueryRequest request) {
         return fcmService.queryInPage(request);
     }
 }

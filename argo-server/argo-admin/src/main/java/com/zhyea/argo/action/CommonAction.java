@@ -1,6 +1,7 @@
 package com.zhyea.argo.action;
 
 import com.zhyea.argo.constants.enums.FcScopeEnum;
+import com.zhyea.argo.constants.enums.FcmPropTypeEnum;
 import com.zhyea.argo.constants.enums.FcmTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import org.chobit.commons.utils.EnumKit;
@@ -29,6 +30,7 @@ public class CommonAction {
 		enumMap.put(FcmTypeEnum.class.getSimpleName(), EnumKit.mapOf(FcmTypeEnum.class));
 		enumMap.put(FcScopeEnum.class.getSimpleName(), EnumKit.mapOf(FcScopeEnum.class));
 		enumMap.put(YesOrNo.class.getSimpleName(), EnumKit.mapOf(YesOrNo.class));
+		enumMap.put(FcmPropTypeEnum.class.getSimpleName(), EnumKit.mapOf(FcmPropTypeEnum.class));
 
 		return enumMap;
 	}

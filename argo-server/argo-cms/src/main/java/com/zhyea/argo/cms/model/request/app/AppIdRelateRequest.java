@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
+
 /**
  * 应用ID相关请求
  *
@@ -19,7 +20,6 @@ public class AppIdRelateRequest extends BaseOperateRequest {
 	 */
 	@NotNull(message = "应用ID不能为空")
 	private Long appId;
-
 
 
 }
