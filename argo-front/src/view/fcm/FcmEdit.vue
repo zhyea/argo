@@ -78,7 +78,7 @@
 						<tr v-for="(e, idx) in fcmPropForm"
 						    :key="idx">
 							<td class="fcm-prop-td-key">
-								<el-form-item prop="propKey">
+								<el-form-item :prop="'e.'+idx + '.propKey'" :rules="fcmPropFormRules.propKey">
 									<el-input v-model="e.propKey"/>
 								</el-form-item>
 							</td>
@@ -102,7 +102,7 @@
 								</el-form-item>
 							</td>
 							<td class="fcm-prop-td-desc">
-								<el-form-item >
+								<el-form-item>
 									<el-input v-model="e.propDesc"/>
 								</el-form-item>
 							</td>
