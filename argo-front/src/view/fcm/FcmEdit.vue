@@ -75,15 +75,15 @@
 							<td class="fcm-prop-td-desc">描述</td>
 							<td class="fcm-prop-td-opt"></td>
 						</tr>
-						<tr v-for="(e, idx) in fcmPropForm"
+						<tr v-for="(e, idx) in fcmPropForm.props"
 						    :key="idx">
 							<td class="fcm-prop-td-key">
-								<el-form-item :prop="'e.'+idx + '.propKey'" :rules="fcmPropFormRules.propKey">
+								<el-form-item :prop="`props.${idx}.propKey`" :rules="fcmPropFormRules.propKey">
 									<el-input v-model="e.propKey"/>
 								</el-form-item>
 							</td>
 							<td class="fcm-prop-td-type">
-								<el-form-item prop="propType">
+								<el-form-item :prop="`props.${idx}.propType`" :rules="fcmPropFormRules.propType">
 									<el-select v-model="e.propType"
 									           placeholder="请选择属性类型">
 										<el-option v-for="e in fcmPropTypeEnum"
@@ -107,14 +107,14 @@
 								</el-form-item>
 							</td>
 							<td class="fcm-prop-td-opt">
-								<el-icon v-if="idx === fcmPropForm.length - 1"
+								<el-icon v-if="idx === fcmPropForm.props.length - 1"
 								         :size="30" @click="addFcmProp">
-									<CirclePlus/>
+									<CirclePlus class="fcm-prop-td-opt-icon"/>
 								</el-icon>
 
 								<el-icon v-else
 								         :size="30" @click="removeFcmProp(idx)">
-									<Remove/>
+									<Remove class="fcm-prop-td-opt-icon"/>
 								</el-icon>
 							</td>
 						</tr>
@@ -156,12 +156,14 @@ const fcmForm = ref({
 
 
 // fcm 属性表单数据
-const fcmPropForm = ref([{
-	propKey: '',
-	propType: '',
-	propDesc: '',
-	required: 0,
-}])
+const fcmPropForm = ref({
+	props: [{
+		propKey: '',
+		propType: '',
+		propDesc: '',
+		required: 0,
+	}]
+})
 
 
 // fcm 表单引用
@@ -176,6 +178,7 @@ const fcmPropFormRef = ref()
 const fcmFormRules = {
 	name: [
 		{required: true, message: '请输入组件模型名称', trigger: 'blur'},
+		{min: 1, max: 32, message: '模型属性key长度为1-32', trigger: 'change'}
 	],
 	type: [
 		{required: true, message: '请选择组件模型类型', trigger: 'blur'},
@@ -189,10 +192,7 @@ const fcmFormRules = {
 	appCode: [
 		{
 			validator: (rule, value, callback) => {
-				if (2 === fcmForm.value.scope && !value) {
-					return false
-				}
-				return true;
+				return !(2 === fcmForm.value.scope && !value);
 			}, message: '请选择应用', trigger: 'blur'
 		}
 	],
@@ -203,6 +203,7 @@ const fcmFormRules = {
 const fcmPropFormRules = {
 	propKey: [
 		{required: true, message: '请输入模型属性key', trigger: 'change'},
+		{min: 1, max: 32, message: '模型属性key长度为1-32', trigger: 'change'}
 	],
 	propType: [
 		{required: true, message: '请选择模型属性类型', trigger: 'change'},
@@ -249,38 +250,39 @@ const fetchApps = async () => {
 
 // 新增fcm属性
 function addFcmProp() {
-	fcmPropForm.value.push({})
+	fcmPropForm.value.props.push({})
 }
 
 // 删除fcm属性
 function removeFcmProp(idx) {
-	fcmPropForm.value.splice(idx, 1)
+	fcmPropForm.value.props.splice(idx, 1)
 }
 
 // 标记是否已经提交表单
 const isFcmFormSubmitted = ref(false)
 
-
 // 提交fcm编辑信息
-function submitFcmForm() {
+const submitFcmForm = async () => {
 
-	fcmPropFormRef.value.validate((valid) => {
-		if (!valid) {
-			return
-		}
+	const valid = await Promise.all([fcmFormRef.value.validate(), fcmPropFormRef.value.validate()])
+		.catch(err => {
+			console.log(err)
+		})
 
-		const formData = {...fcmForm.value}
-		formData.props = fcmPropForm.value
+	if (!valid) {
+		return
+	}
 
-		let maintainMethod = addFcm
+	const formData = {...fcmForm.value}
+	formData.props = fcmPropForm.value.props
 
-		if (formData.id) {
-			maintainMethod = editFcm
-		}
+	let maintainMethod = addFcm
 
-		submitForm(fcmFormRef, formData, isFcmFormSubmitted, maintainMethod)
-	})
+	if (formData.id) {
+		maintainMethod = editFcm
+	}
 
+	submitForm(fcmFormRef, formData, isFcmFormSubmitted, maintainMethod)
 }
 
 </script>
@@ -337,6 +339,10 @@ function submitFcmForm() {
 
 	.el-icon {
 		padding-bottom: 18px;
+	}
+
+	.fcm-prop-td-opt-icon {
+		cursor: pointer !important;
 	}
 }
 </style>

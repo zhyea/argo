@@ -34,7 +34,6 @@
 <script setup>
 import {ref} from "vue";
 import {addApp, editApp} from "@/api/app.js";
-import {ElMessage} from "element-plus";
 import {submitForm} from "@/utils/common.js";
 
 // app 表单数据
