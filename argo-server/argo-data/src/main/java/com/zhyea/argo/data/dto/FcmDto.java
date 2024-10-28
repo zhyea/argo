@@ -1,25 +1,39 @@
-package com.zhyea.argo.cms.model.item;
+package com.zhyea.argo.data.dto;
 
 import com.zhyea.argo.constants.enums.FcScopeEnum;
 import com.zhyea.argo.constants.enums.FcmTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import lombok.Data;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
- * 组件模型信息
+ * 组件模型数据信息
  *
  * @author robin
  */
 @Data
-public class FcmItem {
+public class FcmDto {
 
 
 	/**
 	 * 组件模型ID
 	 */
-	private Long fcmId;
+	private Long id;
+
+
+	/**
+	 * 组件名称
+	 */
+	private String name;
+
+
+	/**
+	 * 类型
+	 * <p>
+	 * see also {@link FcmTypeEnum}
+	 */
+	private Integer type;
 
 
 	/**
@@ -43,29 +57,15 @@ public class FcmItem {
 
 
 	/**
-	 * 组件名称
-	 */
-	private String name;
-
-
-	/**
 	 * 图标
 	 */
 	private String icon;
 
 
 	/**
-	 * 类型
-	 * <p>
-	 * see also {@link FcmTypeEnum}
-	 */
-	private Integer type;
-
-
-	/**
 	 * 属性
 	 */
-	private List<FcmPropItem> props;
+	private String props;
 
 
 	/**
@@ -81,5 +81,16 @@ public class FcmItem {
 	 */
 	private String remark;
 
+
+	/**
+	 * 创建时间
+	 */
+	private LocalDateTime createTime;
+
+
+	/**
+	 * 更新时间
+	 */
+	private LocalDateTime updateTime;
 
 }

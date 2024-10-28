@@ -8,16 +8,18 @@
 
     <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query"
-            resultType="com.zhyea.argo.data.entity.cms.FcmEntity">
-        select * from ag_cms_fcm where deleted=0
-        <if test="null != appId">
-            and app_id=#{appId}
+            resultType="com.zhyea.argo.data.dto.FcmDto">
+        select f.*, a.app_name from
+        ag_cms_fcm f left join ag_cms_app a on f.app_code=a.app_code
+        where f.deleted=0
+        <if test="null != appCode">
+            and f.app_code=#{appCode}
         </if>
 
         <if test="null != keyword and keyword != ''">
             and (
-            name like concat('%', #{keyword}, '%')
-            or remark like concat('%', #{keyword}, '%')
+            f.name like concat('%', #{keyword}, '%')
+            or f.remark like concat('%', #{keyword}, '%')
             )
         </if>
     </select>

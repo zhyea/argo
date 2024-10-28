@@ -13,6 +13,15 @@ import lombok.Data;
 public class FcmEntity extends BaseEntity {
 
 
+
+	/**
+	 * 类型
+	 * <p>
+	 * see also {@link FcmTypeEnum}
+	 */
+	private Integer type;
+
+
 	/**
 	 * 作用域
 	 * <p>
@@ -37,14 +46,6 @@ public class FcmEntity extends BaseEntity {
 	 * 图标
 	 */
 	private String icon;
-
-
-	/**
-	 * 类型
-	 * <p>
-	 * see also {@link FcmTypeEnum}
-	 */
-	private Integer type;
 
 
 	/**
