@@ -22,7 +22,6 @@ export function submitForm(formRef,
 
 		submitFlag.value = true
 
-		let isSuccess = false
 		maintainMethod(formData, maintainMethod).then(response => {
 			if (response.data) {
 				ElMessage.success({
@@ -30,16 +29,17 @@ export function submitForm(formRef,
 					duration: 1500,
 				})
 
-				isSuccess = true
+				if (extraAction) {
+					extraAction()
+				}
+
+			} else {
+				submitFlag.value = false
 			}
+		}).catch(error => {
+			submitFlag.value = false
 		})
 
-		if (!isSuccess) {
-			submitFlag.value = false
-		}
 
-		if (extraAction) {
-			extraAction()
-		}
 	})
 }
