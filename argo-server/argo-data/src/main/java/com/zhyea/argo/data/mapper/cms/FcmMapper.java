@@ -1,5 +1,6 @@
 package com.zhyea.argo.data.mapper.cms;
 
+import com.zhyea.argo.data.dto.FcmDto;
 import com.zhyea.argo.data.entity.cms.FcmEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -86,12 +87,12 @@ public interface FcmMapper {
     List<FcmEntity> findByAppId(@Param("appId") String appId);
 
 
-    /**
-     * 获取所有组件模型
-     *
-     * @return 组件模型列表
-     */
-    List<FcmEntity> query(@Param("appId") Long appId, @Param("keyword") String keyword);
+	/**
+	 * 获取所有组件模型
+	 *
+	 * @return 组件模型列表
+	 */
+	List<FcmDto> query(@Param("appCode") String appCode, @Param("keyword") String keyword);
 
 
     /**

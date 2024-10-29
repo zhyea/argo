@@ -15,7 +15,7 @@ public class FcmQueryRequest extends BasePageRequest {
 	/**
 	 * 应用id
 	 */
-	private Long appId;
+	private String appCode;
 
 
 	/**

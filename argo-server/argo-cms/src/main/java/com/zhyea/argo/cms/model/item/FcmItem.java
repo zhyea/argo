@@ -37,6 +37,12 @@ public class FcmItem {
 
 
     /**
+     * 应用名称
+     */
+    private String appName;
+
+
+    /**
      * 组件名称
      */
     private String name;

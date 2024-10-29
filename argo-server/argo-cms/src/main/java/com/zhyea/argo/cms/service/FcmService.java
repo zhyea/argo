@@ -9,6 +9,7 @@ import com.zhyea.argo.cms.model.request.fcm.FcmEditRequest;
 import com.zhyea.argo.cms.model.request.fcm.FcmQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.constants.ResponseCode;
+import com.zhyea.argo.data.dto.FcmDto;
 import com.zhyea.argo.data.entity.cms.FcmEntity;
 import com.zhyea.argo.data.mapper.cms.FcmMapper;
 import com.zhyea.argo.except.ArgoServerException;
@@ -105,29 +106,29 @@ public class FcmService {
     public PageResult<FcmItem> queryInPage(FcmQueryRequest request) {
         PageResult<FcmItem> result = new PageResult<>();
 
-        try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-            List<FcmEntity> list = fcmMapper.query(request.getAppId(), request.getKeyword());
+		try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
+			List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
 
-            result.setData(fcmConverter.entityList2ItemList(list));
-            result.setTotal(page.getTotal());
-            result.setPageNo(page.getPageNum());
-            result.setPageSize(page.getPageSize());
-        }
+			result.setData(fcmConverter.dtoList2ItemList(list));
+			result.setTotal(page.getTotal());
+			result.setPageNo(page.getPageNum());
+			result.setPageSize(page.getPageSize());
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 
-    /**
-     * 根据关键字获取组件模型列表
-     *
-     * @param request 查询请求
-     * @return 组件模型列表
-     */
-    public List<FcmItem> findByKeyword(FcmQueryRequest request) {
-        List<FcmEntity> list = fcmMapper.query(request.getAppId(), request.getKeyword());
-        return fcmConverter.entityList2ItemList(list);
-    }
+	/**
+	 * 根据关键字获取组件模型列表
+	 *
+	 * @param request 查询请求
+	 * @return 组件模型列表
+	 */
+	public List<FcmItem> findByKeyword(FcmQueryRequest request) {
+		List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
+		return fcmConverter.dtoList2ItemList(list);
+	}
 
 
     private void checkFcmExists(FcmAddRequest request, Long id) {

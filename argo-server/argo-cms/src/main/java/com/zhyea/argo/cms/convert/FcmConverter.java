@@ -1,5 +1,6 @@
 package com.zhyea.argo.cms.convert;
 
+import com.zhyea.argo.data.dto.FcmDto;
 import com.zhyea.argo.data.entity.cms.FcmEntity;
 import com.zhyea.argo.cms.model.item.FcmItem;
 import com.zhyea.argo.cms.model.request.fcm.FcmAddRequest;
@@ -59,6 +60,24 @@ public interface FcmConverter {
      * @return Item对象列表
      */
     List<FcmItem> entityList2ItemList(List<FcmEntity> entity);
+	/**
+	 * 实体对象转换为Item对象
+	 *
+	 * @param dto 实体对象
+	 * @return Item对象
+	 */
+	@Mapping(target = "props", source = "props", qualifiedByName = "toPropItems")
+	@Mapping(target = "fcmId", source = "id")
+	FcmItem dto2Item(FcmDto dto);
+
+
+	/**
+	 * 实体对象列表转换为Item对象列表
+	 *
+	 * @param dtoList 实体对象列表
+	 * @return Item对象列表
+	 */
+	List<FcmItem> dtoList2ItemList(List<FcmDto> dtoList);
 
 
     /**
