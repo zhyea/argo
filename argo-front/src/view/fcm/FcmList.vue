@@ -42,7 +42,6 @@
 			               :page-size="pageData.pageSize"
 			               :current-page="pageData.pageNo"
 			               :total="pageData.total"
-			               @size-change="handlePageChange"
 			               @current-change="handlePageChange"
 			               layout="total, prev, pager, next, ->, jumper"/>
 		</div>
