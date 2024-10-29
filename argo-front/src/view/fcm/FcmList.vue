@@ -38,13 +38,13 @@
 		</div>
 
 		<div class="table-footer">
-			<el-pagination :pager-count="5"
+			<el-pagination background
 			               :page-size="pageData.pageSize"
 			               :current-page="pageData.pageNo"
 			               :total="pageData.total"
 			               @size-change="handlePageChange"
 			               @current-change="handlePageChange"
-			               layout="prev, pager, next"/>
+			               layout="total, prev, pager, next, ->, jumper"/>
 		</div>
 	</div>
 </template>
@@ -88,6 +88,7 @@ function loadFcmListData() {
 	findFcmList(appId, keyword, pageInfo).then(response => {
 		if (response && response.data && response.data.data) {
 			fcmListData.value = response.data.data
+			pageInfo.total = response.data.total
 		}
 	})
 }
@@ -96,6 +97,7 @@ function loadFcmListData() {
 // 处理页面切换
 const handlePageChange = async (val) => {
 	console.log(val)
+	pageData.value.pageNo = val
 	loadFcmListData()
 }
 
