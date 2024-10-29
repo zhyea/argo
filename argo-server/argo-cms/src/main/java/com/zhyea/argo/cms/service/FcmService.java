@@ -51,7 +51,7 @@ public class FcmService {
      * @return 新增的组件模型id
      */
     public Long add(FcmAddRequest request) {
-        this.checkFcmExists(request);
+        this.checkFcmExists(request, null);
         FcmEntity entity = fcmConverter.addRequest2Entity(request);
         fcmMapper.add(entity);
         return entity.getId();
@@ -65,7 +65,7 @@ public class FcmService {
      * @return 是否修改成功
      */
     public boolean edit(FcmEditRequest request) {
-        this.checkFcmExists(request);
+        this.checkFcmExists(request, request.getFcmId());
         FcmEntity entity = fcmConverter.editRequest2Entity(request);
         int count = fcmMapper.modify(entity);
         return count == NumConstants.ONE;
@@ -130,9 +130,9 @@ public class FcmService {
     }
 
 
-    private void checkFcmExists(FcmAddRequest request) {
+    private void checkFcmExists(FcmAddRequest request, Long id) {
         String uniqCode = computeUniqCode(request);
-        int count = fcmMapper.countByUniqCode(uniqCode);
+        int count = fcmMapper.countByUniqCode(uniqCode, id);
         if (count > 0) {
             logger.info("FcmService.checkFcmExists 相同组件模型已存在 uniqueCode:{}", uniqCode);
             throw new ArgoServerException(ResponseCode.FCM_DUPLICATE_ERROR);

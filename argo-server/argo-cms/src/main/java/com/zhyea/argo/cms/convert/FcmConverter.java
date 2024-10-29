@@ -67,6 +67,7 @@ public interface FcmConverter {
      * @param request 请求对象
      * @return 克隆后的请求对象
      */
+    @Mapping(source = "remark", target = "remark", ignore = true)
     FcmAddRequest clone(FcmAddRequest request);
 
 }

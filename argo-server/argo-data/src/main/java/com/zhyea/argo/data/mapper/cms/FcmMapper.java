@@ -100,6 +100,5 @@ public interface FcmMapper {
      * @param uniqCode 唯一编码
      * @return 组件模型数量
      */
-    @Select("select count(id) from ag_cms_fcm where uniq_code=#{uniqCode}")
-    int countByUniqCode(@Param("uniqCode") String uniqCode);
+    int countByUniqCode(@Param("uniqCode") String uniqCode, @Param("id") Long id);
 }

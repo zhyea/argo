@@ -7,11 +7,10 @@
 
 
     <!-- 根据应用ID和关键字查询组件模板信息 -->
-    <select id="query"
-            resultType="com.zhyea.argo.data.entity.cms.FcmEntity">
+    <select id="query" resultType="com.zhyea.argo.data.entity.cms.FcmEntity">
         select * from ag_cms_fcm where deleted=0
-        <if test="null != appId">
-            and app_id=#{appId}
+        <if test="null != appCode">
+            and app_code=#{appCode}
         </if>
 
         <if test="null != keyword and keyword != ''">
@@ -21,5 +20,15 @@
             )
         </if>
     </select>
+
+
+    <!-- 根据uniqCode统计组件模板信息 -->
+    <select id="countByUniqCode" resultType="java.lang.Integer">
+        select count(id) as cnt from ag_cms_fcm where deleted=0 and uniq_code=#{uniqCode}
+        <if test="null != id">
+            and id &lt;&gt; #{id}
+        </if>
+    </select>
+
 
 </mapper>

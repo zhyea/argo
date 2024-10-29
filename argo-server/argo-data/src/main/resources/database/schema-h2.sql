@@ -18,6 +18,7 @@ create table if not exists ag_cms_fcm
     scope          tinyint      not null default 0 comment '作用域',
     props          tinytext     not null default '[]' comment '属性',
     data_bind_flag tinyint      not null default 0 comment '是否绑定数据',
+    uniq_code      varchar(32)  not null default '' comment '唯一编码',
     remark         varchar(128) not null default '' comment '备注',
 
     operator_code  varchar(32)  not null default 0 comment '操作人ID',
