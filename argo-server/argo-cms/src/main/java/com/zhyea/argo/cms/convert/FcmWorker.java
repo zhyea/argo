@@ -5,7 +5,7 @@ import com.zhyea.argo.cms.model.item.FcmPropItem;
 import org.chobit.commons.utils.JsonKit;
 import org.mapstruct.Named;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.chobit.commons.utils.StrKit.isBlank;
 
@@ -24,11 +24,11 @@ public final class FcmWorker {
 	 * @return 属性集合
 	 */
 	@Named("toPropItems")
-	public static List<FcmPropItem> toPropItems(String propsJson) {
+	public static Set<FcmPropItem> toPropItems(String propsJson) {
 		if (isBlank(propsJson)) {
 			return null;
 		}
-		return JsonKit.fromJson(propsJson, new TypeReference<List<FcmPropItem>>() {
+		return JsonKit.fromJson(propsJson, new TypeReference<Set<FcmPropItem>>() {
 		});
 	}
 
