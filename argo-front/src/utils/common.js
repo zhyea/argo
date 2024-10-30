@@ -2,6 +2,7 @@
  * 通用工具
  */
 import {ElMessage} from "element-plus";
+import {useRouter} from "vue-router";
 
 
 /**
@@ -39,7 +40,19 @@ export function submitForm(formRef,
 		}).catch(error => {
 			submitFlag.value = false
 		})
-
-
 	})
+}
+
+
+export const jumpWithParam = async (key, value) => {
+	const router = useRouter()
+	const currentRoute = router.currentRoute.value
+	await router.push({
+		path: `${currentRoute.path}`,
+		query: {
+			...currentRoute.query,
+			[key]: value
+		}
+	})
+
 }
