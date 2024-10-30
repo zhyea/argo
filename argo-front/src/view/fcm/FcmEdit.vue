@@ -136,9 +136,13 @@ import {ref, onMounted} from "vue";
 
 import {loadEnums} from "@/api/common.js";
 import {findAppList} from "@/api/app.js";
-import {addFcm, editFcm} from "@/api/fcm.js";
+import {addFcm, editFcm, getFcm} from "@/api/fcm.js";
 import {submitForm} from "@/utils/common.js";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
+import {useRoute} from "vue-router";
+
+
+const route = useRoute()
 
 
 // fcm 表单数据
@@ -231,7 +235,24 @@ onMounted(() => {
 		fcScopeEnum.value = allEnumMap.value.get('FcScopeEnum')
 		fcmPropTypeEnum.value = allEnumMap.value.get('FcmPropTypeEnum')
 	})
+
+	// 加载组件模型数据
+	loadFcmData()
 })
+
+
+const loadFcmData = async () => {
+	let fcmId = route.query.fcmId
+	if (!fcmId) {
+		return
+	}
+	getFcm(fcmId).then(response => {
+		if (response && response.data) {
+			fcmForm.value = response.data
+			fcmPropForm.value.props = response.data.props
+		}
+	})
+}
 
 
 // 获取应用

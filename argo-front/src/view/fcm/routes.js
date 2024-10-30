@@ -14,6 +14,13 @@ export default [{
 	path: '/fcm-add',
 	component: FcmEditPage,
 	meta: {
-		title: '新增模型',
+		title: '新增组件模型',
+	},
+}, {
+	name: 'FcmEdit',
+	path: '/fcm-edit',
+	component: FcmEditPage,
+	meta: {
+		title: '编辑组件模型',
 	},
 }]

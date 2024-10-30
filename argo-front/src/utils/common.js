@@ -21,7 +21,7 @@ export function submitForm(formRef,
 	formRef.value.validate((valid) => {
 		if (!valid) return
 
-		submitFlag.value = true
+		//submitFlag.value = true
 
 		maintainMethod(formData, maintainMethod).then(response => {
 			if (response.data) {
@@ -45,8 +45,8 @@ export function submitForm(formRef,
 
 
 export const jumpWithParam = async (key, value) => {
-	const router = useRouter()
-	const currentRoute = router.currentRoute.value
+	const router = useRoute()
+	const currentRoute = router.value
 	await router.push({
 		path: `${currentRoute.path}`,
 		query: {

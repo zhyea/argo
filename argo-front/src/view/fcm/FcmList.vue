@@ -26,12 +26,8 @@
 				                 :formatter="mapDataBindFlag" align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=136>
 					<template #default="scope">
-						<el-button type="success" size="small" @click="handleEdit(scope.row)">
-							查看
-						</el-button>
-						<el-button type="danger" size="small" @click="handleDelete(scope.row)">
-							删除
-						</el-button>
+						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -50,12 +46,16 @@
 
 <script setup>
 import {ref, onMounted} from 'vue'
-import {useRoute} from "vue-router";
-import {findFcmList} from "@/api/fcm.js";
+import {useRoute, useRouter} from "vue-router";
+import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
+import {jumpWithParam} from "@/utils/common.js";
+import {config} from "@/config/index.js";
+import {ElMessage} from "element-plus";
 
 
 const route = useRoute();
+const router = useRouter();
 
 // 分页数据
 const pageData = ref({
@@ -81,8 +81,12 @@ const fcmListData = ref([])
 // 加载方法列表数据
 function loadFcmListData() {
 	let keyword = keywordForm.value.keyword
-	let appId = route.params.appId
+	let appId = route.query.appId
 	let pageInfo = pageData.value
+
+	if (route.query.page) {
+		pageInfo.pageNo = parseInt(route.query.page)
+	}
 
 	findFcmList(appId, keyword, pageInfo).then(response => {
 		if (response && response.data && response.data.data) {
@@ -95,19 +99,30 @@ function loadFcmListData() {
 
 // 处理页面切换
 const handlePageChange = async (val) => {
-	console.log(val)
-	pageData.value.pageNo = val
-	loadFcmListData()
+	let appId = route.params.appId
+	router.push({name: config.fcmListRouteName, query: {appId: appId, page: val}})
+		.then(() => {
+			loadFcmListData()
+		})
+
 }
 
 // 处理FCM编辑
 function handleEdit(row) {
-	console.log(row)
+	router.push({name: config.fcmEditRouteName, query: {fcmId: row.fcmId}})
 }
 
 // 处理FCM删除
 function handleDelete(row) {
-	console.log(row)
+	delFcm(row.fcmId).then(response => {
+		if (response && response.data) {
+			ElMessage.success({
+				message: '删除成功',
+				duration: 1500,
+			})
+			loadFcmListData()
+		}
+	})
 }
 
 

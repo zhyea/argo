@@ -14,7 +14,7 @@ export function findFcmList(appId, keyword, pageInfo) {
 
 // 获取模型详情
 export function getFcm(fcmId) {
-	return request.get('/cms/fcm/get', {
+	return request.post('/cms/fcm/get', {
 		fcmId: fcmId,
 	})
 }
@@ -34,6 +34,7 @@ export function editFcm(formData) {
 
 // 删除模型记录
 export function delFcm(fcmId) {
+	console.log(fcmId)
 	return request.post('/cms/fcm/delete', {
 		fcmId: fcmId,
 	})

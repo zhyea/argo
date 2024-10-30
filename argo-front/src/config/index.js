@@ -3,6 +3,8 @@ export const config = {
 	// route
 	loginRouteName: 'Login',
 	homeRouteName: 'Home',
+	fcmEditRouteName: 'FcmEdit',
+	fcmListRouteName: 'FcmList',
 
 	// auth
 	TOKEN: 'token',
