@@ -60,33 +60,36 @@ public interface FcmConverter {
      * @return Item对象列表
      */
     List<FcmItem> entityList2ItemList(List<FcmEntity> entity);
-	/**
-	 * 实体对象转换为Item对象
-	 *
-	 * @param dto 实体对象
-	 * @return Item对象
-	 */
-	@Mapping(target = "props", source = "props", qualifiedByName = "toPropItems")
-	@Mapping(target = "fcmId", source = "id")
-	FcmItem dto2Item(FcmDto dto);
 
-
-	/**
-	 * 实体对象列表转换为Item对象列表
-	 *
-	 * @param dtoList 实体对象列表
-	 * @return Item对象列表
-	 */
-	List<FcmItem> dtoList2ItemList(List<FcmDto> dtoList);
+    /**
+     * 实体对象转换为Item对象
+     *
+     * @param dto 实体对象
+     * @return Item对象
+     */
+    @Mapping(target = "props", source = "props", qualifiedByName = "toPropItems")
+    @Mapping(target = "fcmId", source = "id")
+    FcmItem dto2Item(FcmDto dto);
 
 
     /**
-     * 克隆请求对象
+     * 实体对象列表转换为Item对象列表
+     *
+     * @param dtoList 实体对象列表
+     * @return Item对象列表
+     */
+    List<FcmItem> dtoList2ItemList(List<FcmDto> dtoList);
+
+
+    /**
+     * 克隆请求对象，会忽略几个不必要的字段，主要用于计算uniqCode
      *
      * @param request 请求对象
      * @return 克隆后的请求对象
      */
+    @Mapping(source = "name", target = "name", ignore = true)
+    @Mapping(source = "icon", target = "icon", ignore = true)
     @Mapping(source = "remark", target = "remark", ignore = true)
-    FcmAddRequest clone(FcmAddRequest request);
+    FcmAddRequest cloneWithoutUnnecessaryFields(FcmAddRequest request);
 
 }

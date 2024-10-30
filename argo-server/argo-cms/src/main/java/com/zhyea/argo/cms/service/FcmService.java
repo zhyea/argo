@@ -33,132 +33,135 @@ import java.util.List;
 public class FcmService {
 
 
-	private final FcmMapper fcmMapper;
+    private final FcmMapper fcmMapper;
 
-	private final FcmConverter fcmConverter;
-
-
-	@Autowired
-	public FcmService(FcmMapper fcmMapper, FcmConverter fcmConverter) {
-		this.fcmMapper = fcmMapper;
-		this.fcmConverter = fcmConverter;
-	}
+    private final FcmConverter fcmConverter;
 
 
-	/**
-	 * 新增组件模型
-	 *
-	 * @param request 新增组件模型请求
-	 * @return 新增的组件模型id
-	 */
-	public Long add(FcmAddRequest request) {
-		this.checkFcmExists(request, null);
-		FcmEntity entity = fcmConverter.addRequest2Entity(request);
-		fcmMapper.add(entity);
-		return entity.getId();
-	}
+    @Autowired
+    public FcmService(FcmMapper fcmMapper, FcmConverter fcmConverter) {
+        this.fcmMapper = fcmMapper;
+        this.fcmConverter = fcmConverter;
+    }
 
 
-	/**
-	 * 修改组件模型
-	 *
-	 * @param request 修改组件模型请求
-	 * @return 是否修改成功
-	 */
-	public boolean edit(FcmEditRequest request) {
-		this.checkFcmExists(request, request.getFcmId());
-		FcmEntity entity = fcmConverter.editRequest2Entity(request);
-		int count = fcmMapper.modify(entity);
-		return count == NumConstants.ONE;
-	}
+    /**
+     * 新增组件模型
+     *
+     * @param request 新增组件模型请求
+     * @return 新增的组件模型id
+     */
+    public Long add(FcmAddRequest request) {
+        String uniqCode = this.computeUniqCode(request);
+        this.checkFcmExists(uniqCode, null);
+        FcmEntity entity = fcmConverter.addRequest2Entity(request);
+        entity.setUniqCode(uniqCode);
+        fcmMapper.add(entity);
+        return entity.getId();
+    }
 
 
-	/**
-	 * 根据id获取组件模型
-	 *
-	 * @param id 组件模型id
-	 * @return 组件模型
-	 */
-	public FcmItem getById(Long id) {
-		FcmEntity entity = fcmMapper.getById(id);
-		return fcmConverter.entity2Item(entity);
-	}
+    /**
+     * 修改组件模型
+     *
+     * @param request 修改组件模型请求
+     * @return 是否修改成功
+     */
+    public boolean edit(FcmEditRequest request) {
+        String uniqCode = this.computeUniqCode(request);
+        this.checkFcmExists(uniqCode, request.getFcmId());
+        FcmEntity entity = fcmConverter.editRequest2Entity(request);
+        entity.setUniqCode(uniqCode);
+        int count = fcmMapper.modify(entity);
+        return count == NumConstants.ONE;
+    }
 
 
-	/**
-	 * 根据id删除组件模型
-	 *
-	 * @param id 组件模型id
-	 * @return 是否删除成功
-	 */
-	public boolean deleteById(Long id) {
-		int count = fcmMapper.deleteById(id);
-		return count == NumConstants.ONE;
-	}
+    /**
+     * 根据id获取组件模型
+     *
+     * @param id 组件模型id
+     * @return 组件模型
+     */
+    public FcmItem getById(Long id) {
+        FcmEntity entity = fcmMapper.getById(id);
+        return fcmConverter.entity2Item(entity);
+    }
 
 
-	/**
-	 * 分页查询获取组件模型列表
-	 *
-	 * @param request 组件模型查询请求
-	 * @return 组件模型列表
-	 */
-	public PageResult<FcmItem> queryInPage(FcmQueryRequest request) {
-		PageResult<FcmItem> result = new PageResult<>();
-
-		try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-			List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
-
-			result.setData(fcmConverter.dtoList2ItemList(list));
-			result.setTotal(page.getTotal());
-			result.setPageNo(page.getPageNum());
-			result.setPageSize(page.getPageSize());
-		}
-
-		return result;
-	}
+    /**
+     * 根据id删除组件模型
+     *
+     * @param id 组件模型id
+     * @return 是否删除成功
+     */
+    public boolean deleteById(Long id) {
+        int count = fcmMapper.deleteById(id);
+        return count == NumConstants.ONE;
+    }
 
 
-	/**
-	 * 根据关键字获取组件模型列表
-	 *
-	 * @param request 查询请求
-	 * @return 组件模型列表
-	 */
-	public List<FcmItem> findByKeyword(FcmQueryRequest request) {
-		List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
-		return fcmConverter.dtoList2ItemList(list);
-	}
+    /**
+     * 分页查询获取组件模型列表
+     *
+     * @param request 组件模型查询请求
+     * @return 组件模型列表
+     */
+    public PageResult<FcmItem> queryInPage(FcmQueryRequest request) {
+        PageResult<FcmItem> result = new PageResult<>();
+
+        try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
+            List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
+
+            result.setData(fcmConverter.dtoList2ItemList(list));
+            result.setTotal(page.getTotal());
+            result.setPageNo(page.getPageNum());
+            result.setPageSize(page.getPageSize());
+        }
+
+        return result;
+    }
 
 
-	/**
-	 * 检查组件模型是否存在
-	 *
-	 * @param request 组件模型基础信息
-	 * @param id      组件模型id
-	 */
-	private void checkFcmExists(FcmAddRequest request, Long id) {
-		String uniqCode = computeUniqCode(request);
-		int count = fcmMapper.countByUniqCode(uniqCode, id);
-		if (count > 0) {
-			logger.info("FcmService.checkFcmExists 相同组件模型已存在 uniqueCode:{}", uniqCode);
-			throw new ArgoServerException(ResponseCode.FCM_DUPLICATE_ERROR);
-		}
-		request.setUniqCode(uniqCode);
-	}
+    /**
+     * 根据关键字获取组件模型列表
+     *
+     * @param request 查询请求
+     * @return 组件模型列表
+     */
+    public List<FcmItem> findByKeyword(FcmQueryRequest request) {
+        List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
+        return fcmConverter.dtoList2ItemList(list);
+    }
 
 
-	/**
-	 * 计算组件唯一值
-	 *
-	 * @param request 组件基础信息
-	 * @return 组件唯一值
-	 */
-	private String computeUniqCode(FcmAddRequest request) {
-		FcmAddRequest o = fcmConverter.clone(request);
-		String json = JsonKit.toJson(o);
-		return MD5.encode(json);
-	}
+    /**
+     * 检查组件模型是否存在
+     *
+     * @param uniqCode 组件模型唯一标识符
+     * @param id       组件模型id
+     */
+    private void checkFcmExists(String uniqCode, Long id) {
+        FcmEntity exists = fcmMapper.getByUniqCode(uniqCode, id);
+        if (null != exists) {
+            logger.info("FcmService.checkFcmExists 相同组件模型已存在 uniqueCode:{}, id:{}, name:{}",
+                    uniqCode, exists.getId(), exists.getName());
+            throw new ArgoServerException(ResponseCode.FCM_DUPLICATE_ERROR.getCode(), "");
+        }
+    }
+
+
+    /**
+     * 计算组件唯一值
+     *
+     * @param request 组件基础信息
+     * @return 组件唯一值
+     */
+    private String computeUniqCode(FcmAddRequest request) {
+        FcmAddRequest o = fcmConverter.cloneWithoutUnnecessaryFields(request);
+        String json = JsonKit.toJson(o);
+        return MD5.encode(json);
+    }
 
 
 }

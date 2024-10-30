@@ -86,12 +86,6 @@ public class FcmAddRequest extends BaseOperateRequest implements Checkable {
 	private String remark;
 
 
-	/**
-	 * 组件唯一编码
-	 */
-	private String uniqCode;
-
-
 	@Override
 	public boolean check() throws ParamException {
 		// 如果是应用组件，则应用ID不能为空
