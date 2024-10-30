@@ -4,6 +4,29 @@
 --
 --
 
+
+--
+-- 应用信息
+--
+create table if not exists ag_cms_app
+(
+    id            int          not null default 0 auto_increment comment 'id',
+
+    app_code      varchar(32)  not null default '' comment '应用编码',
+    app_name      varchar(64)  not null default '' comment '应用名称',
+    icon          varchar(64)  not null default '' comment '图标',
+    remark        varchar(128) not null default '' comment '备注',
+
+    operator_code varchar(32)  not null default 0 comment '操作人ID',
+    deleted       tinyint      not null default 0 comment '删除标记',
+    create_time   datetime     not null default now() comment '创建时间',
+    update_time   timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
+
+    primary key (id)
+);
+
+
+
 --
 -- 组件模型
 --
@@ -25,27 +48,6 @@ create table if not exists ag_cms_fcm
     deleted        tinyint      not null default 0 comment '删除标记',
     create_time    datetime     not null default now() comment '创建时间',
     update_time    timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
-
-    primary key (id)
-);
-
-
---
--- 应用信息
---
-create table if not exists ag_cms_app
-(
-    id            int          not null default 0 auto_increment comment 'id',
-
-    app_code      varchar(32)  not null default '' comment '应用编码',
-    app_name      varchar(64)  not null default '' comment '应用名称',
-    icon          varchar(64)  not null default '' comment '图标',
-    remark        varchar(128) not null default '' comment '备注',
-
-    operator_code varchar(32)  not null default 0 comment '操作人ID',
-    deleted       tinyint      not null default 0 comment '删除标记',
-    create_time   datetime     not null default now() comment '创建时间',
-    update_time   timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
 
     primary key (id)
 );
