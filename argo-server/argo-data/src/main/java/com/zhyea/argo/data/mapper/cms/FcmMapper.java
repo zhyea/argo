@@ -102,6 +102,5 @@ public interface FcmMapper {
 	 * @param uniqCode 唯一编码
 	 * @return 组件模型
 	 */
-	@Select("select * from ag_cms_fcm where uniq_code=#{uniqCode} and id!=#{id}")
 	FcmEntity getByUniqCode(@Param("uniqCode") String uniqCode, @Param("id") Long id);
 }
