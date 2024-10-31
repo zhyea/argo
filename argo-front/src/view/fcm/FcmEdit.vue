@@ -34,14 +34,14 @@
 					</el-radio-group>
 				</el-form-item>
 
-				<el-form-item label="应用" v-if="2===fcmForm.scope" prop="appCode">
-					<el-select id="appCode" v-model="fcmForm.appCode"
+				<el-form-item label="应用" v-if="2===fcmForm.scope" prop="appId">
+					<el-select id="appId" v-model="fcmForm.appId"
 					           placeholder="请选择应用"
 					           filterable remote :remote-method="fetchApps">
 						<el-option v-for="e in appList"
-						           :key="e.appCode"
+						           :key="e.id"
 						           :label="e.appName"
-						           :value="e.appCode"/>
+						           :value="e.id"/>
 					</el-select>
 				</el-form-item>
 
@@ -152,7 +152,7 @@ const fcmForm = ref({
 	icon: '',
 	type: 1,
 	scope: 1,
-	appCode: '',
+	appId: null,
 	dataBindFlag: '',
 	remark: '',
 	props: [],
