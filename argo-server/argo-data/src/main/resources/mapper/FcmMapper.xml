@@ -9,7 +9,7 @@
     <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query" resultType="com.zhyea.argo.data.dto.FcmDto">
         select f.*, a.app_name from
-        ag_cms_fcm f left join ag_cms_app a on f.app_code=a.app_code
+        ag_cms_fcm f left join ag_cms_app a on f.app_id=a.id
         where f.deleted=0
         <if test="null != appId">
             and f.app_id=#{appId}

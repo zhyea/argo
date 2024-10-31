@@ -32,12 +32,12 @@ create table if not exists ag_cms_app
 --
 create table if not exists ag_cms_fcm
 (
-    id             int          not null default 0 auto_increment comment 'id',
+    id             bigint       not null default 0 auto_increment comment 'id',
 
     name           varchar(64)  not null default '' comment '名称',
     icon           varchar(64)  not null default '' comment '图标',
     type           tinyint      not null default 0 comment '类型',
-    app_code       varchar(32)  not null default '' comment '应用编码',
+    app_id         int          not null default 0 comment '应用ID',
     scope          tinyint      not null default 0 comment '作用域',
     props          tinytext     not null default '[]' comment '属性',
     data_bind_flag tinyint      not null default 0 comment '是否绑定数据',

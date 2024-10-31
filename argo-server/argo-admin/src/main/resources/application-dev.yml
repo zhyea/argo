@@ -5,7 +5,7 @@ spring:
   datasource:
     type: org.apache.commons.dbcp2.BasicDataSource
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/argo:argo-adm;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:./argo-adm;DB_CLOSE_ON_EXIT=FALSE
     dbcp2:
       validation-query: SELECT 1
       pool-prepared-statements: true
@@ -18,7 +18,7 @@ spring:
         trace: true
   sql:
     init:
-      mode: EMBEDDED
+      mode: ALWAYS
       schema-locations: classpath:/database/schema-h2.sql
       data-locations: classpath:/database/data-h2.sql
 
