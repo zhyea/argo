@@ -18,7 +18,7 @@ import static org.chobit.commons.constans.Symbol.EMPTY;
  */
 @MappedTypes({String.class})
 @MappedJdbcTypes(JdbcType.VARCHAR)
-public class NullTypeHandler extends BaseTypeHandler<String> {
+public class NullStringHandler extends BaseTypeHandler<String> {
 
 
 	@Override

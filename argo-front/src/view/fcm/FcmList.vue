@@ -49,7 +49,6 @@ import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
-import {jumpWithParam} from "@/utils/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
 
@@ -180,7 +179,6 @@ function mapEnum(enumType, enumCode) {
 	border: #535bf2 1px solid;
 }
 
-
 .table-header, .table-body {
 	margin-bottom: 9px;
 }
@@ -188,7 +186,6 @@ function mapEnum(enumType, enumCode) {
 .table-header {
 	padding-top: 24px;
 }
-
 
 .table-button {
 	padding-bottom: 9px;

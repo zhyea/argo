@@ -5,6 +5,7 @@ import NotFoundPage from '@/view/error/NotFound.vue'
 
 import appRoutes from '@/view/app/routes'
 import fcmRoutes from '@/view/fcm/routes'
+import appHomeRoutes from '@/view/app/routes-app'
 
 
 const routes = [
@@ -23,7 +24,7 @@ const routes = [
 		name: 'Login',
 		path: '/login',
 		component: LoginPage
-	},{
+	}, {
 		name: 'AppHome',
 		path: '/app-home',
 		component: AppHomePage,
@@ -31,7 +32,7 @@ const routes = [
 			title: '应用首页',
 		},
 		children: [
-			...appRoutes,
+			...appHomeRoutes
 		],
 	},
 	{

@@ -24,7 +24,7 @@ public class FcmEntity extends BaseEntity {
     /**
      * 应用ID
      */
-    private String appCode;
+    private Long appId;
 
 
     /**

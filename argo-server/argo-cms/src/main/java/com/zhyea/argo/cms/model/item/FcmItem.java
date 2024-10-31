@@ -33,7 +33,7 @@ public class FcmItem {
     /**
      * 应用ID
      */
-    private String appCode;
+    private Long appId;
 
 
     /**

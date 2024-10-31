@@ -12,7 +12,7 @@
         ag_cms_fcm f left join ag_cms_app a on f.app_code=a.app_code
         where f.deleted=0
         <if test="null != appCode">
-            and f.app_code=#{appCode}
+            and f.app_id=#{appId}
         </if>
 
         <if test="null != keyword and keyword != ''">

@@ -23,8 +23,8 @@ public interface AppMapper {
             "insert into ag_cms_app (app_code, app_name, icon, remark)",
             "values",
             "(#{e.appCode}, #{e.appName}, ",
-            "#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler},",
-            "#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler})"
+            "#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler},",
+            "#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler})"
     })
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void add(@Param("e") AppEntity app);
@@ -39,8 +39,8 @@ public interface AppMapper {
     @Update({
             "update ag_cms_app set",
             "app_code=#{e.appCode}, app_name=#{e.appName}, ",
-            "icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
-            "remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}",
+            "icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
+            "remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}",
             "where id=#{e.id}"
     })
     int modify(@Param("e") AppEntity app);

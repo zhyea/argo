@@ -21,17 +21,17 @@ public interface FcmMapper {
 	 * @param entity 组件模型数据
 	 */
 	@Insert({
-			"insert into ag_cms_fcm (scope, app_code, name, icon, type, props, data_bind_flag, uniq_code, remark)",
+			"insert into ag_cms_fcm (scope, app_id, name, icon, type, props, data_bind_flag, uniq_code, remark)",
 			"values",
 			"(#{e.scope}, ",
-			"#{e.appCode, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"#{e.appId, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"#{e.name}, ",
-			"#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"#{e.type}, ",
-			"#{e.props, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"#{e.props, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"#{e.dataBindFlag}, ",
 			"#{e.uniqCode}, ",
-			"#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler})"
+			"#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler})"
 	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") FcmEntity entity);
@@ -46,13 +46,13 @@ public interface FcmMapper {
 	@Update({
 			"update ag_cms_fcm set",
 			"scope=#{e.scope}, ",
-			"app_code=#{e.appCode, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"app_id=#{e.appId, typeHandler=com.zhyea.argo.data.type.NullBigIntHandler}, ",
 			"name=#{e.name}, ",
-			"icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"type=#{e.type}, ",
-			"props=#{e.props, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}, ",
+			"props=#{e.props, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"data_bind_flag=#{e.dataBindFlag}, ",
-			"remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullTypeHandler}",
+			"remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}",
 			"where id=#{e.id}"
 	})
 	int modify(@Param("e") FcmEntity entity);
@@ -81,11 +81,11 @@ public interface FcmMapper {
 	/**
 	 * 根据应用id获取组件模型
 	 *
-	 * @param appCode 应用id
+	 * @param appId 应用id
 	 * @return 组件模型列表
 	 */
-	@Select("select * from ag_cms_fcm where app_code=#{appCode}")
-	List<FcmEntity> findByAppId(@Param("appCode") String appCode);
+	@Select("select * from ag_cms_fcm where app_id=#{appId}")
+	List<FcmEntity> findByAppId(@Param("appId") Long appId);
 
 
 	/**
@@ -93,7 +93,7 @@ public interface FcmMapper {
 	 *
 	 * @return 组件模型列表
 	 */
-	List<FcmDto> query(@Param("appCode") String appCode, @Param("keyword") String keyword);
+	List<FcmDto> query(@Param("appId") Long appId, @Param("keyword") String keyword);
 
 
 	/**

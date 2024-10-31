@@ -12,16 +12,16 @@ import org.chobit.commons.model.request.BasePageRequest;
 public class FcmQueryRequest extends BasePageRequest {
 
 
-	/**
-	 * 应用id
-	 */
-	private String appCode;
+    /**
+     * 应用id
+     */
+    private Long appId;
 
 
-	/**
-	 * 关键字
-	 */
-	private String keyword;
+    /**
+     * 关键字
+     */
+    private String keyword;
 
 
 }

@@ -120,7 +120,7 @@ public class FcmService {
 		PageResult<FcmItem> result = new PageResult<>();
 
 		try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-			List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
+			List<FcmDto> list = fcmMapper.query(request.getAppId(), request.getKeyword());
 
 			result.setData(fcmConverter.dtoList2ItemList(list));
 			result.setTotal(page.getTotal());
@@ -139,7 +139,7 @@ public class FcmService {
 	 * @return 组件模型列表
 	 */
 	public List<FcmItem> findByKeyword(FcmQueryRequest request) {
-		List<FcmDto> list = fcmMapper.query(request.getAppCode(), request.getKeyword());
+		List<FcmDto> list = fcmMapper.query(request.getAppId(), request.getKeyword());
 		return fcmConverter.dtoList2ItemList(list);
 	}
 
