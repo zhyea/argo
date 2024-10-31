@@ -23,6 +23,7 @@ import {ref} from 'vue'
 
 import {findAppList} from "@/api/app.js";
 import {useRouter} from "vue-router";
+import {config} from "@/config/index.js";
 
 defineProps({
 	appItems: Array,
@@ -53,7 +54,7 @@ const router = useRouter();
 
 // 跳转到应用页面
 const goToAppPage = (appId) => {
-	router.push({name: 'AppPage', query: {'appId': appId}, replace: true})
+	router.push({name: config.appHomeRouteName, query: {'appId': appId}, replace: true})
 }
 </script>
 

@@ -26,11 +26,11 @@ export default {
 			index: 'fcm-main',
 
 			children: [{
-				name: '模型列表',
+				name: '组件模型列表',
 				index: 'fcm-list',
 				uri: '/fcm-list',
 			}, {
-				name: '新增模型',
+				name: '新增组件模型',
 				index: 'fcm-add',
 				uri: '/fcm-add',
 			}]
@@ -63,16 +63,51 @@ export default {
 	app: [
 		{
 			name: '组件模型',
-			icon: 'menu',
-			uri: '/fcm-list',
+			icon: 'cpu',
+			index: 'app-fcm-list',
+
+			children: [{
+				name: '组件模型列表',
+				index: 'app-fcm-list',
+				uri: '/fcm-list',
+			}, {
+				name: '新增组件模型',
+				index: 'fcm-add',
+				uri: '/fcm-add',
+			}]
 		}, {
 			name: '组件实例',
-			icon: 'user',
-			uri: '/fci-list',
+			icon: 'set-up',
+			index: 'fci-main',
+
+			children: [{
+				name: '组件实例列表',
+				index: 'fci-list',
+				uri: '/fci-list',
+			}, {
+				name: '新增组件实例',
+				index: 'fci-add',
+				uri: '/fci-add',
+			}]
+		}, {
+			name: '应用页',
+			icon: 'office-building',
+			index: 'app-page-main',
+
+			children: [{
+				name: '应用页面列表',
+				index: 'app-page-list',
+				uri: '/app-page-list',
+			}, {
+				name: '新增页面实例',
+				index: 'app-page-add',
+				uri: '/app-page-add',
+			}]
 		}, {
 			name: '用户组',
 			icon: 'User',
 			uri: '#',
+			index: 'user-group',
 		}
 	],
 }

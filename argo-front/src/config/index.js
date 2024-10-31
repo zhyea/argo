@@ -3,6 +3,7 @@ export const config = {
 	// route
 	loginRouteName: 'Login',
 	homeRouteName: 'Home',
+	appHomeRouteName: 'AppHome',
 	fcmEditRouteName: 'FcmEdit',
 	fcmListRouteName: 'FcmList',
 
