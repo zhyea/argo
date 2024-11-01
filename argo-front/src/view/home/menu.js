@@ -69,11 +69,11 @@ export default {
 			children: [{
 				name: '组件模型列表',
 				index: 'app-fcm-list',
-				uri: '/fcm-list',
+				uri: '/app-fcm-list',
 			}, {
 				name: '新增组件模型',
-				index: 'fcm-add',
-				uri: '/fcm-add',
+				index: 'app-fcm-add',
+				uri: '/app-fcm-add',
 			}]
 		}, {
 			name: '组件实例',

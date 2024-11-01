@@ -26,7 +26,7 @@ const routes = [
 		component: LoginPage
 	}, {
 		name: 'AppHome',
-		path: '/app-home',
+		path: '/app-home/:appId',
 		component: AppHomePage,
 		meta: {
 			title: '应用首页',

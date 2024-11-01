@@ -1,7 +1,7 @@
 <template>
 	<el-container class="app-container">
 		<div v-for="item in appItems"
-		     class="app-box" @click="goToAppPage(item.appCode)">
+		     class="app-box" @click="goToAppPage(item.id)">
 
 			<div class="app-icon">
 				<img :src="item.icon" alt="item.appName" class="app-icon-img"/>
@@ -50,9 +50,10 @@ findAllApps().then(response => {
 const router = useRouter();
 
 // 跳转到应用页面
-const goToAppPage = (appCode) => {
-	console.log(appCode)
-	router.push({name: config.appHomeRouteName, query: {'appCode': appCode}})
+const goToAppPage = (appId) => {
+	console.log(appId)
+	let params = {appId: appId}
+	router.push({path: '/app-home/' + appId})
 }
 </script>
 
