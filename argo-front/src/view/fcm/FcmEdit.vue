@@ -37,6 +37,7 @@
 				<el-form-item label="应用" v-if="2===fcmForm.scope" prop="appId">
 					<el-select id="appId" v-model.lazy="fcmForm.appId"
 					           placeholder="请选择应用"
+					           remote-show-suffix
 					           filterable remote :remote-method="fetchApps">
 						<el-option v-for="e in appList"
 						           :key="e.id"
@@ -135,9 +136,9 @@
 import {ref, onMounted} from "vue";
 
 import {loadEnums} from "@/api/common.js";
-import {findAppList} from "@/api/app.js";
+import {findAllApps, queryApps} from "@/api/app.js";
 import {addFcm, editFcm, getFcm} from "@/api/fcm.js";
-import {submitForm} from "@/utils/common.js";
+import {mapOf, submitForm} from "@/utils/common.js";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
 
@@ -241,6 +242,10 @@ onMounted(() => {
 })
 
 
+// 应用信息
+const appList = ref()
+
+// 加载组件模型数据
 const loadFcmData = async () => {
 	let fcmId = route.query.fcmId
 	if (!fcmId) {
@@ -250,16 +255,18 @@ const loadFcmData = async () => {
 		if (response && response.data) {
 			fcmForm.value = response.data
 			fcmPropForm.value.props = response.data.props
+			appList.value = [{
+				id: response.data.appId,
+				appName: response.data.appName,
+			}]
 		}
 	})
 }
 
 
-// 获取应用
-const appList = ref()
-
-const fetchApps = async () => {
-	findAppList().then(response => {
+// 加载应用
+function fetchApps(keyword) {
+	queryApps(keyword).then(response => {
 		if (response && response.data) {
 			appList.value = response.data
 		} else {
@@ -299,7 +306,7 @@ const submitFcmForm = async () => {
 
 	let maintainMethod = addFcm
 
-	if (formData.id) {
+	if (formData.fcmId) {
 		maintainMethod = editFcm
 	}
 

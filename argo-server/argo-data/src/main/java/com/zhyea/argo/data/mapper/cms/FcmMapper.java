@@ -64,8 +64,7 @@ public interface FcmMapper {
 	 * @param id 组件模型id
 	 * @return 组件模型记录
 	 */
-	@Select("select * from ag_cms_fcm where id=#{id}")
-	FcmEntity getById(@Param("id") Long id);
+	FcmDto getById(@Param("id") Long id);
 
 
 	/**

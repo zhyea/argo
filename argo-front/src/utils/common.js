@@ -2,7 +2,6 @@
  * 通用工具
  */
 import {ElMessage} from "element-plus";
-import {useRouter} from "vue-router";
 
 
 /**
@@ -21,7 +20,7 @@ export function submitForm(formRef,
 	formRef.value.validate((valid) => {
 		if (!valid) return
 
-		//submitFlag.value = true
+		submitFlag.value = true
 
 		maintainMethod(formData, maintainMethod).then(response => {
 			if (response.data) {
@@ -44,15 +43,14 @@ export function submitForm(formRef,
 }
 
 
-export const jumpWithParam = async (key, value) => {
-	const router = useRoute()
-	const currentRoute = router.value
-	await router.push({
-		path: `${currentRoute.path}`,
-		query: {
-			...currentRoute.query,
-			[key]: value
-		}
-	})
-
+/**
+ * 将k/v 对转为Map对象
+ * @param key key
+ * @param value 值
+ * @returns {Map<any, any>} Map对象
+ */
+export function mapOf(key, value) {
+	const map = new Map()
+	map.set(key, value)
+	return map
 }

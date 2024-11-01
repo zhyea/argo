@@ -11,6 +11,8 @@ public class MyApp {
 
         boolean r = item.equals(item2);
 
+        System.out.println(r);
+
         System.out.println(item.hashCode());
         System.out.println(item2.hashCode());
 

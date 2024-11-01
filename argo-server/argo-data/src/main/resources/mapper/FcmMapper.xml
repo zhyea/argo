@@ -26,6 +26,13 @@
     </select>
 
 
+    <!-- 根据应用ID和关键字查询组件模板信息 -->
+    <select id="getById" resultType="com.zhyea.argo.data.dto.FcmDto">
+        select f.*, a.app_name from ag_cms_fcm f left join ag_cms_app a on f.app_id=a.id
+        where f.id=#{id}
+    </select>
+
+
     <!-- 根据uniqCode查询最近的组件模板信息 -->
     <select id="getByUniqCode" resultType="com.zhyea.argo.data.entity.cms.FcmEntity">
         select * from ag_cms_fcm where deleted=0 and uniq_code=#{uniqCode}

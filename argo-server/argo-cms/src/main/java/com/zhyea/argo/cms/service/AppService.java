@@ -4,14 +4,17 @@ import com.zhyea.argo.cms.convert.AppConverter;
 import com.zhyea.argo.cms.model.item.AppItem;
 import com.zhyea.argo.cms.model.request.app.AppAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppEditRequest;
+import com.zhyea.argo.cms.model.request.app.AppQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.data.entity.cms.AppEntity;
 import com.zhyea.argo.data.mapper.cms.AppMapper;
 import com.zhyea.argo.except.ArgoServerException;
+import org.chobit.commons.utils.Collections2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -96,5 +99,21 @@ public class AppService {
     public List<AppItem> findAll() {
         List<AppEntity> list = appMapper.findAll();
         return appConverter.entityList2ItemList(list);
+    }
+
+
+    /**
+     * 根据关键字查询应用
+     *
+     * @param request 查询请求
+     * @return 应用列表
+     */
+    public List<AppItem> query(AppQueryRequest request) {
+        List<AppEntity> list = appMapper.query(request.getKeyword());
+        if (Collections2.isEmpty(list)) {
+            return new LinkedList<>();
+        } else {
+            return appConverter.entityList2ItemList(list);
+        }
     }
 }

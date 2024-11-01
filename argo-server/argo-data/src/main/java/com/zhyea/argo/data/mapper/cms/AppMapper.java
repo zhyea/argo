@@ -76,16 +76,6 @@ public interface AppMapper {
 
 
     /**
-     * 根据应用编码获取应用集合
-     *
-     * @param appCode 应用编码
-     * @return appCode对应的应用集合
-     */
-    @Select("select * from ag_cms_app where app_code=#{appCode}")
-    List<AppEntity> findByAppCode(@Param("appCode") String appCode);
-
-
-    /**
      * 根据应用编码统计应用数量
      *
      * @param appCode 应用编码
@@ -93,4 +83,14 @@ public interface AppMapper {
      */
     @Select("select count(id) from ag_cms_app where app_code=#{appCode}")
     int countByAppCode(@Param("appCode") String appCode);
+
+
+    /**
+     * 根据关键字查询应用
+     *
+     * @param keyword 关键字
+     * @return 应用列表
+     */
+    List<AppEntity> query(@Param("keyword") String keyword);
+
 }

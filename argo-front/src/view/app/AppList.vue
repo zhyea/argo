@@ -18,7 +18,7 @@
 <script setup>
 import {ref} from 'vue'
 
-import {findAppList} from "@/api/app.js";
+import {findAllApps} from "@/api/app.js";
 import {useRouter} from "vue-router";
 import {config} from "@/config/index.js";
 
@@ -30,7 +30,7 @@ defineProps({
 let appItems = ref([])
 
 // 获取应用信息
-findAppList().then(response => {
+findAllApps().then(response => {
 
 	if (!response || !response.data) {
 		return
