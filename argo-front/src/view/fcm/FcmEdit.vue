@@ -35,7 +35,7 @@
 				</el-form-item>
 
 				<el-form-item label="应用" v-if="2===fcmForm.scope" prop="appId">
-					<el-select id="appId" v-model="fcmForm.appId"
+					<el-select id="appId" v-model.lazy="fcmForm.appId"
 					           placeholder="请选择应用"
 					           filterable remote :remote-method="fetchApps">
 						<el-option v-for="e in appList"
@@ -48,8 +48,8 @@
 				<el-form-item label="绑定数据" prop="dataBindFlag">
 					<el-switch id="dataBindFlag" v-model="fcmForm.dataBindFlag"
 					           inline-prompt size="large"
-					           active-text="是" active-value="1"
-					           inactive-text="否" inactive-value="0"
+					           active-text="是" :active-value="1"
+					           inactive-text="否" :inactive-value="0"
 					/>
 				</el-form-item>
 
@@ -95,9 +95,9 @@
 							</td>
 							<td class="fcm-prop-td-required">
 								<el-form-item>
-									<el-switch v-model="e.required" inline-prompt
-									           active-text="是" active-value=1
-									           inactive-text="否" inactive-value=0
+									<el-switch v-model.number="e.required" inline-prompt
+									           active-text="是" :active-value='1'
+									           inactive-text="否" :inactive-value='0'
 									/>
 								</el-form-item>
 							</td>
@@ -147,12 +147,12 @@ const route = useRoute()
 
 // fcm 表单数据
 const fcmForm = ref({
-	fcmId: '',
+	fcmId: null,
 	name: '',
 	icon: '',
 	type: 1,
 	scope: 1,
-	appId: null,
+	appId: '',
 	dataBindFlag: '',
 	remark: '',
 	props: [],
