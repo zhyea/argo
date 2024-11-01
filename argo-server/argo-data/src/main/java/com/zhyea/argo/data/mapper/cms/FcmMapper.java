@@ -24,7 +24,7 @@ public interface FcmMapper {
 			"insert into ag_cms_fcm (scope, app_id, name, icon, type, props, data_bind_flag, uniq_code, remark)",
 			"values",
 			"(#{e.scope}, ",
-			"#{e.appId, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
+			"#{e.appId, typeHandler=com.zhyea.argo.data.type.NullBigIntHandler}, ",
 			"#{e.name}, ",
 			"#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"#{e.type}, ",
