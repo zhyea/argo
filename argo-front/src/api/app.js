@@ -1,8 +1,16 @@
 import request from '@/utils/request.js'
 
 // 获取应用列表
-export function findAppList() {
+export function findAllApps() {
 	return request.get('/cms/app/all')
+}
+
+
+// 根据关键字查询应用列表
+export function queryApps(keyword) {
+	return request.post('/cms/app/query', {
+		keyword: keyword,
+	})
 }
 
 
