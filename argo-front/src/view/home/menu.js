@@ -69,11 +69,11 @@ export default {
 			children: [{
 				name: '组件模型列表',
 				index: 'app-fcm-list',
-				uri: '/app-fcm-list',
+				uri: '/app-fcm-list/:appId',
 			}, {
 				name: '新增组件模型',
 				index: 'app-fcm-add',
-				uri: '/app-fcm-add',
+				uri: '/app-fcm-add/:appId',
 			}]
 		}, {
 			name: '组件实例',
@@ -83,11 +83,11 @@ export default {
 			children: [{
 				name: '组件实例列表',
 				index: 'fci-list',
-				uri: '/fci-list',
+				uri: '/fci-list/:appId',
 			}, {
 				name: '新增组件实例',
 				index: 'fci-add',
-				uri: '/fci-add',
+				uri: '/fci-add/:appId',
 			}]
 		}, {
 			name: '应用页',
@@ -97,11 +97,11 @@ export default {
 			children: [{
 				name: '应用页面列表',
 				index: 'app-page-list',
-				uri: '/app-page-list',
+				uri: '/app-page-list/:appId',
 			}, {
 				name: '新增页面实例',
 				index: 'app-page-add',
-				uri: '/app-page-add',
+				uri: '/app-page-add/:appId',
 			}]
 		}, {
 			name: '用户组',
