@@ -136,9 +136,9 @@
 import {ref, onMounted} from "vue";
 
 import {loadEnums} from "@/api/common.js";
-import {findAllApps, queryApps} from "@/api/app.js";
+import {queryApps} from "@/api/app.js";
 import {addFcm, editFcm, getFcm} from "@/api/fcm.js";
-import {mapOf, submitForm} from "@/utils/common.js";
+import {submitForm} from "@/utils/common.js";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
 

@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
@@ -40,19 +40,21 @@ const appMenu = ref([])
 
 // 调整菜单路由
 function changeMenuRoutes() {
-	const appId = route.query.appId
+	const appId = route.params.appId
 	const menus = menuItems.app
 
+	if (!appId) return
+
 	menus.forEach(menu => {
-		if (menu.uri) {
-			menu.uri = menu.uri.replace(':appId', appId)
+		if (menu.index) {
+			menu.index = menu.index.replace(':appId', appId)
 		}
 
 		if (!menu.children) return
 
 		menu.children.forEach(child => {
-			if (child.uri) {
-				child.uri = child.uri.replace(':appId', appId)
+			if (child.index) {
+				child.index = child.index.replace(':appId', appId)
 			}
 		})
 	})

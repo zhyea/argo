@@ -20,7 +20,6 @@ import {ref} from 'vue'
 
 import {findAllApps} from "@/api/app.js";
 import {useRouter} from "vue-router";
-import {config} from "@/config/index.js";
 
 defineProps({
 	appItems: Array,
