@@ -57,6 +57,8 @@ public enum ResponseCode implements CodeDescEnum {
      */
     APP_DUPLICATE_ERROR(40100, "应用已存在"),
 
+    APP_ABSENT_ERROR(40101, "应用不存在"),
+
 
     /**
      * CMS fcm相关问题
