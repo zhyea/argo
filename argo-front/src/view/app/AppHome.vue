@@ -1,8 +1,7 @@
 <template>
-	<el-container class="home_container">
+	<el-container v-loading="loadingAppFlag" class="home_container">
 
-		<sidebar :collapsed="collapseFlag"
-		         :menu-items="appMenu"/>
+		<sidebar :collapsed="collapseFlag" :menu-items="appMenu"/>
 
 		<el-container direction="vertical">
 			<head-bar :collapsed="collapseFlag" @menu="changeSideBarState"/>
@@ -63,16 +62,24 @@ function changeMenuRoutes() {
 }
 
 
+// 是否需要loading蒙版
+const loadingAppFlag = ref(true)
+
+
 onMounted(() => {
+	// 调整路径
 	changeMenuRoutes()
+	// 检查appIds是否有效
+	loadAppData()
 })
 
 
+// 加载应用数据判断应用ID是否有效
 function loadAppData() {
-	let appId = route.query.appId
+	let appId = route.params.appId
 
 	getApp(appId).then(response => {
-
+		loadingAppFlag.value = !(response && response.data)
 	})
 }
 

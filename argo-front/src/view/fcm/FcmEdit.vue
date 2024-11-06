@@ -233,6 +233,9 @@ const defaultAppFcmFlag = ref(false)
 
 // 页面渲染前执行一些必要的操作
 onMounted(() => {
+	// 检查组件和应用的关系
+	checkFcmAppFlag()
+
 	// 加载枚举数据
 	loadEnums(allEnumMap, () => {
 		fcmTypeEnum.value = allEnumMap.value.get('FcmTypeEnum')
