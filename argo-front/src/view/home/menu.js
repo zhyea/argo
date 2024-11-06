@@ -60,10 +60,10 @@ export default {
 
 			children: [{
 				name: '组件模型列表',
-				index: '/app-fcm-list/:appId',
+				index: '/app/:appId/app-fcm-list',
 			}, {
 				name: '新增组件模型',
-				index: '/app-fcm-add/:appId',
+				index: '/app/:appId/app-fcm-add',
 			}]
 		}, {
 			name: '组件实例',
@@ -72,27 +72,27 @@ export default {
 
 			children: [{
 				name: '组件实例列表',
-				index: '/fci-list/:appId',
+				index: '/app/:appId/fci-list',
 			}, {
 				name: '新增组件实例',
-				index: '/fci-add/:appId',
+				index: '/app/:appId/fci-add',
 			}]
 		}, {
 			name: '应用页',
 			icon: 'office-building',
-			index: '/app-page-main',
+			index: '/app/:appId/page-main',
 
 			children: [{
 				name: '应用页面列表',
-				index: '/app-page-list/:appId',
+				index: '/app/:appId/page-list',
 			}, {
 				name: '新增页面实例',
-				index: '/app-page-add/:appId',
+				index: '/app/:appId/page-add',
 			}]
 		}, {
 			name: '用户组',
 			icon: 'User',
-			index: '/user-group',
+			index: '/app/:appId/user-group',
 		}
 	],
 }

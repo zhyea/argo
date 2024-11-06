@@ -52,7 +52,7 @@ const router = useRouter();
 const goToAppPage = (appId) => {
 	console.log(appId)
 	let params = {appId: appId}
-	router.push({path: '/app-home/' + appId})
+	router.push({path: '/app/' + appId})
 }
 </script>
 
