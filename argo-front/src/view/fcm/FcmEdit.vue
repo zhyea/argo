@@ -25,7 +25,7 @@
 					</el-radio-group>
 				</el-form-item>
 
-				<el-form-item label="作用域" prop="scope">
+				<el-form-item label="作用域" prop="scope" v-if="!defaultAppFcmFlag">
 					<el-radio-group id="scope" v-model="fcmForm.scope">
 						<el-radio v-for="e in fcScopeEnum"
 						          :value="e[0]">
@@ -34,7 +34,7 @@
 					</el-radio-group>
 				</el-form-item>
 
-				<el-form-item label="应用" v-if="2===fcmForm.scope" prop="appId">
+				<el-form-item label="应用" v-if="2===fcmForm.scope && !defaultAppFcmFlag" prop="appId">
 					<el-select id="appId" v-model.lazy="fcmForm.appId"
 					           placeholder="请选择应用"
 					           remote-show-suffix
@@ -228,6 +228,9 @@ const fcScopeEnum = ref()
 
 const fcmPropTypeEnum = ref()
 
+// 标记组件模型的作用域是否默认是应用内，用于在应用页新增编辑组件模型
+const defaultAppFcmFlag = ref(false)
+
 // 页面渲染前执行一些必要的操作
 onMounted(() => {
 	// 加载枚举数据
@@ -247,7 +250,7 @@ const appList = ref()
 
 // 加载组件模型数据
 const loadFcmData = async () => {
-	let fcmId = route.query.fcmId
+	const fcmId = route.query.fcmId
 	if (!fcmId) {
 		return
 	}
@@ -273,6 +276,16 @@ function fetchApps(keyword) {
 			appList.value = []
 		}
 	})
+}
+
+
+// 检查组件
+function checkFcmAppFlag() {
+	const appId = route.params.appId
+
+	if (!appId) return
+
+	defaultAppFcmFlag.value = true
 }
 
 
@@ -303,6 +316,11 @@ const submitFcmForm = async () => {
 
 	const formData = {...fcmForm.value}
 	formData.props = fcmPropForm.value.props
+
+	if (defaultAppFcmFlag.value) {
+		formData.appId = route.params.appId
+		formData.appName = 2
+	}
 
 	let maintainMethod = addFcm
 

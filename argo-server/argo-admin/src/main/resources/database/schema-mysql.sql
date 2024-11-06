@@ -1,7 +1,7 @@
 --
 --
 -- 用户表
-create table if not exists `user`
+create table if not exists user
 (
     id          int                not null auto_increment primary key,
 
