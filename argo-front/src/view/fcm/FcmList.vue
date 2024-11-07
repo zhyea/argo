@@ -153,6 +153,7 @@ function mapDataBindFlag(row, column, cellValue, index) {
 
 
 function mapEnum(enumType, enumCode) {
+	console.log(enumType)
 	let enumMap = allEnumsMap.value.get(enumType)
 	let result
 	if (enumMap) {

@@ -12,8 +12,7 @@
 	</el-container>
 
 	<el-container v-else v-loading="!validAppFlag"
-	              element-loading-text="应用不存在"
-	              element-loading-background="#6F8FAF"
+	              element-loading-text="应用不存在 ······"
 	              class="home_container">
 		<el-main/>
 	</el-container>
@@ -21,7 +20,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+import {ref, onMounted, onActivated} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
@@ -80,6 +79,11 @@ onMounted(() => {
 })
 
 
+onActivated(() => {
+	// 调整路径
+	changeMenuRoutes()
+})
+
 // 加载应用数据判断应用ID是否有效
 function loadAppData() {
 	let appId = route.params.appId
@@ -102,4 +106,5 @@ function loadAppData() {
 	padding: 0;
 	height: 100%;
 }
+
 </style>
