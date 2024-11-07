@@ -1,6 +1,6 @@
 <template>
-	<el-container v-loading="loadingAppFlag" class="home_container">
 
+	<el-container v-if="validAppFlag" class="home_container">
 		<sidebar :collapsed="collapseFlag" :menu-items="appMenu"/>
 
 		<el-container direction="vertical">
@@ -9,7 +9,13 @@
 				<router-view :key="$route.fullPath"/>
 			</el-main>
 		</el-container>
+	</el-container>
 
+	<el-container v-else v-loading="!validAppFlag"
+	              element-loading-text="应用不存在"
+	              element-loading-background="#6F8FAF"
+	              class="home_container">
+		<el-main/>
 	</el-container>
 
 </template>
@@ -63,7 +69,7 @@ function changeMenuRoutes() {
 
 
 // 是否需要loading蒙版
-const loadingAppFlag = ref(true)
+const validAppFlag = ref(false)
 
 
 onMounted(() => {
@@ -79,7 +85,7 @@ function loadAppData() {
 	let appId = route.params.appId
 
 	getApp(appId).then(response => {
-		loadingAppFlag.value = !(response && response.data)
+		validAppFlag.value = response && response.data
 	})
 }
 
