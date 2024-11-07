@@ -22,10 +22,11 @@
 				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"
 				                 :formatter="mapScopeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="appName" label="应用"/>
-				<el-table-column show-overflow-tooltip min-width=60 prop="dataBindFlag" label="绑定数据"
+				<el-table-column show-overflow-tooltip min-width=80 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
-				<el-table-column label="操作" align="center" fixed="right" width=136>
+				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
+						<el-button type="warning" size="small" @click="handleAddFci(scope.row)">创建实例</el-button>
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
@@ -42,6 +43,8 @@
 			               layout="total, prev, pager, next, ->, jumper"/>
 		</div>
 	</div>
+
+	<fci-drawer ref="fciDrawerRef"/>
 </template>
 
 <script setup>
@@ -51,6 +54,7 @@ import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
+import FciDrawer from "@/view/fci/FciDrawer.vue";
 
 
 const route = useRoute();
@@ -122,6 +126,15 @@ function handleDelete(row) {
 			loadFcmListData()
 		}
 	})
+}
+
+
+// 组件实例编辑抽屉
+const fciDrawerRef = ref()
+
+// 打开新增组件实例抽屉
+function handleAddFci(row) {
+	fciDrawerRef.value.openFciDrawer(row.fcmId)
 }
 
 

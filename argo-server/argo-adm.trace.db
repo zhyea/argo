@@ -379,3 +379,36 @@ select f.*, a.app_name from
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-11-07 21:40:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "ICON CHARACTER VARYING(64)": "'https://bpic.51yuansu.com/pic3/cover/03/44/02/5ba256823bb46_610.jpg?x-oss-proce... (119)"; SQL statement:
+insert into ag_cms_app (app_code, app_name, icon, remark) values (?, ?,  ?, ?) [22001-214]
+2024-11-07 21:41:02 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "ICON CHARACTER VARYING(64)": "'https://bpic.51yuansu.com/pic3/cover/03/44/02/5ba256823bb46_610.jpg?x-oss-proce... (119)"; SQL statement:
+insert into ag_cms_app (app_code, app_name, icon, remark) values (?, ?,  ?, ?) [22001-214]
+2024-11-07 21:41:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "ICON CHARACTER VARYING(64)": "'https://bpic.51yuansu.com/pic3/cover/03/44/02/5ba256823bb46_610.jpg?x-oss-proce... (119)"; SQL statement:
+insert into ag_cms_app (app_code, app_name, icon, remark) values (?, ?,  ?, ?) [22001-214]
+2024-11-07 21:43:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "ICON CHARACTER VARYING(64)": "'https://bpic.51yuansu.com/pic3/cover/03/44/02/5ba256823bb46_610.jpg?x-oss-proce... (119)"; SQL statement:
+insert into ag_cms_app (app_code, app_name, icon, remark) values (?, ?,  ?, ?) [22001-214]
+2024-11-07 21:46:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "ICON CHARACTER VARYING(64)": "'https://bpic.51yuansu.com/pic3/cover/03/44/02/5ba256823bb46_610.jpg?x-oss-proce... (119)"; SQL statement:
+insert into ag_cms_app (app_code, app_name, icon, remark) values (?, ?,  ?, ?) [22001-214]
+2024-11-07 21:51:09 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table AG_CMS_APP [*]ICON modify icon varchar(128) not null default '' comment '图标',"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table AG_CMS_APP ICON modify icon varchar(128) not null default '' comment '图标', [42001-214]
+2024-11-07 21:51:25 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table AG_CMS_APP [*]ICON modify icon varchar(128) not null default '' comment '图标'"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table AG_CMS_APP ICON modify icon varchar(128) not null default '' comment '图标' [42001-214]
+2024-11-07 21:52:06 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table AG_CMS_APP [*]modify icon varchar(128) not null default '' comment '图标'"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table AG_CMS_APP modify icon varchar(128) not null default '' comment '图标' [42001-214]
+2024-11-07 21:52:27 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table AG_CMS_APP [*]modify icon varchar(128) not null default ''"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table AG_CMS_APP modify icon varchar(128) not null default '' [42001-214]
+2024-11-07 21:52:57 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table AG_CMS_APP [*]modify icon varchar(128) not null default ''"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table AG_CMS_APP modify icon varchar(128) not null default '' [42001-214]
+2024-11-07 21:53:19 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table ag_cms_app [*]modify icon varchar(128) not null default ''"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table ag_cms_app modify icon varchar(128) not null default '' [42001-214]
