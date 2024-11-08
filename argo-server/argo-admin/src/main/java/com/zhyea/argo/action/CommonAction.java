@@ -1,13 +1,9 @@
 package com.zhyea.argo.action;
 
-import com.zhyea.argo.constants.enums.FcScopeEnum;
-import com.zhyea.argo.constants.enums.FcmPropTypeEnum;
-import com.zhyea.argo.constants.enums.FcmTypeEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
-import org.chobit.commons.utils.EnumKit;
+import com.zhyea.argo.constants.enums.*;
+import com.zhyea.argo.tools.EnumMapBuilder;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,14 +21,15 @@ public class CommonAction {
 	 * @return 枚举对应的Map结构
 	 */
 	public Map<String, Map<Integer, String>> enumMap() {
-		Map<String, Map<Integer, String>> enumMap = new HashMap<>(16);
+		EnumMapBuilder builder = new EnumMapBuilder();
 
-		enumMap.put(FcmTypeEnum.class.getSimpleName(), EnumKit.mapOf(FcmTypeEnum.class));
-		enumMap.put(FcScopeEnum.class.getSimpleName(), EnumKit.mapOf(FcScopeEnum.class));
-		enumMap.put(YesOrNo.class.getSimpleName(), EnumKit.mapOf(YesOrNo.class));
-		enumMap.put(FcmPropTypeEnum.class.getSimpleName(), EnumKit.mapOf(FcmPropTypeEnum.class));
+		builder.add(FcmTypeEnum.class)
+				.add(FcScopeEnum.class)
+				.add(YesOrNo.class)
+				.add(FcmPropTypeEnum.class)
+				.add(EffectivePeriodTypeEnum.class);
 
-		return enumMap;
+		return builder.build();
 	}
 
 

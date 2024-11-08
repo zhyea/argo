@@ -29,6 +29,12 @@ public class FciEntity extends BaseEntity {
 
 
 	/**
+	 * 组件名称
+	 */
+	private String name;
+
+
+	/**
 	 * 数据链接
 	 */
 	private String dataUrl;

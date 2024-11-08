@@ -2,8 +2,10 @@ package com.zhyea.argo.cms.model.request.fci;
 
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
+import lombok.Data;
 import org.chobit.commons.validation.EnumVal;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
  *
  * @author robin
  */
+@Data
 public class FciAddRequest extends BaseOperateRequest {
 
 
@@ -27,6 +30,13 @@ public class FciAddRequest extends BaseOperateRequest {
 	 */
 	@NotNull(message = "fcmId不能为空")
 	private Integer fcmId;
+
+
+	/**
+	 * 组件名称
+	 */
+	@NotBlank(message = "name不能为空")
+	private String name;
 
 
 	/**
