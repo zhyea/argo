@@ -65,7 +65,13 @@ public enum ResponseCode implements CodeDescEnum {
      */
     FCM_DUPLICATE_ERROR(40200, "相同组件模型已存在"),
 
-    DELETE_WITH_FCI_ERROR(40201, "该组件模型已被使用，无法删除")
+    DELETE_WITH_FCI_ERROR(40201, "该组件模型已被使用，无法删除"),
+
+
+    /**
+     * CMS fci相关问题
+     */
+    FCI_PROP_EFFECTIVE_TIME_OVERLAP(40300, "组件属性生效时间存在重叠"),
 
 
     ;

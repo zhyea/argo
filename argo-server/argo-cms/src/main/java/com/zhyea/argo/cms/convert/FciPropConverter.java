@@ -25,7 +25,7 @@ public interface FciPropConverter {
 	 * @param request 新增组件实例请求
 	 * @return 实体
 	 */
-	FciPropEntity addRequestToEntity(FciPropAddRequest request);
+	FciPropEntity addRequest2Entity(FciPropAddRequest request);
 
 
 	/**
@@ -35,7 +35,7 @@ public interface FciPropConverter {
 	 * @return 实体
 	 */
 	@Mapping(target = "id", source = "propId")
-	FciPropEntity editRequestToEntity(FciPropEditRequest request);
+	FciPropEntity editRequest2Entity(FciPropEditRequest request);
 
 
 	/**
@@ -44,7 +44,7 @@ public interface FciPropConverter {
 	 * @param entity 实体
 	 * @return 组件实例信息
 	 */
-	FciPropItem entityToItem(FciPropEntity entity);
+	FciPropItem entity2Item(FciPropEntity entity);
 
 
 	/**
@@ -53,7 +53,16 @@ public interface FciPropConverter {
 	 * @param entityList 实体列表
 	 * @return 组件实例信息列表
 	 */
-	List<FciPropItem> entityListToItemList(List<FciPropEntity> entityList);
+	List<FciPropItem> entityList2ItemList(List<FciPropEntity> entityList);
+
+
+	/**
+	 * 新增组件实例请求转组件实例信息
+	 *
+	 * @param request 新增组件实例请求
+	 * @return 组件实例信息
+	 */
+	FciPropItem addRequest2Item(FciPropAddRequest request);
 
 
 }

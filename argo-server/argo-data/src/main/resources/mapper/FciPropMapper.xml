@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhyea.argo.data.mapper.cms.FciPropMapper">
+
+
+    <!-- 根据组件ID获取当前有效的组件属性集合 -->
+    <select id="findValidByFciId" resultType="com.zhyea.argo.data.entity.cms.FciPropEntity">
+        select * from (
+
+        select * from ag_cms_fci_prop
+        where deleted=0 and fci_id=#{fciId} and switch_flag=1 and effective_period_type=1
+
+        union all
+
+        select * from ag_cms_fci_prop
+        where deleted=0 and fci_id=#{fciId} and switch_flag=1 and effective_period_type=2
+        and (effective_start_time &lt; now() and effective_end_time &gt;= now())
+
+        )tmp order by create_time desc
+    </select>
+
+</mapper>

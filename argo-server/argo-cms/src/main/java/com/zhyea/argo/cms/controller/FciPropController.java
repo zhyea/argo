@@ -95,4 +95,10 @@ public class FciPropController {
 		return fciPropService.findByFciId(request.getFciId());
 	}
 
+
+
+	public List<FciPropItem> findByPropKey(Long fciId) {
+		return null;
+	}
+
 }
