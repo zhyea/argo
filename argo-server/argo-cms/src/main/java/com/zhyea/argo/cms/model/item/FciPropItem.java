@@ -79,4 +79,15 @@ public class FciPropItem {
 	private String remark;
 
 
+	/**
+	 * 状态
+	 */
+	private Integer status;
+
+
+	/**
+	 * 状态描述
+	 */
+	private String statusDesc;
+
 }
