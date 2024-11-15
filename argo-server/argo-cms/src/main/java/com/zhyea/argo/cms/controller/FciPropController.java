@@ -48,7 +48,7 @@ public class FciPropController {
      */
     @PostMapping("/add")
     public Long add(@RequestBody @Validated FciPropAddRequest request) {
-        return fciPropService.add(request);
+        return fciPropMaintainAction.add(request);
     }
 
 
