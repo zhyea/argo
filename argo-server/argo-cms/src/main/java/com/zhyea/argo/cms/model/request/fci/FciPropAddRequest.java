@@ -43,7 +43,6 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
     /**
      * 属性值
      */
-    @NotBlank(message = "属性值不能为空")
     private String propValue;
 
 
@@ -105,10 +104,10 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
             }
         }
 
-        if (YesOrNo.YES.is(dataBindFlag) && isBlank(propValueSelector)) {
+        if (YesOrNo.YES.is(getDataBindFlag()) && isBlank(getPropValueSelector())
+                || YesOrNo.NO.is(getDataBindFlag()) && isBlank(getPropValue())) {
             return false;
         }
-
         return true;
     }
 }

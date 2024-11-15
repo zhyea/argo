@@ -40,6 +40,12 @@ public class FciPropItem {
 
 
 	/**
+	 * 数据绑定标识
+	 */
+	private Integer dataBindFlag;
+
+
+	/**
 	 * 属性值选择器
 	 */
 	private String propValueSelector;
@@ -71,6 +77,12 @@ public class FciPropItem {
 	 * 属性生效结束时间
 	 */
 	private LocalDateTime effectiveEndTime;
+
+
+	/**
+	 * 删除标记
+	 */
+	private Integer deleted;
 
 
 	/**
