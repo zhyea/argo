@@ -20,10 +20,10 @@ public interface FciPropMapper {
      * @param entity 组件属性数据
      */
     @Insert({
-            "insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, prop_value_selector",
+            "insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, data_bind_flag, prop_value_selector",
             "effective_period_type, effective_start_time, effective_end_time, remark)",
             "values",
-            "(#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.propValueSelector},",
+            "(#{e.fciId}, #{e.propKey}, #{e.propValue}, #{dataBindFlag}, #{e.propValueSelector},",
             "#{e.effectivePeriodType}, #{e.effectiveStartTime}, #{e.effectiveEndTime}, #{e.remark})"
     })
     @Options(useGeneratedKeys = true, keyProperty = "id")
@@ -39,7 +39,7 @@ public interface FciPropMapper {
     @Update({
             "update ag_cms_fci_prop set",
             "fci_id=#{e.fciId}, prop_key=#{e.propKey}, prop_value=#{e.propValue}, prop_value_selector=#{e.propValueSelector},",
-            "effective_period_type=#{e.effectivePeriodType}, effective_start_time=#{e.effectiveStartTime},",
+            "data_bind_flag=#{dataBindFlag}, effective_period_type=#{e.effectivePeriodType}, effective_start_time=#{e.effectiveStartTime},",
             "effective_end_time=#{e.effectiveEndTime}, remark=#{e.remark}",
             "where id=#{e.id}"
     })
