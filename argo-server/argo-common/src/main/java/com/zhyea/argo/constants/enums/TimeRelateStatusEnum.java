@@ -66,7 +66,7 @@ public enum TimeRelateStatusEnum implements CodeDescEnum {
      * @param endTime    生效结束时间
      * @return 时间相关状态
      */
-    public static TimeRelateStatusEnum analyzeStatus(Integer periodType, LocalDateTime startTime, LocalDateTime endTime) {
+    public static TimeRelateStatusEnum analyze(Integer periodType, LocalDateTime startTime, LocalDateTime endTime) {
         if (EffectivePeriodTypeEnum.LONG_TERM.is(periodType)) {
             return IN_EFFECT;
         }
@@ -100,7 +100,7 @@ public enum TimeRelateStatusEnum implements CodeDescEnum {
      * @return 时间相关状态描述
      */
     public static String analyzeStatusDesc(Integer periodType, LocalDateTime startTime, LocalDateTime endTime) {
-        TimeRelateStatusEnum status = analyzeStatus(periodType, startTime, endTime);
+        TimeRelateStatusEnum status = analyze(periodType, startTime, endTime);
         if (null == status) {
             return EMPTY;
         }

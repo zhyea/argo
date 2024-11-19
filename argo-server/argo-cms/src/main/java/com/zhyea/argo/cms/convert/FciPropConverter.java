@@ -54,7 +54,7 @@ public interface FciPropConverter {
 
         FciPropItem item = entity2ItemSimply(entity);
         TimeRelateStatusEnum statusEnum =
-                TimeRelateStatusEnum.analyzeStatus(item.getEffectivePeriodType(), item.getEffectiveStartTime(), item.getEffectiveEndTime());
+                TimeRelateStatusEnum.analyze(item.getEffectivePeriodType(), item.getEffectiveStartTime(), item.getEffectiveEndTime());
         if (null == statusEnum) {
             return item;
         }
