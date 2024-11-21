@@ -26,88 +26,89 @@ import static org.chobit.commons.utils.StrKit.isBlank;
 public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 
 
-    /**
-     * 组件实例ID
-     */
-    @NotNull(message = "fciId不能为空")
-    private Long fciId;
+	/**
+	 * 组件实例ID
+	 */
+	@NotNull(message = "fciId不能为空")
+	private Long fciId;
 
 
-    /**
-     * 属性key
-     */
-    @NotBlank(message = "属性Key不能为空")
-    private String propKey;
+	/**
+	 * 属性key
+	 */
+	@NotBlank(message = "属性Key不能为空")
+	private String propKey;
 
 
-    /**
-     * 属性值
-     */
-    private String propValue;
+	/**
+	 * 属性值
+	 */
+	private String propValue;
 
 
-    /**
-     * 数据绑定标识
-     */
-    @NotNull(message = "数据绑定标识不能为空")
-    private Integer dataBindFlag;
+	/**
+	 * 数据绑定标识
+	 */
+	@EnumVal(enumClass = YesOrNo.class, message = "数据绑定标识错误")
+	@NotNull(message = "数据绑定标识不能为空")
+	private Integer dataBindFlag;
 
 
-    /**
-     * 数据值选择器
-     */
-    private String propValueSelector;
+	/**
+	 * 数据值选择器
+	 */
+	private String propValueSelector;
 
 
-    /**
-     * 属性生效周期类型
-     */
-    @EnumVal(enumClass = EffectivePeriodTypeEnum.class, message = "属性生效周期类型错误")
-    @NotNull(message = "属性生效周期类型不能为空")
-    private Integer effectivePeriodType;
+	/**
+	 * 属性生效周期类型
+	 */
+	@EnumVal(enumClass = EffectivePeriodTypeEnum.class, message = "属性生效周期类型错误")
+	@NotNull(message = "属性生效周期类型不能为空")
+	private Integer effectivePeriodType;
 
 
-    /**
-     * 属性生效开始时间
-     */
-    private LocalDateTime effectiveStartTime;
+	/**
+	 * 属性生效开始时间
+	 */
+	private LocalDateTime effectiveStartTime;
 
 
-    /**
-     * 属性生效结束时间
-     */
-    private LocalDateTime effectiveEndTime;
+	/**
+	 * 属性生效结束时间
+	 */
+	private LocalDateTime effectiveEndTime;
 
 
-    /**
-     * 描述
-     */
-    private String remark;
+	/**
+	 * 描述
+	 */
+	private String remark;
 
 
-    @Override
-    public boolean check() throws ParamException {
-        if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
-            if (null == effectiveStartTime || null == effectiveEndTime) {
-                return false;
-            }
+	@Override
+	public boolean check() throws ParamException {
+		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
+			if (null == effectiveStartTime || null == effectiveEndTime) {
+				return false;
+			}
 
-            // 新增时，开始时间不能<=当前时间
-            if (effectiveStartTime.isBefore(LocalDateTime.now())
-                    || effectiveStartTime.isEqual(LocalDateTime.now())) {
-                return false;
-            }
+			// 新增时，开始时间不能<=当前时间
+			if (effectiveStartTime.isBefore(LocalDateTime.now())
+					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
+				return false;
+			}
 
-            // 结束时间需要大于开始时间
-            if (!effectiveEndTime.isAfter(effectiveStartTime)) {
-                return false;
-            }
-        }
+			// 结束时间需要大于开始时间
+			if (!effectiveEndTime.isAfter(effectiveStartTime)) {
+				return false;
+			}
+		}
 
-        if (YesOrNo.YES.is(getDataBindFlag()) && isBlank(getPropValueSelector())
-                || YesOrNo.NO.is(getDataBindFlag()) && isBlank(getPropValue())) {
-            return false;
-        }
-        return true;
-    }
+		if (YesOrNo.YES.is(getDataBindFlag()) && isBlank(getPropValueSelector())
+				|| YesOrNo.NO.is(getDataBindFlag()) && isBlank(getPropValue())) {
+			return false;
+		}
+		return true;
+	}
 }
