@@ -55,7 +55,7 @@ axiosInst.interceptors.response.use(
 				message: msg,
 				duration: 1500,
 			})
-			return result;
+			return Promise.reject(msg);
 		}
 	},
 	error => {

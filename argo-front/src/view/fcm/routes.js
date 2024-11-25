@@ -1,5 +1,5 @@
 import FcmListPage from './FcmList.vue'
-import FcmEditPage from './FcmEdit.vue'
+import FcmEditPage from './FcmEditDrawer.vue'
 
 
 export default [{

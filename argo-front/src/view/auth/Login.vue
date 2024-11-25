@@ -204,8 +204,8 @@ const submitLogin = (e) => {
 			authStore.useLogin(formData).then(() => {
 				console.log('login success')
 				router.push({name: config.homeRouteName})
-			}).catch(() => {
-				console.log('login fail')
+			}).catch(err => {
+				console.log('login fail，error: ' + err)
 			})
 		} else {
 			return false

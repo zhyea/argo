@@ -45,6 +45,7 @@
 	</div>
 
 	<fci-drawer ref="fciDrawerRef"/>
+	<fcm-edit-drawer ref="fciDrawerRef"/>
 </template>
 
 <script setup>
@@ -110,6 +111,9 @@ const handlePageChange = async (val) => {
 
 }
 
+
+// 组件实例编辑抽屉
+const fcmEditDrawerRef = ref()
 // 处理FCM编辑
 function handleEdit(row) {
 	router.push({name: config.fcmEditRouteName, query: {fcmId: row.fcmId}})

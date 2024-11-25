@@ -1,6 +1,6 @@
 import AppEditPage from './AppEdit.vue'
 import FcmListPage from '../fcm/FcmList.vue'
-import FcmEditPage from '../fcm/FcmEdit.vue'
+import FcmEditPage from '../fcm/FcmEditDrawer.vue'
 
 export default [{
 	name: 'AppEdit',

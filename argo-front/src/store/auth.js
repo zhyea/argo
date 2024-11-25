@@ -37,7 +37,6 @@ export const useAuthStore = defineStore('auth', {
 						this.setToken(response.data)
 						resolve()
 					}).catch(error => {
-						console.log(error)
 						reject(error)
 					})
 			})

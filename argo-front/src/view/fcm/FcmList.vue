@@ -17,11 +17,11 @@
 
 			<el-table :data="fcmListData" border style="width: 100%">
 				<el-table-column type="index" width="50"/>
-				<el-table-column show-overflow-tooltip min-width=270 prop="name" label="名称"/>
+				<el-table-column show-overflow-tooltip min-width=240 prop="name" label="名称"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"
 				                 :formatter="mapScopeEnum"/>
-				<el-table-column show-overflow-tooltip min-width=270 prop="appName" label="应用"/>
+				<el-table-column show-overflow-tooltip min-width=240 prop="appName" label="应用"/>
 				<el-table-column show-overflow-tooltip min-width=80 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
@@ -44,7 +44,8 @@
 		</div>
 	</div>
 
-	<fci-drawer ref="fciDrawerRef"/>
+	<fci-drawer ref="fciAddDrawerRef"/>
+	<fcm-drawer ref="fcmEditDrawerRef"/>
 </template>
 
 <script setup>
@@ -55,6 +56,7 @@ import {loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciDrawer.vue";
+import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 
 
 const route = useRoute();
@@ -110,11 +112,6 @@ const handlePageChange = async (val) => {
 
 }
 
-// 处理FCM编辑
-function handleEdit(row) {
-	router.push({name: config.fcmEditRouteName, query: {fcmId: row.fcmId}})
-}
-
 // 处理FCM删除
 function handleDelete(row) {
 	delFcm(row.fcmId).then(response => {
@@ -129,14 +126,20 @@ function handleDelete(row) {
 }
 
 
-// 组件实例编辑抽屉
-const fciDrawerRef = ref()
+// 组件实例新增抽屉
+const fciAddDrawerRef = ref()
+// 组件模型编辑抽屉
+const fcmEditDrawerRef = ref()
 
 // 打开新增组件实例抽屉
 function handleAddFci(row) {
-	fciDrawerRef.value.openFciDrawer(row.fcmId)
+	fciAddDrawerRef.value.openFciDrawer(row.fcmId)
 }
 
+// 处理FCM编辑
+function handleEdit(row) {
+	fcmEditDrawerRef.value.openFcmEditDrawer(row.fcmId, row.appId)
+}
 
 // 枚举数据
 const allEnumsMap = ref()
