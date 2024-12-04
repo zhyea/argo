@@ -14,6 +14,9 @@
 		</div>
 
 		<div class="table-body">
+			<div class="table-button">
+				<el-button type="primary" @click="handleAdd">新增模型</el-button>
+			</div>
 
 			<el-table :data="fcmListData" border style="width: 100%">
 				<el-table-column type="index" width="50"/>
@@ -134,6 +137,11 @@ const fcmEditDrawerRef = ref()
 // 打开新增组件实例抽屉
 function handleAddFci(row) {
 	fciAddDrawerRef.value.openFciDrawer(row.fcmId)
+}
+
+// 新增FCM
+function handleAdd() {
+	fcmEditDrawerRef.value.openFcmEditDrawer()
 }
 
 // 处理FCM编辑

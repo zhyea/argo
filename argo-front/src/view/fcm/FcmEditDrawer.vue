@@ -1,134 +1,134 @@
 <template>
 	<el-drawer title="编辑组件模型"
 	           v-model="fcmEditDrawer" :with-header=true size="70%">
-			<!--表单信息-->
-			<el-form
-				:model="fcmForm" ref="fcmFormRef" :rules="fcmFormRules"
-				label-suffix=":" label-width="90px"
-				class="fcm-form" status-icon>
+		<!--表单信息-->
+		<el-form
+			:model="fcmForm" ref="fcmFormRef" :rules="fcmFormRules"
+			label-suffix=":" label-width="90px"
+			class="fcm-form" status-icon>
 
-				<el-card header="组件模型基础信息" class="fcm-region">
+			<el-card header="组件模型基础信息" class="fcm-region">
 
-					<el-form-item prop="fcmId">
-						<el-input type="hidden" v-model="fcmForm.fcmId"/>
-					</el-form-item>
+				<el-form-item prop="fcmId">
+					<el-input type="hidden" v-model="fcmForm.fcmId"/>
+				</el-form-item>
 
-					<el-form-item label="名称" prop="name">
-						<el-input id="name" v-model="fcmForm.name"/>
-					</el-form-item>
+				<el-form-item label="名称" prop="name">
+					<el-input id="name" v-model="fcmForm.name"/>
+				</el-form-item>
 
-					<el-form-item label="类型" prop="type">
-						<el-radio-group id="type" v-model="fcmForm.type">
-							<el-radio v-for="e in fcmTypeEnum"
-							          :value="e[0]">
-								{{ e[1] }}
-							</el-radio>
-						</el-radio-group>
-					</el-form-item>
+				<el-form-item label="类型" prop="type">
+					<el-radio-group id="type" v-model="fcmForm.type">
+						<el-radio v-for="e in fcmTypeEnum"
+						          :value="e[0]">
+							{{ e[1] }}
+						</el-radio>
+					</el-radio-group>
+				</el-form-item>
 
-					<el-form-item label="作用域" prop="scope" v-if="!defaultAppFcmFlag">
-						<el-radio-group id="scope" v-model="fcmForm.scope">
-							<el-radio v-for="e in fcScopeEnum"
-							          :value="e[0]">
-								{{ e[1] }}
-							</el-radio>
-						</el-radio-group>
-					</el-form-item>
+				<el-form-item label="作用域" prop="scope" v-if="!defaultAppFcmFlag">
+					<el-radio-group id="scope" v-model="fcmForm.scope">
+						<el-radio v-for="e in fcScopeEnum"
+						          :value="e[0]">
+							{{ e[1] }}
+						</el-radio>
+					</el-radio-group>
+				</el-form-item>
 
-					<el-form-item label="应用" v-if="2===fcmForm.scope && !defaultAppFcmFlag" prop="appId">
-						<el-select id="appId" v-model.lazy="fcmForm.appId"
-						           placeholder="请选择应用"
-						           remote-show-suffix
-						           filterable remote :remote-method="fetchApps">
-							<el-option v-for="e in appList"
-							           :key="e.id"
-							           :label="e.appName"
-							           :value="e.id"/>
-						</el-select>
-					</el-form-item>
+				<el-form-item label="应用" v-if="2===fcmForm.scope && !defaultAppFcmFlag" prop="appId">
+					<el-select id="appId" v-model.lazy="fcmForm.appId"
+					           placeholder="请选择应用"
+					           remote-show-suffix
+					           filterable remote :remote-method="fetchApps">
+						<el-option v-for="e in appList"
+						           :key="e.id"
+						           :label="e.appName"
+						           :value="e.id"/>
+					</el-select>
+				</el-form-item>
 
-					<el-form-item label="绑定数据" prop="dataBindFlag">
-						<el-switch id="dataBindFlag" v-model="fcmForm.dataBindFlag"
-						           inline-prompt size="large"
-						           active-text="是" :active-value="1"
-						           inactive-text="否" :inactive-value="0"
-						/>
-					</el-form-item>
+				<el-form-item label="绑定数据" prop="dataBindFlag">
+					<el-switch id="dataBindFlag" v-model="fcmForm.dataBindFlag"
+					           inline-prompt size="large"
+					           active-text="是" :active-value="1"
+					           inactive-text="否" :inactive-value="0"
+					/>
+				</el-form-item>
 
-					<el-form-item label="图标" prop="icon">
-						<el-input id="icon" v-model="fcmForm.icon"/>
-					</el-form-item>
+				<el-form-item label="图标" prop="icon">
+					<el-input id="icon" v-model="fcmForm.icon"/>
+				</el-form-item>
 
-					<el-form-item label="备注" prop="remark">
-						<el-input id="remark" type="textarea" v-model="fcmForm.remark" :autosize="{ minRows: 4,}"/>
-					</el-form-item>
-				</el-card>
+				<el-form-item label="备注" prop="remark">
+					<el-input id="remark" type="textarea" v-model="fcmForm.remark" :autosize="{ minRows: 4,}"/>
+				</el-form-item>
+			</el-card>
 
 
-				<el-card header="组件模型属性信息" class="fcm-region">
+			<el-card header="组件模型属性信息" class="fcm-region">
 
-					<el-form :model="fcmPropForm" ref="fcmPropFormRef" :rules="fcmPropFormRules">
-						<table class="fcm-prop-table">
-							<tbody>
-							<tr>
-								<td class="fcm-prop-td-key">属性key</td>
-								<td class="fcm-prop-td-type">类型</td>
-								<td class="fcm-prop-td-required">必填</td>
-								<td class="fcm-prop-td-desc">描述</td>
-								<td class="fcm-prop-td-opt"></td>
-							</tr>
-							<tr v-for="(e, idx) in fcmPropForm.props"
-							    :key="idx">
-								<td class="fcm-prop-td-key">
-									<el-form-item :prop="`props.${idx}.propKey`" :rules="fcmPropFormRules.propKey">
-										<el-input v-model="e.propKey"/>
-									</el-form-item>
-								</td>
-								<td class="fcm-prop-td-type">
-									<el-form-item :prop="`props.${idx}.propType`" :rules="fcmPropFormRules.propType">
-										<el-select v-model="e.propType"
-										           placeholder="请选择属性类型">
-											<el-option v-for="e in fcmPropTypeEnum"
-											           :key="e[0]"
-											           :label="e[1]"
-											           :value="e[0]"/>
-										</el-select>
-									</el-form-item>
-								</td>
-								<td class="fcm-prop-td-required">
-									<el-form-item>
-										<el-switch v-model.number="e.required" inline-prompt
-										           active-text="是" :active-value='1'
-										           inactive-text="否" :inactive-value='0'
-										/>
-									</el-form-item>
-								</td>
-								<td class="fcm-prop-td-desc">
-									<el-form-item>
-										<el-input v-model="e.propDesc"/>
-									</el-form-item>
-								</td>
-								<td class="fcm-prop-td-opt">
-									<el-icon v-if="idx === fcmPropForm.props.length - 1"
-									         :size="30" @click="addFcmProp">
-										<CirclePlus class="fcm-prop-td-opt-icon"/>
-									</el-icon>
+				<el-form :model="fcmPropForm" ref="fcmPropFormRef" :rules="fcmPropFormRules">
+					<table class="fcm-prop-table">
+						<tbody>
+						<tr>
+							<td class="fcm-prop-td-key">属性key</td>
+							<td class="fcm-prop-td-type">类型</td>
+							<td class="fcm-prop-td-required">必填</td>
+							<td class="fcm-prop-td-desc">描述</td>
+							<td class="fcm-prop-td-opt"></td>
+						</tr>
+						<tr v-for="(e, idx) in fcmPropForm.props"
+						    :key="idx">
+							<td class="fcm-prop-td-key">
+								<el-form-item :prop="`props.${idx}.propKey`" :rules="fcmPropFormRules.propKey">
+									<el-input v-model="e.propKey"/>
+								</el-form-item>
+							</td>
+							<td class="fcm-prop-td-type">
+								<el-form-item :prop="`props.${idx}.propType`" :rules="fcmPropFormRules.propType">
+									<el-select v-model="e.propType"
+									           placeholder="请选择属性类型">
+										<el-option v-for="e in fcmPropTypeEnum"
+										           :key="e[0]"
+										           :label="e[1]"
+										           :value="e[0]"/>
+									</el-select>
+								</el-form-item>
+							</td>
+							<td class="fcm-prop-td-required">
+								<el-form-item>
+									<el-switch v-model.number="e.required" inline-prompt
+									           active-text="是" :active-value='1'
+									           inactive-text="否" :inactive-value='0'
+									/>
+								</el-form-item>
+							</td>
+							<td class="fcm-prop-td-desc">
+								<el-form-item>
+									<el-input v-model="e.propDesc"/>
+								</el-form-item>
+							</td>
+							<td class="fcm-prop-td-opt">
+								<el-icon v-if="idx === fcmPropForm.props.length - 1"
+								         :size="30" @click="addFcmProp">
+									<CirclePlus class="fcm-prop-td-opt-icon"/>
+								</el-icon>
 
-									<el-icon v-else
-									         :size="30" @click="removeFcmProp(idx)">
-										<Remove class="fcm-prop-td-opt-icon"/>
-									</el-icon>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</el-form>
-				</el-card>
+								<el-icon v-else
+								         :size="30" @click="removeFcmProp(idx)">
+									<Remove class="fcm-prop-td-opt-icon"/>
+								</el-icon>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</el-form>
+			</el-card>
 
-				<el-card class="fcm-region">
-					<el-button type="primary" :disabled="isFcmFormSubmitted" @click="submitFcmForm">提交</el-button>
-				</el-card>
-			</el-form>
+			<el-card class="fcm-region">
+				<el-button type="primary" :disabled="isFcmFormSubmitted" @click="submitFcmForm">提交</el-button>
+			</el-card>
+		</el-form>
 	</el-drawer>
 </template>
 
@@ -284,7 +284,9 @@ const openFcmEditDrawer = (fcmId, appId) => {
 	})
 
 	// 加载组件模型数据
-	loadFcmData(fcmId)
+	if (fcmId) {
+		loadFcmData(fcmId)
+	}
 }
 
 
@@ -340,7 +342,7 @@ const submitFcmForm = async () => {
 
 .fcm-form {
 	width: 100%;
-	padding: 30px;
+	padding: 10px;
 }
 
 
