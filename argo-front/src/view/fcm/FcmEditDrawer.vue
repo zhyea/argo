@@ -1,5 +1,5 @@
 <template>
-	<el-drawer title="编辑组件模型"
+	<el-drawer :title="`${fcmForm.fcmId ? '编辑' : '新增'}组件模型`"
 	           v-model="fcmEditDrawer" :with-header=true size="70%">
 		<!--表单信息-->
 		<el-form
@@ -267,8 +267,14 @@ function fetchApps(keyword) {
 
 // 打开组件模型编辑抽屉
 const openFcmEditDrawer = (fcmId, appId) => {
-	fcmEditDrawer.value = true
+	if (fcmFormRef.value) {
+		fcmFormRef.value.resetFields()
+	}
+	if (fcmPropFormRef.value) {
+		fcmPropFormRef.value.resetFields()
+	}
 
+	fcmEditDrawer.value = true
 	fcmForm.value = {
 		appId: appId,
 	}
