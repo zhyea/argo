@@ -312,6 +312,9 @@ function removeFcmProp(idx) {
 // 标记是否已经提交表单
 const isFcmFormSubmitted = ref(false)
 
+
+const emit = defineEmits(['afterFcmAdd'])
+
 // 提交fcm编辑信息
 const submitFcmForm = async () => {
 
@@ -327,10 +330,10 @@ const submitFcmForm = async () => {
 	const formData = {...fcmForm.value}
 	formData.props = fcmPropForm.value.props
 
-	if (defaultAppFcmFlag.value) {
+	/*if (defaultAppFcmFlag.value) {
 		formData.appId = route.params.appId
 		formData.appName = 2
-	}
+	}*/
 
 	let maintainMethod = addFcm
 
@@ -339,6 +342,7 @@ const submitFcmForm = async () => {
 	}
 
 	submitForm(fcmFormRef, formData, isFcmFormSubmitted, maintainMethod, () => {
+		emit('afterFcmAdd');
 		fcmEditDrawer.value = false
 	})
 }
