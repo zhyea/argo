@@ -25,9 +25,6 @@ export default {
 			children: [{
 				name: '组件模型列表',
 				index: '/fcm-list',
-			}, {
-				name: '新增组件模型',
-				index: '/fcm-add',
 			}]
 		}, {
 			name: '用户',
@@ -61,10 +58,7 @@ export default {
 			children: [{
 				name: '组件模型列表',
 				index: '/app/:appId/app-fcm-list',
-			}, {
-				name: '新增组件模型',
-				index: '/app/:appId/app-fcm-add',
-			}]
+			},]
 		}, {
 			name: '组件实例',
 			icon: 'set-up',
@@ -73,10 +67,7 @@ export default {
 			children: [{
 				name: '组件实例列表',
 				index: '/app/:appId/fci-list',
-			}, {
-				name: '新增组件实例',
-				index: '/app/:appId/fci-add',
-			}]
+			},]
 		}, {
 			name: '应用页',
 			icon: 'office-building',
@@ -85,10 +76,7 @@ export default {
 			children: [{
 				name: '应用页面列表',
 				index: '/app/:appId/page-list',
-			}, {
-				name: '新增页面实例',
-				index: '/app/:appId/page-add',
-			}]
+			},]
 		}, {
 			name: '用户组',
 			icon: 'User',
