@@ -126,7 +126,7 @@
 			</el-card>
 
 			<el-card class="fcm-region">
-				<el-button type="primary" :disabled="isFcmFormSubmitted" @click="submitFcmForm">提交</el-button>
+				<el-button type="primary" :disabled="isFcmFormSubmitted" @click="submitFcmForm()">提交</el-button>
 			</el-card>
 		</el-form>
 	</el-drawer>
