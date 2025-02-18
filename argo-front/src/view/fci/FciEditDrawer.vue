@@ -11,6 +11,7 @@
 
 
 				<el-card header="组件实例信息" class="fcm-region">
+
 					<el-form-item prop="fcmId">
 						<el-input type="hidden" v-model="fciForm.fcmId"/>
 					</el-form-item>
@@ -23,8 +24,7 @@
 						<el-switch id="switchFlag" v-model="fciForm.switchFlag"
 						           inline-prompt size="large"
 						           active-text="是" :active-value="1"
-						           inactive-text="否" :inactive-value="0"
-						/>
+						           inactive-text="否" :inactive-value="0"/>
 					</el-form-item>
 
 					<el-form-item label="生效周期" prop="effectivePeriodType">
@@ -38,13 +38,12 @@
 
 					<el-form-item label="生效时间" prop="effectivePeriodType">
 						<el-date-picker
-							v-model="fciForm.effectiveStartTime"
+							v-model="fciForm.effectiveTimeRange"
 							type="datetimerange"
 							range-separator="到"
 							start-placeholder="请选择生效开始时间"
 							end-placeholder="请选择生效结束时间"
-							value-format="YYYY-MM-DD HH:mm:ss"
-						/>
+							value-format="YYYY-MM-DD HH:mm:ss"/>
 					</el-form-item>
 
 					<el-form-item label="备注" prop="remark">
@@ -64,6 +63,7 @@
 <script setup>
 
 import {ref} from "vue";
+import {loadEnums} from "@/api/common.js";
 
 const fciItemDrawer = ref(false)
 
@@ -74,8 +74,7 @@ const fciForm = ref({
 	dataUrl: '',
 	switchFlag: 0,
 	effectivePeriodType: 0,
-	effectiveStartTime: '',
-	effectiveEndTime: '',
+	effectiveTimeRange: null,
 	remark: '',
 })
 
@@ -94,6 +93,10 @@ const fciFormRules = {
 const isFciFormSubmitted = ref(false)
 
 
+// 枚举相关信息
+const allEnumMap = ref()
+const effectivePeriodTypeEnumRef = ref()
+
 // 打开组件实例抽屉
 const openFciDrawer = (fcmId, fciId) => {
 	fciItemDrawer.value = true
@@ -111,6 +114,11 @@ const openFciDrawer = (fcmId, fciId) => {
 	}
 
 	isFciFormSubmitted.value = false
+
+	// 加载枚举数据
+	loadEnums(allEnumMap, () => {
+		effectivePeriodTypeEnumRef.value = allEnumMap.value.get('EffectivePeriodTypeEnum')
+	})
 }
 
 

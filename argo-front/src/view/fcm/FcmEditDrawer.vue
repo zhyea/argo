@@ -223,11 +223,8 @@ const fcmPropFormRules = {
 
 // 枚举相关信息
 const allEnumMap = ref()
-
 const fcmTypeEnum = ref()
-
 const fcScopeEnum = ref()
-
 const fcmPropTypeEnum = ref()
 
 // 标记组件模型的作用域是否默认是应用内，用于在应用页新增编辑组件模型
