@@ -36,7 +36,7 @@
 						</el-radio-group>
 					</el-form-item>
 
-					<el-form-item label="生效时间" prop="effectivePeriodType">
+					<el-form-item label="生效时间" prop="effectivePeriodType" v-if="fciForm.effectivePeriodType === 2">
 						<el-date-picker
 							v-model="fciForm.effectiveTimeRange"
 							type="datetimerange"
@@ -53,7 +53,7 @@
 
 
 				<el-card class="fcm-region">
-					<el-button type="primary" :disabled="isFcmFormSubmitted" @click="submitFcmForm">提交</el-button>
+					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
 				</el-card>
 			</el-form>
 		</el-container>
@@ -95,7 +95,7 @@ const isFciFormSubmitted = ref(false)
 
 // 枚举相关信息
 const allEnumMap = ref()
-const effectivePeriodTypeEnumRef = ref()
+const effectivePeriodTypeEnum = ref()
 
 // 打开组件实例抽屉
 const openFciDrawer = (fcmId, fciId) => {
@@ -117,15 +117,15 @@ const openFciDrawer = (fcmId, fciId) => {
 
 	// 加载枚举数据
 	loadEnums(allEnumMap, () => {
-		effectivePeriodTypeEnumRef.value = allEnumMap.value.get('EffectivePeriodTypeEnum')
+		effectivePeriodTypeEnum.value = allEnumMap.value.get('EffectivePeriodTypeEnum')
 	})
 }
 
 
+const submitFciForm = async () => {}
+
+
 defineExpose({openFciDrawer})
-
-
-const effectivePeriodTypeEnum = ref([])
 
 
 </script>
