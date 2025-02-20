@@ -36,7 +36,8 @@
 						</el-radio-group>
 					</el-form-item>
 
-					<el-form-item label="生效时间" prop="effectivePeriodType" v-if="fciForm.effectivePeriodType === 2">
+					<el-form-item label="生效时间" prop="effectivePeriodType" size="small"
+					              v-if="fciForm.effectivePeriodType === 2">
 						<el-date-picker
 							v-model="fciForm.effectiveTimeRange"
 							type="datetimerange"
@@ -72,8 +73,8 @@ const fciForm = ref({
 	fcmId: 0,
 	name: '',
 	dataUrl: '',
-	switchFlag: 0,
-	effectivePeriodType: 0,
+	switchFlag: 1,
+	effectivePeriodType: 1,
 	effectiveTimeRange: null,
 	remark: '',
 })
@@ -108,9 +109,10 @@ const openFciDrawer = (fcmId, fciId) => {
 	if (fciId) {
 		//loadMethodRule(ruleId)
 	} else {
-		fciForm.value = {
+		fciForm.value.fcmId = fcmId
+		/*fciForm.value = {
 			fcmId: fcmId,
-		}
+		}*/
 	}
 
 	isFciFormSubmitted.value = false
