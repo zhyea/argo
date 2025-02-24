@@ -1,5 +1,5 @@
 <template>
-	<el-drawer :title="`${appPageForm.id ? '编辑' : '新增'}应用页面`"
+	<el-drawer :title="`${appPageForm.pageId ? '编辑' : '新增'}应用页面`"
 	           v-model="appPageItemDrawer" :with-header=true size="50%">
 		<el-container>
 			<!--表单信息-->
@@ -41,12 +41,12 @@
 <script setup>
 
 import {ref} from "vue";
-import {loadEnums} from "@/api/common.js";
+import {getPage} from "@/api/page.js";
 
 const appPageItemDrawer = ref(false)
 
 const appPageForm = ref({
-	id: 0,
+	pageId: 0,
 	appId: 0,
 	pageCode: '',
 	pageName: '',
@@ -76,15 +76,24 @@ const openAppPageDrawer = (appId, pageId) => {
 	}
 
 	if (pageId) {
-		//loadMethodRule(ruleId)
+		loadPageInfo(appId, pageId)
 	} else {
-		appPageForm.value.fcmId = fcmId
+		appPageForm.value.appId = appId
 		/*fciForm.value = {
 			fcmId: fcmId,
 		}*/
 	}
 
 	isAppPageFormSubmitted.value = false
+}
+
+const loadPageInfo = (appId, pageId) => {
+	getPage(pageId).then(res => {
+		if (res.data.appId !== appId) {
+			throw new Error('页面信息错误')
+		}
+		appPageForm.value = res.data
+	})
 }
 
 
