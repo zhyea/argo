@@ -25,7 +25,6 @@
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageName" label="页面名称"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
-						<el-button type="warning" size="small" @click="handleAddFci(scope.row)">创建实例</el-button>
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
@@ -38,7 +37,6 @@
 			               :page-size="pageData.pageSize"
 			               :current-page="pageData.pageNo"
 			               :total="pageData.total"
-			               @current-change="handlePageChange"
 			               layout="total, prev, pager, next, ->, jumper"/>
 		</div>
 	</div>
@@ -49,11 +47,13 @@
 <script setup>
 import PageDrawer from "@/view/page/AppPageEditDrawer.vue";
 import {ref} from "vue";
-import {useRoute} from "vue-router";
-import {findPages} from "@/api/page.js";
+import {useRoute, useRouter} from "vue-router";
+import {deletePage, findPages} from "@/api/page.js";
+import {ElMessage} from "element-plus";
 
 
 const route = useRoute();
+const router = useRouter();
 
 // 应用页面新增抽屉
 const appPageAddDrawerRef = ref()
@@ -100,6 +100,25 @@ function loadAppPageListData() {
 function handleAdd() {
 	appPageAddDrawerRef.value.openAppPageDrawer()
 }
+
+// 编辑应用页面
+function handleEdit(row) {
+	appPageAddDrawerRef.value.openFcmEditDrawer(row.pageId, row.appId)
+}
+
+// 处理页面删除
+function handleDelete(row) {
+	deletePage(row.pageId).then(response => {
+		if (response && response.data) {
+			ElMessage.success({
+				message: '删除成功',
+				duration: 1500,
+			})
+			loadAppPageListData()
+		}
+	})
+}
+
 </script>
 
 <style scoped lang="less">
