@@ -1,19 +1,11 @@
-import AppListPage from './AppList.vue'
-import AppEditPage from './AppEdit.vue'
+import AppPageList from './AppPageList.vue'
 
 
 export default [{
 	name: 'AppPageList',
-	path: '/app-list',
-	component: AppListPage,
+	path: '/app/:appId/page-list',
+	component: AppPageList,
 	meta: {
-		title: '应用列表',
-	},
-}, {
-	name: 'AppAdd',
-	path: '/app-add',
-	component: AppEditPage,
-	meta: {
-		title: '新增应用',
+		title: '应用页面',
 	},
 }]
