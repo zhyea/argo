@@ -37,6 +37,7 @@
 			               :page-size="pageData.pageSize"
 			               :current-page="pageData.pageNo"
 			               :total="pageData.total"
+			               @current-change="handlePageChange"
 			               layout="total, prev, pager, next, ->, jumper"/>
 		</div>
 	</div>
@@ -117,6 +118,15 @@ function handleDelete(row) {
 			loadAppPageListData()
 		}
 	})
+}
+
+// 处理页面切换
+const handlePageChange = async (val) => {
+	let appId = route.params.appId
+	/*router.push({name: config.fcmListRouteName, query: {appId: appId, page: val}})
+		.then(() => {
+			loadFcmListData()
+		})*/
 }
 
 </script>

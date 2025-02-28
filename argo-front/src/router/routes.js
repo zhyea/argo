@@ -6,6 +6,7 @@ import NotFoundPage from '@/view/error/NotFound.vue'
 import appRoutes from '@/view/app/routes'
 import fcmRoutes from '@/view/fcm/routes'
 import appHomeRoutes from '@/view/app/routes-app'
+import appPageRoutes from '@/view/page/routes'
 
 
 const routes = [
@@ -32,7 +33,8 @@ const routes = [
 			title: '应用首页',
 		},
 		children: [
-			...appHomeRoutes
+			...appHomeRoutes,
+			...appPageRoutes,
 		],
 	},
 	{
