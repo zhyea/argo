@@ -69,7 +69,7 @@ export default {
 				index: '/app/:appId/fci-list',
 			},]
 		}, {
-			name: '应用页',
+			name: '应用页面',
 			icon: 'office-building',
 			index: '/app/:appId/page-main',
 
