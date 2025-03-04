@@ -1,6 +1,6 @@
 <template>
 	<el-drawer :title="`${appPageForm.pageId ? '编辑' : '新增'}应用页面`"
-	           v-model="appPageItemDrawer" :with-header=true size="50%">
+	           v-model="appPageItemDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->
 			<el-form status-icon
@@ -17,7 +17,7 @@
 					</el-form-item>
 
 					<el-form-item label="页面代码" prop="pageCode">
-						<el-input id="pageCode" v-model="appPageForm.pageCode"/>
+						<el-input id="pageCode" readonly v-model="appPageForm.pageCode"/>
 					</el-form-item>
 
 					<el-form-item label="页面名称" prop="pageName">

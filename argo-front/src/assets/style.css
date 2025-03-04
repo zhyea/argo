@@ -140,6 +140,14 @@ button:focus-visible {
 	padding-bottom: 9px;
 }
 
+
+.el-drawer__header {
+	/* 修改标题容器的样式，例如颜色、字体大小等 */
+	color: #333;
+	font-size: 24px;
+	border-bottom: #535bf2 1px solid;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
