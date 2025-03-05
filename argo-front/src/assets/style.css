@@ -145,7 +145,12 @@ button:focus-visible {
 	/* 修改标题容器的样式，例如颜色、字体大小等 */
 	color: #333;
 	font-size: 24px;
-	border-bottom: #535bf2 1px solid;
+	border-bottom: #213547 1px solid;
+}
+
+.el-card {
+	margin-bottom: 12px;
+	box-shadow: none;
 }
 
 @media (prefers-color-scheme: light) {

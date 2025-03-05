@@ -41,7 +41,7 @@
 <script setup>
 
 import {ref} from "vue";
-import {getPage} from "@/api/page.js";
+import {generatePageCode, getPage} from "@/api/page.js";
 
 const appPageItemDrawer = ref(false)
 
@@ -78,7 +78,10 @@ const openAppPageDrawer = (appId, pageId) => {
 	if (pageId) {
 		loadPageInfo(appId, pageId)
 	} else {
-		appPageForm.value.appId = appId
+		appPageForm.value.appId = appId;
+		generatePageCode().then(res => {
+			appPageForm.value.pageCode = res.data;
+		});
 		/*fciForm.value = {
 			fcmId: fcmId,
 		}*/

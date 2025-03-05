@@ -7,7 +7,7 @@
 			label-suffix=":" label-width="90px"
 			class="fcm-form" status-icon>
 
-			<el-card header="组件模型基础信息" class="fcm-region">
+			<el-card header="组件模型基础信息">
 
 				<el-form-item prop="fcmId">
 					<el-input type="hidden" v-model="fcmForm.fcmId"/>
@@ -65,7 +65,7 @@
 			</el-card>
 
 
-			<el-card header="组件模型属性信息" class="fcm-region">
+			<el-card header="组件模型属性信息">
 
 				<el-form :model="fcmPropForm" ref="fcmPropFormRef" :rules="fcmPropFormRules">
 					<table class="fcm-prop-table">
@@ -125,7 +125,7 @@
 				</el-form>
 			</el-card>
 
-			<el-card class="fcm-region">
+			<el-card>
 				<el-button type="primary" :disabled="isFcmFormSubmitted" @click="submitFcmForm()">提交</el-button>
 			</el-card>
 		</el-form>
@@ -351,13 +351,6 @@ const submitFcmForm = async () => {
 	width: 100%;
 	padding: 10px;
 }
-
-
-.fcm-region {
-	margin-bottom: 20px;
-	box-shadow: none;
-}
-
 
 .fcm-prop-table {
 	width: 100%;
