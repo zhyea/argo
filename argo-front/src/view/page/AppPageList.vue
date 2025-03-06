@@ -42,7 +42,7 @@
 		</div>
 	</div>
 
-	<page-drawer ref="appPageAddDrawerRef"/>
+	<page-drawer ref="appPageAddDrawerRef" after-page-add="loadAppPageListData"/>
 </template>
 
 <script setup>
@@ -99,7 +99,8 @@ function loadAppPageListData() {
 
 // 新增应用页面
 function handleAdd() {
-	appPageAddDrawerRef.value.openAppPageDrawer()
+	let appId = route.params.appId
+	appPageAddDrawerRef.value.openAppPageDrawer(appId)
 }
 
 // 编辑应用页面

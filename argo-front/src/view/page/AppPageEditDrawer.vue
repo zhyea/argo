@@ -9,7 +9,6 @@
 			         label-suffix=":"
 			         :model="appPageForm" ref="appPageFormRef" :rules="appPageFormRules" class="page-form">
 
-
 				<el-card header="应用页面信息" class="page-region">
 
 					<el-form-item prop="appId">
@@ -41,7 +40,8 @@
 <script setup>
 
 import {ref} from "vue";
-import {generatePageCode, getPage} from "@/api/page.js";
+import {addPage, editPage, generatePageCode, getPage} from "@/api/page.js";
+import {submitForm} from "@/utils/common.js";
 
 const appPageItemDrawer = ref(false)
 
@@ -76,31 +76,43 @@ const openAppPageDrawer = (appId, pageId) => {
 	}
 
 	if (pageId) {
-		loadPageInfo(appId, pageId)
+		loadPageInfo(appId, pageId);
 	} else {
 		appPageForm.value.appId = appId;
 		generatePageCode().then(res => {
 			appPageForm.value.pageCode = res.data;
 		});
-		/*fciForm.value = {
-			fcmId: fcmId,
-		}*/
 	}
 
 	isAppPageFormSubmitted.value = false
 }
 
+// 加载页面信息
 const loadPageInfo = (appId, pageId) => {
 	getPage(pageId).then(res => {
 		if (res.data.appId !== appId) {
 			throw new Error('页面信息错误')
 		}
-		appPageForm.value = res.data
+		appPageForm.value = res.data;
 	})
 }
 
 
+const emit = defineEmits(['afterPageAdd'])
+
 const submitAppPageForm = async () => {
+	if (!appPageFormRef.value.validate()) {
+		return;
+	}
+
+	const formData = {...appPageForm.value};
+
+	const maintainMethod = formData.pageId ? editPage : addPage;
+
+	submitForm(appPageFormRef, formData, isAppPageFormSubmitted, maintainMethod, () => {
+		emit('afterPageAdd');
+		appPageItemDrawer.value = false
+	})
 }
 
 

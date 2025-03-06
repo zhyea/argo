@@ -184,7 +184,6 @@ function mapEnum(enumType, enumCode) {
 	}
 	return result ? result : ''
 }
-
 </script>
 
 <style scoped lang="less">

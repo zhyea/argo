@@ -133,7 +133,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref} from "vue";
 
 import {loadEnums} from "@/api/common.js";
 import {queryApps} from "@/api/app.js";
@@ -141,9 +141,6 @@ import {addFcm, editFcm, getFcm} from "@/api/fcm.js";
 import {submitForm} from "@/utils/common.js";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
-
-
-const route = useRoute()
 
 const fcmEditDrawer = ref(false)
 
@@ -332,11 +329,7 @@ const submitFcmForm = async () => {
 		formData.appName = 2
 	}*/
 
-	let maintainMethod = addFcm
-
-	if (formData.fcmId) {
-		maintainMethod = editFcm
-	}
+	const maintainMethod = (formData.fcmId) ? editFcm : addFcm;
 
 	submitForm(fcmFormRef, formData, isFcmFormSubmitted, maintainMethod, () => {
 		emit('afterFcmAdd');
