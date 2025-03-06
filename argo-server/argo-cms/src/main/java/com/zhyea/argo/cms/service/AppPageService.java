@@ -8,11 +8,14 @@ import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageQueryRequest;
 import com.zhyea.argo.data.mapper.cms.AppPageMapper;
+import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.tools.ShortCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.zhyea.argo.constants.ResponseCode.APP_PAGE_ALREADY_EXISTS_ERROR;
 
 /**
  * 应用页面相关业务处理类
@@ -42,6 +45,10 @@ public class AppPageService {
 	 * @return 新增的应用页面id
 	 */
 	public Long add(AppPageAddRequest request) {
+		long count = appPageMapper.countByPageCode(request.getPageCode());
+		if (count > 0) {
+			throw new ArgoServerException(APP_PAGE_ALREADY_EXISTS_ERROR);
+		}
 		AppPageEntity entity = appPageConverter.addRequest2Entity(request);
 		appPageMapper.add(entity);
 		return entity.getId();
