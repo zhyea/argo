@@ -1,14 +1,18 @@
 package com.zhyea.argo.cms.service;
 
-import com.zhyea.argo.constants.NumConstants;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.zhyea.argo.cms.convert.AppPageConverter;
-import com.zhyea.argo.data.entity.cms.AppPageEntity;
 import com.zhyea.argo.cms.model.item.AppPageItem;
 import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageQueryRequest;
+import com.zhyea.argo.constants.NumConstants;
+import com.zhyea.argo.data.entity.cms.AppPageEntity;
 import com.zhyea.argo.data.mapper.cms.AppPageMapper;
 import com.zhyea.argo.except.ArgoServerException;
+import org.chobit.commons.group.E;
+import org.chobit.commons.model.response.PageResult;
 import org.chobit.commons.tools.ShortCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,9 +102,18 @@ public class AppPageService {
 	 * @param request 应用页面查询请求
 	 * @return 应用页面列表
 	 */
-	public List<AppPageItem> findByAppId(AppPageQueryRequest request) {
-		List<AppPageEntity> entityList = appPageMapper.query(request.getAppId(), request.getKeyword());
-		return appPageConverter.entityList2ItemList(entityList);
+	public PageResult<AppPageItem> findByAppId(AppPageQueryRequest request) {
+		PageResult<AppPageItem> result = new PageResult<>();
+
+		try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
+			List<AppPageEntity> list = appPageMapper.query(request.getAppId(), request.getKeyword());
+			result.setData(appPageConverter.entityList2ItemList(list));
+			result.setPageNo(page.getPageNum());
+			result.setPageSize(page.getPageSize());
+			result.setTotal(page.getTotal());
+		}
+
+		return result;
 	}
 
 

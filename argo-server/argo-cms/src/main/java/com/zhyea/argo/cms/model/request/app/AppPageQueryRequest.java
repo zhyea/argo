@@ -1,6 +1,7 @@
 package com.zhyea.argo.cms.model.request.app;
 
 import lombok.Data;
+import org.chobit.commons.model.request.BasePageRequest;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class AppPageQueryRequest {
+public class AppPageQueryRequest extends BasePageRequest {
 
 
 	/**

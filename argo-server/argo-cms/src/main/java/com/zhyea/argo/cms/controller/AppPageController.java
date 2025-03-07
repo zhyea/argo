@@ -6,12 +6,11 @@ import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageIdRelateRequest;
 import com.zhyea.argo.cms.model.request.app.AppPageQueryRequest;
 import com.zhyea.argo.cms.service.AppPageService;
+import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 应用页面相关接口
@@ -88,7 +87,7 @@ public class AppPageController {
      * @return 应用页面列表
      */
     @PostMapping("/list")
-    public List<AppPageItem> findByAppId(@RequestBody @Validated AppPageQueryRequest request) {
+    public PageResult<AppPageItem> findByAppId(@RequestBody @Validated AppPageQueryRequest request) {
         return appPageService.findByAppId(request);
     }
 
