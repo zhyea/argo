@@ -30,10 +30,12 @@ export function deletePage(pageId) {
 
 
 // 根据应用ID获取页面列表
-export function findPages(appId, keyword) {
+export function findPages(appId, keyword, pageInfo) {
 	return request.post('/cms/app/page/list', {
 		appId: appId,
 		keyword: keyword,
+		pageNo: pageInfo.pageNo,
+		pageSize: pageInfo.pageSize,
 	})
 }
 
