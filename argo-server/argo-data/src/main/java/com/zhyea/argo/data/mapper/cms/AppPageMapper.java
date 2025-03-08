@@ -17,15 +17,17 @@ public interface AppPageMapper {
 	/**
 	 * 新增应用页面记录
 	 *
-	 * @param entity 应用页面数据
+	 * @param page 应用页面数据
 	 */
-	@Select({
+	@Insert({
 			"insert into ag_cms_app_page (app_id, page_code, page_name, remark)",
 			"values",
-			"(#{e.appId}, #{e.pageCode}, #{e.pageName}, #{e.remark})"
+			"(#{e.appId}, #{e.pageCode}, #{e.pageName},",
+			"#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler})",
+			""
 	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
-	void add(@Param("e") AppPageEntity entity);
+	void add(@Param("e") AppPageEntity page);
 
 
 	/**
@@ -58,7 +60,7 @@ public interface AppPageMapper {
 	 * @param id 应用页面id
 	 * @return 影响行数
 	 */
-	@Update("update ag_cms_app_page set deleted=1 where id=#{id}")
+	@Delete("delete from ag_cms_app_page where id=#{id}")
 	int deleteById(@Param("id") Long id);
 
 

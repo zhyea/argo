@@ -3,6 +3,7 @@ package com.zhyea.argo.service;
 import com.zhyea.argo.TestBase;
 import com.zhyea.argo.cms.model.request.app.AppAddRequest;
 import com.zhyea.argo.cms.service.AppService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,12 +17,13 @@ public class AppServiceTest extends TestBase {
 	@Test
 	public void add() {
 		AppAddRequest req = new AppAddRequest();
-		req.setAppCode("test");
+		req.setAppCode("test2");
 		req.setAppName("测试应用");
 		req.setRemark("测试应用");
 		req.setIcon("icon");
 
-		appService.add(req);
+		Long id = appService.add(req);
+		Assertions.assertNotNull(id);
 	}
 
 }

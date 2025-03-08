@@ -23,82 +23,82 @@ import org.springframework.web.bind.annotation.*;
 public class AppPageController {
 
 
-    private final AppPageService appPageService;
+	private final AppPageService appPageService;
 
 
-    @Autowired
-    public AppPageController(AppPageService appPageService) {
-        this.appPageService = appPageService;
-    }
+	@Autowired
+	public AppPageController(AppPageService appPageService) {
+		this.appPageService = appPageService;
+	}
 
 
-    /**
-     * 新增应用页面
-     *
-     * @param request 新增应用页面请求
-     * @return 应用页面记录id
-     */
-    @PostMapping("/add")
-    public Long add(@RequestBody @Validated AppPageAddRequest request) {
-        return appPageService.add(request);
-    }
+	/**
+	 * 新增应用页面
+	 *
+	 * @param request 新增应用页面请求
+	 * @return 应用页面记录id
+	 */
+	@PostMapping("/add")
+	public Long add(@RequestBody @Validated AppPageAddRequest request) {
+		return appPageService.add(request);
+	}
 
 
-    /**
-     * 修改应用页面
-     *
-     * @param request 修改应用页面请求
-     * @return 是否修改成功
-     */
-    @PostMapping("/edit")
-    public boolean modify(@RequestBody @Validated AppPageEditRequest request) {
-        return appPageService.modify(request);
-    }
+	/**
+	 * 修改应用页面
+	 *
+	 * @param request 修改应用页面请求
+	 * @return 是否修改成功
+	 */
+	@PostMapping("/edit")
+	public boolean modify(@RequestBody @Validated AppPageEditRequest request) {
+		return appPageService.modify(request);
+	}
 
 
-    /**
-     * 根据id获取应用页面
-     *
-     * @param request 应用页面id相关请求
-     * @return 应用页面信息
-     */
-    @PostMapping("/get")
-    public AppPageItem get(@RequestBody @Validated AppPageIdRelateRequest request) {
-        return appPageService.get(request.getPageId());
-    }
+	/**
+	 * 根据id获取应用页面
+	 *
+	 * @param request 应用页面id相关请求
+	 * @return 应用页面信息
+	 */
+	@PostMapping("/get")
+	public AppPageItem get(@RequestBody @Validated AppPageIdRelateRequest request) {
+		return appPageService.get(request.getPageId());
+	}
 
 
-    /**
-     * 根据id删除应用页面
-     *
-     * @param request 应用页面id相关请求
-     * @return 是否删除成功
-     */
-    @PostMapping("/delete")
-    public boolean delete(@RequestBody @Validated AppPageIdRelateRequest request) {
-        return appPageService.delete(request.getPageId());
-    }
+	/**
+	 * 根据id删除应用页面
+	 *
+	 * @param request 应用页面id相关请求
+	 * @return 是否删除成功
+	 */
+	@PostMapping("/delete")
+	public boolean delete(@RequestBody @Validated AppPageIdRelateRequest request) {
+		return appPageService.delete(request.getPageId());
+	}
 
 
-    /**
-     * 根据应用id获取应用页面列表
-     *
-     * @param request 应用id相关请求
-     * @return 应用页面列表
-     */
-    @PostMapping("/list")
-    public PageResult<AppPageItem> findByAppId(@RequestBody @Validated AppPageQueryRequest request) {
-        return appPageService.findByAppId(request);
-    }
+	/**
+	 * 根据应用id获取应用页面列表
+	 *
+	 * @param request 应用id相关请求
+	 * @return 应用页面列表
+	 */
+	@PostMapping("/list")
+	public PageResult<AppPageItem> findByAppId(@RequestBody @Validated AppPageQueryRequest request) {
+		return appPageService.findByAppId(request);
+	}
 
 
-    /**
-     * 生成页面code
-     *
-     * @return 页面code
-     */
-    @GetMapping("/page-code")
-    public String pageCode() {
-        return appPageService.generatePageCode();
-    }
+	/**
+	 * 生成页面code
+	 *
+	 * @return 页面code
+	 */
+	@GetMapping("/page-code")
+	public String pageCode() {
+		return appPageService.generatePageCode();
+	}
 }

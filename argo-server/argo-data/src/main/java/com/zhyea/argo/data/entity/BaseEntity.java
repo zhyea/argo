@@ -1,5 +1,6 @@
 package com.zhyea.argo.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,34 +14,36 @@ import java.util.Date;
 public abstract class BaseEntity {
 
 
-    /**
-     * 记录ID
-     */
-    private Long id;
+	/**
+	 * 记录ID
+	 */
+	private Long id;
 
 
-    /**
-     * 操作人code
-     */
-    private String operatorCode;
+	/**
+	 * 操作人code
+	 */
+	private String operatorCode;
 
 
-    /**
-     * 删除标记
-     */
-    private Integer deleted;
+	/**
+	 * 删除标记
+	 */
+	private Integer deleted;
 
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+	/**
+	 * 创建时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date createTime;
 
 
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
+	/**
+	 * 更新时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date updateTime;
 
 
 }

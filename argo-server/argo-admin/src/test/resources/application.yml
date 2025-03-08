@@ -4,11 +4,7 @@ spring:
   application:
     name: argo-admin
   profiles:
-    active: dev
-  sql:
-    init:
-      mode: never
-      schema-locations: schema.sql
+    active: local
 
 
 mybatis:
