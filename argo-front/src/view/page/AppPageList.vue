@@ -41,12 +41,12 @@
 		</div>
 	</div>
 
-	<page-drawer ref="appPageAddDrawerRef" after-page-add="loadAppPageListData"/>
+	<page-drawer ref="appPageAddDrawerRef" @after-page-add="loadAppPageListData"/>
 </template>
 
 <script setup>
 import PageDrawer from "@/view/page/AppPageEditDrawer.vue";
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {deletePage, findPages} from "@/api/page.js";
 import {ElMessage} from "element-plus";
@@ -104,7 +104,7 @@ function handleAdd() {
 
 // 编辑应用页面
 function handleEdit(row) {
-	appPageAddDrawerRef.value.openFcmEditDrawer(row.pageId, row.appId)
+	appPageAddDrawerRef.value.openAppPageDrawer(row.appId, row.pageId)
 }
 
 // 处理页面删除
@@ -128,6 +128,11 @@ const handlePageChange = async (val) => {
 			loadFcmListData()
 		})*/
 }
+
+
+onMounted(() => {
+	loadAppPageListData()
+})
 
 </script>
 
