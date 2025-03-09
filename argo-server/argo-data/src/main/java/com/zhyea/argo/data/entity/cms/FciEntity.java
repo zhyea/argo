@@ -35,6 +35,13 @@ public class FciEntity extends BaseEntity {
 
 
 	/**
+	 * 数据绑定标记
+	 * （非数据库列）
+	 */
+	private Integer dataBindFlag;
+
+
+	/**
 	 * 数据链接
 	 */
 	private String dataUrl;
