@@ -14,6 +14,7 @@
 
 					<el-form-item prop="fcmId">
 						<el-input type="hidden" v-model="fciForm.fcmId"/>
+						<el-input type="hidden" v-model="fciForm.appId"/>
 					</el-form-item>
 
 					<el-form-item label="名称" prop="name">
@@ -47,16 +48,8 @@
 							value-format="YYYY-MM-DD HH:mm:ss"/>
 					</el-form-item>
 
-					<el-form-item label="应用" v-if="2===fcmForm.scope && !defaultAppFcmFlag" prop="appId">
-						<el-select id="appId" v-model.lazy="fcmForm.appId"
-						           placeholder="请选择应用"
-						           remote-show-suffix
-						           filterable remote :remote-method="fetchApps">
-							<el-option v-for="e in appList"
-							           :key="e.id"
-							           :label="e.appName"
-							           :value="e.id"/>
-						</el-select>
+					<el-form-item label="数据链接" v-if="2===fciForm.dataBindFlag" prop="dataUrl">
+						<el-input id="name" v-model="fciForm.dataUrl"/>
 					</el-form-item>
 
 					<el-form-item label="备注" prop="remark">
@@ -82,8 +75,9 @@ const fciItemDrawer = ref(false)
 const fciForm = ref({
 	id: 0,
 	fcmId: 0,
-	appId:0,
+	appId: 0,
 	name: '',
+	dataBindFlag: 0,
 	dataUrl: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
@@ -136,7 +130,8 @@ const openFciDrawer = (fcmId, fciId) => {
 }
 
 
-const submitFciForm = async () => {}
+const submitFciForm = async () => {
+}
 
 
 defineExpose({openFciDrawer})
