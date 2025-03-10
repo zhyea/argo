@@ -109,11 +109,6 @@ button:focus-visible {
 }
 
 
-.el-drawer__header {
-	margin-bottom: 10px;
-}
-
-
 .table-container {
 	margin: 0;
 	padding: 12px;
@@ -142,6 +137,10 @@ button:focus-visible {
 
 
 .el-drawer__header {
+	margin-bottom: 10px;
+}
+
+.el-drawer__header {
 	/* 修改标题容器的样式，例如颜色、字体大小等 */
 	color: #333;
 	font-size: 24px;
@@ -152,6 +151,7 @@ button:focus-visible {
 	margin-bottom: 12px;
 	box-shadow: none;
 }
+
 
 @media (prefers-color-scheme: light) {
 	:root {

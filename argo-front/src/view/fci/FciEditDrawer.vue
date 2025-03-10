@@ -37,7 +37,7 @@
 						</el-radio-group>
 					</el-form-item>
 
-					<el-form-item label="生效时间" prop="effectivePeriodType" size="small"
+					<el-form-item label="生效时间" prop="effectivePeriodType"
 					              v-if="fciForm.effectivePeriodType === 2">
 						<el-date-picker
 							v-model="fciForm.effectiveTimeRange"
@@ -48,7 +48,7 @@
 							value-format="YYYY-MM-DD HH:mm:ss"/>
 					</el-form-item>
 
-					<el-form-item label="数据链接" v-if="2===fciForm.dataBindFlag" prop="dataUrl">
+					<el-form-item label="数据链接" v-if="1===fciForm.dataBindFlag" prop="dataUrl">
 						<el-input id="name" v-model="fciForm.dataUrl"/>
 					</el-form-item>
 
@@ -104,21 +104,13 @@ const isFciFormSubmitted = ref(false)
 const allEnumMap = ref()
 const effectivePeriodTypeEnum = ref()
 
-// 打开组件实例抽屉
-const openFciDrawer = (fcmId, fciId) => {
+
+// 打开组件实例抽屉前的准备
+const openPrepare = () => {
 	fciItemDrawer.value = true
 
 	if (fciFormRef.value) {
 		fciFormRef.value.resetFields();
-	}
-
-	if (fciId) {
-		//loadMethodRule(ruleId)
-	} else {
-		fciForm.value.fcmId = fcmId
-		/*fciForm.value = {
-			fcmId: fcmId,
-		}*/
 	}
 
 	isFciFormSubmitted.value = false
@@ -130,11 +122,20 @@ const openFciDrawer = (fcmId, fciId) => {
 }
 
 
+// 打开组件实例抽屉
+const openFciAddDrawer = (fcmRow) => {
+	openPrepare()
+	console.log(fcmRow)
+	fciForm.value.fcmId = fcmRow.fcmId
+	fciForm.value.appId = fcmRow.appId
+	fciForm.value.dataBindFlag = fcmRow.dataBindFlag
+}
+
 const submitFciForm = async () => {
 }
 
 
-defineExpose({openFciDrawer})
+defineExpose({openFciAddDrawer: openFciAddDrawer})
 
 
 </script>

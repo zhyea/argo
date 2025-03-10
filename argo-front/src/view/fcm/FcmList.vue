@@ -136,7 +136,7 @@ const fcmEditDrawerRef = ref()
 
 // 打开新增组件实例抽屉
 function handleAddFci(row) {
-	fciAddDrawerRef.value.openFciDrawer(row.fcmId)
+	fciAddDrawerRef.value.openFciAddDrawer(row)
 }
 
 // 新增FCM
