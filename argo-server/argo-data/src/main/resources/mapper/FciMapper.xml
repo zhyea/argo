@@ -24,8 +24,10 @@
     <!-- 根据页面编码获取组件实例 -->
     <select id="findByPageCode"
             resultType="com.zhyea.argo.data.entity.cms.FciEntity">
-        select ci.* from ag_cms_fci ci left join ag_cms_app_page p on ci.page_id=p.id
-        where deleted=0 and p.page_code=#{pageCode}
+        select fci.*, fcm.data_bind_flag from ag_cms_fci fci
+            left join ag_cms_app_page page on fci.page_id=page.id
+                    left join ag_cms_fcm fcm on fci.fcm_id=fcm.id
+        where deleted=0 and page.page_code=#{pageCode}
     </select>
 
 </mapper>
