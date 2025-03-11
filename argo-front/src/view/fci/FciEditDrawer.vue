@@ -82,6 +82,7 @@ const fciForm = ref({
 	switchFlag: 1,
 	effectivePeriodType: 1,
 	effectiveTimeRange: null,
+
 	remark: '',
 })
 
@@ -132,6 +133,14 @@ const openFciAddDrawer = (fcmRow) => {
 }
 
 const submitFciForm = async () => {
+	if (!fciFormRef.value.validate()) {
+		return;
+	}
+
+	const formData = {...fciForm.value}
+
+	console.log(JSON.stringify(formData))
+
 }
 
 
