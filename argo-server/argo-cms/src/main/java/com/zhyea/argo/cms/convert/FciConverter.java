@@ -15,7 +15,8 @@ import java.util.List;
  *
  * @author robin
  */
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+		uses = {CommonWorker.class})
 public interface FciConverter {
 
 
@@ -25,6 +26,8 @@ public interface FciConverter {
 	 * @param request 新增请求对象
 	 * @return 实体对象
 	 */
+	@Mapping(source = "effectiveTimeRange", target = "effectiveStartTime", qualifiedByName = "takeStartTime")
+	@Mapping(source = "effectiveTimeRange", target = "effectiveEndTime", qualifiedByName = "takeEndTime")
 	FciEntity addRequest2Entity(FciAddRequest request);
 
 
@@ -34,6 +37,8 @@ public interface FciConverter {
 	 * @param request 修改请求对象
 	 * @return 实体对象
 	 */
+	@Mapping(source = "effectiveTimeRange", target = "effectiveStartTime", qualifiedByName = "takeStartTime")
+	@Mapping(source = "effectiveTimeRange", target = "effectiveEndTime", qualifiedByName = "takeEndTime")
 	@Mapping(source = "fciId", target = "id")
 	FciEntity modifyRequest2Entity(FciEditRequest request);
 

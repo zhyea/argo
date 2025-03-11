@@ -3,10 +3,13 @@ package com.zhyea.argo.cms.model.request.fci;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import lombok.Data;
+import org.chobit.commons.contract.Checkable;
+import org.chobit.commons.exception.ParamException;
+import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.validation.EnumVal;
+import org.chobit.commons.validation.WholeCheck;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +19,9 @@ import java.util.List;
  *
  * @author robin
  */
+@WholeCheck(message = "组件实例信息有误")
 @Data
-public class FciAddRequest extends BaseOperateRequest {
+public class FciAddRequest extends BaseOperateRequest implements Checkable {
 
 
 	/**
@@ -58,7 +62,6 @@ public class FciAddRequest extends BaseOperateRequest {
 	/**
 	 * 组件生效时间范围
 	 */
-	@NotEmpty(message = "生效时间范围不能为空")
 	List<LocalDateTime> effectiveTimeRange;
 
 
@@ -68,4 +71,28 @@ public class FciAddRequest extends BaseOperateRequest {
 	private String remark;
 
 
+	@Override
+	public boolean check() throws ParamException {
+		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
+			if (Collections2.isEmpty(effectiveTimeRange) || effectiveTimeRange.size() < 2) {
+				return false;
+			}
+
+			LocalDateTime effectiveStartTime = effectiveTimeRange.get(0);
+			LocalDateTime effectiveEndTime = effectiveTimeRange.get(1);
+
+			// 新增时，开始时间不能<=当前时间
+			if (effectiveStartTime.isBefore(LocalDateTime.now())
+					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
+				return false;
+			}
+
+			// 结束时间需要大于开始时间
+			if (!effectiveEndTime.isAfter(effectiveStartTime)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

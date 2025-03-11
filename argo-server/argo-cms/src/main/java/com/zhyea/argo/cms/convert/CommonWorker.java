@@ -1,7 +1,11 @@
 package com.zhyea.argo.cms.convert;
 
+import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.utils.JsonKit;
 import org.mapstruct.Named;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.chobit.commons.constans.Symbol.EMPTY;
 
@@ -26,5 +30,37 @@ public final class CommonWorker {
 		}
 
 		return JsonKit.toJson(obj);
+	}
+
+
+	/**
+	 * 获取时间范围中的开始时间
+	 *
+	 * @param timeRange 时间范围（包含两个值）
+	 * @return 开始时间
+	 */
+	@Named("takeStartTime")
+	public static LocalDateTime takeStartTime(List<LocalDateTime> timeRange) {
+		if (Collections2.isEmpty(timeRange)) {
+			return null;
+		}
+
+		return timeRange.get(0);
+	}
+
+
+	/**
+	 * 获取时间范围中的结束时间
+	 *
+	 * @param timeRange 时间范围（包含两个值）
+	 * @return 结束时间
+	 */
+	@Named("takeEndTime")
+	public static LocalDateTime takeEndTime(List<LocalDateTime> timeRange) {
+		if (Collections2.isEmpty(timeRange) || timeRange.size() < 2) {
+			return null;
+		}
+
+		return timeRange.get(1);
 	}
 }
