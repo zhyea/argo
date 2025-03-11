@@ -6,8 +6,10 @@ import lombok.Data;
 import org.chobit.commons.validation.EnumVal;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 组件实例新增请求
@@ -54,15 +56,10 @@ public class FciAddRequest extends BaseOperateRequest {
 
 
 	/**
-	 * 组件生效开始时间
+	 * 组件生效时间范围
 	 */
-	private LocalDateTime effectiveStartTime;
-
-
-	/**
-	 * 组件生效结束时间
-	 */
-	private LocalDateTime effectiveEndTime;
+	@NotEmpty(message = "生效时间范围不能为空")
+	List<LocalDateTime> effectiveTimeRange;
 
 
 	/**
