@@ -69,6 +69,8 @@
 
 import {ref} from "vue";
 import {loadEnums} from "@/api/common.js";
+import {submitForm} from "@/utils/common.js";
+import {addFci, editFci} from "@/api/fci.js";
 
 const fciItemDrawer = ref(false)
 
@@ -126,7 +128,6 @@ const openPrepare = () => {
 // 打开组件实例抽屉
 const openFciAddDrawer = (fcmRow) => {
 	openPrepare()
-	console.log(fcmRow)
 	fciForm.value.fcmId = fcmRow.fcmId
 	fciForm.value.appId = fcmRow.appId
 	fciForm.value.dataBindFlag = fcmRow.dataBindFlag
@@ -139,6 +140,11 @@ const submitFciForm = async () => {
 
 	const formData = {...fciForm.value}
 
+	const maintainMethod = formData.id ? editFci : addFci;
+
+	submitForm(fciFormRef, formData, isFciFormSubmitted, maintainMethod, () => {
+		fciItemDrawer.value = false
+	})
 	console.log(JSON.stringify(formData))
 
 }
