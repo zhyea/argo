@@ -1,5 +1,6 @@
 package com.zhyea.argo.cms.model.request.fci;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	/**
 	 * 页面ID
 	 */
-	@NotNull(message = "pageId不能为空")
+	//@NotNull(message = "pageId不能为空")
 	private Long pageId;
 
 
@@ -62,6 +63,7 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	/**
 	 * 组件生效时间范围
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	List<LocalDateTime> effectiveTimeRange;
 
 
