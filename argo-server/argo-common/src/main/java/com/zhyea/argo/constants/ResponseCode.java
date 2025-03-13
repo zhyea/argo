@@ -84,7 +84,13 @@ public enum ResponseCode implements CodeDescEnum {
 
 	FCI_PROP_EFFECTIVE_START_TIME_NOT_ALLOW_EDIT(40302, "组件属性生效时间开始时间不允许修改"),
 
-	FCI_NOT_EXISTS_ERROR(40303, "组件实例不存在"),
+	FCI_PROP_EFFECTIVE_TIME_IS_EMPTY(40303, "组件属性生效时间错误"),
+
+	FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW(40304, "组件属性生效开始时间不能小于当前时间"),
+
+	FCI_PROP_EFFECTIVE_END_TIME_AFTER_START(40305, "组件属性生效结束时间需要大于开始时间"),
+
+	FCI_NOT_EXISTS_ERROR(40310, "组件实例不存在"),
 
 
 	/**
