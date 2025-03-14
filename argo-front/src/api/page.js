@@ -40,6 +40,15 @@ export function findPages(appId, keyword, pageInfo) {
 }
 
 
+// 根据关键字查询应用页面列表
+export function queryAppPages(appI, keyword) {
+	return request.post('/cms/app/page/query', {
+		appId: appI,
+		keyword: keyword,
+	})
+}
+
+
 // 生成页面代码
 export function generatePageCode() {
 	return request.get('/cms/app/page/page-code')

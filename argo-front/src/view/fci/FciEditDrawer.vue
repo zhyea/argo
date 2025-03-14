@@ -37,6 +37,18 @@
 						</el-radio-group>
 					</el-form-item>
 
+					<el-form-item label="页面" prop="pageId">
+						<el-select id="pageId" v-model.lazy="fciForm.pageId"
+						           placeholder="请选择页面"
+						           remote-show-suffix
+						           filterable remote :remote-method="fetchAppPages">
+							<el-option v-for="e in appPageList"
+							           :key="e.pageId"
+							           :label="e.pageName"
+							           :value="e.pageId"/>
+						</el-select>
+					</el-form-item>
+
 					<el-form-item label="生效时间" prop="effectivePeriodType"
 					              v-if="fciForm.effectivePeriodType === 2">
 						<el-date-picker
@@ -71,6 +83,7 @@ import {ref} from "vue";
 import {loadEnums} from "@/api/common.js";
 import {submitForm} from "@/utils/common.js";
 import {addFci, editFci} from "@/api/fci.js";
+import {findPages, queryAppPages} from "@/api/page.js";
 
 const fciItemDrawer = ref(false)
 
@@ -149,9 +162,22 @@ const submitFciForm = async () => {
 
 }
 
-
 defineExpose({openFciAddDrawer: openFciAddDrawer})
 
+// 应用页面信息
+const appPageList = ref()
+
+// 加载应用
+function fetchAppPages(keyword) {
+	const appId = fciForm.value.appId
+	queryAppPages(appId, keyword).then(response => {
+		if (response && response.data) {
+			appPageList.value = response.data
+		} else {
+			appPageList.value = []
+		}
+	})
+}
 
 </script>
 

@@ -114,8 +114,7 @@
 									<CirclePlus class="fcm-prop-td-opt-icon"/>
 								</el-icon>
 
-								<el-icon v-else
-								         :size="30" @click="removeFcmProp(idx)">
+								<el-icon v-else :size="30" @click="removeFcmProp(idx)">
 									<Remove class="fcm-prop-td-opt-icon"/>
 								</el-icon>
 							</td>
