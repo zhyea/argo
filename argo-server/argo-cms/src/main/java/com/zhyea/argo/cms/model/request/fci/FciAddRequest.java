@@ -31,7 +31,7 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	/**
 	 * 页面ID
 	 */
-	//@NotNull(message = "pageId不能为空")
+	@NotNull(message = "pageId不能为空")
 	private Long pageId;
 
 

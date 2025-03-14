@@ -4,9 +4,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zhyea.argo.cms.convert.AppPageConverter;
 import com.zhyea.argo.cms.model.item.AppPageItem;
-import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
-import com.zhyea.argo.cms.model.request.app.AppPageEditRequest;
-import com.zhyea.argo.cms.model.request.app.AppPageQueryRequest;
+import com.zhyea.argo.cms.model.request.page.AppListQueryRequest;
+import com.zhyea.argo.cms.model.request.page.AppPageAddRequest;
+import com.zhyea.argo.cms.model.request.page.AppPageEditRequest;
+import com.zhyea.argo.cms.model.request.page.AppPageQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.data.entity.cms.AppPageEntity;
 import com.zhyea.argo.data.mapper.cms.AppPageMapper;
@@ -91,6 +92,7 @@ public class AppPageService {
 	 * @return 是否删除成功
 	 */
 	public boolean delete(Long pageId) {
+		// TODO 删除之前检查该应用页面是否被关联到其他组件实例中
 		int count = appPageMapper.deleteById(pageId);
 		return count == NumConstants.ONE;
 	}
@@ -114,6 +116,18 @@ public class AppPageService {
 		}
 
 		return result;
+	}
+
+
+	/**
+	 * 查询应用页面
+	 *
+	 * @param request 查询请求
+	 * @return 返回应用页面列表
+	 */
+	public List<AppPageItem> queryAppPages(AppListQueryRequest request) {
+		List<AppPageEntity> list = appPageMapper.query(request.getAppId(), request.getKeyword());
+		return appPageConverter.entityList2ItemList(list);
 	}
 
 

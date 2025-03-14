@@ -1,7 +1,7 @@
 package com.zhyea.argo.service;
 
 import com.zhyea.argo.TestBase;
-import com.zhyea.argo.cms.model.request.app.AppPageAddRequest;
+import com.zhyea.argo.cms.model.request.page.AppPageAddRequest;
 import com.zhyea.argo.cms.service.AppPageService;
 import org.chobit.commons.tools.ShortCode;
 import org.junit.jupiter.api.Assertions;
