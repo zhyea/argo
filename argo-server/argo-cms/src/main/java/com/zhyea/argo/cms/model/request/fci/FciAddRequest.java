@@ -3,6 +3,7 @@ package com.zhyea.argo.cms.model.request.fci;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
+import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.except.ArgoServerException;
 import lombok.Data;
 import org.chobit.commons.contract.Checkable;
@@ -39,7 +40,7 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	 * 组件模型ID
 	 */
 	@NotNull(message = "fcmId不能为空")
-	private Integer fcmId;
+	private Long fcmId;
 
 
 	/**
@@ -47,6 +48,13 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	 */
 	@NotBlank(message = "name不能为空")
 	private String name;
+
+
+	/**
+	 * 组件开关标志
+	 */
+	@EnumVal(enumClass = YesOrNo.class, message = "开关标志错误")
+	private Integer switchFlag;
 
 
 	/**

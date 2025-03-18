@@ -74,6 +74,8 @@ public enum ResponseCode implements CodeDescEnum {
 
 	DELETE_WITH_FCI_ERROR(40201, "该组件模型已被使用，无法删除"),
 
+	FCM_NOT_EXISTS_ERROR(40202, "对应组件模型不存在"),
+
 
 	/**
 	 * CMS fci相关问题
@@ -89,6 +91,8 @@ public enum ResponseCode implements CodeDescEnum {
 	FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW(40304, "组件属性生效开始时间不能小于当前时间"),
 
 	FCI_PROP_EFFECTIVE_END_TIME_AFTER_START(40305, "组件属性生效结束时间需要大于开始时间"),
+
+	DATA_BIND_URL_IS_EMPTY(40306, "数据链接不能为空"),
 
 	FCI_NOT_EXISTS_ERROR(40310, "组件实例不存在"),
 

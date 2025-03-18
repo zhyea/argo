@@ -3,19 +3,25 @@ package com.zhyea.argo.cms.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.cms.convert.FciConverter;
-import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.cms.model.item.FciItem;
+import com.zhyea.argo.cms.model.item.FcmItem;
 import com.zhyea.argo.cms.model.request.fci.FciAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciEditRequest;
 import com.zhyea.argo.cms.model.request.fci.FciQueryRequest;
+import com.zhyea.argo.constants.NumConstants;
+import com.zhyea.argo.constants.ResponseCode;
+import com.zhyea.argo.constants.enums.YesOrNo;
+import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.data.mapper.cms.FciMapper;
+import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.model.response.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static org.chobit.commons.utils.StrKit.isBlank;
 
 
 /**
@@ -27,101 +33,111 @@ import java.util.List;
 public class FciService {
 
 
-    private final FciMapper fciMapper;
+	private final FciMapper fciMapper;
 
-    private final FciConverter fciConverter;
+	private final FciConverter fciConverter;
 
-
-    @Autowired
-    public FciService(FciMapper fciMapper, FciConverter fciConverter) {
-        this.fciMapper = fciMapper;
-        this.fciConverter = fciConverter;
-    }
+	private final FcmService fcmService;
 
 
-    /**
-     * 新增组件实例
-     *
-     * @param request 新增组件实例请求
-     * @return 新增的组件实例id
-     */
-    public Long add(FciAddRequest request) {
-        FciEntity entity = fciConverter.addRequest2Entity(request);
-        fciMapper.add(entity);
-        return entity.getId();
-    }
+	@Autowired
+	public FciService(FciMapper fciMapper, FciConverter fciConverter, FcmService fcmService) {
+		this.fciMapper = fciMapper;
+		this.fciConverter = fciConverter;
+		this.fcmService = fcmService;
+	}
 
 
-    /**
-     * 修改组件实例
-     *
-     * @param request 修改组件实例请求
-     * @return 是否修改成功
-     */
-    public boolean edit(FciEditRequest request) {
-        FciEntity entity = fciConverter.modifyRequest2Entity(request);
-        int count = fciMapper.modify(entity);
-        return count == NumConstants.ONE;
-    }
+	/**
+	 * 新增组件实例
+	 *
+	 * @param request 新增组件实例请求
+	 * @return 新增的组件实例id
+	 */
+	public Long add(FciAddRequest request) {
+		FcmItem fcmItem = fcmService.getById(request.getFcmId());
+		if(null == fcmItem){
+			throw new ArgoServerException(ResponseCode.FCM_NOT_EXISTS_ERROR);
+		}
+		if(YesOrNo.YES.is(fcmItem.getDataBindFlag()) && isBlank(request.getDataUrl())){
+			throw new ArgoServerException(ResponseCode.DATA_BIND_URL_IS_EMPTY);
+		}
+
+		FciEntity entity = fciConverter.addRequest2Entity(request);
+		fciMapper.add(entity);
+		return entity.getId();
+	}
 
 
-    /**
-     * 根据id获取组件实例
-     *
-     * @param id 组件实例id
-     * @return 组件实例
-     */
-    public FciItem getById(Long id) {
-        FciEntity entity = fciMapper.getById(id);
-        return fciConverter.entity2Item(entity);
-    }
+	/**
+	 * 修改组件实例
+	 *
+	 * @param request 修改组件实例请求
+	 * @return 是否修改成功
+	 */
+	public boolean edit(FciEditRequest request) {
+		FciEntity entity = fciConverter.modifyRequest2Entity(request);
+		int count = fciMapper.modify(entity);
+		return count == NumConstants.ONE;
+	}
 
 
-    /**
-     * 根据id删除组件实例
-     *
-     * @param id 组件实例id
-     * @return 是否删除成功
-     */
-    public boolean deleteById(Long id) {
-        int count = fciMapper.deleteById(id);
-        return count == NumConstants.ONE;
-    }
+	/**
+	 * 根据id获取组件实例
+	 *
+	 * @param id 组件实例id
+	 * @return 组件实例
+	 */
+	public FciItem getById(Long id) {
+		FciEntity entity = fciMapper.getById(id);
+		return fciConverter.entity2Item(entity);
+	}
 
 
-    /**
-     * 根据页面id获取组件实例列表
-     *
-     * @param pageCode 页面code
-     * @return 组件实例列表
-     */
-    public List<FciItem> findByPageCode(String pageCode) {
-        List<FciEntity> entityList = fciMapper.findByPageCode(pageCode);
-        return fciConverter.entityList2ItemList(entityList);
-    }
+	/**
+	 * 根据id删除组件实例
+	 *
+	 * @param id 组件实例id
+	 * @return 是否删除成功
+	 */
+	public boolean deleteById(Long id) {
+		int count = fciMapper.deleteById(id);
+		return count == NumConstants.ONE;
+	}
 
 
-    /**
-     * 分页查询组件实例
-     *
-     * @param request 分页查询请求
-     * @return 分页查询结果
-     */
-    public PageResult<FciItem> findInPage(FciQueryRequest request) {
-        PageResult<FciItem> result = new PageResult<>();
+	/**
+	 * 根据页面id获取组件实例列表
+	 *
+	 * @param pageCode 页面code
+	 * @return 组件实例列表
+	 */
+	public List<FciItem> findByPageCode(String pageCode) {
+		List<FciEntity> entityList = fciMapper.findByPageCode(pageCode);
+		return fciConverter.entityList2ItemList(entityList);
+	}
 
-        try (Page<FciEntity> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-            List<FciEntity> list = fciMapper.findByAppId(request.getAppId(), request.getKeyword());
 
-            result.setData(fciConverter.entityList2ItemList(list));
-            result.setPageNo(page.getPageNum());
-            result.setPageSize(page.getPageSize());
-            result.setTotal(page.getTotal());
-        }
+	/**
+	 * 分页查询组件实例
+	 *
+	 * @param request 分页查询请求
+	 * @return 分页查询结果
+	 */
+	public PageResult<FciItem> findInPage(FciQueryRequest request) {
+		PageResult<FciItem> result = new PageResult<>();
 
-        return result;
-    }
+		try (Page<FciEntity> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
+			List<FciEntity> list = fciMapper.findByAppId(request.getAppId(), request.getKeyword());
 
+			result.setData(fciConverter.entityList2ItemList(list));
+			result.setPageNo(page.getPageNum());
+			result.setPageSize(page.getPageSize());
+			result.setTotal(page.getTotal());
+		}
+
+		return result;
+	}
 
 
 }
