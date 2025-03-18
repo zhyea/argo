@@ -21,6 +21,18 @@
 						<el-input id="name" v-model="fciForm.name"/>
 					</el-form-item>
 
+					<el-form-item label="页面" prop="pageId">
+						<el-select id="pageId" v-model.lazy="fciForm.pageId"
+						           placeholder="请选择页面"
+						           remote-show-suffix
+						           filterable remote :remote-method="fetchAppPages">
+							<el-option v-for="e in appPageList"
+							           :key="e.pageId"
+							           :label="e.pageName"
+							           :value="e.pageId"/>
+						</el-select>
+					</el-form-item>
+
 					<el-form-item label="是否启用" prop="switchFlag">
 						<el-switch id="switchFlag" v-model="fciForm.switchFlag"
 						           inline-prompt size="large"
@@ -35,18 +47,6 @@
 								{{ e[1] }}
 							</el-radio>
 						</el-radio-group>
-					</el-form-item>
-
-					<el-form-item label="页面" prop="pageId">
-						<el-select id="pageId" v-model.lazy="fciForm.pageId"
-						           placeholder="请选择页面"
-						           remote-show-suffix
-						           filterable remote :remote-method="fetchAppPages">
-							<el-option v-for="e in appPageList"
-							           :key="e.pageId"
-							           :label="e.pageName"
-							           :value="e.pageId"/>
-						</el-select>
 					</el-form-item>
 
 					<el-form-item label="生效时间" prop="effectivePeriodType"
