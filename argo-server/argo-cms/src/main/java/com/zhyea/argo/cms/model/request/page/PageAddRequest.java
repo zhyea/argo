@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class AppPageAddRequest extends BaseOperateRequest {
+public class PageAddRequest extends BaseOperateRequest {
 
 
 	@NotNull(message = "应用ID不能为空")

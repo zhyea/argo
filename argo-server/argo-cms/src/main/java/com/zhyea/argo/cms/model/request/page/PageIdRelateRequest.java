@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class AppPageIdRelateRequest extends BaseOperateRequest {
+public class PageIdRelateRequest extends BaseOperateRequest {
 
 
 	/**

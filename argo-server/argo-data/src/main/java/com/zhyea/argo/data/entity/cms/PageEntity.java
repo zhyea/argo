@@ -9,7 +9,7 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class AppPageEntity extends BaseEntity {
+public class PageEntity extends BaseEntity {
 
 
 	/**

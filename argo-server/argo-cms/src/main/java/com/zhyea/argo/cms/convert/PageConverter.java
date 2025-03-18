@@ -1,9 +1,9 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.data.entity.cms.AppPageEntity;
-import com.zhyea.argo.cms.model.item.AppPageItem;
-import com.zhyea.argo.cms.model.request.page.AppPageAddRequest;
-import com.zhyea.argo.cms.model.request.page.AppPageEditRequest;
+import com.zhyea.argo.cms.model.item.PageItem;
+import com.zhyea.argo.data.entity.cms.PageEntity;
+import com.zhyea.argo.cms.model.request.page.PageAddRequest;
+import com.zhyea.argo.cms.model.request.page.PageEditRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author robin
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface AppPageConverter {
+public interface PageConverter {
 
 
 	/**
@@ -25,7 +25,7 @@ public interface AppPageConverter {
 	 * @param addRequest 应用页面新增请求
 	 * @return 实体
 	 */
-	AppPageEntity addRequest2Entity(AppPageAddRequest addRequest);
+	PageEntity addRequest2Entity(PageAddRequest addRequest);
 
 
 	/**
@@ -35,7 +35,7 @@ public interface AppPageConverter {
 	 * @return 实体
 	 */
 	@Mapping(source = "pageId", target = "id")
-	AppPageEntity modifyRequest2Entity(AppPageEditRequest modifyRequest);
+	PageEntity modifyRequest2Entity(PageEditRequest modifyRequest);
 
 
 	/**
@@ -45,7 +45,7 @@ public interface AppPageConverter {
 	 * @return 应用页面信息
 	 */
 	@Mapping(source = "id", target = "pageId")
-	AppPageItem entity2Item(AppPageEntity entity);
+	PageItem entity2Item(PageEntity entity);
 
 
 	/**
@@ -54,7 +54,7 @@ public interface AppPageConverter {
 	 * @param entityList 实体列表
 	 * @return 应用页面信息列表
 	 */
-	List<AppPageItem> entityList2ItemList(List<AppPageEntity> entityList);
+	List<PageItem> entityList2ItemList(List<PageEntity> entityList);
 
 
 }

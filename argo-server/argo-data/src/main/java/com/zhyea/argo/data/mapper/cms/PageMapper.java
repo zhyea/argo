@@ -1,6 +1,6 @@
 package com.zhyea.argo.data.mapper.cms;
 
-import com.zhyea.argo.data.entity.cms.AppPageEntity;
+import com.zhyea.argo.data.entity.cms.PageEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author robin
  */
 @Mapper
-public interface AppPageMapper {
+public interface PageMapper {
 
 
 	/**
@@ -27,7 +27,7 @@ public interface AppPageMapper {
 			""
 	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
-	void add(@Param("e") AppPageEntity page);
+	void add(@Param("e") PageEntity page);
 
 
 	/**
@@ -41,7 +41,7 @@ public interface AppPageMapper {
 			"app_id=#{e.appId}, page_code=#{e.pageCode}, page_name=#{e.pageName}, remark=#{e.remark}",
 			"where id=#{e.id}"
 	})
-	int modify(@Param("e") AppPageEntity entity);
+	int modify(@Param("e") PageEntity entity);
 
 
 	/**
@@ -51,7 +51,7 @@ public interface AppPageMapper {
 	 * @return 应用页面记录
 	 */
 	@Select("select * from ag_cms_app_page where id=#{id}")
-	AppPageEntity getById(@Param("id") Long id);
+	PageEntity getById(@Param("id") Long id);
 
 
 	/**
@@ -70,7 +70,7 @@ public interface AppPageMapper {
 	 * @param appId 应用id
 	 * @return 应用页面记录集合
 	 */
-	List<AppPageEntity> query(@Param("appId") Long appId, @Param("keyword") String keyword);
+	List<PageEntity> query(@Param("appId") Long appId, @Param("keyword") String keyword);
 
 
 	/**

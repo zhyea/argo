@@ -8,7 +8,7 @@ import lombok.Data;
  * @author robin
  */
 @Data
-public class AppPageItem {
+public class PageItem {
 
 
 	/**

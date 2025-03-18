@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class AppPageEditRequest extends AppPageAddRequest {
+public class PageEditRequest extends PageAddRequest {
 
 
 	/**

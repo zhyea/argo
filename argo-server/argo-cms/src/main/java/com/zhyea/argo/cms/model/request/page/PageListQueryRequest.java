@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author robin
  */
 @Data
-public class AppListQueryRequest {
+public class PageListQueryRequest {
 
 
 	/**

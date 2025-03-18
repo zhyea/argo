@@ -2,15 +2,15 @@ package com.zhyea.argo.cms.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhyea.argo.cms.convert.AppPageConverter;
-import com.zhyea.argo.cms.model.item.AppPageItem;
-import com.zhyea.argo.cms.model.request.page.AppListQueryRequest;
-import com.zhyea.argo.cms.model.request.page.AppPageAddRequest;
-import com.zhyea.argo.cms.model.request.page.AppPageEditRequest;
-import com.zhyea.argo.cms.model.request.page.AppPageQueryRequest;
+import com.zhyea.argo.cms.convert.PageConverter;
+import com.zhyea.argo.cms.model.item.PageItem;
+import com.zhyea.argo.cms.model.request.page.PageAddRequest;
+import com.zhyea.argo.cms.model.request.page.PageListQueryRequest;
+import com.zhyea.argo.cms.model.request.page.PageEditRequest;
+import com.zhyea.argo.cms.model.request.page.PageQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
-import com.zhyea.argo.data.entity.cms.AppPageEntity;
-import com.zhyea.argo.data.mapper.cms.AppPageMapper;
+import com.zhyea.argo.data.entity.cms.PageEntity;
+import com.zhyea.argo.data.mapper.cms.PageMapper;
 import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.group.E;
 import org.chobit.commons.model.response.PageResult;
@@ -28,18 +28,18 @@ import static com.zhyea.argo.constants.ResponseCode.APP_PAGE_ALREADY_EXISTS_ERRO
  * @author robin
  */
 @Service
-public class AppPageService {
+public class PageService {
 
 
-	private final AppPageMapper appPageMapper;
+	private final PageMapper pageMapper;
 
-	private final AppPageConverter appPageConverter;
+	private final PageConverter pageConverter;
 
 
 	@Autowired
-	public AppPageService(AppPageMapper appPageMapper, AppPageConverter appPageConverter) {
-		this.appPageMapper = appPageMapper;
-		this.appPageConverter = appPageConverter;
+	public PageService(PageMapper pageMapper, PageConverter pageConverter) {
+		this.pageMapper = pageMapper;
+		this.pageConverter = pageConverter;
 	}
 
 
@@ -49,13 +49,13 @@ public class AppPageService {
 	 * @param request 新增页面请求
 	 * @return 新增的应用页面id
 	 */
-	public Long add(AppPageAddRequest request) {
-		long count = appPageMapper.countByPageCode(request.getPageCode());
+	public Long add(PageAddRequest request) {
+		long count = pageMapper.countByPageCode(request.getPageCode());
 		if (count > 0) {
 			throw new ArgoServerException(APP_PAGE_ALREADY_EXISTS_ERROR);
 		}
-		AppPageEntity entity = appPageConverter.addRequest2Entity(request);
-		appPageMapper.add(entity);
+		PageEntity entity = pageConverter.addRequest2Entity(request);
+		pageMapper.add(entity);
 		return entity.getId();
 	}
 
@@ -66,9 +66,9 @@ public class AppPageService {
 	 * @param request 修改页面请求
 	 * @return 是否修改成功
 	 */
-	public boolean modify(AppPageEditRequest request) {
-		AppPageEntity entity = appPageConverter.modifyRequest2Entity(request);
-		int count = appPageMapper.modify(entity);
+	public boolean modify(PageEditRequest request) {
+		PageEntity entity = pageConverter.modifyRequest2Entity(request);
+		int count = pageMapper.modify(entity);
 		return count == NumConstants.ONE;
 	}
 
@@ -79,9 +79,9 @@ public class AppPageService {
 	 * @param pageId 应用页面id
 	 * @return 应用页面
 	 */
-	public AppPageItem get(Long pageId) {
-		AppPageEntity entity = appPageMapper.getById(pageId);
-		return appPageConverter.entity2Item(entity);
+	public PageItem get(Long pageId) {
+		PageEntity entity = pageMapper.getById(pageId);
+		return pageConverter.entity2Item(entity);
 	}
 
 
@@ -93,7 +93,7 @@ public class AppPageService {
 	 */
 	public boolean delete(Long pageId) {
 		// TODO 删除之前检查该应用页面是否被关联到其他组件实例中
-		int count = appPageMapper.deleteById(pageId);
+		int count = pageMapper.deleteById(pageId);
 		return count == NumConstants.ONE;
 	}
 
@@ -104,12 +104,12 @@ public class AppPageService {
 	 * @param request 应用页面查询请求
 	 * @return 应用页面列表
 	 */
-	public PageResult<AppPageItem> findByAppId(AppPageQueryRequest request) {
-		PageResult<AppPageItem> result = new PageResult<>();
+	public PageResult<PageItem> findByAppId(PageQueryRequest request) {
+		PageResult<PageItem> result = new PageResult<>();
 
 		try (Page<E> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-			List<AppPageEntity> list = appPageMapper.query(request.getAppId(), request.getKeyword());
-			result.setData(appPageConverter.entityList2ItemList(list));
+			List<PageEntity> list = pageMapper.query(request.getAppId(), request.getKeyword());
+			result.setData(pageConverter.entityList2ItemList(list));
 			result.setPageNo(page.getPageNum());
 			result.setPageSize(page.getPageSize());
 			result.setTotal(page.getTotal());
@@ -125,9 +125,9 @@ public class AppPageService {
 	 * @param request 查询请求
 	 * @return 返回应用页面列表
 	 */
-	public List<AppPageItem> queryAppPages(AppListQueryRequest request) {
-		List<AppPageEntity> list = appPageMapper.query(request.getAppId(), request.getKeyword());
-		return appPageConverter.entityList2ItemList(list);
+	public List<PageItem> queryAppPages(PageListQueryRequest request) {
+		List<PageEntity> list = pageMapper.query(request.getAppId(), request.getKeyword());
+		return pageConverter.entityList2ItemList(list);
 	}
 
 
@@ -138,10 +138,10 @@ public class AppPageService {
 	 */
 	public String generatePageCode() {
 		String pageCode = ShortCode.genUpper();
-		long count = appPageMapper.countByPageCode(pageCode);
+		long count = pageMapper.countByPageCode(pageCode);
 		while (count > 0) {
 			pageCode = ShortCode.genUpper();
-			count = appPageMapper.countByPageCode(pageCode);
+			count = pageMapper.countByPageCode(pageCode);
 		}
 		return pageCode;
 	}

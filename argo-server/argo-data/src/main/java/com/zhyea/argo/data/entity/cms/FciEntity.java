@@ -17,15 +17,9 @@ public class FciEntity extends BaseEntity {
 
 
 	/**
-	 * 页面ID
-	 */
-	private Long pageId;
-
-
-	/**
 	 * 组件ID
 	 */
-	private Integer fcmId;
+	private Long fcmId;
 
 
 	/**

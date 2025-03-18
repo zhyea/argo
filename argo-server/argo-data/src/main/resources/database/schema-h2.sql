@@ -29,25 +29,9 @@ create table if not exists ag_cms_app
 --
 -- 应用页面信息
 --
--- create table if not exists ag_cms_app_page
--- (
---     id            int       not null default 0 auto_increment comment 'id',
---
---     app_id        int          not null default '' comment '应用ID',
---     page_code     varchar(16)  not null default '' comment '页面code',
---     page_name     varchar(64)  not null default '' comment '页面名称',
---     remark        varchar(128) not null default '' comment '备注',
---
---     operator_code varchar(32)  not null default 0 comment '操作人ID',
---     deleted       tinyint      not null default 0 comment '删除标记',
---     create_time   datetime     not null default now() comment '创建时间',
---     update_time   timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
---
---     primary key (id)
--- );
 create table if not exists ag_cms_app_page
 (
-    id            int          not null default 0 auto_increment comment 'id',
+    id            bigint       not null default 0 auto_increment comment 'id',
 
     app_id        int          not null default '' comment '应用ID',
     page_code     varchar(16)  not null default '' comment '页面code',
@@ -97,9 +81,7 @@ create table if not exists ag_cms_fci
 (
     id                    bigint       not null default 0 auto_increment comment 'id',
 
-    page_id               bigint       not null default 0 comment '页面ID',
-    fcm_id                int          not null default 0 comment '组件模型ID',
-
+    fcm_id                bigint       not null default 0 comment '组件模型ID',
 
     name                  varchar(64)  not null default '' comment '名称',
     data_url              varchar(128) not null default '' comment '数据URL',
@@ -123,9 +105,9 @@ create table if not exists ag_cms_fci
 --
 create table if not exists ag_cms_fci_prop
 (
-    id                    int          not null default 0 auto_increment comment 'id',
+    id                    bigint       not null default 0 auto_increment comment 'id',
 
-    fci_id                int          not null default 0 comment '组件实例ID',
+    fci_id                bigint       not null default 0 comment '组件实例ID',
 
     prop_key              varchar(64)  not null default 0 comment '属性key',
     prop_value            varchar(256) not null default '' comment '属性值',
@@ -140,6 +122,26 @@ create table if not exists ag_cms_fci_prop
     deleted               tinyint      not null default 0 comment '删除标记',
     create_time           datetime     not null default now() comment '创建时间',
     update_time           timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
+
+    primary key (id)
+);
+
+
+
+--
+-- 页面组件实例关联表
+--
+create table if not exists ag_cms_page_fci
+(
+    id            bigint      not null default 0 auto_increment comment 'id',
+
+    page_id       bigint      not null default 0 comment '页面ID',
+    fci_id        bigint      not null default 0 comment '组件实例ID',
+
+    operator_code varchar(32) not null default 0 comment '操作人ID',
+    deleted       tinyint     not null default 0 comment '删除标记',
+    create_time   datetime    not null default now() comment '创建时间',
+    update_time   timestamp   not null default current_timestamp on update current_timestamp comment '更新时间',
 
     primary key (id)
 );

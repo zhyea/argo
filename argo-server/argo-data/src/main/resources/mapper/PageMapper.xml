@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.zhyea.argo.data.mapper.cms.AppPageMapper">
+<mapper namespace="com.zhyea.argo.data.mapper.cms.PageMapper">
 
 
     <!-- 根据应用ID和关键字查询页面信息 -->
     <select id="query"
-            resultType="com.zhyea.argo.data.entity.cms.AppPageEntity">
+            resultType="com.zhyea.argo.data.entity.cms.PageEntity">
         select * from ag_cms_app_page where app_id=#{appId} and deleted=0
         <if test="null != keyword and keyword != ''">
             and (
