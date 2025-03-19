@@ -4,6 +4,12 @@ import com.zhyea.argo.data.entity.cms.PageFciEntity;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+
+/**
+ * 页面组件实例关联
+ *
+ * @author zhyea
+ */
 @Mapper
 public interface PageFciMapper {
 

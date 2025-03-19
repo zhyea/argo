@@ -16,6 +16,7 @@ import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.data.mapper.cms.FciMapper;
 import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.model.response.PageResult;
+import org.chobit.commons.tools.ShortCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,14 +57,16 @@ public class FciService {
 	 */
 	public Long add(FciAddRequest request) {
 		FcmItem fcmItem = fcmService.getById(request.getFcmId());
-		if(null == fcmItem){
+		if (null == fcmItem) {
 			throw new ArgoServerException(ResponseCode.FCM_NOT_EXISTS_ERROR);
 		}
-		if(YesOrNo.YES.is(fcmItem.getDataBindFlag()) && isBlank(request.getDataUrl())){
+		if (YesOrNo.YES.is(fcmItem.getDataBindFlag()) && isBlank(request.getDataUrl())) {
 			throw new ArgoServerException(ResponseCode.DATA_BIND_URL_IS_EMPTY);
 		}
 
 		FciEntity entity = fciConverter.addRequest2Entity(request);
+		entity.setFciCode(ShortCode.genUpper());
+		
 		fciMapper.add(entity);
 		return entity.getId();
 	}

@@ -23,6 +23,12 @@ public class FciEntity extends BaseEntity {
 
 
 	/**
+	 * 组件实例编码
+	 */
+	private String fciCode;
+
+
+	/**
 	 * 组件名称
 	 */
 	private String name;

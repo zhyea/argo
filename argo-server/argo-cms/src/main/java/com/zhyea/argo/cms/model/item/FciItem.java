@@ -20,6 +20,12 @@ public class FciItem {
 
 
 	/**
+	 * 组件代码
+	 */
+	private String fciCode;
+
+
+	/**
 	 * 组件ID
 	 */
 	private Integer fcmId;
