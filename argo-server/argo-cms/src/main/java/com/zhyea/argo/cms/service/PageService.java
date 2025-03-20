@@ -4,12 +4,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zhyea.argo.cms.convert.PageConverter;
 import com.zhyea.argo.cms.model.item.PageItem;
-import com.zhyea.argo.cms.model.request.page.PageAddRequest;
-import com.zhyea.argo.cms.model.request.page.PageListQueryRequest;
-import com.zhyea.argo.cms.model.request.page.PageEditRequest;
-import com.zhyea.argo.cms.model.request.page.PageQueryRequest;
+import com.zhyea.argo.cms.model.request.page.*;
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.data.entity.cms.PageEntity;
+import com.zhyea.argo.data.mapper.cms.PageFciMapper;
 import com.zhyea.argo.data.mapper.cms.PageMapper;
 import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.group.E;
@@ -32,14 +30,15 @@ public class PageService {
 
 
 	private final PageMapper pageMapper;
-
 	private final PageConverter pageConverter;
+	private final PageFciMapper pageFciMapper;
 
 
 	@Autowired
-	public PageService(PageMapper pageMapper, PageConverter pageConverter) {
+	public PageService(PageMapper pageMapper, PageConverter pageConverter, PageFciMapper pageFciMapper) {
 		this.pageMapper = pageMapper;
 		this.pageConverter = pageConverter;
+		this.pageFciMapper = pageFciMapper;
 	}
 
 
@@ -144,5 +143,17 @@ public class PageService {
 			count = pageMapper.countByPageCode(pageCode);
 		}
 		return pageCode;
+	}
+
+
+	/**
+	 * 映射页面组件实例
+	 *
+	 * @param request 页面组件实例映射请求
+	 * @return 是否映射成功
+	 */
+	public boolean mapFci(PageFciMapRequest request) {
+		Integer count = pageFciMapper.batchAdd(request.getPageId(), request.getFciIdList());
+		return request.getFciIdList().size() == count;
 	}
 }

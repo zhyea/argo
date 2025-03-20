@@ -20,6 +20,7 @@ public interface PageFciMapper {
 	 *
 	 * @param pageId 页面id
 	 * @param fciIds 组件实例ID集合
+	 * @return 添加成功数量
 	 */
-	void batchAdd(@Param("pageId") Long pageId, @Param("fciIdList") List<Long> fciIds);
+	Integer batchAdd(@Param("pageId") Long pageId, @Param("fciIdList") List<Long> fciIds);
 }

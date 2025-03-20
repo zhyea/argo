@@ -35,9 +35,7 @@ public class FciService {
 
 
 	private final FciMapper fciMapper;
-
 	private final FciConverter fciConverter;
-
 	private final FcmService fcmService;
 
 

@@ -1,6 +1,7 @@
 package com.zhyea.argo.cms.model.request.page;
 
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author robin
  * @since 2025/3/20 7:43
  */
+@Data
 public class PageFciMapRequest extends BaseOperateRequest {
 
 

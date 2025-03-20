@@ -107,16 +107,4 @@ public class FciController {
 		return fciService.findByPageCode(request.getPageCode());
 	}
 
-
-	/**
-	 * 挂链组件实例
-	 *
-	 * @param request 关联请求
-	 * @return 是否成功
-	 */
-	@PostMapping("/map-fci")
-	public boolean mapFci(@RequestBody @Validated PageFciMapRequest request) {
-
-	}
-
 }
