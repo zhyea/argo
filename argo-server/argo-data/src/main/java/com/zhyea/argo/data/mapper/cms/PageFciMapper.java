@@ -1,8 +1,9 @@
 package com.zhyea.argo.data.mapper.cms;
 
-import com.zhyea.argo.data.entity.cms.PageFciEntity;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -14,12 +15,11 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PageFciMapper {
 
 
-	@Insert({
-			"insert into ag_cms_page_fci (page_id, fci_id)",
-			"values",
-			"	(#{pageId}, #{fciId})",
-	})
-	int add(PageFciEntity pageFciEntity);
-
-
+	/**
+	 * 批量添加页面和组件实例关联关系
+	 *
+	 * @param pageId 页面id
+	 * @param fciIds 组件实例ID集合
+	 */
+	void batchAdd(@Param("pageId") Long pageId, @Param("fciIdList") List<Long> fciIds);
 }
