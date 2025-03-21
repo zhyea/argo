@@ -53,3 +53,12 @@ export function queryAppPages(appI, keyword) {
 export function generatePageCode() {
 	return request.get('/cms/app/page/page-code')
 }
+
+
+// 关联FCI实例
+export function mapFciList(pageId, fciIdList) {
+	return request.post('/cms/app/page/map-fci', {
+		pageId: pageId,
+		fciIdList: fciIdList,
+	})
+}
