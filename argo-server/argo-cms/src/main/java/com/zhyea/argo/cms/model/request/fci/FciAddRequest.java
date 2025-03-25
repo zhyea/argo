@@ -28,6 +28,12 @@ import static com.zhyea.argo.constants.ResponseCode.*;
 @Data
 public class FciAddRequest extends BaseOperateRequest implements Checkable {
 
+	/**
+	 * 应用ID
+	 */
+	@NotNull(message = "应用Id不能为空")
+	private Long appId;
+
 
 	/**
 	 * 组件模型ID
