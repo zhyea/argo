@@ -21,18 +21,6 @@
 						<el-input id="name" v-model="fciForm.name"/>
 					</el-form-item>
 
-					<el-form-item label="页面" prop="pageId">
-						<el-select id="pageId" v-model.lazy="fciForm.pageId"
-						           placeholder="请选择页面"
-						           remote-show-suffix
-						           filterable remote :remote-method="fetchAppPages">
-							<el-option v-for="e in appPageList"
-							           :key="e.pageId"
-							           :label="e.pageName"
-							           :value="e.pageId"/>
-						</el-select>
-					</el-form-item>
-
 					<el-form-item label="是否启用" prop="switchFlag">
 						<el-switch id="switchFlag" v-model="fciForm.switchFlag"
 						           inline-prompt size="large"
@@ -83,7 +71,6 @@ import {ref} from "vue";
 import {loadEnums} from "@/api/common.js";
 import {submitForm} from "@/utils/common.js";
 import {addFci, editFci} from "@/api/fci.js";
-import {findPages, queryAppPages} from "@/api/page.js";
 
 const fciItemDrawer = ref(false)
 
@@ -158,26 +145,9 @@ const submitFciForm = async () => {
 	submitForm(fciFormRef, formData, isFciFormSubmitted, maintainMethod, () => {
 		fciItemDrawer.value = false
 	})
-	console.log(JSON.stringify(formData))
-
 }
 
 defineExpose({openFciAddDrawer: openFciAddDrawer})
-
-// 应用页面信息
-const appPageList = ref()
-
-// 加载应用
-function fetchAppPages(keyword) {
-	const appId = fciForm.value.appId
-	queryAppPages(appId, keyword).then(response => {
-		if (response && response.data) {
-			appPageList.value = response.data
-		} else {
-			appPageList.value = []
-		}
-	})
-}
 
 </script>
 
