@@ -29,13 +29,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		String path = request.getRequestURI();
 
-		logger.info("Mocko Request, path:{}", path);
+		logger.info("Argo Request, path:{}", path);
 
 		String token = request.getHeader(TOKEN_FLAG);
 		token = String.valueOf(token).replace("Bearer ", EMPTY);
 
 		if (isBlank(token) || ObjKit.nonEquals(token, AuthContext.getToken())) {
-			logger.info("Mocko Request is blocked, clientToken:{}, serverToken:{} ", token, AuthContext.getToken());
+			logger.info("Argo Request is blocked, clientToken:{}, serverToken:{} ", token, AuthContext.getToken());
 			throw new ArgoServerException(USER_AUTH_ERROR);
 		}
 

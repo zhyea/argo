@@ -21,7 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         String path = request.getRequestURI();
 
-        logger.info("Mocko Request, path:{}, sessionId:{}", path, request.getSession().getId());
+        logger.info("Argo Request, path:{}, sessionId:{}", path, request.getSession().getId());
 
 
         return true;

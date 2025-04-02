@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ValidationException;
 import java.util.stream.Collectors;
 
 import static org.chobit.commons.constans.Symbol.COMMA;
 import static org.chobit.commons.constans.Symbol.EMPTY;
+import static org.chobit.commons.utils.StrKit.isBlank;
+import static org.chobit.commons.utils.StrKit.isNotBlank;
 
 
 /**
@@ -37,7 +40,7 @@ public class ApiExceptionAdvisor {
 	 */
 	@ResponseBody
 	@ExceptionHandler(ArgoServerException.class)
-	public Object mockoServerExceptionHandler(ArgoServerException e) {
+	public Object argoServerExceptionHandler(ArgoServerException e) {
 
 		Result<?> r = new Result<>(e.getCode());
 		r.setMsg(e.getMessage());
@@ -75,6 +78,34 @@ public class ApiExceptionAdvisor {
 		logger.warn("请求参数错误, total:{}, detail:{}", ex.getErrorCount(), logMsg);
 
 		return r;
+	}
+
+
+	/**
+	 * 参数校验异常返回值处理
+	 *
+	 * @param ex 异常信息
+	 * @return 封装后的异常返回值
+	 */
+	@ResponseBody
+	@ExceptionHandler(ValidationException.class)
+	public Result<?> paramExceptionHandler(ValidationException ex) {
+		String msg = ex.getMessage();
+		if (null != ex.getCause() && isNotBlank(ex.getCause().getMessage())) {
+			msg = ex.getCause().getMessage();
+		}
+
+		if (isBlank(msg)) {
+			msg = "请求参数错误";
+		}
+
+		Result<?> r = new Result<>(ResponseCode.ARGUMENT_ERROR.code);
+		r.setMsg(msg);
+
+		logger.warn("请求参数错误", ex);
+
+		return r;
+
 	}
 
 
