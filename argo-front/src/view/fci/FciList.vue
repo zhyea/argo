@@ -5,17 +5,17 @@
 			<el-form :model="keywordForm" label-width="60px" label-suffix=":" :inline="true"
 			         @submit.native.prevent>
 				<el-form-item label="关键字">
-					<el-input v-model="keywordForm.keyword" @keyup.enter.native="loadFcmListData"/>
+					<el-input v-model="keywordForm.keyword" @keyup.enter.native="loadFciListData"/>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="loadFcmListData">查询</el-button>
+					<el-button type="primary" @click="loadFciListData">查询</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
 
 		<div class="table-body">
 
-			<el-table :data="fcmListData" border style="width: 100%">
+			<el-table :data="fciListData" border style="width: 100%">
 				<el-table-column type="index" width="50"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="name" label="名称"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
@@ -45,7 +45,7 @@
 	</div>
 
 	<fci-drawer ref="fciDrawerRef"/>
-	<fcm-edit-drawer ref="fciDrawerRef"/>
+	<fci-edit-drawer ref="fciDrawerRef"/>
 </template>
 
 <script setup>
@@ -56,6 +56,8 @@ import {loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
+import {findFciList} from "@/api/fci.js";
+import FciEditDrawer from "@/view/fci/FciEditDrawer.vue";
 
 
 const route = useRoute();
@@ -80,10 +82,10 @@ const keywordForm = ref({
 
 
 // FCM列表数据
-const fcmListData = ref([])
+const fciListData = ref([])
 
 // 加载方法列表数据
-function loadFcmListData() {
+function loadFciListData() {
 	let keyword = keywordForm.value.keyword
 	let appId = route.params.appId
 	let pageInfo = pageData.value
@@ -92,9 +94,9 @@ function loadFcmListData() {
 		pageInfo.pageNo = parseInt(route.query.page)
 	}
 
-	findFcmList(appId, keyword, pageInfo).then(response => {
+	findFciList(appId, keyword, pageInfo).then(response => {
 		if (response && response.data && response.data.data) {
-			fcmListData.value = response.data.data
+			fciListData.value = response.data.data
 			pageInfo.total = response.data.total
 		}
 	})
@@ -106,7 +108,7 @@ const handlePageChange = async (val) => {
 	let appId = route.params.appId
 	router.push({name: config.fcmListRouteName, query: {appId: appId, page: val}})
 		.then(() => {
-			loadFcmListData()
+			loadFciListData()
 		})
 
 }
@@ -127,7 +129,7 @@ function handleDelete(row) {
 				message: '删除成功',
 				duration: 1500,
 			})
-			loadFcmListData()
+			loadFciListData()
 		}
 	})
 }
@@ -150,7 +152,7 @@ onMounted(() => {
 	// 加载枚举数据
 	loadEnums(allEnumsMap)
 	// 加载页面数据
-	loadFcmListData()
+	loadFciListData()
 })
 
 

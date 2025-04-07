@@ -6,6 +6,8 @@ export const config = {
 	appHomeRouteName: 'AppHome',
 	fcmEditRouteName: 'FcmEdit',
 	fcmListRouteName: 'FcmList',
+	fciEditRouteName: 'FciEdit',
+	fciListRouteName: 'FciList',
 
 	// auth
 	TOKEN: 'token',
