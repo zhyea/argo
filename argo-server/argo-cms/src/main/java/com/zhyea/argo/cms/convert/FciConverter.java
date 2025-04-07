@@ -1,5 +1,6 @@
 package com.zhyea.argo.cms.convert;
 
+import com.zhyea.argo.data.dto.FciDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.cms.model.item.FciItem;
 import com.zhyea.argo.cms.model.request.fci.FciAddRequest;
@@ -55,9 +56,9 @@ public interface FciConverter {
 	/**
 	 * 实体对象列表转换为Item对象列表
 	 *
-	 * @param entityList 实体对象列表
+	 * @param dtoList 数据传输对象列表
 	 * @return Item对象列表
 	 */
-	List<FciItem> entityList2ItemList(List<FciEntity> entityList);
+	List<FciItem> dtoList2ItemList(List<FciDto> dtoList);
 
 }

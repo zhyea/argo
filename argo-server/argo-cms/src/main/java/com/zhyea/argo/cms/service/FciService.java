@@ -12,6 +12,7 @@ import com.zhyea.argo.cms.model.request.fci.FciQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.constants.enums.YesOrNo;
+import com.zhyea.argo.data.dto.FciDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.data.mapper.cms.FciMapper;
 import com.zhyea.argo.except.ArgoServerException;
@@ -64,7 +65,7 @@ public class FciService {
 
 		FciEntity entity = fciConverter.addRequest2Entity(request);
 		entity.setFciCode(ShortCode.genUpper());
-		
+
 		fciMapper.add(entity);
 		return entity.getId();
 	}
@@ -114,8 +115,8 @@ public class FciService {
 	 * @return 组件实例列表
 	 */
 	public List<FciItem> findByPageCode(String pageCode) {
-		List<FciEntity> entityList = fciMapper.findByPageCode(pageCode);
-		return fciConverter.entityList2ItemList(entityList);
+		List<FciDto> entityList = fciMapper.findByPageCode(pageCode);
+		return fciConverter.dtoList2ItemList(entityList);
 	}
 
 
@@ -129,9 +130,9 @@ public class FciService {
 		PageResult<FciItem> result = new PageResult<>();
 
 		try (Page<FciEntity> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-			List<FciEntity> list = fciMapper.findByAppId(request.getAppId(), request.getKeyword());
+			List<FciDto> list = fciMapper.findByAppId(request.getAppId(), request.getKeyword());
 
-			result.setData(fciConverter.entityList2ItemList(list));
+			result.setData(fciConverter.dtoList2ItemList(list));
 			result.setPageNo(page.getPageNum());
 			result.setPageSize(page.getPageSize());
 			result.setTotal(page.getTotal());

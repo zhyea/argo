@@ -1,5 +1,6 @@
 package com.zhyea.argo.data.mapper.cms;
 
+import com.zhyea.argo.data.dto.FciDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -74,7 +75,7 @@ public interface FciMapper {
 	 * @param pageCode 页面code
 	 * @return 组件实例列表
 	 */
-	List<FciEntity> findByPageCode(@Param("pageId") String pageCode);
+	List<FciDto> findByPageCode(@Param("pageId") String pageCode);
 
 
 	/**
@@ -84,7 +85,7 @@ public interface FciMapper {
 	 * @param keyword 关键字
 	 * @return 组件实例列表
 	 */
-	List<FciEntity> findByAppId(@Param("appId") Long appId, @Param("keyword") String keyword);
+	List<FciDto> findByAppId(@Param("appId") Long appId, @Param("keyword") String keyword);
 
 
 	/**

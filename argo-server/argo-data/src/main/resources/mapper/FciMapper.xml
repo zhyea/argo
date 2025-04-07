@@ -6,11 +6,12 @@
 
 
     <!-- 根据应用id获取组件实例 -->
-    <select id="findByAppId"
-            resultType="com.zhyea.argo.data.entity.cms.FciEntity">
-        select fci.* from ag_cms_fci fci
+    <select id="findByAppId" resultType="com.zhyea.argo.data.dto.FciDto">
+        select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
+        from ag_cms_fci fci
         left join ag_cms_page_fci pf on fci.id=pf.fci_id
         left join ag_cms_app_page page on pf.page_id=page.id
+        left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
         where deleted=0
         <if test="null != appId">
             and page.app_id=#{appId}
@@ -24,9 +25,8 @@
 
 
     <!-- 根据页面编码获取组件实例 -->
-    <select id="findByPageCode"
-            resultType="com.zhyea.argo.data.entity.cms.FciEntity">
-        select fci.*, fcm.data_bind_flag
+    <select id="findByPageCode" resultType="com.zhyea.argo.data.dto.FciDto">
+        select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
         from ag_cms_fci fci
                  left join ag_cms_page_fci pf on fci.id = pf.fci_id
                  left join ag_cms_app_page page on pf.page_id = page.id
