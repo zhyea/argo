@@ -1,6 +1,7 @@
 import AppEditPage from './AppEdit.vue'
 import FcmListPage from '../fcm/FcmList.vue'
 import FcmEditPage from '../fcm/FcmEditDrawer.vue'
+import FciListPage from '../fci/FciList.vue'
 
 export default [{
 	name: 'AppEdit',
@@ -13,6 +14,13 @@ export default [{
 	name: 'AppFcmList',
 	path: '/app/:appId/app-fcm-list',
 	component: FcmListPage,
+	meta: {
+		title: '模型列表',
+	},
+}, {
+	name: 'AppFcmList',
+	path: '/app/:appId/fci-list',
+	component: FciListPage,
 	meta: {
 		title: '模型列表',
 	},
