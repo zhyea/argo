@@ -17,6 +17,12 @@ public class FciEntity extends BaseEntity {
 
 
 	/**
+	 * 应用ID
+	 */
+	private Long appId;
+
+
+	/**
 	 * 组件ID
 	 */
 	private Long fcmId;

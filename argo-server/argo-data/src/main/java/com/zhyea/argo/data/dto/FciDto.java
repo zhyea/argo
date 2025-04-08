@@ -35,9 +35,15 @@ public class FciDto {
 
 
 	/**
+	 * 应用ID
+	 */
+	private Long appId;
+
+
+	/**
 	 * 模型ID
 	 */
-	private Integer fcmId;
+	private Long fcmId;
 
 
 	/**

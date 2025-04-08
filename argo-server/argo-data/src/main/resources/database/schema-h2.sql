@@ -82,6 +82,7 @@ create table if not exists ag_cms_fci
     id                    bigint       not null default 0 auto_increment comment 'id',
 
     fcm_id                bigint       not null default 0 comment '组件模型ID',
+    app_id                bigint       not null default 0 comment '应用ID',
 
     name                  varchar(64)  not null default '' comment '名称',
     fci_code              varchar(16)  not null default '' comment '组件实例编码',

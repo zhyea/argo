@@ -12,7 +12,7 @@
         left join ag_cms_page_fci pf on fci.id=pf.fci_id
         left join ag_cms_app_page page on pf.page_id=page.id
         left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
-        where deleted=0
+        where fci.deleted=0
         <if test="null != appId">
             and page.app_id=#{appId}
         </if>
@@ -31,7 +31,7 @@
                  left join ag_cms_page_fci pf on fci.id = pf.fci_id
                  left join ag_cms_app_page page on pf.page_id = page.id
                  left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
-        where deleted = 0
+        where fci.deleted = 0
           and page.page_code = #{pageCode}
     </select>
 
