@@ -18,7 +18,7 @@ export default [{
 		title: '模型列表',
 	},
 }, {
-	name: 'AppFcmList',
+	name: 'AppFciList',
 	path: '/app/:appId/fci-list',
 	component: FciListPage,
 	meta: {
