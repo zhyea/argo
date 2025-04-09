@@ -21,10 +21,10 @@ public interface FciMapper {
 	 * @param entity 组件数据
 	 */
 	@Insert({
-			"insert into ag_cms_fci (fcm_id, name, data_url, switch_flag, ",
+			"insert into ag_cms_fci (app_id, fcm_id, fci_code, name, data_url, switch_flag, ",
 			"effective_period_type, effective_start_time, effective_end_time, remark)",
 			"values",
-			"(#{e.fcmId}, #{e.name}, #{e.dataUrl}, #{e.switchFlag}, ",
+			"(#{e.appId}, #{e.fcmId}, #{e.fciCode}, #{e.name}, #{e.dataUrl}, #{e.switchFlag}, ",
 			"#{e.effectivePeriodType}, #{e.effectiveStartTime}, #{e.effectiveEndTime}, #{e.remark})"
 	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
@@ -39,9 +39,10 @@ public interface FciMapper {
 	 */
 	@Update({
 			"update ag_cms_fci set",
-			"fcm_id=#{e.fcmId}, name=#{e.name}, data_url=#{e.dataUrl}, switch_flag=#{e.switchFLag}, ",
+			"`name`=#{e.name}, data_url=#{e.dataUrl}, switch_flag=#{e.switchFLag}, ",
 			"effective_period_type=#{e.effectivePeriodType},",
-			"effective_start_time=#{e.effectiveStartTime}, effective_end_time=#{e.effectiveEndTime}, remark=#{e.remark}",
+			"effective_start_time=#{e.effectiveStartTime}, effective_end_time=#{e.effectiveEndTime}, ",
+			"remark=#{e.remark}",
 			"where id=#{e.id}"
 	})
 	int modify(@Param("e") FciEntity entity);
