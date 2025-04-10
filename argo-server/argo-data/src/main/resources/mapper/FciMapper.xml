@@ -5,6 +5,40 @@
 <mapper namespace="com.zhyea.argo.data.mapper.cms.FciMapper">
 
 
+    <insert id="add">
+        insert into ag_cms_fci (
+        app_id,
+        fcm_id,
+        fci_code,
+        name,
+        data_url,
+        switch_flag,
+        effective_period_type,
+        <if test="null != e.effectiveStartTime">
+            effective_start_time,
+        </if>
+        <if test="null != e.effectiveEndTime">
+            effective_end_time,
+        </if>
+        remark
+        )values (
+        #{e.appId},
+        #{e.fcmId},
+        #{e.fciCode},
+        #{e.name},
+        #{e.dataUrl},
+        #{e.switchFlag},
+        #{e.effectivePeriodType},
+        <if test="null != e.effectiveStartTime">
+            #{e.effectiveStartTime},
+        </if>
+        <if test="null != e.effectiveEndTime">
+            #{e.effectiveEndTime},
+        </if>
+        #{e.remark})
+    </insert>
+
+
     <!-- 根据应用id获取组件实例 -->
     <select id="findByAppId" resultType="com.zhyea.argo.data.dto.FciDto">
         select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type

@@ -20,13 +20,6 @@ public interface FciMapper {
 	 *
 	 * @param entity 组件数据
 	 */
-	@Insert({
-			"insert into ag_cms_fci (app_id, fcm_id, fci_code, name, data_url, switch_flag, ",
-			"effective_period_type, effective_start_time, effective_end_time, remark)",
-			"values",
-			"(#{e.appId}, #{e.fcmId}, #{e.fciCode}, #{e.name}, #{e.dataUrl}, #{e.switchFlag}, ",
-			"#{e.effectivePeriodType}, #{e.effectiveStartTime}, #{e.effectiveEndTime}, #{e.remark})"
-	})
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") FciEntity entity);
 
