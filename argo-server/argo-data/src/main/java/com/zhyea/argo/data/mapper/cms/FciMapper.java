@@ -20,7 +20,6 @@ public interface FciMapper {
 	 *
 	 * @param entity 组件数据
 	 */
-	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void add(@Param("e") FciEntity entity);
 
 
@@ -30,14 +29,6 @@ public interface FciMapper {
 	 * @param entity 组件数据
 	 * @return 影响行数
 	 */
-	@Update({
-			"update ag_cms_fci set",
-			"`name`=#{e.name}, data_url=#{e.dataUrl}, switch_flag=#{e.switchFLag}, ",
-			"effective_period_type=#{e.effectivePeriodType},",
-			"effective_start_time=#{e.effectiveStartTime}, effective_end_time=#{e.effectiveEndTime}, ",
-			"remark=#{e.remark}",
-			"where id=#{e.id}"
-	})
 	int modify(@Param("e") FciEntity entity);
 
 

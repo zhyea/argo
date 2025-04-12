@@ -1,6 +1,7 @@
 package com.zhyea.argo.cms.model.item;
 
-import com.zhyea.argo.constants.enums.*;
+import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
+import com.zhyea.argo.constants.enums.SwitchFlagEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class FciItem {
 
 
 	/**
-	 * 组件模型ID
+	 * 组件ID
 	 */
 	private Long id;
 
@@ -27,19 +28,9 @@ public class FciItem {
 
 
 	/**
-	 * 类型
-	 * <p>
-	 * see also {@link FcmTypeEnum}
+	 * 组件代码
 	 */
-	private Integer type;
-
-
-	/**
-	 * 作用域
-	 * <p>
-	 * see also {@link FcScopeEnum}
-	 */
-	private Integer scope;
+	private String fciCode;
 
 
 	/**
@@ -49,46 +40,67 @@ public class FciItem {
 
 
 	/**
-	 * 应用名称
+	 * 模型ID
 	 */
-	private String appName;
+	private Long fcmId;
 
 
 	/**
-	 * 图标
+	 * 模型名称
 	 */
-	private String icon;
+	private String fcmName;
 
 
 	/**
-	 * 属性
+	 * 组件类型
 	 */
-	private String props;
+	private Integer type;
 
 
 	/**
-	 * 是否需要绑定数据标记
-	 * <p>
-	 * see also {@link YesOrNo}
+	 * 数据绑定标记
 	 */
 	private Integer dataBindFlag;
 
 
 	/**
-	 * 组件备注
+	 * 数据链接
+	 */
+	private String dataUrl;
+
+
+	/**
+	 * 开关标记
+	 * <p>
+	 * see also {@link SwitchFlagEnum}
+	 */
+	private Integer switchFlag;
+
+
+	/**
+	 * 组件生效周期类型
+	 * <p>
+	 * see also {@link EffectivePeriodTypeEnum}
+	 */
+	private Integer effectivePeriodType;
+
+
+	/**
+	 * 组件生效开始时间
+	 */
+	private LocalDateTime effectiveStartTime;
+
+
+	/**
+	 * 组件生效结束时间
+	 */
+	private LocalDateTime effectiveEndTime;
+
+
+	/**
+	 * 备注
 	 */
 	private String remark;
 
-
-	/**
-	 * 创建时间
-	 */
-	private LocalDateTime createTime;
-
-
-	/**
-	 * 更新时间
-	 */
-	private LocalDateTime updateTime;
 
 }

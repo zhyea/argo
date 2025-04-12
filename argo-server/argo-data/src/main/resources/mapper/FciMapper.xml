@@ -5,7 +5,9 @@
 <mapper namespace="com.zhyea.argo.data.mapper.cms.FciMapper">
 
 
-    <insert id="add">
+    <!-- 添加fci实例 -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.zhyea.argo.data.entity.cms.FciEntity">
         insert into ag_cms_fci (
         app_id,
         fcm_id,
@@ -39,17 +41,31 @@
     </insert>
 
 
+    <!-- 修改fci实例 -->
+    <update id="modify">
+        update ag_cms_fci
+        set `name`=#{e.name},
+        data_url=#{e.dataUrl},
+        switch_flag=#{e.switchFLag},
+        effective_period_type=#{e.effectivePeriodType},
+        <if test="null != e.effectiveStartTime">
+            effective_start_time=#{e.effectiveStartTime},
+        </if>
+        <if test="null != e.effectiveEndTime">
+            effective_end_time=#{e.effectiveEndTime},
+        </if>
+        remark=#{e.remark}
+        where id = #{e.id}
+    </update>
+
+
     <!-- 根据应用id获取组件实例 -->
     <select id="findByAppId" resultType="com.zhyea.argo.data.dto.FciDto">
         select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
         from ag_cms_fci fci
-        left join ag_cms_page_fci pf on fci.id=pf.fci_id
-        left join ag_cms_app_page page on pf.page_id=page.id
         left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
         where fci.deleted=0
-        <if test="null != appId">
-            and page.app_id=#{appId}
-        </if>
+        and fci.app_id=#{appId}
 
         <if test="null != keyword and keyword != ''">
             and fci.remark like concat('%', #{keyword}, '%')
