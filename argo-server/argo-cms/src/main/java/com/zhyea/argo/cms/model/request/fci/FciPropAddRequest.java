@@ -9,8 +9,9 @@ import org.chobit.commons.exception.ParamException;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 import static org.chobit.commons.utils.StrKit.isBlank;

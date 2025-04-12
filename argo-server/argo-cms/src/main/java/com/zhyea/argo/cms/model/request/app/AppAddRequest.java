@@ -3,7 +3,7 @@ package com.zhyea.argo.cms.model.request.app;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 
 /**

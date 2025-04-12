@@ -3,7 +3,7 @@ package com.zhyea.argo.cms.model.request.fci;
 import lombok.Data;
 import org.chobit.commons.model.request.BasePageRequest;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 
 /**

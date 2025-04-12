@@ -5,6 +5,8 @@ import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.except.ArgoServerException;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.chobit.commons.contract.Checkable;
 import org.chobit.commons.exception.ParamException;
@@ -12,8 +14,6 @@ import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 

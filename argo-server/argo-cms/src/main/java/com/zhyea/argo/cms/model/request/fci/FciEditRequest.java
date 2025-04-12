@@ -2,7 +2,7 @@ package com.zhyea.argo.cms.model.request.fci;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 
 /**
