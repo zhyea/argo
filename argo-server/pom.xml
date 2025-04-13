@@ -29,6 +29,7 @@
         <junit.version>5.9.3</junit.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <h2.version>2.1.214</h2.version>
+        <jackson.version>2.18.3</jackson.version>
     </properties>
 
     <dependencies>
@@ -120,6 +121,17 @@
                 <groupId>org.chobit.commons</groupId>
                 <artifactId>common-validator</artifactId>
                 <version>${zhy-commons.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
