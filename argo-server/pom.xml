@@ -25,7 +25,7 @@
 
         <!-- dependency version -->
         <lombok.version>1.18.38</lombok.version>
-        <zhy-commons.version>0.1.3.8</zhy-commons.version>
+        <zhy-commons.version>0.1.3.9-SNAPSHOT</zhy-commons.version>
         <junit.version>5.9.3</junit.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <h2.version>2.1.214</h2.version>

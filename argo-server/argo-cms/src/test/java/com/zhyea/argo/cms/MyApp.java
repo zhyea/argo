@@ -1,22 +1,16 @@
 package com.zhyea.argo.cms;
 
 import com.zhyea.argo.cms.model.item.FcmItem;
+import com.zhyea.argo.constants.enums.FcmTypeEnum;
+import org.chobit.commons.utils.JsonKit;
 
 public class MyApp {
 
-    public static void main(String[] args) {
-        FcmItem item = new FcmItem();
-
-        FcmItem item2 = new FcmItem();
-
-        boolean r = item.equals(item2);
-
-        System.out.println(r);
-
-        System.out.println(item.hashCode());
-        System.out.println(item2.hashCode());
-
-    }
+	public static void main(String[] args) {
+		FcmItem item = new FcmItem();
+		item.setType(FcmTypeEnum.IMAGE.getCode());
+		System.out.println(JsonKit.toJson(item));
+	}
 
 
 }

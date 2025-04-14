@@ -10,7 +10,6 @@ import org.chobit.commons.contract.CodeDescEnum;
 public enum FcmTypeEnum implements CodeDescEnum {
 
 
-
 	/**
 	 * 字符串
 	 */
@@ -50,5 +49,21 @@ public enum FcmTypeEnum implements CodeDescEnum {
 	@Override
 	public String getDesc() {
 		return desc;
+	}
+
+
+	public static FcmTypeEnum codeOf(int code) {
+		for (FcmTypeEnum e : values()) {
+			if (e.code == code) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+
+	public static String descOf(int code) {
+		FcmTypeEnum e = codeOf(code);
+		return null == e ? null : e.desc;
 	}
 }

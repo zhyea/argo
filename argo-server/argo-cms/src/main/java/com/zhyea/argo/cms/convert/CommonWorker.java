@@ -63,4 +63,5 @@ public final class CommonWorker {
 
 		return timeRange.get(1);
 	}
+
 }
