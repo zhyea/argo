@@ -1,8 +1,6 @@
 package com.zhyea.argo.cms.model.item;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
-import com.zhyea.argo.constants.enums.FcmTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
 import lombok.Data;
 
@@ -104,9 +102,4 @@ public class FciItem {
 	 */
 	private String remark;
 
-
-	@JsonAnyGetter
-	public String getTypeDesc() {
-		return FcmTypeEnum.descOf(this.type);
-	}
 }
