@@ -17,12 +17,14 @@
 
 			<el-table :data="fciListData" border style="width: 100%">
 				<el-table-column type="index" width="50"/>
-				<el-table-column show-overflow-tooltip min-width=270 prop="fcmName" label="模型名称"/>
-				<el-table-column show-overflow-tooltip min-width=270 prop="name" label="组件名称"/>
+				<el-table-column show-overflow-tooltip min-width=150 prop="fcmName" label="模型名称"/>
+				<el-table-column show-overflow-tooltip min-width=60 prop="fciCode" align="center" label="组件Code"/>
+				<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
 				<el-table-column min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
-				<el-table-column min-width=120 prop="scope" label="作用域" :formatter="mapScopeEnum"/>
-				<el-table-column show-overflow-tooltip min-width=80 prop="dataBindFlag" label="绑定数据"
+				<el-table-column min-width=30 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
+				<el-table-column show-overflow-tooltip min-width=160 prop="type" label="生效周期"
+				                 :formatter="formatEffectivePeriod"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
@@ -114,6 +116,7 @@ const handlePageChange = async (val) => {
 
 // 组件实例编辑抽屉
 const fcmEditDrawerRef = ref()
+
 // 处理FCM编辑
 function handleEdit(row) {
 	router.push({name: config.fcmEditRouteName, query: {fcmId: row.fcmId}})
@@ -166,6 +169,17 @@ function mapScopeEnum(row, column, cellValue, index) {
 
 function mapDataBindFlag(row, column, cellValue, index) {
 	return mapEnum('YesOrNo', row.dataBindFlag)
+}
+
+
+function formatEffectivePeriod(row, column, cellValue, index) {
+	let result = '~'
+	if (row.effectiveStartTime && row.effectiveEndTime) {
+		result = row.effectiveStartTime + ' ~ ' + row.effectiveEndTime;
+	} else if (row.effectiveStartTime) {
+		result = row.effectiveStartTime + ' ~ ';
+	}
+	return result
 }
 
 
