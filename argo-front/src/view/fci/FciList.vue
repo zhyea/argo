@@ -15,15 +15,16 @@
 
 		<div class="table-body">
 
-			<el-table :data="fciListData" border style="width: 100%">
+			<el-table :data="fciListData" border stripe style="width: 100%">
 				<el-table-column type="index" width="50"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="fcmName" label="模型名称"/>
-				<el-table-column show-overflow-tooltip min-width=60 prop="fciCode" align="center" label="组件Code"/>
+				<el-table-column show-overflow-tooltip min-width=60 prop="fciCode"
+				                 class-name="table-fci-code" align="center" label="组件Code"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
-				<el-table-column min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
+				<el-table-column min-width=60 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column min-width=30 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
-				<el-table-column show-overflow-tooltip min-width=160 prop="type" label="生效周期"
+				<el-table-column show-overflow-tooltip min-width=180 prop="type" label="生效周期" align="center"
 				                 :formatter="formatEffectivePeriod"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
@@ -221,5 +222,9 @@ function mapEnum(enumType, enumCode) {
 
 .table-button {
 	padding-bottom: 9px;
+}
+
+.table-fci-code {
+	font-family: 'Consolas', 'Monaco', 'Monospaced', 'serif' !important;
 }
 </style>
