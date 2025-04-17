@@ -1,15 +1,14 @@
 package com.zhyea.argo.cms;
 
-import com.zhyea.argo.cms.model.item.FcmItem;
-import com.zhyea.argo.constants.enums.FcmTypeEnum;
-import org.chobit.commons.utils.JsonKit;
+import org.chobit.commons.utils.LocalDateKit;
+
+import java.time.LocalDateTime;
 
 public class MyApp {
 
 	public static void main(String[] args) {
-		FcmItem item = new FcmItem();
-		item.setType(FcmTypeEnum.IMAGE.getCode());
-		System.out.println(JsonKit.toJson(item));
+
+		System.out.println(LocalDateKit.formatTime(LocalDateTime.MIN));
 	}
 
 

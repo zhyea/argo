@@ -50,7 +50,20 @@ public interface FciConverter {
 	 * @param entity 实体对象
 	 * @return Item对象
 	 */
+	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
+	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
 	FciItem entity2Item(FciEntity entity);
+
+
+	/**
+	 * 实体对象转换为Item对象
+	 *
+	 * @param dto 实体对象
+	 * @return Item对象
+	 */
+	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
+	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
+	FciItem dto2Item(FciDto dto);
 
 
 	/**
@@ -59,6 +72,8 @@ public interface FciConverter {
 	 * @param dtoList 数据传输对象列表
 	 * @return Item对象列表
 	 */
+	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
+	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
 	List<FciItem> dtoList2ItemList(List<FciDto> dtoList);
 
 }
