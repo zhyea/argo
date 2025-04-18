@@ -27,6 +27,8 @@
 				<el-table-column show-overflow-tooltip min-width=240 prop="appName" label="应用"/>
 				<el-table-column show-overflow-tooltip min-width=80 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
+				<el-table-column show-overflow-tooltip min-width=160 prop="createTime" label="创建时间"/>
+				<el-table-column show-overflow-tooltip min-width=160 prop="updateTime" label="修改时间"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="warning" size="small" @click="handleAddFci(scope.row)">创建实例</el-button>
