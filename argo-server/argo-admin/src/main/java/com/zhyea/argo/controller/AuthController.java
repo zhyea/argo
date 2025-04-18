@@ -2,7 +2,7 @@ package com.zhyea.argo.controller;
 
 import com.zhyea.argo.action.UserLoginAction;
 import com.zhyea.argo.model.request.UserLoginRequest;
-import com.zhyea.argo.tools.AuthContext;
+import com.zhyea.argo.tools.auth.AuthContext;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;

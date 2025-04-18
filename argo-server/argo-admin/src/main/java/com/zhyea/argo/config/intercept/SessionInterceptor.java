@@ -1,6 +1,6 @@
 package com.zhyea.argo.config.intercept;
 
-import com.zhyea.argo.tools.AuthContext;
+import com.zhyea.argo.tools.auth.AuthContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

@@ -1,4 +1,4 @@
-package com.zhyea.argo.tools;
+package com.zhyea.argo.tools.auth;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;

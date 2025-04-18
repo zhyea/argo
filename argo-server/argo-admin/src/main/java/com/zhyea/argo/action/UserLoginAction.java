@@ -6,7 +6,7 @@ import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.data.mapper.adm.UserMapper;
 import com.zhyea.argo.model.item.UserItem;
 import com.zhyea.argo.service.UserService;
-import com.zhyea.argo.tools.AuthContext;
+import com.zhyea.argo.tools.auth.AuthContext;
 import org.chobit.commons.codec.MD5;
 import org.chobit.commons.utils.LocalDateKit;
 import org.chobit.commons.utils.StrKit;

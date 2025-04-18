@@ -1,7 +1,7 @@
 package com.zhyea.argo.config.intercept;
 
 import com.zhyea.argo.except.ArgoServerException;
-import com.zhyea.argo.tools.AuthContext;
+import com.zhyea.argo.tools.auth.AuthContext;
 import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.utils.ObjKit;
 import org.springframework.web.servlet.HandlerInterceptor;
