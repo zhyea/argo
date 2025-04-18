@@ -95,7 +95,7 @@
             <dependency>
                 <groupId>org.chobit.spring</groupId>
                 <artifactId>zhy-spring-boot-autoconfigure</artifactId>
-                <version>0.0.5-SNAPSHOT</version>
+                <version>0.0.6</version>
             </dependency>
             <dependency>
                 <groupId>jakarta.validation</groupId>
@@ -107,6 +107,13 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>8.0.2.Final</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>1.80</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.chobit.commons</groupId>
                 <artifactId>common-model</artifactId>

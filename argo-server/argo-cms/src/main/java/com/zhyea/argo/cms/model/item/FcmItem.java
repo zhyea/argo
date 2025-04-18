@@ -5,6 +5,7 @@ import com.zhyea.argo.constants.enums.FcmTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -21,12 +22,10 @@ public class FcmItem {
 	 */
 	private Long id;
 
-
 	/**
 	 * 组件模型ID
 	 */
 	private Long fcmId;
-
 
 	/**
 	 * 作用域
@@ -35,30 +34,25 @@ public class FcmItem {
 	 */
 	private Integer scope;
 
-
 	/**
 	 * 应用ID
 	 */
 	private Long appId;
-
 
 	/**
 	 * 应用名称
 	 */
 	private String appName;
 
-
 	/**
 	 * 组件名称
 	 */
 	private String name;
 
-
 	/**
 	 * 图标
 	 */
 	private String icon;
-
 
 	/**
 	 * 类型
@@ -67,12 +61,10 @@ public class FcmItem {
 	 */
 	private Integer type;
 
-
 	/**
 	 * 属性
 	 */
 	private Set<FcmPropItem> props;
-
 
 	/**
 	 * 是否需要绑定数据标记
@@ -81,11 +73,18 @@ public class FcmItem {
 	 */
 	private Integer dataBindFlag;
 
-
 	/**
 	 * 组件备注
 	 */
 	private String remark;
 
+	/**
+	 * 创建时间
+	 */
+	private LocalDateTime createTime;
 
+	/**
+	 * 更新时间
+	 */
+	private LocalDateTime updateTime;
 }
