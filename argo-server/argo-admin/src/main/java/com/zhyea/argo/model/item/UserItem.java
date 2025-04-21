@@ -31,5 +31,8 @@ public class UserItem {
 	 * 上次登录时间
 	 */
 	private LocalDateTime lastLoginTime;
+	
+
+	private String clientIp;
 
 }

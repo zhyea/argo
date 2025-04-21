@@ -19,4 +19,9 @@ public interface SystemConstants {
 	String SPAN_ID = "spanId";
 
 
+	/**
+	 * unknown
+	 */
+	String UNKNOWN = "unknown";
+
 }

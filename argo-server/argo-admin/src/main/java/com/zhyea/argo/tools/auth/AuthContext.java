@@ -17,8 +17,7 @@ public final class AuthContext {
 	/**
 	 * 用户信息缓存
 	 */
-	private static final Cache<String, UserItem> USER_CACHE =
-			Caffeine.newBuilder().maximumSize(1024).expireAfterAccess(30, TimeUnit.MINUTES).build();
+	private static final Cache<String, UserItem> USER_CACHE = Caffeine.newBuilder().maximumSize(1024).expireAfterAccess(30, TimeUnit.MINUTES).build();
 
 
 	/**
@@ -68,6 +67,28 @@ public final class AuthContext {
 	public static String getToken() {
 		UserItem user = getUser();
 		return null == user ? null : user.getToken();
+	}
+
+
+	/**
+	 * 获取当前登录用户的ip
+	 *
+	 * @return ip
+	 */
+	public static String getClientIp() {
+		UserItem user = getUser();
+		return null == user ? null : user.getClientIp();
+	}
+
+
+	/**
+	 * 设置当前登录用户的ip
+	 */
+	public static void setClientIp(String ip) {
+		UserItem user = getUser();
+		if (null != user) {
+			user.setClientIp(ip);
+		}
 	}
 
 

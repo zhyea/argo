@@ -29,7 +29,7 @@ public class AuthController {
 
 
 	@PostMapping("/login")
-	public String login(@RequestBody @Validated UserLoginRequest request) {
+	public String login(@RequestBody @Validated UserLoginRequest request) throws Exception {
 		return loginAction.doLogin(request.getUsername(), request.getPassword());
 	}
 

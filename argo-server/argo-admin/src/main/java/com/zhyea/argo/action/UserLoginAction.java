@@ -2,28 +2,32 @@ package com.zhyea.argo.action;
 
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.data.entity.adm.UserEntity;
-import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.data.mapper.adm.UserMapper;
+import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.model.item.UserItem;
 import com.zhyea.argo.service.UserService;
+import com.zhyea.argo.tools.auth.AES;
 import com.zhyea.argo.tools.auth.AuthContext;
+import com.zhyea.argo.tools.auth.AuthInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.codec.MD5;
-import org.chobit.commons.utils.LocalDateKit;
-import org.chobit.commons.utils.StrKit;
+import org.chobit.commons.utils.JsonKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
-import static org.chobit.commons.constans.Symbol.COMMA;
+import static org.chobit.commons.utils.StrKit.isNotBlank;
 
 /**
  * 用户相关业务处理
  *
  * @author robin
  */
+@Slf4j
 @Component
 public class UserLoginAction {
 
@@ -41,6 +45,10 @@ public class UserLoginAction {
 
 	@Value("${argo.password.salt}")
 	private String pwdSalt;
+	@Value("${argo.auth.key}")
+	private String authKey;
+	@Value("${argo.auth.iv}")
+	private String authIv;
 
 
 	/**
@@ -51,7 +59,7 @@ public class UserLoginAction {
 	 * @return true 登陆成功， false 登录失败
 	 */
 	@Transactional
-	public String doLogin(String username, String password) {
+	public String doLogin(String username, String password) throws Exception {
 
 		// 密码加盐后查询记录校验
 		password = MD5.encode(password + pwdSalt);
@@ -65,13 +73,49 @@ public class UserLoginAction {
 		LocalDateTime now = LocalDateTime.now();
 		userMapper.resetLoginTime(username, now);
 
-		// 使用用户名、密码、登录时间生成token
-		String authInfo = StrKit.join(COMMA, username, password, LocalDateKit.formatTime(now));
-		String token = MD5.encode(authInfo);
+		return refreshToken(username, password);
+	}
+
+
+	public void checkToken(String token, String ip) throws Exception {
+
+		if(isNotBlank(AuthContext.getClientIp()) && !AuthContext.getClientIp().equals(ip)){
+			AuthContext.clear();
+			throw new ArgoServerException(ResponseCode.CLIENT_IP_CHANGED_ERROR);
+		}
+
+		String json = AES.decrypt(token, authKey, authIv);
+		AuthInfo authInfo = JsonKit.fromJson(json, AuthInfo.class);
+		if (null == authInfo) {
+			logger.warn("UserLoginAction#decodeToken invalid token:{}", token);
+			throw new ArgoServerException(ResponseCode.INVALID_TOKEN_ERROR);
+		}
+		long expireTime = authInfo.getExpireTime();
+
+		long timeLeft = expireTime - System.currentTimeMillis();
+		if (timeLeft < 0) {
+			throw new ArgoServerException(ResponseCode.EXPIRED_TOKEN_ERROR);
+		}
+
+		if (timeLeft > TimeUnit.MINUTES.toMillis(20L)) {
+			refreshToken(authInfo.getUsername(), authInfo.getPassword());
+		}
+
+		AuthContext.setClientIp(ip);
+	}
+
+
+	private String refreshToken(String username, String password) throws Exception {
+		AuthInfo authInfo = new AuthInfo(username, password);
+		authInfo.setExpireTime(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(25L));
+
+		String json = JsonKit.toJson(authInfo);
+
+		String token = AES.encrypt(json, authKey, authIv);
 
 		// 将登录信息置于AuthContext
 		UserItem userItem =
-				UserItem.builder().username(username).token(token).lastLoginTime(now).build();
+				UserItem.builder().username(username).token(token).lastLoginTime(LocalDateTime.now()).build();
 		AuthContext.addUser(userItem);
 
 		return token;

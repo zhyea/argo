@@ -1,16 +1,16 @@
 package com.zhyea.argo.config.intercept;
 
+import com.zhyea.argo.action.UserLoginAction;
 import com.zhyea.argo.except.ArgoServerException;
-import com.zhyea.argo.tools.auth.AuthContext;
-import lombok.extern.slf4j.Slf4j;
-import org.chobit.commons.utils.ObjKit;
-import org.springframework.web.servlet.HandlerInterceptor;
-
+import com.zhyea.argo.tools.BeanKit;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import static com.zhyea.argo.constants.Constants.TOKEN_FLAG;
 import static com.zhyea.argo.constants.ResponseCode.USER_AUTH_ERROR;
+import static com.zhyea.argo.constants.SystemConstants.UNKNOWN;
 import static org.chobit.commons.constans.Symbol.EMPTY;
 import static org.chobit.commons.utils.StrKit.isBlank;
 
@@ -33,12 +33,46 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		String token = request.getHeader(TOKEN_FLAG);
 		token = String.valueOf(token).replace("Bearer ", EMPTY);
+		String clientIp = clientIp(request);
 
-		if (isBlank(token) || ObjKit.nonEquals(token, AuthContext.getToken())) {
-			logger.info("Argo Request is blocked, clientToken:{}, serverToken:{} ", token, AuthContext.getToken());
+		checkClientInfo(token, clientIp);
+
+		return true;
+	}
+
+
+	public static String clientIp(HttpServletRequest request) {
+		String ip = request.getHeader("X-Real-IP");
+		if (isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+			ip = request.getHeader("X-Forwarded-For");
+		}
+		if (isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+
+
+	private void checkClientInfo(String token, String ip) {
+		if (isBlank(token)) {
+			logger.info("Argo Request is blocked, clientToken:{}", token);
 			throw new ArgoServerException(USER_AUTH_ERROR);
 		}
 
-		return true;
+		try {
+			UserLoginAction loginAction = BeanKit.get(UserLoginAction.class);
+			loginAction.checkToken(token);
+		} catch (ArgoServerException e) {
+			throw e;
+		} catch (Exception e) {
+			logger.info("Argo Request is blocked, check token failed。 clientToken:{}", token);
+			throw new ArgoServerException(USER_AUTH_ERROR);
+		}
 	}
 }

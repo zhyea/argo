@@ -30,6 +30,9 @@ public enum ResponseCode implements CodeDescEnum {
 	 * 用户已登出
 	 */
 	USER_AUTH_ERROR(100, "用户已登出"),
+	INVALID_TOKEN_ERROR(101, "token异常"),
+	EXPIRED_TOKEN_ERROR(102, "token已过期，请重新登录"),
+	CLIENT_IP_CHANGED_ERROR(103, "检测到用户IP地址变化，请重新登录"),
 
 
 	/**

@@ -7,14 +7,11 @@ import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.chobit.commons.utils.JsonKit;
 
 import javax.crypto.KeyGenerator;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
-
-import static org.chobit.commons.utils.StrKit.uuid;
 
 public class AES {
 
@@ -79,23 +76,6 @@ public class AES {
 		byte[] byteIv = Base36.decode(iv);
 
 		return new ParametersWithIV(new KeyParameter(bytesKey), byteIv);
-	}
-
-
-	public static void main(String[] args) throws Exception {
-
-		String key = generateKey();
-		String iv = generateIV();
-
-		AuthInfo authInfo = new AuthInfo("admin", uuid());
-		authInfo.setExpireTime(System.currentTimeMillis());
-
-		String src = JsonKit.toJson(authInfo);
-		String encrypted = encrypt(src, key, iv);
-		System.out.println("encrypted:" + encrypted);
-		String decrypted = decrypt(encrypted, key, iv);
-		System.out.println("decrypted:" + decrypted);
-
 	}
 
 
