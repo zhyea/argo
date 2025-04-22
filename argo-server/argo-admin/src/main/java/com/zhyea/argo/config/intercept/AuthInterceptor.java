@@ -67,7 +67,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		try {
 			UserLoginAction loginAction = BeanKit.get(UserLoginAction.class);
-			loginAction.checkToken(token);
+			loginAction.checkToken(token, ip);
 		} catch (ArgoServerException e) {
 			throw e;
 		} catch (Exception e) {

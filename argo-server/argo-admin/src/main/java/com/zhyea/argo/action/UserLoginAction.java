@@ -97,7 +97,7 @@ public class UserLoginAction {
 			throw new ArgoServerException(ResponseCode.EXPIRED_TOKEN_ERROR);
 		}
 
-		if (timeLeft > TimeUnit.MINUTES.toMillis(20L)) {
+		if (timeLeft < TimeUnit.MINUTES.toMillis(1L)) {
 			refreshToken(authInfo.getUsername(), authInfo.getPassword());
 		}
 
@@ -107,7 +107,7 @@ public class UserLoginAction {
 
 	private String refreshToken(String username, String password) throws Exception {
 		AuthInfo authInfo = new AuthInfo(username, password);
-		authInfo.setExpireTime(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(25L));
+		authInfo.setExpireTime(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(6L));
 
 		String json = JsonKit.toJson(authInfo);
 
