@@ -33,7 +33,7 @@ export function doPing(){
  * 设置token
  */
 export function setHttpToken(token) {
-	request.defaults.headers.common.Authorization = `Bearer ${token}`
+	request.defaults.headers.common.Authorization = `${token}`
 }
 
 

@@ -22,7 +22,7 @@ const axiosInst = axios.create({
 axiosInst.interceptors.request.use(cfg => {
 		let token = sessionStorage.getItem(config.TOKEN)
 		if (token) {
-			cfg.headers.Authorization = `Bearer ${token}`
+			cfg.headers.Authorization = `${token}`
 		}
 		return cfg;
 	},
