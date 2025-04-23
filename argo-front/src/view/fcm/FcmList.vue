@@ -20,15 +20,17 @@
 
 			<el-table :data="fcmListData" border style="width: 100%">
 				<el-table-column type="index" width="50"/>
-				<el-table-column show-overflow-tooltip min-width=240 prop="name" label="名称"/>
+				<el-table-column show-overflow-tooltip min-width=180 prop="name" label="名称"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"
 				                 :formatter="mapScopeEnum" align="center"/>
-				<el-table-column show-overflow-tooltip min-width=240 prop="appName" label="应用"/>
+				<el-table-column show-overflow-tooltip min-width=180 prop="appName" label="应用"/>
 				<el-table-column show-overflow-tooltip min-width=80 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
-				<el-table-column show-overflow-tooltip min-width=160 prop="createTime" label="创建时间"/>
-				<el-table-column show-overflow-tooltip min-width=160 prop="updateTime" label="修改时间"/>
+				<el-table-column show-overflow-tooltip min-width=180 prop="createTime" label="创建时间"
+				                 align="center"/>
+				<el-table-column show-overflow-tooltip min-width=180 prop="updateTime" label="修改时间"
+				                 align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="warning" size="small" @click="handleAddFci(scope.row)">创建实例</el-button>
