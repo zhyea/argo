@@ -49,6 +49,10 @@ public class UserLoginAction {
 	private String authKey;
 	@Value("${argo.auth.iv}")
 	private String authIv;
+	@Value("${argo.auth.token-duration-minutes}")
+	private int tokenDurationMinutes;
+	@Value("${argo.auth.idle-timeout-minutes}")
+	private int idleTimeoutMinutes;
 
 
 	/**
@@ -79,7 +83,7 @@ public class UserLoginAction {
 
 	public void checkToken(String token, String ip) throws Exception {
 
-		if(isNotBlank(AuthContext.getClientIp()) && !AuthContext.getClientIp().equals(ip)){
+		if (isNotBlank(AuthContext.getClientIp()) && !AuthContext.getClientIp().equals(ip)) {
 			AuthContext.clear();
 			throw new ArgoServerException(ResponseCode.CLIENT_IP_CHANGED_ERROR);
 		}
@@ -97,7 +101,7 @@ public class UserLoginAction {
 			throw new ArgoServerException(ResponseCode.EXPIRED_TOKEN_ERROR);
 		}
 
-		if (timeLeft < TimeUnit.MINUTES.toMillis(1L)) {
+		if (timeLeft < TimeUnit.MINUTES.toMillis(idleTimeoutMinutes)) {
 			refreshToken(authInfo.getUsername(), authInfo.getPassword());
 		}
 
@@ -107,7 +111,8 @@ public class UserLoginAction {
 
 	private String refreshToken(String username, String password) throws Exception {
 		AuthInfo authInfo = new AuthInfo(username, password);
-		authInfo.setExpireTime(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(6L));
+		long tokenMinutes = tokenDurationMinutes + idleTimeoutMinutes;
+		authInfo.setExpireTime(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(tokenMinutes));
 
 		String json = JsonKit.toJson(authInfo);
 
