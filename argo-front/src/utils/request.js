@@ -43,7 +43,7 @@ axiosInst.interceptors.response.use(
 		let code = result.code;
 		if (code === 0) {
 			return result;
-		} else if (code === 100) {
+		} else if (code === 100 || code === 102) {
 			// 执行跳转到登录页
 			sessionStorage.removeItem(config.TOKEN)
 			router.push({name: config.loginRouteName}).then(() => {
