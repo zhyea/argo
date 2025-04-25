@@ -28,5 +28,5 @@ argo:
   auth:
     key: F1XX8W35IV8T7GI0Z0MB749D102QY0S1NJYL62RE7BK6G94SVTD
     iv: Z3M6RQGU5C80KTJ70DZIN2RDYW
-    token-duration-minutes: 10
-    idle-timeout-minutes: 5
+    token-duration-minutes: 5
+    idle-timeout-minutes: 2
