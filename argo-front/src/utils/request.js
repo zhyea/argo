@@ -22,6 +22,7 @@ const axiosInst = axios.create({
 axiosInst.interceptors.request.use(cfg => {
 		let token = sessionStorage.getItem(config.TOKEN)
 		if (token) {
+			console.log(`token:${token}`)
 			cfg.headers.Authorization = `${token}`
 		}
 		return cfg;

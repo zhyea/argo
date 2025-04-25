@@ -18,7 +18,7 @@
 				<el-table-column type="index" width="40"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="fcmName" label="模型名称"/>
 				<el-table-column show-overflow-tooltip min-width=90 prop="fciCode" label="组件Code"
-				                 class-name="table-fci-code" align="center" />
+				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
 				<el-table-column min-width=60 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column min-width=55 prop="dataBindFlag" label="绑定数据"
@@ -221,9 +221,5 @@ function mapEnum(enumType, enumCode) {
 
 .table-button {
 	padding-bottom: 9px;
-}
-
-.table-fci-code div{
-	font-family: 'Consolas', 'Monaco', 'Monospaced', 'serif' !important;
 }
 </style>

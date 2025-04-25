@@ -152,6 +152,9 @@ button:focus-visible {
 	box-shadow: none;
 }
 
+.table-user-code {
+	font-family: 'Monospaced', 'Monaco', 'serif', 'Consolas', monospace !important;
+}
 
 @media (prefers-color-scheme: light) {
 	:root {
