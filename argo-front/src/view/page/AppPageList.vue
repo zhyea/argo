@@ -20,10 +20,13 @@
 
 			<el-table :data="appPageListData" border style="width: 100%">
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageId" label="ID"/>
-				<el-table-column show-overflow-tooltip min-width=120 prop="pageCode" label="页面代码" align="center"/>
+				<el-table-column show-overflow-tooltip min-width=120 prop="pageCode" label="页面代码"
+				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageName" label="页面名称"/>
-				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"/>
-				<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="更新时间"/>
+				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
+						align="center" />
+				<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="更新时间"
+						align="center" />
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>

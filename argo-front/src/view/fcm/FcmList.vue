@@ -19,7 +19,6 @@
 			</div>
 
 			<el-table :data="fcmListData" border style="width: 100%">
-				<el-table-column type="index" width="50"/>
 				<el-table-column show-overflow-tooltip min-width=160 prop="name" label="名称"/>
 				<el-table-column show-overflow-tooltip min-width=90 prop="type" label="类型"
 				                 :formatter="mapTypeEnum"/>

@@ -15,7 +15,6 @@
 
 		<div class="table-body">
 			<el-table :data="fciListData" border stripe style="width: 100%">
-				<el-table-column type="index" width="40"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="fcmName" label="模型名称"/>
 				<el-table-column show-overflow-tooltip min-width=90 prop="fciCode" label="组件Code"
 				                 class-name="table-user-code" align="center"/>
@@ -23,8 +22,12 @@
 				<el-table-column min-width=60 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column min-width=55 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
-				<el-table-column show-overflow-tooltip min-width=180 prop="type" label="生效周期" align="center"
+				<el-table-column show-overflow-tooltip min-width=220 prop="type" label="生效周期" align="center"
 				                 :formatter="formatEffectivePeriod"/>
+				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
+				                 align="center"/>
+				<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="修改时间"
+				                 align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
@@ -106,20 +109,16 @@ function loadFciListData() {
 // 处理页面切换
 const handlePageChange = async (val) => {
 	let appId = route.params.appId
-	router.push({name: config.fcmListRouteName, query: {appId: appId, page: val}})
+	router.push({name: config.fciListRouteName, query: {appId: appId, page: val}})
 		.then(() => {
 			loadFciListData()
 		})
-
 }
 
 
-// 组件实例编辑抽屉
-const fcmEditDrawerRef = ref()
-
 // 处理FCM编辑
 function handleEdit(row) {
-	router.push({name: config.fcmEditRouteName, query: {fcmId: row.fcmId}})
+	router.push({name: config.fciListRouteName, query: {fcmId: row.fcmId}})
 }
 
 // 处理FCM删除
@@ -184,7 +183,6 @@ function formatEffectivePeriod(row, column, cellValue, index) {
 
 
 function mapEnum(enumType, enumCode) {
-	console.log(enumType)
 	let enumMap = allEnumsMap.value.get(enumType)
 	let result
 	if (enumMap) {

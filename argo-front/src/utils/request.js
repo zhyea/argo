@@ -2,6 +2,7 @@ import axios from 'axios';
 import {ElMessage} from "element-plus";
 import router from '@/router/index.js'
 import {config} from "@/config/index.js";
+import {setHttpToken} from "@/api/auth.js";
 
 // axios.defaults.withCredentials = true
 // axios.defaults.crossDomain = true
@@ -39,12 +40,13 @@ axiosInst.interceptors.request.use(cfg => {
 axiosInst.interceptors.response.use(
 	resp => {
 		let result = resp.data
+		result.authToken = null;
 
 		//判断code码
 		let code = result.code;
 		if (code === 0) {
 			return result;
-		} else if (code === 100 || code === 102) {
+		} else if (code === 100 || code === 102 || code === 103) {
 			// 执行跳转到登录页
 			sessionStorage.removeItem(config.TOKEN)
 			router.push({name: config.loginRouteName}).then(() => {
@@ -57,6 +59,12 @@ axiosInst.interceptors.response.use(
 				duration: 1500,
 			})
 			return Promise.reject(msg);
+		}
+
+		if (result && result.authToken) {
+			console.log(`received new authToken:${result.authToken}`)
+			sessionStorage.setItem(config.TOKEN, result.authToken)
+			setHttpToken(result.authToken)
 		}
 	},
 	error => {
