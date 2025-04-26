@@ -22,6 +22,7 @@
         <if test="null != e.effectiveEndTime">
             effective_end_time,
         </if>
+        operator_code,
         remark
         )values (
         #{e.appId},
@@ -37,6 +38,7 @@
         <if test="null != e.effectiveEndTime">
             #{e.effectiveEndTime},
         </if>
+        #{e.operatorCode}
         #{e.remark})
     </insert>
 
@@ -54,6 +56,7 @@
         <if test="null != e.effectiveEndTime">
             effective_end_time=#{e.effectiveEndTime},
         </if>
+        operator_code=#{e.operatorCode},
         remark=#{e.remark}
         where id = #{e.id}
     </update>

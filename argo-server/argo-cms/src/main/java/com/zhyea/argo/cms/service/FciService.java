@@ -16,6 +16,7 @@ import com.zhyea.argo.data.dto.FciDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.data.mapper.cms.FciMapper;
 import com.zhyea.argo.except.ArgoServerException;
+import com.zhyea.argo.tools.auth.AuthContext;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.commons.tools.ShortCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class FciService {
 
 		FciEntity entity = fciConverter.addRequest2Entity(request);
 		entity.setFciCode(ShortCode.genUpper());
+		entity.setOperatorCode(AuthContext.getUsername());
 
 		fciMapper.add(entity);
 		return entity.getId();

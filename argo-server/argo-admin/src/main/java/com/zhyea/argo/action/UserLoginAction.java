@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static org.chobit.commons.utils.StrKit.isBlank;
 import static org.chobit.commons.utils.StrKit.isNotBlank;
 
 /**
@@ -107,6 +108,8 @@ public class UserLoginAction {
 
 		if (timeLeft < TimeUnit.MINUTES.toMillis(idleTimeoutMinutes)) {
 			refreshToken(authInfo.getUsername(), authInfo.getPassword());
+		} else if (isBlank(AuthContext.getUsername())) {
+			AuthContext.addUser(authInfo);
 		}
 
 		AuthContext.setClientIp(ip);
@@ -121,6 +124,7 @@ public class UserLoginAction {
 		String json = JsonKit.toJson(authInfo);
 
 		String token = AES.encrypt(json, authKey, authIv);
+		logger.info("UserLoginAction#refreshToken new token:{}", token);
 
 		// 将登录信息置于AuthContext
 		AuthInfo userItem =

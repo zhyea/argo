@@ -35,7 +35,6 @@ public class AES {
 		PaddedBufferedBlockCipher aes = new PaddedBufferedBlockCipher(
 				CBCBlockCipher.newInstance(AESEngine.newInstance())
 		);
-
 		aes.init(true, ivAndKey);
 
 		return cipherData(aes, plain);

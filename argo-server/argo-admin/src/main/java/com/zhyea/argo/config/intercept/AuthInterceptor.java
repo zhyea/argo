@@ -41,7 +41,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	}
 
 
-	public static String clientIp(HttpServletRequest request) {
+	private String clientIp(HttpServletRequest request) {
 		String ip = request.getHeader("X-Real-IP");
 		if (isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
 			ip = request.getHeader("X-Forwarded-For");
@@ -71,7 +71,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		} catch (ArgoServerException e) {
 			throw e;
 		} catch (Exception e) {
-			logger.info("Argo Request is blocked, check token failed。 clientToken:{}", token);
+			logger.info("Argo Request is blocked, check token failed。 clientToken:{}", token, e);
 			throw new ArgoServerException(USER_AUTH_ERROR);
 		}
 	}

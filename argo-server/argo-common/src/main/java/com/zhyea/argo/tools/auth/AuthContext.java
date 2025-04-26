@@ -13,11 +13,6 @@ public final class AuthContext {
 	 */
 	private static final ThreadLocal<AuthInfo> T_USER = new InheritableThreadLocal<>();
 
-	/**
-	 * token信息
-	 */
-	private static final ThreadLocal<String> T_TOKEN = new InheritableThreadLocal<>();
-
 
 	/**
 	 * 将用户信息保存到线程缓存
