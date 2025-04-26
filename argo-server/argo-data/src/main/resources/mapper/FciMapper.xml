@@ -38,7 +38,7 @@
         <if test="null != e.effectiveEndTime">
             #{e.effectiveEndTime},
         </if>
-        #{e.operatorCode}
+        #{e.operatorCode},
         #{e.remark})
     </insert>
 
