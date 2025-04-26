@@ -1,6 +1,9 @@
 package com.zhyea.argo.tools.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +13,8 @@ import lombok.NoArgsConstructor;
  * @author robin
  * @since 2025/4/18 23:00
  */
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class AuthInfo {
@@ -25,6 +30,18 @@ public class AuthInfo {
 
 	@JsonProperty("e")
 	private Long expireTime;
+
+
+	@JsonIgnore
+	private String token;
+
+
+	@JsonIgnore
+	private String ip;
+
+
+	@JsonIgnore
+	private boolean tokenChangeFlag;
 
 
 	public AuthInfo(String username, String password) {

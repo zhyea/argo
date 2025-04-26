@@ -1,11 +1,5 @@
 package com.zhyea.argo.tools.auth;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.zhyea.argo.model.item.UserItem;
-
-import java.util.concurrent.TimeUnit;
-
 /**
  * 用户登录信息及权限信息上下文
  *
@@ -15,15 +9,14 @@ public final class AuthContext {
 
 
 	/**
-	 * 用户信息缓存
+	 * user信息
 	 */
-	private static final Cache<String, UserItem> USER_CACHE = Caffeine.newBuilder().maximumSize(1024).expireAfterAccess(30, TimeUnit.MINUTES).build();
-
+	private static final ThreadLocal<AuthInfo> T_USER = new InheritableThreadLocal<>();
 
 	/**
-	 * user信息线程缓存
+	 * token信息
 	 */
-	private static final ThreadLocal<String> T_SESSION_ID = new InheritableThreadLocal<>();
+	private static final ThreadLocal<String> T_TOKEN = new InheritableThreadLocal<>();
 
 
 	/**
@@ -31,20 +24,8 @@ public final class AuthContext {
 	 *
 	 * @param user 用户信息
 	 */
-	public static void addUser(UserItem user) {
-		String sessionId = T_SESSION_ID.get();
-		USER_CACHE.put(sessionId, user);
-	}
-
-
-	/**
-	 * 获取用户信息
-	 *
-	 * @return 用户信息
-	 */
-	public static UserItem getUser() {
-		String sessionId = T_SESSION_ID.get();
-		return USER_CACHE.getIfPresent(sessionId);
+	public static void addUser(AuthInfo user) {
+		T_USER.set(user);
 	}
 
 
@@ -54,7 +35,7 @@ public final class AuthContext {
 	 * @return 用户名
 	 */
 	public static String getUsername() {
-		UserItem user = getUser();
+		AuthInfo user = T_USER.get();
 		return null == user ? null : user.getUsername();
 	}
 
@@ -65,7 +46,7 @@ public final class AuthContext {
 	 * @return token信息
 	 */
 	public static String getToken() {
-		UserItem user = getUser();
+		AuthInfo user = T_USER.get();
 		return null == user ? null : user.getToken();
 	}
 
@@ -76,8 +57,8 @@ public final class AuthContext {
 	 * @return ip
 	 */
 	public static String getClientIp() {
-		UserItem user = getUser();
-		return null == user ? null : user.getClientIp();
+		AuthInfo user = T_USER.get();
+		return null == user ? null : user.getIp();
 	}
 
 
@@ -85,28 +66,10 @@ public final class AuthContext {
 	 * 设置当前登录用户的ip
 	 */
 	public static void setClientIp(String ip) {
-		UserItem user = getUser();
+		AuthInfo user = T_USER.get();
 		if (null != user) {
-			user.setClientIp(ip);
+			user.setIp(ip);
 		}
-	}
-
-
-	/**
-	 * 设置sessionId
-	 *
-	 * @param sessionId sessionId
-	 */
-	public static void setSessionId(String sessionId) {
-		T_SESSION_ID.set(sessionId);
-	}
-
-
-	/**
-	 * 移除sessionId
-	 */
-	public static void removeSessionId() {
-		T_SESSION_ID.remove();
 	}
 
 
@@ -114,9 +77,29 @@ public final class AuthContext {
 	 * 清理当前线程的缓存
 	 */
 	public static void clear() {
-		String sessionId = T_SESSION_ID.get();
-		USER_CACHE.invalidate(sessionId);
-		T_SESSION_ID.remove();
+		T_USER.remove();
+	}
+
+
+	/**
+	 * 重置token变更标记
+	 */
+	public static void resetTokenChangeFlag() {
+		AuthInfo user = T_USER.get();
+		if (null != user) {
+			user.setTokenChangeFlag(false);
+		}
+	}
+
+
+	/**
+	 * 判断token是否变更
+	 *
+	 * @return true:变更，false:未变更
+	 */
+	public static boolean isTokenChanged() {
+		AuthInfo user = T_USER.get();
+		return null != user && user.isTokenChangeFlag();
 	}
 
 

@@ -94,7 +94,7 @@
             <dependency>
                 <groupId>org.chobit.spring</groupId>
                 <artifactId>zhy-spring-boot-autoconfigure</artifactId>
-                <version>0.0.6</version>
+                <version>0.0.7-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>jakarta.validation</groupId>

@@ -1,11 +1,9 @@
 package com.zhyea.argo.config.intercept;
 
-import com.zhyea.argo.tools.auth.AuthContext;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * session信息拦截器
@@ -18,7 +16,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		String sessionId = request.getSession(true).getId();
-		AuthContext.setSessionId(sessionId);
+
 		return true;
 	}
 
@@ -33,6 +31,6 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
 	                            Object handler, Exception ex) {
-		AuthContext.removeSessionId();
+
 	}
 }

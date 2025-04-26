@@ -15,30 +15,25 @@ import java.time.LocalDateTime;
 @Data
 public class FciEntity extends BaseEntity {
 
-
 	/**
 	 * 应用ID
 	 */
 	private Long appId;
-
 
 	/**
 	 * 组件ID
 	 */
 	private Long fcmId;
 
-
 	/**
 	 * 组件实例编码
 	 */
 	private String fciCode;
 
-
 	/**
 	 * 组件名称
 	 */
 	private String name;
-
 
 	/**
 	 * 数据绑定标记
@@ -46,12 +41,10 @@ public class FciEntity extends BaseEntity {
 	 */
 	private Integer dataBindFlag;
 
-
 	/**
 	 * 数据链接
 	 */
 	private String dataUrl;
-
 
 	/**
 	 * 开关标记
@@ -60,7 +53,6 @@ public class FciEntity extends BaseEntity {
 	 */
 	private Integer switchFlag;
 
-
 	/**
 	 * 组件生效周期类型
 	 * <p>
@@ -68,18 +60,15 @@ public class FciEntity extends BaseEntity {
 	 */
 	private Integer effectivePeriodType;
 
-
 	/**
 	 * 组件生效开始时间
 	 */
 	private LocalDateTime effectiveStartTime;
 
-
 	/**
 	 * 组件生效结束时间
 	 */
 	private LocalDateTime effectiveEndTime;
-
 
 	/**
 	 * 备注

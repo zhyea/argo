@@ -4,13 +4,13 @@ import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.data.entity.adm.UserEntity;
 import com.zhyea.argo.data.mapper.adm.UserMapper;
 import com.zhyea.argo.except.ArgoServerException;
-import com.zhyea.argo.model.item.UserItem;
 import com.zhyea.argo.service.UserService;
 import com.zhyea.argo.tools.auth.AES;
 import com.zhyea.argo.tools.auth.AuthContext;
 import com.zhyea.argo.tools.auth.AuthInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.codec.MD5;
+import org.chobit.commons.utils.DateKit;
 import org.chobit.commons.utils.JsonKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.chobit.commons.utils.StrKit.isNotBlank;
@@ -84,6 +85,7 @@ public class UserLoginAction {
 	public void checkToken(String token, String ip) throws Exception {
 
 		if (isNotBlank(AuthContext.getClientIp()) && !AuthContext.getClientIp().equals(ip)) {
+			logger.info("UserLoginAction#decodeToken origenIp:{}, currentIp:{}", ip, AuthContext.getClientIp());
 			AuthContext.clear();
 			throw new ArgoServerException(ResponseCode.CLIENT_IP_CHANGED_ERROR);
 		}
@@ -94,10 +96,12 @@ public class UserLoginAction {
 			logger.warn("UserLoginAction#decodeToken invalid token:{}", token);
 			throw new ArgoServerException(ResponseCode.INVALID_TOKEN_ERROR);
 		}
+
 		long expireTime = authInfo.getExpireTime();
 
 		long timeLeft = expireTime - System.currentTimeMillis();
 		if (timeLeft < 0) {
+			logger.info("UserLoginAction#checkToken 用户长时间没有操作，已自动登出 token过期时间:{}", DateKit.format(new Date(expireTime)));
 			throw new ArgoServerException(ResponseCode.EXPIRED_TOKEN_ERROR);
 		}
 
@@ -119,8 +123,8 @@ public class UserLoginAction {
 		String token = AES.encrypt(json, authKey, authIv);
 
 		// 将登录信息置于AuthContext
-		UserItem userItem =
-				UserItem.builder().username(username).token(token).lastLoginTime(LocalDateTime.now()).build();
+		AuthInfo userItem =
+				AuthInfo.builder().username(username).token(token).tokenChangeFlag(true).build();
 		AuthContext.addUser(userItem);
 
 		return token;

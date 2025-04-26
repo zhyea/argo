@@ -1,9 +1,9 @@
-package com.zhyea.argo.config;
+package com.zhyea.argo.config.response;
 
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.except.ArgoServerException;
+import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
-import org.chobit.commons.model.response.Result;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import jakarta.validation.ValidationException;
 import java.util.stream.Collectors;
 
 import static org.chobit.commons.constans.Symbol.COMMA;
@@ -42,7 +41,7 @@ public class ApiExceptionAdvisor {
 	@ExceptionHandler(ArgoServerException.class)
 	public Object argoServerExceptionHandler(ArgoServerException e) {
 
-		Result<?> r = new Result<>(e.getCode());
+		ResultWrapper<?> r = new ResultWrapper<>(e.getCode());
 		r.setMsg(e.getMessage());
 
 		logger.warn("发现服务端异常：{}", r.getMsg(), e);
@@ -59,7 +58,7 @@ public class ApiExceptionAdvisor {
 	 */
 	@ResponseBody
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Result<?> paramExceptionHandler(MethodArgumentNotValidException ex) {
+	public ResultWrapper<?> paramExceptionHandler(MethodArgumentNotValidException ex) {
 
 		String msg = EMPTY;
 		if (ex.hasFieldErrors()) {
@@ -72,7 +71,7 @@ public class ApiExceptionAdvisor {
 				.map(DefaultMessageSourceResolvable::getDefaultMessage)
 				.collect(Collectors.joining(COMMA));
 
-		Result<?> r = new Result<>(ResponseCode.ARGUMENT_ERROR.code);
+		ResultWrapper<?> r = new ResultWrapper<>(ResponseCode.ARGUMENT_ERROR.code);
 		r.setMsg(msg);
 
 		logger.warn("请求参数错误, total:{}, detail:{}", ex.getErrorCount(), logMsg);
@@ -89,7 +88,7 @@ public class ApiExceptionAdvisor {
 	 */
 	@ResponseBody
 	@ExceptionHandler(ValidationException.class)
-	public Result<?> paramExceptionHandler(ValidationException ex) {
+	public ResultWrapper<?> paramExceptionHandler(ValidationException ex) {
 		String msg = ex.getMessage();
 		if (null != ex.getCause() && isNotBlank(ex.getCause().getMessage())) {
 			msg = ex.getCause().getMessage();
@@ -99,13 +98,12 @@ public class ApiExceptionAdvisor {
 			msg = "请求参数错误";
 		}
 
-		Result<?> r = new Result<>(ResponseCode.ARGUMENT_ERROR.code);
+		ResultWrapper<?> r = new ResultWrapper<>(ResponseCode.ARGUMENT_ERROR.code);
 		r.setMsg(msg);
 
 		logger.warn("请求参数错误", ex);
 
 		return r;
-
 	}
 
 
@@ -118,13 +116,13 @@ public class ApiExceptionAdvisor {
 	@ResponseBody
 	@ExceptionHandler(BindException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public Result<?> bindExceptionHandler(BindException ex) {
+	public ResultWrapper<?> bindExceptionHandler(BindException ex) {
 
 		String msg = ex.getAllErrors().stream()
 				.map(DefaultMessageSourceResolvable::getDefaultMessage)
 				.collect(Collectors.joining(COMMA));
 
-		Result<?> r = new Result<>(ResponseCode.ERROR.code);
+		ResultWrapper<?> r = new ResultWrapper<>(ResponseCode.ERROR.code);
 		r.setMsg("未知异常");
 
 		logger.error("发现未知异常: {}", msg, ex);
@@ -142,9 +140,9 @@ public class ApiExceptionAdvisor {
 	@ResponseBody
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public Result<?> exceptionHandler(Exception e) {
+	public ResultWrapper<?> exceptionHandler(Exception e) {
 
-		Result<?> r = new Result<>(ResponseCode.ERROR.code);
+		ResultWrapper<?> r = new ResultWrapper<>(ResponseCode.ERROR.code);
 		r.setMsg("未知异常");
 
 		logger.error("发现未知异常: {}", r.getMsg(), e);
