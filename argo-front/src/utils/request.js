@@ -40,11 +40,15 @@ axiosInst.interceptors.request.use(cfg => {
 axiosInst.interceptors.response.use(
 	resp => {
 		let result = resp.data
-		result.authToken = null;
 
 		//判断code码
 		let code = result.code;
 		if (code === 0) {
+			if (result?.authToken) {
+				console.log(`received new authToken:${result.authToken}`)
+				sessionStorage.setItem(config.TOKEN, result.authToken)
+				setHttpToken(result.authToken)
+			}
 			return result;
 		} else if (code === 100 || code === 102 || code === 103) {
 			// 执行跳转到登录页
@@ -59,12 +63,6 @@ axiosInst.interceptors.response.use(
 				duration: 1500,
 			})
 			return Promise.reject(msg);
-		}
-
-		if (result && result.authToken) {
-			console.log(`received new authToken:${result.authToken}`)
-			sessionStorage.setItem(config.TOKEN, result.authToken)
-			setHttpToken(result.authToken)
 		}
 	},
 	error => {

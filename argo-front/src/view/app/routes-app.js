@@ -3,6 +3,8 @@ import FcmListPage from '../fcm/FcmList.vue'
 import FcmEditPage from '../fcm/FcmEditDrawer.vue'
 import FciListPage from '../fci/FciList.vue'
 
+import {config} from "@/config/index.js";
+
 export default [{
 	name: 'AppEdit',
 	path: '/app/:appId/edit',
@@ -18,7 +20,7 @@ export default [{
 		title: '模型列表',
 	},
 }, {
-	name: 'AppFciList',
+	name: config.fciListRouteName,
 	path: '/app/:appId/fci-list',
 	component: FciListPage,
 	meta: {
