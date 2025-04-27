@@ -69,7 +69,7 @@
 import {ref} from "vue";
 import {loadEnums} from "@/api/common.js";
 import {submitForm} from "@/utils/common.js";
-import {addFci, editFci} from "@/api/fci.js";
+import {addFci, editFci, getFci} from "@/api/fci.js";
 
 const fciItemDrawer = ref(false)
 
@@ -99,6 +99,20 @@ const fciFormRules = {
 };
 
 
+// 加载组件实例数据
+const loadFciData = async (fciId) => {
+	console.log('loadFciData', fciId)
+	if (!fciId) {
+		return
+	}
+	getFci(fciId).then(response => {
+		if (response && response.data) {
+			fciForm.value = response.data
+		}
+	})
+}
+
+
 const isFciFormSubmitted = ref(false)
 
 
@@ -125,13 +139,13 @@ const openPrepare = () => {
 
 
 // 打开组件实例抽屉
-const openFciEditDrawer = (fcmRow) => {
+const openFciEditDrawer = (fciId, appId) => {
 	openPrepare()
-	fciForm.value.fcmId = fcmRow.fcmId
-	fciForm.value.appId = fcmRow.appId
-	fciForm.value.dataBindFlag = fcmRow.dataBindFlag
+	loadFciData(fciId)
 }
 
+
+// 提交组件实例表单
 const submitFciForm = async () => {
 	if (!fciFormRef.value.validate()) {
 		return;

@@ -47,7 +47,7 @@
 		</div>
 	</div>
 
-	<fci-drawer ref="fciDrawerRef"/>
+	<fci-drawer ref="fciEditDrawerRef"/>
 </template>
 
 <script setup>
@@ -124,7 +124,7 @@ function handleEdit(row) {
 
 // 处理FCM删除
 function handleDelete(row) {
-	delFci(row.fcmId).then(response => {
+	delFci(row.id).then(response => {
 		if (response && response.data) {
 			ElMessage.success({
 				message: '删除成功',
