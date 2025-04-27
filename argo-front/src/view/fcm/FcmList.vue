@@ -62,7 +62,7 @@ import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
-import FciDrawer from "@/view/fci/FciEditDrawer.vue";
+import FciDrawer from "@/view/fci/FciAddDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 
 

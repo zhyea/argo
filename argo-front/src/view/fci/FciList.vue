@@ -48,19 +48,16 @@
 	</div>
 
 	<fci-drawer ref="fciDrawerRef"/>
-	<fci-edit-drawer ref="fciDrawerRef"/>
 </template>
 
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
-import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
-import {findFciList} from "@/api/fci.js";
-import FciEditDrawer from "@/view/fci/FciEditDrawer.vue";
+import {delFci, findFciList} from "@/api/fci.js";
 
 
 const route = useRoute();
@@ -116,14 +113,18 @@ const handlePageChange = async (val) => {
 }
 
 
-// 处理FCM编辑
+// 组件实例编辑抽屉
+const fciEditDrawerRef = ref()
+
+
+// 处理FCI编辑
 function handleEdit(row) {
-	router.push({name: config.fciListRouteName, query: {fcmId: row.fcmId}})
+	fciEditDrawerRef.value.openFciEditDrawer(row.id, row.appId)
 }
 
 // 处理FCM删除
 function handleDelete(row) {
-	delFcm(row.fcmId).then(response => {
+	delFci(row.fcmId).then(response => {
 		if (response && response.data) {
 			ElMessage.success({
 				message: '删除成功',
@@ -137,11 +138,6 @@ function handleDelete(row) {
 
 // 组件实例编辑抽屉
 const fciDrawerRef = ref()
-
-// 打开新增组件实例抽屉
-function handleAddFci(row) {
-	fciDrawerRef.value.openFciDrawer(row.fcmId)
-}
 
 
 // 枚举数据

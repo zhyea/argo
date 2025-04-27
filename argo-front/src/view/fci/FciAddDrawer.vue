@@ -9,6 +9,7 @@
 			         label-suffix=":"
 			         :model="fciForm" ref="fciFormRef" :rules="fciFormRules" class="fci-form">
 
+
 				<el-card header="组件实例信息" class="fcm-region">
 
 					<el-form-item prop="fcmId">
@@ -125,7 +126,7 @@ const openPrepare = () => {
 
 
 // 打开组件实例抽屉
-const openFciEditDrawer = (fcmRow) => {
+const openFciAddDrawer = (fcmRow) => {
 	openPrepare()
 	fciForm.value.fcmId = fcmRow.fcmId
 	fciForm.value.appId = fcmRow.appId
@@ -146,7 +147,7 @@ const submitFciForm = async () => {
 	})
 }
 
-defineExpose({openFciEditDrawer: openFciEditDrawer})
+defineExpose({openFciAddDrawer: openFciAddDrawer})
 
 </script>
 
