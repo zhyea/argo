@@ -40,7 +40,7 @@ public interface FciMapper {
 	 */
 	@Select({"select fci.*, fcm.data_bind_flag from ag_cms_fci fci ",
 			"left join ag_cms_fcm fcm on fci.fcm_id=fcm.id ",
-			"where id=#{id}"})
+			"where fci.id=#{id}"})
 	FciEntity getById(@Param("id") Long id);
 
 

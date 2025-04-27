@@ -124,11 +124,10 @@ public class UserLoginAction {
 		String json = JsonKit.toJson(authInfo);
 
 		String token = AES.encrypt(json, authKey, authIv);
-		logger.info("UserLoginAction#refreshToken new token:{}", token);
+		logger.info("UserLoginAction#refreshToken new token: {}", token);
 
 		// 将登录信息置于AuthContext
-		AuthInfo userItem =
-				AuthInfo.builder().username(username).token(token).tokenChangeFlag(true).build();
+		AuthInfo userItem = AuthInfo.builder().username(username).token(token).tokenChangeFlag(true).build();
 		AuthContext.addUser(userItem);
 
 		return token;
