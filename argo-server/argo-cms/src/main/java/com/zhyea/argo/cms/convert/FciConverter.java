@@ -40,7 +40,6 @@ public interface FciConverter {
 	 */
 	@Mapping(source = "effectiveTimeRange", target = "effectiveStartTime", qualifiedByName = "takeStartTime")
 	@Mapping(source = "effectiveTimeRange", target = "effectiveEndTime", qualifiedByName = "takeEndTime")
-	@Mapping(source = "fciId", target = "id")
 	FciEntity modifyRequest2Entity(FciEditRequest request);
 
 
@@ -75,5 +74,4 @@ public interface FciConverter {
 	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
 	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
 	List<FciItem> dtoList2ItemList(List<FciDto> dtoList);
-
 }

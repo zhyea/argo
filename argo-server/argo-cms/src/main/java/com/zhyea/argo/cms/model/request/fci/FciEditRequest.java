@@ -18,6 +18,6 @@ public class FciEditRequest extends FciAddRequest {
 	 * 组件实例id
 	 */
 	@NotNull(message = "fciId不能为空")
-	private Long fciId;
+	private Long id;
 
 }

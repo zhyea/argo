@@ -44,11 +44,11 @@
 
 
     <!-- 修改fci实例 -->
-    <update id="modify">
+    <update id="modify" parameterType="com.zhyea.argo.data.entity.cms.FciEntity">
         update ag_cms_fci
         set `name`=#{e.name},
         data_url=#{e.dataUrl},
-        switch_flag=#{e.switchFLag},
+        switch_flag=#{e.switchFlag},
         effective_period_type=#{e.effectivePeriodType},
         <if test="null != e.effectiveStartTime">
             effective_start_time=#{e.effectiveStartTime},
@@ -73,7 +73,6 @@
         <if test="null != keyword and keyword != ''">
             and fci.remark like concat('%', #{keyword}, '%')
         </if>
-
     </select>
 
 

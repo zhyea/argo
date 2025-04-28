@@ -11,6 +11,9 @@ import lombok.Data;
 public abstract class BaseOperateRequest {
 
 
-
+	/**
+	 * 操作人编码
+	 */
+	private String operatorCode;
 
 }
