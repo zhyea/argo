@@ -3060,3 +3060,9 @@ select fci.*, fcm.data_bind_flag from ag_cms_fci fci  left join ag_cms_fcm fcm o
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-04-28 08:08:13 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]desc ag_cms_fci"; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+desc ag_cms_fci [42001-214]
+2025-04-28 08:08:29 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]create table ag_cms_fci"; SQL statement:
+show create table ag_cms_fci [42000-214]

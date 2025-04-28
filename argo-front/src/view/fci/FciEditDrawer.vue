@@ -101,13 +101,14 @@ const fciFormRules = {
 
 // 加载组件实例数据
 const loadFciData = async (fciId) => {
-	console.log('loadFciData', fciId)
 	if (!fciId) {
 		return
 	}
 	getFci(fciId).then(response => {
 		if (response && response.data) {
-			fciForm.value = response.data
+			const fciData = response.data;
+			fciForm.value = fciData;
+			fciForm.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
 		}
 	})
 }
