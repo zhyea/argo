@@ -1,6 +1,6 @@
 <template>
 	<el-drawer :title="`${fciForm.id ? '编辑' : '新增'}组件实例`"
-	           v-model="fciItemDrawer" :with-header=true size="50%">
+	           v-model="fciItemDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->
 			<el-form status-icon
@@ -108,7 +108,7 @@ const loadFciData = async (fciId) => {
 		if (response && response.data) {
 			const fciData = response.data;
 			fciForm.value = fciData;
-			fciForm.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
+			fciForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
 		}
 	})
 }
@@ -146,6 +146,10 @@ const openFciEditDrawer = (fciId, appId) => {
 }
 
 
+
+const emit = defineEmits(['afterFciEdit'])
+
+
 // 提交组件实例表单
 const submitFciForm = async () => {
 	if (!fciFormRef.value.validate()) {
@@ -157,6 +161,7 @@ const submitFciForm = async () => {
 	const maintainMethod = formData.id ? editFci : addFci;
 
 	submitForm(fciFormRef, formData, isFciFormSubmitted, maintainMethod, () => {
+		emit('afterFciEdit');
 		fciItemDrawer.value = false
 	})
 }
