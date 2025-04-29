@@ -2,6 +2,7 @@ server:
   port: 8087
 
 spring:
+  # 数据库配置
   datasource:
     type: org.apache.commons.dbcp2.BasicDataSource
     driver-class-name: org.h2.Driver
@@ -22,11 +23,13 @@ spring:
       schema-locations: classpath:/database/schema-h2.sql
       data-locations: classpath:/database/data-h2.sql
 
+
+# Argo 权限相关信息
 argo:
   password:
     salt: 123456
   auth:
     key: F1XX8W35IV8T7GI0Z0MB749D102QY0S1NJYL62RE7BK6G94SVTD
     iv: Z3M6RQGU5C80KTJ70DZIN2RDYW
-    token-duration-minutes: 10
-    idle-timeout-minutes: 5
+    token-duration-minutes: 30
+    idle-timeout-minutes: 10
