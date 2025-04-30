@@ -9,8 +9,7 @@
 			         label-suffix=":"
 			         :model="fciForm" ref="fciFormRef" :rules="fciFormRules" class="fci-form">
 
-				<el-card header="组件实例信息" class="fcm-region">
-
+				<el-card class="fcm-region">
 					<el-form-item prop="fcmId">
 						<el-input type="hidden" v-model="fciForm.fcmId"/>
 						<el-input type="hidden" v-model="fciForm.appId"/>
@@ -104,6 +103,7 @@ const loadFciData = async (fciId) => {
 	if (!fciId) {
 		return
 	}
+
 	getFci(fciId).then(response => {
 		if (response && response.data) {
 			const fciData = response.data;
@@ -139,12 +139,20 @@ const openPrepare = () => {
 }
 
 
-// 打开组件实例抽屉
-const openFciEditDrawer = (fciId, appId) => {
+// 打开组件实例抽屉-用于编辑
+const openDrawerForEdit = (fciId, appId) => {
 	openPrepare()
 	loadFciData(fciId)
 }
 
+
+// 打开组件实例抽屉-用于新增
+const openDrawerForAdd = (fcmRow) => {
+	openPrepare()
+	fciForm.value.fcmId = fcmRow.fcmId
+	fciForm.value.appId = fcmRow.appId
+	fciForm.value.dataBindFlag = fcmRow.dataBindFlag
+}
 
 
 const emit = defineEmits(['afterFciEdit'])
@@ -166,7 +174,11 @@ const submitFciForm = async () => {
 	})
 }
 
-defineExpose({openFciEditDrawer: openFciEditDrawer})
+
+defineExpose({
+	openFciDrawerForEdit: openDrawerForEdit,
+	openFciDrawerForAdd: openDrawerForAdd,
+})
 
 </script>
 

@@ -51,7 +51,7 @@
 		</div>
 	</div>
 
-	<fci-drawer ref="fciAddDrawerRef"/>
+	<fci-drawer ref="fciEditDrawerRef"/>
 	<fcm-drawer @after-fcm-add="loadFcmListData" ref="fcmEditDrawerRef"/>
 </template>
 
@@ -62,7 +62,7 @@ import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
-import FciDrawer from "@/view/fci/FciAddDrawer.vue";
+import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 
 
@@ -133,14 +133,14 @@ function handleDelete(row) {
 }
 
 
-// 组件实例新增抽屉
-const fciAddDrawerRef = ref()
+// 组件实例编辑抽屉
+const fciEditDrawerRef = ref()
 // 组件模型编辑抽屉
 const fcmEditDrawerRef = ref()
 
 // 打开新增组件实例抽屉
 function handleAddFci(row) {
-	fciAddDrawerRef.value.openFciAddDrawer(row)
+	fciEditDrawerRef.value.openFciDrawerForAdd(row)
 }
 
 // 新增FCM

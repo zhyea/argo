@@ -120,7 +120,7 @@ const fciEditDrawerRef = ref()
 
 // 处理FCI编辑
 function handleEdit(row) {
-	fciEditDrawerRef.value.openFciEditDrawer(row.id, row.appId)
+	fciEditDrawerRef.value.openFciDrawerForEdit(row.id, row.appId)
 }
 
 // 处理FCM删除
