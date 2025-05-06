@@ -148,6 +148,7 @@
         <module>argo-data</module>
         <module>argo-admin</module>
         <module>argo-cms</module>
+        <module>argo-api</module>
     </modules>
 
 
