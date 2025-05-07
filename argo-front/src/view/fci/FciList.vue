@@ -140,7 +140,15 @@ function handleDelete(row) {
 
 // 打开属性管理窗口
 function showDetail(row) {
-	window.open(router.resolve({name: 'About'}).href, '_blank');
+	const target = {
+		name: 'FciDetail',
+		params: {
+			fciId: row.id,
+			appId: row.appId
+		}
+	}
+
+	window.open(router.resolve(target).href, '_blank');
 }
 
 

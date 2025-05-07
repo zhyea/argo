@@ -11,7 +11,7 @@
 
 
 			<!-- breadcrumb -->
-			<el-col :span="15">
+			<el-col :span="15" :breadcrumb>
 				<el-breadcrumb separator="/">
 					<el-breadcrumb-item v-for="item in breadcrumb"
 					                    :to="item.path"
@@ -57,6 +57,7 @@ import {ArrowDown, Avatar, Expand, Fold} from "@element-plus/icons-vue";
 
 const props = defineProps({
 	collapsed: Boolean,
+	breadcrumb: true,
 })
 
 

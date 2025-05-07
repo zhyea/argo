@@ -2,6 +2,8 @@ import HomePage from "@/view/home/Home.vue";
 import LoginPage from "@/view/auth/Login.vue"
 import AppHomePage from '@/view/app/AppHome.vue'
 import NotFoundPage from '@/view/error/NotFound.vue'
+import FciDetailPage from "@/view/fci/FciDetail.vue";
+
 
 import appRoutes from '@/view/app/routes'
 import fcmRoutes from '@/view/fcm/routes'
@@ -36,6 +38,10 @@ const routes = [
 			...appHomeRoutes,
 			...appPageRoutes,
 		],
+	}, {
+		name: 'FciDetail',
+		path: '/fci/:fciId',
+		component: FciDetailPage,
 	},
 	{
 		path: "/:pathMatch(.*)*", component: NotFoundPage, name: 'notFound'
