@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 
 /**
- * Argo CMS 启动类
+ * Argo API 启动类
  *
  * @author robin
  */
