@@ -1,15 +1,11 @@
 <template>
 
-	<el-container direction="vertical">
-		<head-bar/>
+	<el-container direction="vertical" class="out-wrapper">
+		<head-bar :showBreadcrumb="false" />
 
-		<el-container class="fci_container" direction="vertical">
-			<el-row>
-				<el-col :span="6">A</el-col>
-				<el-col :span="6">B</el-col>
-				<el-col :span="6">C</el-col>
-				<el-col :span="6">D</el-col>
-			</el-row>
+		<el-container class="fci_container">
+			<el-aside class="left_container">Aside</el-aside>
+			<el-main class="right_container">Main</el-main>
 		</el-container>
 
 	</el-container>
@@ -44,10 +40,26 @@ const pageData = ref({
 </script>
 
 <style scoped lang="less">
+.out-wrapper {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
 .fci_container {
-	height: calc(100vh - 100px);
-	background: #F0FFF0;
-	padding: 20px;
+	height: 100%;
+	padding: 10px;
+}
+
+.left_container {
+	width: 300px;
+	height: 100%;
+	background-color: #f5f000;
+}
+
+.right_container {
+	height: 100%;
+	background-color: #00f000;
 }
 
 </style>

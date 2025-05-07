@@ -2,8 +2,8 @@
 	<el-header>
 		<el-row>
 			<!-- sidebar switch-->
-			<el-col :span="1" class="open-menu">
-				<el-icon @click="sidebarSwitch">
+			<el-col :span="1" :class="{'open-menu': showBreadcrumb}">
+				<el-icon @click="sidebarSwitch" v-if="showBreadcrumb">
 					<expand v-if="collapsed"/>
 					<fold v-if="!collapsed"/>
 				</el-icon>
@@ -11,7 +11,7 @@
 
 
 			<!-- breadcrumb -->
-			<el-col :span="15" :breadcrumb>
+			<el-col :span="15">
 				<el-breadcrumb separator="/">
 					<el-breadcrumb-item v-for="item in breadcrumb"
 					                    :to="item.path"
@@ -57,7 +57,7 @@ import {ArrowDown, Avatar, Expand, Fold} from "@element-plus/icons-vue";
 
 const props = defineProps({
 	collapsed: Boolean,
-	breadcrumb: true,
+	showBreadcrumb: Boolean,
 })
 
 
