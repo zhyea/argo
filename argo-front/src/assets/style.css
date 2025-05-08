@@ -158,6 +158,7 @@ button:focus-visible {
 
 .item-row {
 	margin: 12px 0 6px 0;
+	font-size: 14px;
 }
 
 .item-label {
