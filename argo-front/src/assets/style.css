@@ -156,6 +156,23 @@ button:focus-visible {
 	font-family: 'Monospaced', 'Monaco', 'serif', 'Consolas', monospace !important;
 }
 
+.item-row {
+	margin: 12px 0 6px 0;
+}
+
+.item-label {
+	text-align: right;
+}
+
+.item-label:after {
+	content: ':';
+}
+
+.item-value {
+	padding-left: 8px;
+	text-align: left;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

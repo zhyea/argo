@@ -1,11 +1,47 @@
 <template>
 
 	<el-container direction="vertical" class="out-wrapper">
-		<head-bar :showBreadcrumb="false" />
+		<head-bar :showBreadcrumb="false"/>
 
 		<el-container class="fci_container">
-			<el-aside class="left_container">Aside</el-aside>
-			<el-main class="right_container">Main</el-main>
+			<el-aside class="left_container">
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">组件名称</el-col>
+					<el-col :span="18" class="item-value">{{name}}</el-col>
+				</el-row>
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">组件代码</el-col>
+					<el-col :span="18" class="item-value">{{fciCode}}</el-col>
+				</el-row>
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">模型名称</el-col>
+					<el-col :span="18" class="item-value">{{fcmName}}</el-col>
+				</el-row>
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">组件类型</el-col>
+					<el-col :span="18" class="item-value">{{typeName}}</el-col>
+				</el-row>
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">是否绑定数据</el-col>
+					<el-col :span="18" class="item-value">{{dataBindFlag}}</el-col>
+				</el-row>
+				<el-row class="item-row" v-if="dataBindFlag">
+					<el-col :span="6" class="item-label">数据连接</el-col>
+					<el-col :span="18" class="item-value">{{dataUrl}}</el-col>
+				</el-row>
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">生效周期</el-col>
+					<el-col :span="18" class="item-value">{{effectivePeriod}}</el-col>
+				</el-row>
+				<el-row class="item-row">
+					<el-col :span="6" class="item-label">备注</el-col>
+					<el-col :span="18" class="item-value">{{remark}}</el-col>
+				</el-row>
+			</el-aside>
+
+			<el-main class="right_container">
+
+			</el-main>
 		</el-container>
 
 	</el-container>
@@ -48,11 +84,11 @@ const pageData = ref({
 
 .fci_container {
 	height: 100%;
-	padding: 10px;
+	padding: 0;
 }
 
 .left_container {
-	width: 300px;
+	width: 420px;
 	height: 100%;
 	background-color: #f5f000;
 }
