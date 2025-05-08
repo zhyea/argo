@@ -63,6 +63,15 @@
 
 
     <!-- 根据应用id获取组件实例 -->
+    <select id="getById" resultType="com.zhyea.argo.data.dto.FciDto">
+        select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
+        from ag_cms_fci fci
+        left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
+        where fci.deleted=0 and fci.id=#{id}
+    </select>
+
+
+    <!-- 根据应用id获取组件实例 -->
     <select id="findByAppId" resultType="com.zhyea.argo.data.dto.FciDto">
         select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
         from ag_cms_fci fci

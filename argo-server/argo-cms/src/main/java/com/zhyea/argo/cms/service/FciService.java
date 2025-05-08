@@ -93,8 +93,8 @@ public class FciService {
 	 * @return 组件实例
 	 */
 	public FciItem getById(Long id) {
-		FciEntity entity = fciMapper.getById(id);
-		return fciConverter.entity2Item(entity);
+		FciDto dto = fciMapper.getById(id);
+		return fciConverter.dto2Item(dto);
 	}
 
 

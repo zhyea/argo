@@ -3,7 +3,6 @@ package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.cms.model.item.FciItem;
 import com.zhyea.argo.cms.model.request.fci.*;
-import com.zhyea.argo.cms.model.request.page.PageFciMapRequest;
 import com.zhyea.argo.cms.service.FciService;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;

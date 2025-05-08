@@ -38,10 +38,7 @@ public interface FciMapper {
 	 * @param id 组件实例id
 	 * @return 组件实例
 	 */
-	@Select({"select fci.*, fcm.data_bind_flag from ag_cms_fci fci ",
-			"left join ag_cms_fcm fcm on fci.fcm_id=fcm.id ",
-			"where fci.id=#{id}"})
-	FciEntity getById(@Param("id") Long id);
+	FciDto getById(@Param("id") Long id);
 
 
 	/**
