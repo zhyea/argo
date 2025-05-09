@@ -14,6 +14,7 @@ export function loadEnums(enumRef, resolve) {
 }
 
 
+// 获取全部枚举信息
 export async function loadEnumMap() {
 	const res = await request.get('/common/enums')
 	return readResponse(res)
@@ -22,6 +23,7 @@ export async function loadEnumMap() {
 
 /**
  * 读取响应信息
+ *
  * @param res 响应信息
  * @returns {Map<any, any>} 枚举信息
  */

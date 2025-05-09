@@ -157,7 +157,7 @@ button:focus-visible {
 }
 
 .item-row {
-	margin: 12px 0 6px 0;
+	margin: 15px 0 6px 0;
 	font-size: 14px;
 }
 
@@ -166,6 +166,7 @@ button:focus-visible {
 }
 
 .item-label:after {
+	margin-left: 3px;
 	content: ':';
 }
 

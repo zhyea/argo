@@ -6,36 +6,47 @@
 		<el-container class="fci_container">
 			<el-aside class="left_container">
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">组件名称</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.name }}</el-col>
+					<el-col :span="7" class="item-label">组件名称</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.name }}</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">组件代码</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.fciCode }}</el-col>
+					<el-col :span="7" class="item-label">组件代码</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.fciCode }}</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">模型名称</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.fcmName }}</el-col>
+					<el-col :span="7" class="item-label">模型名称</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.fcmName }}</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">组件类型</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.typeName }}</el-col>
+					<el-col :span="7" class="item-label">组件类型</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.typeName }}</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">是否绑定数据</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.dataBindFlag > 0 ? '是' : '否' }}</el-col>
+					<el-col :span="7" class="item-label">是否绑定数据</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.dataBindFlag > 0 ? '是' : '否' }}</el-col>
 				</el-row>
 				<el-row class="item-row" v-if="fciData.dataBindFlag">
-					<el-col :span="6" class="item-label">数据连接</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.dataUrl }}</el-col>
+					<el-col :span="7" class="item-label">数据连接</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.dataUrl }}</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">生效周期</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.effectivePeriod }}</el-col>
+					<el-col :span="7" class="item-label">生效周期类型</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.effectivePeriodTypeName }}
+					</el-col>
+				</el-row>
+				<el-row class="item-row" v-if="fciData.effectivePeriodType === 2">
+					<el-col :span="7" class="item-label">生效开始时间</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.effectiveStartTime }}
+					</el-col>
+				</el-row>
+				<el-row class="item-row" v-if="fciData.effectivePeriodType === 2">
+					<el-col :span="7" class="item-label">生效结束时间</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.effectiveEndTime }}
+					</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="6" class="item-label">备注</el-col>
-					<el-col :span="18" class="item-value">{{ fciData.remark }}</el-col>
+					<el-col :span="7" class="item-label">备注</el-col>
+					<el-col :span="17" class="item-value">{{ fciData.remark }}</el-col>
 				</el-row>
 			</el-aside>
 
@@ -50,7 +61,7 @@
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
-import {loadEnums} from "@/api/common.js";
+import {loadEnumMap, loadEnums} from "@/api/common.js";
 import {config} from "@/config/index.js";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
@@ -73,6 +84,7 @@ const fciData = ref({
 	dataUrl: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
+	effectivePeriodTypeName: '',
 	effectiveStartTime: '',
 	effectiveEndTime: '',
 	remark: '',
@@ -82,22 +94,27 @@ const fciData = ref({
 function loadFciData() {
 	const fciId = route.params.fciId;
 
-	getFci(fciId).then(response => {
-		if (response && response.data) {
-			fciData.value = response.data;
-		}
-	})
+	Promise.all([getFci(fciId), loadEnumMap()])
+		.then(result => {
+			const [resp, enumMap] = result;
+
+			const effectivePeriodTypeEnum = enumMap.get('EffectivePeriodTypeEnum');
+			if (!resp || !resp.data) {
+				return;
+			}
+
+			const r = resp.data;
+			r.effectivePeriodTypeName = effectivePeriodTypeEnum && effectivePeriodTypeEnum.get(r.effectivePeriodType);
+			r.effectivePeriod = r.effectiveStartTime + ' ~ ' + r.effectiveEndTime;
+
+			fciData.value = r;
+		})
 }
-
-
-const allEnumMap = ref()
-
-
 
 
 onMounted(() => {
 	// 加载页面数据
-	loadFciData()
+	loadFciData();
 })
 
 </script>
@@ -115,7 +132,7 @@ onMounted(() => {
 }
 
 .left_container {
-	width: 420px;
+	width: 360px;
 	height: 100%;
 	background-color: #f5f000;
 }
