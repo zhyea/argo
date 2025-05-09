@@ -4,7 +4,7 @@
 		<sidebar :collapsed="collapseFlag" :menu-items="appMenu"/>
 
 		<el-container direction="vertical">
-			<head-bar :collapsed="collapseFlag" @menu="changeSideBarState"/>
+			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true" @menu="changeSideBarState"/>
 			<el-main>
 				<router-view :key="$route.fullPath"/>
 			</el-main>

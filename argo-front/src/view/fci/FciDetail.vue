@@ -7,35 +7,35 @@
 			<el-aside class="left_container">
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">组件名称</el-col>
-					<el-col :span="18" class="item-value">{{fciData.name}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.name }}</el-col>
 				</el-row>
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">组件代码</el-col>
-					<el-col :span="18" class="item-value">{{fciData.fciCode}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.fciCode }}</el-col>
 				</el-row>
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">模型名称</el-col>
-					<el-col :span="18" class="item-value">{{fciData.fcmName}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.fcmName }}</el-col>
 				</el-row>
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">组件类型</el-col>
-					<el-col :span="18" class="item-value">{{fciData.typeName}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.typeName }}</el-col>
 				</el-row>
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">是否绑定数据</el-col>
-					<el-col :span="18" class="item-value">{{fciData.dataBindFlag>0  ? '是' : '否'}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.dataBindFlag > 0 ? '是' : '否' }}</el-col>
 				</el-row>
 				<el-row class="item-row" v-if="fciData.dataBindFlag">
 					<el-col :span="6" class="item-label">数据连接</el-col>
-					<el-col :span="18" class="item-value">{{fciData.dataUrl}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.dataUrl }}</el-col>
 				</el-row>
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">生效周期</el-col>
-					<el-col :span="18" class="item-value">{{fciData.effectivePeriod}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.effectivePeriod }}</el-col>
 				</el-row>
 				<el-row class="item-row">
 					<el-col :span="6" class="item-label">备注</el-col>
-					<el-col :span="18" class="item-value">{{fciData.remark}}</el-col>
+					<el-col :span="18" class="item-value">{{ fciData.remark }}</el-col>
 				</el-row>
 			</el-aside>
 
@@ -73,13 +73,13 @@ const fciData = ref({
 	dataUrl: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
-	effectiveStartTime:'',
+	effectiveStartTime: '',
 	effectiveEndTime: '',
 	remark: '',
 })
 
 // 加载组件实例数据
-const loadFciData = async () => {
+function loadFciData() {
 	const fciId = route.params.fciId;
 
 	getFci(fciId).then(response => {
@@ -88,6 +88,11 @@ const loadFciData = async () => {
 		}
 	})
 }
+
+
+const allEnumMap = ref()
+
+
 
 
 onMounted(() => {
