@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="FILE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{64} - %msg%n"/>
+    <conversionRule  conversionWord="APP_IP" converterClass="com.zhyea.argo.log.LogIpConverter"/>
+
+    <property name="ARGO_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] ${LOG_LEVEL_PATTERN:-%5p} ${PID:-} --- [%APP_IP] %logger{36} : %msg%n"/>
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
@@ -11,11 +13,11 @@
             <fileNamePattern>logs/argo-cms.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <pattern>${ARGO_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.zhyea.argo" level="INFO">
+    <logger name="com.zhyea.argo" level="INFO" additivity="false">
         <appender-ref ref="ROLLING_FILE"/>
     </logger>
 
