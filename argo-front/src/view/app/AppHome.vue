@@ -12,7 +12,7 @@
 	</el-container>
 
 	<el-container v-else v-loading="!validAppFlag"
-	              element-loading-text="加载应用出错 ······"
+	              element-loading-text="应用数据加载中 ······"
 	              class="home_container">
 		<el-main/>
 	</el-container>
