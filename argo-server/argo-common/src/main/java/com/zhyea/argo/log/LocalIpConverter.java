@@ -11,7 +11,7 @@ import java.net.InetAddress;
  * @author robin
  * @since 2025/5/10 13:17
  */
-public class LogIpConverter extends ClassicConverter {
+public class LocalIpConverter extends ClassicConverter {
 
 	private String ip = null;
 
