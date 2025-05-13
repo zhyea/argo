@@ -6,7 +6,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.chobit.commons.utils.JsonKit;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -65,19 +64,13 @@ public class ContentCachingFilter extends OncePerRequestFilter {
 	 * @throws UnsupportedEncodingException 异常
 	 */
 	private String readRequestStr(HttpServletRequest request, ContentCachingRequestWrapper wrapper) throws UnsupportedEncodingException {
-		String requestString;
-		if (HttpMethod.GET.matches(request.getMethod())) {
-			requestString = JsonKit.toJson(wrapper.getParameterMap());
+
+		String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
+		if (isNotBlank(contentType) && contentType.contains("multipart/form-data")) {
+			return "FILE";
 		} else {
-			String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
-			if (isNotBlank(contentType) && contentType.contains("multipart/form-data")) {
-				requestString = "FILE";
-			} else {
-				byte[] requestBody = wrapper.getContentAsByteArray();
-				requestString = new String(requestBody, request.getCharacterEncoding());
-			}
+			return wrapper.getContentAsString();
 		}
-		return requestString;
 	}
 
 
