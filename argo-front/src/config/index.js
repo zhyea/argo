@@ -1,3 +1,13 @@
+
+export default {
+
+	locale: 'zh-cn',
+
+	guard: 'admin',
+
+}
+
+
 // config
 export const config = {
 	// route

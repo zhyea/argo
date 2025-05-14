@@ -12,7 +12,7 @@ export const useBreadcrumbStore
 	actions: {
 
 		set(breadcrumb) {
-			let title = []
+			const title = []
 			this.breadcrumb = breadcrumb.filter(item => {
 
 				if (title.indexOf(item.meta.title) >= 0) {

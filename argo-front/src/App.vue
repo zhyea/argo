@@ -9,17 +9,21 @@
 import {onMounted, watch} from 'vue'
 import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {useRoute} from "vue-router";
+import {useI18n} from "vue-i18n";
 
-const router = useRoute()
+const route = useRoute()
 const breadcrumbStore = useBreadcrumbStore()
 
 onMounted(() => {
-		breadcrumbStore.set(router.matched)
-	}
-)
+		breadcrumbStore.set(route.matched)
+	})
 
-watch(router, () => {
-	breadcrumbStore.set(router.matched)
+
+const i18n = useI18n();
+getLocale()
+
+watch(route, () => {
+	breadcrumbStore.set(route.matched)
 })
 
 </script>
