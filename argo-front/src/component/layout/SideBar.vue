@@ -21,8 +21,16 @@
 					         active-text-color="#ffffff">
 						<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
 					</el-menu>
+
+					<el-menu>
+						<el-menu-item index="999">
+							底部菜单项
+						</el-menu-item>
+					</el-menu>
 				</el-scrollbar>
 			</div>
+
+
 		</div>
 	</el-aside>
 </template>
