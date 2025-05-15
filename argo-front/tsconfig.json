@@ -5,10 +5,18 @@
 				"src/*"
 			]
 		},
+		"types": [
+			"vite/client",
+			"jest",
+			"node"
+		],
 		"esModuleInterop": true
 	},
 	"include": [
-		"**/*.js", "**/*.ts", "**/*.d.ts", "**/*.vue"
+		"**/*.js",
+		"**/*.ts",
+		"**/*.d.ts",
+		"**/*.vue"
 	],
 	"exclude": [
 		"node_modules",

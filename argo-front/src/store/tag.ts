@@ -1,6 +1,6 @@
 import {defineStore} from "pinia"
-import config from "@/config/index.ts";
-import {routeByName, routeFormatTag} from "@/utils/helper";
+import config from "@/config/index";
+import {routeByName, routeFormatTag} from "@/utils/helper/index.ts";
 import router from "@/router";
 
 export const useTagStore = defineStore("tag", {

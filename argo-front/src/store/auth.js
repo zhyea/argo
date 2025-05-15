@@ -2,7 +2,7 @@
 
 import {defineStore} from 'pinia'
 import {doLogin, doLogout, setHttpToken, removeHttpToken, doPing} from '@/api/auth'
-import {route} from '@/config/index.ts'
+import {route} from '@/config'
 
 
 export const useAuthStore = defineStore('auth', {
