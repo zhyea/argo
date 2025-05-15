@@ -55,7 +55,7 @@
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {loadEnums} from "@/api/common.js";
-import {config} from "@/config/index.js";
+import {route} from "@/config/index.ts";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import {delFci, findFciList} from "@/api/fci.js";
@@ -107,7 +107,7 @@ function loadFciListData() {
 // 处理页面切换
 const handlePageChange = async (val) => {
 	let appId = route.params.appId
-	router.push({name: config.fciListRouteName, query: {appId: appId, page: val}})
+	router.push({name: route.fciListRouteName, query: {appId: appId, page: val}})
 		.then(() => {
 			loadFciListData()
 		})

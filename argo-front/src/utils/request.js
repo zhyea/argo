@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {ElMessage} from "element-plus";
 import router from '@/router/index.js'
-import {config} from "@/config/index.js";
+import {route} from "@/config/index.ts";
 import {setHttpToken} from "@/api/auth.js";
 
 // axios.defaults.withCredentials = true
@@ -21,7 +21,7 @@ const axiosInst = axios.create({
 
 //2. 请求拦截器
 axiosInst.interceptors.request.use(cfg => {
-		let token = sessionStorage.getItem(config.TOKEN)
+		let token = sessionStorage.getItem(route.TOKEN)
 		if (token) {
 			console.log(`token:${token}`)
 			cfg.headers.Authorization = `${token}`
@@ -46,14 +46,14 @@ axiosInst.interceptors.response.use(
 		if (code === 0) {
 			if (result?.authToken) {
 				console.log(`received new authToken:${result.authToken}`)
-				sessionStorage.setItem(config.TOKEN, result.authToken)
+				sessionStorage.setItem(route.TOKEN, result.authToken)
 				setHttpToken(result.authToken)
 			}
 			return result;
 		} else if (code === 100 || code === 102 || code === 103) {
 			// 执行跳转到登录页
-			sessionStorage.removeItem(config.TOKEN)
-			router.push({name: config.loginRouteName}).then(() => {
+			sessionStorage.removeItem(route.TOKEN)
+			router.push({name: route.loginRouteName}).then(() => {
 				console.log(name)
 			})
 		} else {

@@ -62,7 +62,7 @@
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {loadEnumMap, loadEnums} from "@/api/common.js";
-import {config} from "@/config/index.js";
+import {route} from "@/config/index.ts";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import {delFci, findFciList, getFci} from "@/api/fci.js";

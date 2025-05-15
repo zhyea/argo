@@ -53,7 +53,7 @@ import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {delFcm, findFcmList} from "@/api/fcm.js";
 import {loadEnums} from "@/api/common.js";
-import {config} from "@/config/index.js";
+import {route} from "@/config/index.ts";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 
@@ -104,7 +104,7 @@ function loadFcmListData() {
 // 处理页面切换
 const handlePageChange = async (val) => {
 	let appId = route.params.appId
-	router.push({name: config.fcmListRouteName, query: {appId: appId, page: val}})
+	router.push({name: route.fcmListRouteName, query: {appId: appId, page: val}})
 		.then(() => {
 			loadFcmListData()
 		})
@@ -116,7 +116,7 @@ const handlePageChange = async (val) => {
 const fcmEditDrawerRef = ref()
 // 处理FCM编辑
 function handleEdit(row) {
-	router.push({name: config.fcmEditRouteName, query: {fcmId: row.fcmId}})
+	router.push({name: route.fcmEditRouteName, query: {fcmId: row.fcmId}})
 }
 
 // 处理FCM删除

@@ -2,13 +2,13 @@
 
 import {defineStore} from 'pinia'
 import {doLogin, doLogout, setHttpToken, removeHttpToken, doPing} from '@/api/auth'
-import {config} from '@/config/index.js'
+import {route} from '@/config/index.ts'
 
 
 export const useAuthStore = defineStore('auth', {
 
 	state: () => ({
-		token: sessionStorage.getItem(config.TOKEN),
+		token: sessionStorage.getItem(route.TOKEN),
 	}),
 
 	actions: {
@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('auth', {
 		// set token function
 		setToken(token) {
 			this.token = token
-			sessionStorage.setItem(config.TOKEN, token)
+			sessionStorage.setItem(route.TOKEN, token)
 			setHttpToken(token)
 		},
 
@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
 		// remove token function
 		removeToken() {
 			this.token = ''
-			sessionStorage.removeItem(config.TOKEN)
+			sessionStorage.removeItem(route.TOKEN)
 			removeHttpToken()
 		},
 

@@ -1,5 +1,5 @@
 import request from "@/utils/request.js";
-import {API} from "@/config/index.js";
+import {API} from "@/config/index.ts";
 
 
 /**

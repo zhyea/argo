@@ -1,4 +1,5 @@
 
+// 默认配置
 export default {
 
 	locale: 'zh-cn',
@@ -9,7 +10,7 @@ export default {
 
 
 // config
-export const config = {
+export const route = {
 	// route
 	loginRouteName: 'Login',
 	homeRouteName: 'Home',
@@ -19,6 +20,7 @@ export const config = {
 	fciEditRouteName: 'FciEdit',
 	fciListRouteName: 'AppFciList',
 
+	dashboardName: 'dashboard',
 
 	// auth
 	TOKEN: 'token',

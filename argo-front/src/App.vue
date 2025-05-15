@@ -7,9 +7,10 @@
 
 <script setup>
 import {onMounted, watch} from 'vue'
-import {useBreadcrumbStore} from "@/store/breadcrumb";
+import {useBreadcrumbStore} from "@/store/breadcrumb.js";
 import {useRoute} from "vue-router";
 import {useI18n} from "vue-i18n";
+import {getLocale} from "@/utils/localforage/index.js";
 
 const route = useRoute()
 const breadcrumbStore = useBreadcrumbStore()
@@ -20,7 +21,9 @@ onMounted(() => {
 
 
 const i18n = useI18n();
-getLocale()
+getLocale().then(lang => {
+	i18n.locale.value = lang
+})
 
 watch(route, () => {
 	breadcrumbStore.set(route.matched)
