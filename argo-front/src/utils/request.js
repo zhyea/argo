@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ElMessage} from "element-plus";
-import router from '@/router/index.js'
+import router from '@/router/index.ts'
 import {route} from "@/config/index.ts";
 import {setHttpToken} from "@/api/auth.js";
 

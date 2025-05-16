@@ -18,6 +18,7 @@ export default defineConfig({
 	},
 
 	plugins: [
+
 		vue(),
 
 		// 自动导入ElementPlus组件
@@ -38,7 +39,6 @@ export default defineConfig({
 		ElementPlus({
 			useSource: true,
 		}),
-
 
 		// 图标
 		Icons(),

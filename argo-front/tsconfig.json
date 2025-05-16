@@ -10,7 +10,20 @@
 			"jest",
 			"node"
 		],
-		"esModuleInterop": true
+		"sourceMap": true,
+		"strict": true,
+		"module": "esnext",
+		"esModuleInterop": true,
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"moduleResolution": "Node",
+		"plugins": [
+			{
+				"name": "@vuedx/typescript-plugin-vue"
+			}
+		]
 	},
 	"include": [
 		"**/*.js",
