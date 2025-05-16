@@ -1,4 +1,4 @@
-import request from "@/utils/request.js";
+import request from "@/utils/request.ts";
 
 
 // 新增应用页面

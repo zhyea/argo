@@ -1,11 +1,11 @@
-import request from "@/utils/request.js";
-import {API} from "@/config/index.ts";
+import request from "@/utils/request";
+import {API} from "@/config";
 
 
 /**
  * 发送登录请求
  */
-export function doLogin(data) {
+export function doLogin(data: any) {
 
 	return request.post(
 		API.LOGIN,
@@ -24,15 +24,18 @@ export function doLogout() {
 }
 
 
-export function doPing(){
-
+/**
+ * 发送ping请求
+ */
+export function doPing() {
+	return request.post(API.LOGOUT)
 }
 
 
 /**
  * 设置token
  */
-export function setHttpToken(token) {
+export function setHttpToken(token: string) {
 	request.defaults.headers.common.Authorization = `${token}`
 }
 

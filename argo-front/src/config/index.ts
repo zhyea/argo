@@ -1,4 +1,3 @@
-
 // 默认配置
 export default {
 
@@ -6,6 +5,8 @@ export default {
 
 	guard: 'admin',
 
+	// auth
+	TOKEN: 'token',
 }
 
 
@@ -21,9 +22,6 @@ export const route = {
 	fciListRouteName: 'AppFciList',
 
 	dashboardName: 'dashboard',
-
-	// auth
-	TOKEN: 'token',
 }
 
 

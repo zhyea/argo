@@ -10,7 +10,7 @@ import {onMounted, watch} from 'vue'
 import {useBreadcrumbStore} from "@/store/breadcrumb.js";
 import {useRoute} from "vue-router";
 import {useI18n} from "vue-i18n";
-import {getLocale} from "@/utils/localforage/index.js";
+import {getLocale} from "@/utils/localforage/index.ts";
 
 const route = useRoute()
 const breadcrumbStore = useBreadcrumbStore()

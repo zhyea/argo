@@ -115,7 +115,7 @@
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
-import {useAuthStore} from '@/store/auth';
+import {useAuthStore} from '@/store/auth.js';
 import {route} from "@/config/index.ts";
 
 

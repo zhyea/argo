@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {ElMessage} from "element-plus";
-import router from '@/router/index.ts'
-import {route} from "@/config/index.ts";
-import {setHttpToken} from "@/api/auth.js";
+import router from '@/router'
+import {route} from "@/config";
+import {setHttpToken} from "@/api/auth";
 
 // axios.defaults.withCredentials = true
 // axios.defaults.crossDomain = true
@@ -11,7 +11,7 @@ import {setHttpToken} from "@/api/auth.js";
 const axiosInst = axios.create({
 	withCredentials: true,
 	baseURL: `${import.meta.env.VITE_BASE_URL}`,
-	timeout: `${import.meta.env.VITE_REQUEST_TIMEOUT}`,
+	timeout: import.meta.env.VITE_REQUEST_TIMEOUT,
 	// 请求头
 	headers: {
 		"Content-Type": "application/json;charset=UTF-8",

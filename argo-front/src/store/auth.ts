@@ -3,20 +3,22 @@
 import {defineStore} from 'pinia'
 import {doLogin, doLogout, setHttpToken, removeHttpToken, doPing} from '@/api/auth'
 import {route} from '@/config'
+import {cacheToken, removeCachedToken} from "@/utils/localforage";
 
 
 export const useAuthStore = defineStore('auth', {
 
 	state: () => ({
-		token: sessionStorage.getItem(route.TOKEN),
+		//token: sessionStorage.getItem(route.TOKEN),
+		token: '',
 	}),
 
 	actions: {
 
 		// set token function
-		setToken(token) {
+		setToken(token: string) {
 			this.token = token
-			sessionStorage.setItem(route.TOKEN, token)
+			//sessionStorage.setItem(route.TOKEN, token)
 			setHttpToken(token)
 		},
 
@@ -24,18 +26,22 @@ export const useAuthStore = defineStore('auth', {
 		// remove token function
 		removeToken() {
 			this.token = ''
-			sessionStorage.removeItem(route.TOKEN)
+			//sessionStorage.removeItem(route.TOKEN)
 			removeHttpToken()
 		},
 
 
 		// login function
-		async useLogin(data) {
+		async useLogin(data: any) {
 			return new Promise((resolve, reject) => {
 				return doLogin(data)
 					.then(response => {
-						this.setToken(response.data)
-						resolve()
+						const token = response.data;
+
+						this.setToken(token);
+						const r = cacheToken(token)
+
+						resolve(r)
 					}).catch(error => {
 						reject(error)
 					})
@@ -49,7 +55,10 @@ export const useAuthStore = defineStore('auth', {
 				this.removeToken()
 				return doLogout()
 					.then(response => {
-						console.log(response)
+
+						this.removeToken()
+						removeCachedToken()
+
 						resolve(response)
 					}).catch(error => {
 						reject(error)
@@ -61,8 +70,10 @@ export const useAuthStore = defineStore('auth', {
 		// ping function
 		async usePing() {
 			return new Promise((resolve, reject) => {
-				return doPing().catch(error => {
-					this.removeToken()
+				return doPing().then(response => {
+					resolve(response)
+				}).catch((error: any) => {
+					reject(error)
 				})
 			})
 		}

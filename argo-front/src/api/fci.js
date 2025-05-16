@@ -1,4 +1,4 @@
-import request from "@/utils/request.js";
+import request from "@/utils/request.ts";
 
 // 获取组件列表
 export function findFciList(appId, keyword, pageInfo) {

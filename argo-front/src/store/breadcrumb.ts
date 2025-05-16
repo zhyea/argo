@@ -12,20 +12,17 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 		set(breadcrumb: any[]) {
 
-			const title = []
+			const title: string[] = []
 
-			this.breadcrumb = breadcrumb.filter(item => {
+			breadcrumb.filter((item: any) => {
 
-				if (title.indexOf(item.meta.title) >= 0) {
-					return false
+					return (title.indexOf(item.meta.title) < 0)
 				}
-
+			).forEach((item: any) => {
 				title.push(item.meta.title)
-
-				return item.meta.title
+				this.breadcrumb.push(item.meta.title)
 			})
-		},
-
-	},
+		}
+	}
 
 });
