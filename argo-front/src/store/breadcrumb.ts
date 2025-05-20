@@ -4,7 +4,7 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 	state: () => ({
 		local: '',
-		breadcrumb: [],
+		breadcrumb: Array<string>(),
 	}),
 
 
@@ -12,10 +12,9 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 		set(breadcrumb: any[]) {
 
-			const title: string[] = []
+			const title: Array<string> = []
 
 			breadcrumb.filter((item: any) => {
-
 					return (title.indexOf(item.meta.title) < 0)
 				}
 			).forEach((item: any) => {

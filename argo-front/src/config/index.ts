@@ -21,7 +21,8 @@ export const route = {
 	fciEditRouteName: 'FciEdit',
 	fciListRouteName: 'AppFciList',
 
-	dashboardName: 'dashboard',
+	dashboardName: 'Dashboard',
+	dashboardFullPath: '/dashboard',
 }
 
 

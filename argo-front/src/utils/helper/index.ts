@@ -1,4 +1,4 @@
-import routers from '@/router/routes';
+import routers, {RouteItem} from '@/router/routes';
 import i18n from '@/lang/index.js'
 import {useAppStore} from "@/store/app.js"
 
@@ -8,7 +8,7 @@ import {useAppStore} from "@/store/app.js"
  * @param name
  * @returns {*}
  */
-export const routeByName = (name) => {
+export const routeByName = (name: string) => {
 
 	let router;
 
@@ -33,8 +33,7 @@ export const routeByName = (name) => {
 }
 
 
-
-export const routeFormatTag = route => {
+export const routeFormatTag = (route: RouteItem) => {
 	return {
 		name: route.name,
 		fullPath: route.fullPath,
@@ -43,7 +42,6 @@ export const routeFormatTag = route => {
 		closable: !route.meta.notClosable,
 	}
 }
-
 
 
 export const getCascaderDefaultIds = (node) => {
