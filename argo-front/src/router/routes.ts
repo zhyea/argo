@@ -14,19 +14,22 @@ import appPageRoutes from '@/view/page/routes'
 export interface RouteItem {
 	name: string;
 	path: string;
-	fullPath: string;
+	fullPath?: string;
 	component: any;
 	meta?: RouteMeta;
 	children?: RouteItem[];
+
 }
 
 
 export interface RouteMeta {
 	title: string;
+	cache?: boolean;
+	notClosable?: boolean;
 }
 
 
-const routes = [
+const routes: RouteItem[] = [
 	{
 		name: 'Home',
 		path: '/',
@@ -59,7 +62,9 @@ const routes = [
 		component: FciDetailPage,
 	},
 	{
-		path: "/:pathMatch(.*)*", component: NotFoundPage, name: 'notFound'
+		path: "/:pathMatch(.*)*",
+		component: NotFoundPage,
+		name: 'notFound'
 	}
 ]
 

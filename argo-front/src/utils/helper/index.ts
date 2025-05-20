@@ -8,12 +8,11 @@ import {useAppStore} from "@/store/app.js"
  * @param name
  * @returns {*}
  */
-export const routeByName = (name: string) => {
+export const routeByName = (name: string): RouteItem => {
 
-	let router;
-
-	const each = (routers, name) => {
-		for (let item of routers) {
+	let router: RouteItem;
+	const each = (routers: RouteItem[], name: string) => {
+		for (const item of routers) {
 			if (item.name === name) {
 				router = item
 			}
@@ -22,7 +21,7 @@ export const routeByName = (name: string) => {
 				break
 			}
 
-			if (item.hasOwnProperty('children') && item.children.length > 0) {
+			if (item.children && item.children.length > 0) {
 				each(item.children, name)
 			}
 		}
@@ -37,9 +36,9 @@ export const routeFormatTag = (route: RouteItem) => {
 	return {
 		name: route.name,
 		fullPath: route.fullPath,
-		title: route.meta.title ? route.meta.title : '',
+		title: route.meta && route.meta.title ? route.meta.title : '',
 		cache: route.meta && route.meta.cache,
-		closable: !route.meta.notClosable,
+		closable: route.meta && !route.meta.notClosable,
 	}
 }
 
@@ -85,8 +84,8 @@ export const getNodeParentPath = (id, nodes, path = {}) => {
 	}
 }
 
-export const getTagTitleName = (titleKey) => {
-	let metaKey = `meta.title.${titleKey}`
+export const getTagTitleName = (titleKey: string) => {
+	const metaKey = `meta.title.${titleKey}`
 
 	return i18n.global.te(metaKey, useAppStore().locale) ? i18n.global.t(metaKey) : titleKey
 }

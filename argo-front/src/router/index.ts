@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 
 import routes from './routes'
-import {route} from "@/config";
+import config, {route} from "@/config";
 
 
 //-创建路由对象
@@ -15,7 +15,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 
 	//判断是否已登录 查sessionStorage中是否有token信息
-	let token = sessionStorage.getItem(route.TOKEN)
+	let token = sessionStorage.getItem(config.TOKEN)
 
 	if (to.name !== route.loginRouteName && !token) {
 		// 未登录，跳转到登录页

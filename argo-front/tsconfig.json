@@ -23,6 +23,10 @@
 			{
 				"name": "@vuedx/typescript-plugin-vue"
 			}
+		],
+		"include": [
+			"src/views",
+			"src/shims-vue.d.ts"
 		]
 	},
 	"include": [

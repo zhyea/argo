@@ -23,7 +23,7 @@ import HeadBar from '@/component/layout/HeadBar.vue'
 import menuItems from '@/view/home/menu'
 
 
-let collapseFlag = ref(false)
+const collapseFlag = ref(false)
 
 function changeMenuState(status) {
 	collapseFlag.value = status

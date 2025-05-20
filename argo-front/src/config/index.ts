@@ -1,8 +1,11 @@
 // 默认配置
 export default {
 
+
+	// lang
 	locale: 'zh-cn',
 
+	// guard
 	guard: 'admin',
 
 	// auth

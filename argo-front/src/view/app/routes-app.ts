@@ -3,7 +3,7 @@ import FcmListPage from '../fcm/FcmList.vue'
 import FcmEditPage from '../fcm/FcmEditDrawer.vue'
 import FciListPage from '../fci/FciList.vue'
 
-import {route} from "@/config/index.ts";
+import {route} from "@/config";
 
 export default [{
 	name: 'AppEdit',
