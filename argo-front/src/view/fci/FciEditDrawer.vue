@@ -66,7 +66,7 @@
 <script setup>
 
 import {ref} from "vue";
-import {loadEnums} from "@/api/common.js";
+import {loadEnums} from "@/api/common";
 import {submitForm} from "@/utils/common.ts";
 import {addFci, editFci, getFci} from "@/api/fci.ts";
 

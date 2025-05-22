@@ -1,6 +1,8 @@
 import routers, {RouteItem} from '@/router/routes';
 import i18n from '@/lang/index.js'
 import {ElMessage} from "element-plus";
+import {Ref} from "vue";
+import config from "@/config";
 
 
 /**
@@ -86,11 +88,22 @@ export const routeFormatTag = (route: RouteItem) => {
 
 
 export const getTagTitleName = (titleKey: string) => {
-	const metaKey = `meta.title.${titleKey}`
+	// 校验 titleKey 是否有效
+	if (!titleKey) {
+		return titleKey;
+	}
 
-	const hasKey = i18n.global.te(metaKey)
+	const metaKey = `meta.title.${titleKey}`;
 
-	return hasKey ? i18n.global.t(metaKey) : titleKey
+	try {
+		// 检查是否存在对应的国际化键
+		const hasKey = i18n.global.te(metaKey);		// 返回对应的国际化文本或原始 titleKey
+		return hasKey ? i18n.global.t(metaKey) : titleKey;
+	} catch (error) {
+		// 异常处理，防止程序崩溃
+		console.error('Error in getTagTitleName:', error);
+		return titleKey;
+	}
 }
 
 
@@ -102,34 +115,31 @@ export const getTagTitleName = (titleKey: string) => {
  * @param maintainMethod 远程交互的方法
  * @param extraAction 额外的操作
  */
-export function submitForm(formRef,
-                           formData,
-                           submitFlag,
-                           maintainMethod,
-                           extraAction) {
-	formRef.value.validate((valid) => {
-		if (!valid) return
+export async function submitForm(formRef: Ref<any>,
+                                 formData: any,
+                                 submitFlag: Ref<boolean>,
+                                 maintainMethod: (data: any) => Promise<any>,
+                                 extraAction?: () => void) {
+	try {
+		const isValid = await formRef.value.validate();
+		if (!isValid) return;
 
-		submitFlag.value = true
+		submitFlag.value = true;
 
-		maintainMethod(formData, maintainMethod).then(response => {
-			if (response.data) {
-				ElMessage.success({
-					message: '保存成功',
-					duration: 1500,
-				})
+		const response = await maintainMethod(formData);
+		if (response.data) {
+			ElMessage.success({
+				message: '保存成功',
+				duration: 1500,
+			});
 
-				if (extraAction) {
-					extraAction()
-				}
-
-			} else {
-				submitFlag.value = false
-			}
-		}).catch(error => {
-			submitFlag.value = false
-		})
-	})
+			extraAction?.();
+		} else {
+			submitFlag.value = false;
+		}
+	} catch (error) {
+		submitFlag.value = false;
+	}
 }
 
 
@@ -139,8 +149,8 @@ export function submitForm(formRef,
  * @param value 值
  * @returns {Map<any, any>} Map对象
  */
-export function mapOf(key, value) {
-	const map = new Map()
-	map.set(key, value)
-	return map
+export function mapOf<K, V>(key: K, value: V): Map<K, V> {
+	const map = new Map<K, V>();
+	map.set(key, value);
+	return map;
 }

@@ -1,8 +1,8 @@
-import request from "@/utils/request.ts";
+import request from "@/utils/request";
 
 
 // 获取枚举信息
-export function loadEnums(enumRef, resolve) {
+export async function loadEnums(enumRef: any, resolve: any) {
 	return request.get('/common/enums').then(res => {
 
 		enumRef.value = readResponse(res);
@@ -27,22 +27,18 @@ export async function loadEnumMap() {
  * @param res 响应信息
  * @returns {Map<any, any>} 枚举信息
  */
-function readResponse(res) {
+function readResponse(res: any): Map<any, any> {
+	if (!res?.data) return new Map();
 
-	let result = new Map()
-
-	if (!res || !res.data) {
-		return result;
-	}
-
-	new Map(Object.entries(res.data)).forEach((val, key) => {
-		let m = new Map()
-		new Map(Object.entries(val)).forEach((v, k) => {
-			m.set(parseInt(k), v)
-		})
-
-		result.set(key, m);
-	})
-
-	return result;
+	return new Map(
+		Object.entries(res.data).map(([key, val]) => [
+			key,
+			new Map(
+				Object.entries(val as Record<string, any>).map(([k, v]) => [
+					parseInt(k),
+					v,
+				])
+			),
+		])
+	);
 }
