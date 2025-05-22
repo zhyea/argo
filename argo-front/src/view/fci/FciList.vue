@@ -58,7 +58,7 @@ import {loadEnums} from "@/api/common.js";
 import {route} from "@/config/index.ts";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
-import {delFci, findFciList} from "@/api/fci.js";
+import {delFci, findFciList} from "@/api/fci.ts";
 
 
 const route = useRoute();

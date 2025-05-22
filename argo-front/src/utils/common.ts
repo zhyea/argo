@@ -12,11 +12,11 @@ import {ElMessage} from "element-plus";
  * @param maintainMethod 远程交互的方法
  * @param extraAction 额外的操作
  */
-export function submitForm(formRef,
-                           formData,
-                           submitFlag,
-                           maintainMethod,
-                           extraAction) {
+export function submitForm(formRef: any,
+                           formData: any,
+                           submitFlag: boolean,
+                           maintainMethod: string,
+                           extraAction: any) {
 	formRef.value.validate((valid) => {
 		if (!valid) return
 
@@ -49,7 +49,7 @@ export function submitForm(formRef,
  * @param value 值
  * @returns {Map<any, any>} Map对象
  */
-export function mapOf(key, value) {
+export function mapOf(key: any, value: any) {
 	const map = new Map()
 	map.set(key, value)
 	return map

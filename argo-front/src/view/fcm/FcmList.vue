@@ -58,7 +58,7 @@
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
-import {delFcm, findFcmList} from "@/api/fcm.js";
+import {delFcm, findFcmList} from "@/api/fcm";
 import {loadEnums} from "@/api/common.js";
 import {route} from "@/config/index.ts";
 import {ElMessage} from "element-plus";

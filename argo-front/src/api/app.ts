@@ -1,4 +1,4 @@
-import request from '@/utils/request.ts'
+import request from '@/utils/request'
 
 // 获取应用列表
 export function findAllApps() {
@@ -7,7 +7,7 @@ export function findAllApps() {
 
 
 // 根据关键字查询应用列表
-export function queryApps(keyword) {
+export function queryApps(keyword: string) {
 	return request.post('/cms/app/query', {
 		keyword: keyword,
 	})
@@ -15,7 +15,7 @@ export function queryApps(keyword) {
 
 
 // 获取应用详情
-export function getApp(appId) {
+export function getApp(appId: number) {
 	return request.post('/cms/app/get', {
 		appId: appId,
 	})
@@ -23,19 +23,19 @@ export function getApp(appId) {
 
 
 // 新增应用记录
-export function addApp(formData) {
+export function addApp(formData: any) {
 	return request.post('/cms/app/add', formData)
 }
 
 
 // 编辑应用记录
-export function editApp(formData) {
+export function editApp(formData: any) {
 	return request.post('/cms/app/edit', formData)
 }
 
 
 // 删除应用记录
-export function delApp(appId) {
+export function delApp(appId: number) {
 	return request.post('/cms/app/delete', {
 		appId: appId,
 	})

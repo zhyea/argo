@@ -1,7 +1,7 @@
-import request from "@/utils/request.ts";
+import request from "@/utils/request";
 
 // 获取组件列表
-export function findFciList(appId, keyword, pageInfo) {
+export function findFciList(appId: number, keyword: string, pageInfo: any) {
 	return request.post('/cms/fci/list', {
 		appId: appId,
 		keyword: keyword,
@@ -12,7 +12,7 @@ export function findFciList(appId, keyword, pageInfo) {
 
 
 // 获取组件详情
-export function getFci(fciId) {
+export function getFci(fciId: number) {
 	return request.post('/cms/fci/get', {
 		fciId: fciId,
 	})
@@ -20,19 +20,19 @@ export function getFci(fciId) {
 
 
 // 新增组件记录
-export function addFci(formData) {
+export function addFci(formData: any) {
 	return request.post('/cms/fci/add', formData)
 }
 
 
 // 编辑组件记录
-export function editFci(formData) {
+export function editFci(formData: any) {
 	return request.post('/cms/fci/edit', formData)
 }
 
 
 // 删除组件记录
-export function delFci(fciId) {
+export function delFci(fciId: any) {
 	return request.post('/cms/fci/delete', {
 		fciId: fciId,
 	})

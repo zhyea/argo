@@ -135,9 +135,9 @@
 import {ref} from "vue";
 
 import {loadEnums} from "@/api/common.js";
-import {queryApps} from "@/api/app.js";
-import {addFcm, editFcm, getFcm} from "@/api/fcm.js";
-import {submitForm} from "@/utils/common.js";
+import {queryApps} from "@/api/app.ts";
+import {addFcm, editFcm, getFcm} from "@/api/fcm.ts";
+import {submitForm} from "@/utils/common.ts";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
 

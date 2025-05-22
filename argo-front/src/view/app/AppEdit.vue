@@ -33,8 +33,8 @@
 
 <script setup>
 import {ref} from "vue";
-import {addApp, editApp} from "@/api/app.js";
-import {submitForm} from "@/utils/common.js";
+import {addApp, editApp} from "@/api/app.ts";
+import {submitForm} from "@/utils/common.ts";
 
 // app 表单数据
 const appForm = ref({

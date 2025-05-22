@@ -18,12 +18,13 @@ export const route = {
 	// route
 	loginRouteName: 'Login',
 	homeRouteName: 'Home',
+	// fci
 	appHomeRouteName: 'AppHome',
 	fcmEditRouteName: 'FcmEdit',
 	fcmListRouteName: 'FcmList',
 	fciEditRouteName: 'FciEdit',
 	fciListRouteName: 'AppFciList',
-
+	//dashboard
 	dashboardName: 'Dashboard',
 	dashboardFullPath: '/dashboard',
 }

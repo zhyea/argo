@@ -27,7 +27,7 @@ import HeadBar from '@/component/layout/HeadBar.vue'
 
 import menuItems from '@/view/home/menu'
 import {useRoute} from "vue-router";
-import {getApp} from "@/api/app.js";
+import {getApp} from "@/api/app.ts";
 
 
 const route = useRoute()
