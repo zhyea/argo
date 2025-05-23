@@ -29,7 +29,7 @@ export interface RouteMeta {
 }
 
 
-const routes: RouteItem[] = [
+const routeConfig: RouteItem[] = [
 	{
 		name: 'Home',
 		path: '/',
@@ -68,4 +68,4 @@ const routes: RouteItem[] = [
 	}
 ]
 
-export default routes
+export default routeConfig

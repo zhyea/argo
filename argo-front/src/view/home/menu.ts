@@ -1,3 +1,10 @@
+
+export interface MenuItem{
+
+}
+
+
+
 export default {
 
 	home: [

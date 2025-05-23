@@ -33,8 +33,8 @@
 
 <script setup>
 import {ref} from "vue";
-import {addApp, editApp} from "@/api/app.ts";
-import {submitForm} from "@/utils/common.ts";
+import {addApp, editApp} from "@/api/app";
+import {submitForm} from "@/utils/common";
 
 // app 表单数据
 const appForm = ref({
@@ -67,14 +67,10 @@ const isAppFormSubmitted = ref(false)
 
 // 提交app编辑信息
 function submitAppForm() {
-	const formData = {...appForm.value}
-	let maintainMethod = addApp
+  const formData = {...appForm.value};
+  const maintainMethod = formData.id ? editApp : addApp;
 
-	if (formData.id) {
-		maintainMethod = editApp
-	}
-
-	submitForm(appFormRef, formData, isAppFormSubmitted, maintainMethod)
+  submitForm(appFormRef, formData, isAppFormSubmitted, maintainMethod);
 }
 
 

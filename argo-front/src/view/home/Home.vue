@@ -20,7 +20,7 @@ import {ref} from 'vue'
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
 
-import menuItems from '@/view/home/menu'
+import menuItems from '@/view/home/menu.js'
 
 
 const collapseFlag = ref(false)
