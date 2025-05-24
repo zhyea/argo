@@ -1,8 +1,8 @@
 import {createApp} from 'vue'
 import {createPinia} from 'pinia'
-import i18n from '@/lang/index'
 
 import * as icons from '@element-plus/icons-vue'
+import i18n from '@/lang/index'
 
 
 import App from './App.vue'
@@ -13,6 +13,7 @@ import './assets/style.css'
 
 const app = createApp(App)
 const pinia = createPinia()
+
 
 app.use(router).use(pinia).use(i18n)
 

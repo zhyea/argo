@@ -3,12 +3,10 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import routeConfig from './route-config'
 import config, {ROUTE_NAMES} from "@/config";
 
-const routes = routeConfig
-
 //-创建路由对象
 const router = createRouter({
 	history: createWebHistory(`${import.meta.env.BASE_URL}`),
-	routes,
+	routes: (await import('./route-config')).default as RouteRecordRaw[],
 })
 
 

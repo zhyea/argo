@@ -46,7 +46,7 @@ watch(route, () => {
 
 
 const locale = ref(computed(() => {
-	return appStore.locale === 'zh-cn' ? zh : en
+	return appStore.locale === getLocale() ? zh : en
 }))
 
 
