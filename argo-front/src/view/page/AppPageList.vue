@@ -53,7 +53,7 @@
 import PageDrawer from "@/view/page/AppPageEditDrawer.vue";
 import {ref, onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {deletePage, findPages} from "@/api/page.ts";
+import {deletePage, findPages} from "@/api/page";
 import {ElMessage} from "element-plus";
 
 

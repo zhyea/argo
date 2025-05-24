@@ -14,7 +14,7 @@ export default {
 
 
 // config
-export const route = {
+export const ROUTE_NAMES = {
 	// route
 	loginRouteName: 'Login',
 	homeRouteName: 'Home',

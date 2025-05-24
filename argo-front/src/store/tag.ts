@@ -1,75 +1,71 @@
 import {defineStore} from "pinia"
-import config, {route} from "@/config";
+import {ROUTE_NAMES} from "@/config";
 import {routeByName, routeFormatTag} from "@/utils/helper";
 import router from "@/router";
-
-
-interface Tag {
-
-	name: string;
-
-	cache: any;
-
-	fullPath: string;
-}
+import {TagItem} from "@/model/tag";
 
 
 export const useTagStore = defineStore("tag", {
 
 	state: () => ({
-		tagList: Array<Tag>(),
+		tagList: Array<TagItem>(),
 	}),
+
 
 	getters: {
 		tags: state => state.tagList,
 		cacheTags: state => {
-			if (!state.tagList) {
-				return [];
-			}
-
-			return state.tagList.filter(item => item.cache).map(item => item.name);
+			return state.tagList?.filter((item: TagItem) => item.cache)
+				.map(item => item.name) || [];
 		}
 	},
 
+
 	actions: {
 
-		openTagView(tag: Tag) {
-			let isset = this.tagList.some(function (item) {
-				return item.fullPath === tag.fullPath
-			})
+		// 打开标签
+		openTagView(tag: TagItem) {
+			const dashboardName = ROUTE_NAMES.dashboardName;
 
-			let dashboardName = route.dashboardName
-			if (tag.name !== dashboardName && (this.tagList.length === 0 || this.tagList[0].name !== dashboardName)) {
-				let dashboardTag = routeFormatTag(routeByName(dashboardName))
-				dashboardTag.fullPath = route.dashboardFullPath
+			// 如果不是仪表盘标签且 tagList 为空或者第一个标签不是仪表盘，则插入仪表盘标签
+			if (tag.name !== dashboardName &&
+				(this.tagList.length === 0 || this.tagList[0].name !== dashboardName)) {
 
-				this.tagList.splice(0, 0, dashboardTag)
+				const dashboardTag = routeFormatTag(routeByName(dashboardName));
+				dashboardTag.fullPath = ROUTE_NAMES.dashboardFullPath;
+				this.tagList.splice(0, 0, dashboardTag);
 			}
 
-			if (!isset) {
-				this.tagList.push(tag)
+			// 如果标签尚未打开，则添加新标签
+			if (!this.tagList.some(item => item.fullPath === tag.fullPath)) {
+				this.tagList.push(tag);
 			}
 		},
 
 
+		// 关闭标签
 		closeTagView(key: string) {
-			for (let item of this.tagList) {
-				if (key !== item.fullPath) {
-					continue;
-				}
-				let index = this.tagList.indexOf(item)
-				this.tagList.splice(index, 1)
+			const index = this.tagList.findIndex(item => item.fullPath === key);
+			if (index === -1) return;
 
-				if (router.currentRoute.value.fullPath === item.fullPath) {
-					return router.push({path: this.tagList[index - 1].fullPath})
+			const [closedTag] = this.tagList.splice(index, 1);
+
+			// 如果关闭的是当前路由页面，则跳转到前一个标签页或默认页面
+			if (router.currentRoute.value.fullPath === closedTag.fullPath) {
+				const previousTag = this.tagList[index - 1];
+				if (previousTag) {
+					router.push({path: previousTag.fullPath});
 				}
 			}
 		},
 
-		closeTagHandle(tagList: Array<number>) {
-			tagList.reverse().forEach(key => {
-				this.tagList.splice(key, 1)
-			})
+
+		// 关闭标签处理
+		closeTagHandle(tagIndices: number[]) {
+			// 从后往前删除，避免索引错乱
+			[...tagIndices].sort((a, b) => b - a).forEach(index => {
+				this.tagList.splice(index, 1);
+			});
 		}
 	}
-})
+});

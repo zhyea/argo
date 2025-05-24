@@ -4,30 +4,51 @@
 	<router-view/>
 </template>
 
-
 <script setup>
 import {onMounted, watch} from 'vue'
-import {useBreadcrumbStore} from "@/store/breadcrumb.js";
+import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {useRoute} from "vue-router";
 import {useI18n} from "vue-i18n";
-import {getLocale} from "@/utils/localforage/index.ts";
+import {getLocale} from "@/utils/localforage";
+import {useAppStore} from "@/store/app";
+import {ROUTE_NAMES} from "@/config/index";
+import {useTagStore} from "@/store/tag";
+import zh from 'element-plus/es/locale/lang/zh-cn'
+import en from 'element-plus/es/locale/lang/en'
+import {routeFormatTag} from "@/utils/helper/index";
 
-const route = useRoute()
-const breadcrumbStore = useBreadcrumbStore()
+const route = useRoute();
+const breadcrumbStore = useBreadcrumbStore();
+const appStore = useAppStore();
+const tagStore = useTagStore();
 
 onMounted(() => {
-		breadcrumbStore.set(route.matched)
-	})
+	breadcrumbStore.set(route.matched);
+})
 
 
 const i18n = useI18n();
 getLocale().then(lang => {
+	if (!lang) {
+		return;
+	}
+	appStore.setLocale(lang)
 	i18n.locale.value = lang
 })
 
 watch(route, () => {
 	breadcrumbStore.set(route.matched)
+	if (route.name !== ROUTE_NAMES.homeRouteName) {
+		const tag = routeFormatTag(route)
+		tagStore.openTagView(tag)
+	}
 })
+
+
+const locale = ref(computed(() => {
+	return appStore.locale === 'zh-cn' ? zh : en
+}))
+
 
 </script>
 

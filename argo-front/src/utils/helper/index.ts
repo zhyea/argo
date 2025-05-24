@@ -1,8 +1,9 @@
-import routers, {RouteItem} from '@/router/routeConfig';
+import routers from '@/router/route-config';
 import i18n from '@/lang/index.js'
 import {ElMessage} from "element-plus";
 import {Ref} from "vue";
-import config from "@/config";
+import {TagItem} from "@/model/tag";
+import {MenuItem} from "@/model/route";
 
 
 /**
@@ -10,10 +11,10 @@ import config from "@/config";
  * @param name
  * @returns {*}
  */
-export const routeByName = (name: string): RouteItem => {
+export const routeByName = (name: string): MenuItem => {
 
-	let router: RouteItem;
-	const each = (routers: RouteItem[], name: string) => {
+	let router: MenuItem;
+	const each = (routers: MenuItem[], name: string) => {
 		for (const item of routers) {
 			if (item.name === name) {
 				router = item
@@ -34,13 +35,19 @@ export const routeByName = (name: string): RouteItem => {
 }
 
 
-export const routeFormatTag = (route: RouteItem) => {
+export const routeFormatTag = (route: MenuItem): TagItem => {
+	if (!route) {
+		throw new Error('Route parameter is required');
+	}
+
+	const {meta} = route;
+
 	return {
 		name: route.name,
 		fullPath: route.fullPath,
-		title: route.meta && route.meta.title ? route.meta.title : '',
-		cache: route.meta && route.meta.cache,
-		closable: route.meta && !route.meta.notClosable,
+		title: meta?.title ?? '',
+		cache: meta?.cache ?? false,
+		closable: meta?.closable ?? true,
 	}
 }
 
@@ -86,7 +93,11 @@ export const routeFormatTag = (route: RouteItem) => {
 // 	}
 // }
 
-
+/**
+ * 获取标签标题
+ * @param titleKey 标题键
+ * @returns 标题
+ */
 export const getTagTitleName = (titleKey: string) => {
 	// 校验 titleKey 是否有效
 	if (!titleKey) {

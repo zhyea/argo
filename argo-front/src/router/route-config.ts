@@ -11,25 +11,7 @@ import appHomeRoutes from '@/view/app/routes-app'
 import appPageRoutes from '@/view/page/routes'
 
 
-export interface RouteItem {
-	name: string;
-	path: string;
-	fullPath?: string;
-	component: any;
-	meta?: RouteMeta;
-	children?: RouteItem[];
-
-}
-
-
-export interface RouteMeta {
-	title: string;
-	cache?: boolean;
-	notClosable?: boolean;
-}
-
-
-const routeConfig: RouteItem[] = [
+export default [
 	{
 		name: 'Home',
 		path: '/',
@@ -68,4 +50,4 @@ const routeConfig: RouteItem[] = [
 	}
 ]
 
-export default routeConfig
+//export default routeConfig

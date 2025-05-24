@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {ElMessage} from "element-plus";
 import router from '@/router'
-import config, {route} from "@/config";
+import config, {ROUTE_NAMES} from "@/config";
 import {setHttpToken} from "@/api/auth";
 
 // axios.defaults.withCredentials = true
@@ -53,7 +53,7 @@ axiosInst.interceptors.response.use(
 		} else if (code === 100 || code === 102 || code === 103) {
 			// 执行跳转到登录页
 			sessionStorage.removeItem(config.TOKEN)
-			router.push({name: route.loginRouteName}).then(() => {
+			router.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
 				console.log(name)
 			})
 		} else {

@@ -50,8 +50,8 @@
 
 import {computed} from 'vue'
 import {useRouter} from 'vue-router'
-import {useAuthStore} from "@/store/auth.js";
-import {useBreadcrumbStore} from "@/store/breadcrumb.js";
+import {useAuthStore} from "@/store/auth";
+import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
 import {ArrowDown, Avatar, Expand, Fold} from "@element-plus/icons-vue";
 

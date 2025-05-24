@@ -14,8 +14,10 @@ export default defineConfig({
 	envPrefix: ['VITE_', 'ARGO_'],
 
 	define: {
+		// custom env vars
 		'import.meta.env.CUSTOM': '11111',
 	},
+
 
 	plugins: [
 
@@ -49,4 +51,14 @@ export default defineConfig({
 			{find: '@', replacement: path.resolve(__dirname, 'src')}
 		]
 	},
+
+
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: 'modern-compiler', // or 'modern'
+			},
+		},
+	},
+
 })

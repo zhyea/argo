@@ -67,8 +67,8 @@
 
 import {ref} from "vue";
 import {loadEnums} from "@/api/common";
-import {submitForm} from "@/utils/common.ts";
-import {addFci, editFci, getFci} from "@/api/fci.ts";
+import {submitForm} from "@/utils/common";
+import {addFci, editFci, getFci} from "@/api/fci";
 
 const fciItemDrawer = ref(false)
 

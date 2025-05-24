@@ -41,8 +41,8 @@
 <script setup>
 
 import {ref} from "vue";
-import {addPage, editPage, generatePageCode, getPage} from "@/api/page.ts";
-import {submitForm} from "@/utils/common.ts";
+import {addPage, editPage, generatePageCode, getPage} from "@/api/page";
+import {submitForm} from "@/utils/common";
 
 const appPageItemDrawer = ref(false)
 

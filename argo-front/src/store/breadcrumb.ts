@@ -10,10 +10,9 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 	actions: {
 
+		// 设置面包屑
 		set(breadcrumb: any[]) {
-
 			const title: Array<string> = []
-
 			breadcrumb.filter((item: any) => {
 					return (title.indexOf(item.meta.title) < 0)
 				}

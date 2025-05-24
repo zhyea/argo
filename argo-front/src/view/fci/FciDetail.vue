@@ -60,13 +60,9 @@
 
 <script setup>
 import {ref, onMounted} from 'vue'
-import {useRoute, useRouter} from "vue-router";
-import {loadEnumMap, loadEnums} from "@/api/common";
-import {route} from "@/config/index.ts";
-import {ElMessage} from "element-plus";
-import FciDrawer from "@/view/fci/FciEditDrawer.vue";
-import {delFci, findFciList, getFci} from "@/api/fci.ts";
-import Sidebar from "@/component/layout/SideBar.vue";
+import {useRoute} from "vue-router";
+import {loadEnumMap} from "@/api/common";
+import { getFci} from "@/api/fci";
 import HeadBar from "@/component/layout/HeadBar.vue";
 
 

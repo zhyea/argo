@@ -18,7 +18,7 @@
 <script setup>
 import {ref} from 'vue'
 
-import {findAllApps} from "@/api/app.ts";
+import {findAllApps} from "@/api/app";
 import {useRouter} from "vue-router";
 
 defineProps({

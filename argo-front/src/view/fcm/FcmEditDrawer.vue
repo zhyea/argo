@@ -134,10 +134,10 @@
 <script setup>
 import {ref} from "vue";
 
-import {loadEnums} from "@/api/common.ts";
-import {queryApps} from "@/api/app.ts";
-import {addFcm, editFcm, getFcm} from "@/api/fcm.ts";
-import {submitForm} from "@/utils/common.ts";
+import {loadEnums} from "@/api/common";
+import {queryApps} from "@/api/app";
+import {addFcm, editFcm, getFcm} from "@/api/fcm";
+import {submitForm} from "@/utils/common";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
 

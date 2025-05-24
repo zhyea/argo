@@ -51,11 +51,12 @@
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
-import {delFcm, findFcmList} from "@/api/fcm.ts";
-import {loadEnums} from "@/api/common.ts";
-import {route} from "@/config/index.ts";
+import {delFcm, findFcmList} from "@/api/fcm";
+import {loadEnums} from "@/api/common";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
+import FcmEditDrawer from "@/view/fcm/FcmEditDrawer.vue";
+import {ROUTE_NAMES as routeName} from "@/config/index.js";
 
 
 const route = useRoute();
@@ -104,7 +105,7 @@ function loadFcmListData() {
 // 处理页面切换
 const handlePageChange = async (val) => {
 	let appId = route.params.appId
-	router.push({name: route.fcmListRouteName, query: {appId: appId, page: val}})
+	router.push({name: routeName.fcmListRouteName, query: {appId: appId, page: val}})
 		.then(() => {
 			loadFcmListData()
 		})
@@ -116,7 +117,7 @@ const handlePageChange = async (val) => {
 const fcmEditDrawerRef = ref()
 // 处理FCM编辑
 function handleEdit(row) {
-	router.push({name: route.fcmEditRouteName, query: {fcmId: row.fcmId}})
+	router.push({name: routeName.fcmEditRouteName, query: {fcmId: row.fcmId}})
 }
 
 // 处理FCM删除
@@ -134,7 +135,7 @@ function handleDelete(row) {
 
 
 // 组件实例编辑抽屉
-const fciDrawerRef = ref()
+const fciDrawerRef = ref();
 
 // 打开新增组件实例抽屉
 function handleAddFci(row) {

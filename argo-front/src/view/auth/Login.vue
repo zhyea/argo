@@ -115,8 +115,8 @@
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
-import {useAuthStore} from '@/store/auth.js';
-import {route} from "@/config/index.ts";
+import {useAuthStore} from '@/store/auth';
+import {ROUTE_NAMES} from "@/config";
 
 
 const loginFormRef = ref();
@@ -203,7 +203,7 @@ const submitLogin = (e) => {
 			const formData = {...loginForm.value,}
 			authStore.useLogin(formData).then(() => {
 				console.log('login success')
-				router.push({name: route.homeRouteName})
+				router.push({name: ROUTE_NAMES.homeRouteName})
 			}).catch(err => {
 				console.log('login fail，error: ' + err)
 			})

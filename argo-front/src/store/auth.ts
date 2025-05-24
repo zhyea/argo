@@ -1,8 +1,7 @@
 // auth store
 
 import {defineStore} from 'pinia'
-import {doLogin, doLogout, setHttpToken, removeHttpToken, doPing} from '@/api/auth'
-import {route} from '@/config'
+import {doLogin, doLogout, doPing, removeHttpToken, setHttpToken} from '@/api/auth'
 import {cacheToken, removeCachedToken} from "@/utils/localforage";
 
 
@@ -33,49 +32,38 @@ export const useAuthStore = defineStore('auth', {
 
 		// login function
 		async useLogin(data: any) {
-			return new Promise((resolve, reject) => {
-				return doLogin(data)
-					.then(response => {
-						const token = response.data;
-
-						this.setToken(token);
-						const r = cacheToken(token)
-
-						resolve(r)
-					}).catch(error => {
-						reject(error)
-					})
-			})
+			try {
+				const response = await doLogin(data);
+				const token = response.data;
+				this.setToken(token);
+				return await cacheToken(token);
+			} catch (error) {
+				throw error;
+			}
 		},
 
 
 		// logout function
 		async useLogout() {
-			return new Promise((resolve, reject) => {
-				this.removeToken()
-				return doLogout()
-					.then(response => {
-
-						this.removeToken()
-						removeCachedToken()
-
-						resolve(response)
-					}).catch(error => {
-						reject(error)
-					})
-			})
+			try {
+				await doLogout();
+				this.removeToken();
+				await removeCachedToken();
+				return Promise.resolve();
+			} catch (error) {
+				return Promise.reject(error);
+			}
 		},
 
 
 		// ping function
 		async usePing() {
-			return new Promise((resolve, reject) => {
-				return doPing().then(response => {
-					resolve(response)
-				}).catch((error: any) => {
-					reject(error)
-				})
-			})
+			try {
+				const response = await doPing();
+				return Promise.resolve(response);
+			} catch (error) {
+				return Promise.reject(error);
+			}
 		}
 
 		// add more actions here...
