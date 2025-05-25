@@ -6,12 +6,14 @@ import config, {ROUTE_NAMES} from "@/config";
 //-创建路由对象
 const router = createRouter({
 	history: createWebHistory(`${import.meta.env.BASE_URL}`),
-	routes: (await import('./route-config')).default as RouteRecordRaw[],
+	routes: routeConfig as RouteRecordRaw[],
 })
 
 
 //全局守卫  访问非Login界面时，验证是否已登录
 router.beforeEach((to, from, next) => {
+
+	console.log("111111111111111111111111")
 
 	//判断是否已登录 查sessionStorage中是否有token信息
 	let token = sessionStorage.getItem(config.TOKEN)
