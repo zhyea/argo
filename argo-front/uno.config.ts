@@ -1,5 +1,4 @@
 import { defineConfig } from '@unocss/vite';
-import { presetSpyroAdmin } from '@spyro/uno-preset';
 import presetUno from '@unocss/preset-uno';
 import presetRemToPx from '@unocss/preset-rem-to-px';
 import transformerDirectives from '@unocss/transformer-directives';
@@ -13,7 +12,7 @@ export default defineConfig({
 		}
 	},
 	// css预设
-	presets: [presetUno({ dark: 'class' }), presetSpyroAdmin(), presetRemToPx(), presetIcons()],
+	presets: [presetUno({ dark: 'class' }), presetRemToPx(), presetIcons()],
 	// unoCss 转换器
 	transformers: [transformerDirectives(), transformerVariantGroup()],
 	// 自定义预设快捷方式
