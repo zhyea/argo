@@ -1,88 +1,82 @@
-import axios from 'axios';
-import {ElMessage} from "element-plus";
-import router from '@/router'
-import config, {ROUTE_NAMES} from "@/config";
-import {setHttpToken} from "@/api/auth";
+import { axios, checkErrorStatus, retryAxios, AxiosConfig, type AxiosError, type InternalAxiosRequestConfig } from '@spyro/axios';
+import { useUserStore } from '@/store';
 
-// axios.defaults.withCredentials = true
-// axios.defaults.crossDomain = true
+const { VITE_MOCK_SERVER, VITE_APP_BASE_API } = import.meta.env;
 
-//1. 创建axios对象
-const axiosInst = axios.create({
-	withCredentials: true,
-	baseURL: `${import.meta.env.VITE_BASE_URL}`,
-	timeout: import.meta.env.VITE_REQUEST_TIMEOUT,
-	// 请求头
-	headers: {
-		"Content-Type": "application/json;charset=UTF-8",
-	},
-});
+let isRefresh = false;
+const requestQueue: Array<{ config: InternalAxiosRequestConfig; resolve: any }> = [];
 
-
-//2. 请求拦截器
-axiosInst.interceptors.request.use(cfg => {
-		let token = sessionStorage.getItem(config.TOKEN)
-		if (token) {
-			console.log(`token:${token}`)
-			cfg.headers.Authorization = `${token}`
-		}
-		return cfg;
-	},
-	error => {
-		Promise.reject(error).then(() => {
-			console.log(error)
-		});
-	}
-);
-
-
-//3. 响应拦截器
-axiosInst.interceptors.response.use(
-	resp => {
-		let result = resp.data
-
-		//判断code码
-		let code = result.code;
-		if (code === 0) {
-			if (result?.authToken) {
-				console.log(`received new authToken:${result.authToken}`)
-				sessionStorage.setItem(config.TOKEN, result.authToken)
-				setHttpToken(result.authToken)
+export const service = new AxiosConfig({
+	baseURL: VITE_MOCK_SERVER === 'true' ? '/mock' : VITE_APP_BASE_API,
+	timeout: 10000,
+	// 拦截器
+	interceptors: {
+		requestInterceptors(config) {
+			const userStore = useUserStore();
+			if (userStore.accessToken) {
+				config.headers['Authorization'] = userStore.accessToken;
 			}
-			return result;
-		} else if (code === 100 || code === 102 || code === 103) {
-			// 执行跳转到登录页
-			sessionStorage.removeItem(config.TOKEN)
-			router.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
-				console.log(name)
-			})
-		} else {
-			let msg = (result.msg ? result.msg : resp.statusText)
-			ElMessage.warning({
-				message: msg,
-				duration: 1500,
-			})
-			return Promise.reject(msg);
+			return config;
+		},
+		requestInterceptorsCatch(error) {
+			return error;
+		},
+		responseInterceptor(response) {
+			if (response.data.code === 401 && !response.config.url?.includes('/refresh')) {
+				return new Promise((resolve) => {
+					requestQueue.push({
+						config: response.config,
+						resolve
+					});
+					const userStore = useUserStore();
+					// 防止多次刷新token
+					if (!isRefresh) {
+						isRefresh = true;
+						userStore
+							.refreshTokenAction()
+							.then(() => {
+								isRefresh = false;
+								requestQueue.forEach(({ resolve, config }) => {
+									resolve(service.request(config));
+								});
+							})
+							.catch((err) => {
+								console.warn('refreshToken失效 ---> ', err);
+								ElMessageBox.confirm('登录失效，是否重新登录?', '温馨提示', {
+									confirmButtonText: '是',
+									cancelButtonText: '否',
+									type: 'warning'
+								}).then(() => {
+									const userStore = useUserStore();
+									userStore.logoutAction();
+								});
+							});
+					}
+				});
+			}
+			return response;
+		},
+		responseInterceptorsCatch(instance, error) {
+			const message = error.code === 'ECONNABORTED' ? '请求超时' : undefined;
+			// 检查请求是否已取消
+			if (axios.isCancel(error)) {
+				return Promise.reject(error);
+			}
+			// 检查响应状态码
+			checkErrorStatus((error as AxiosError).response?.status as any, message, (message) => {
+				ElMessage.error(message);
+				console.error(message);
+			});
+			// 响应错误实现重连功能
+			return retryAxios(instance, error);
 		}
 	},
-	error => {
-		let resp = error.response
-		if (!resp) {
-			ElMessage.warning({
-				message: '服务器开小差了',
-				duration: 1500,
-			})
-		} else {
-			let msg = (resp.data.msg ? resp.data.msg : resp.statusText)
-			ElMessage.warning({
-				message: msg,
-				duration: 1500,
-			})
-		}
-
-		return Promise.reject(error);
+	// 是否取消重复请求 (无法取消mock请求，因为mock请求实际上未发出请求)
+	abortRepetitiveRequest: true,
+	// 超时重试
+	retryConfig: {
+		retry: false,
+		count: 5,
+		waitTime: 5000
 	}
-);
-
-
-export default axiosInst;
+});

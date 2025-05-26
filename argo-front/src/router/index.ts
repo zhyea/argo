@@ -1,33 +1,33 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import type { App } from 'vue';
+import { createRouter, type RouteRecordRaw, type Router } from 'vue-router';
+import { staticRoutes } from './helpers/process';
+import { judgeRouterHistoryMode } from './helpers/utils';
+import constantRoutes from './modules/constant';
 
-import routeConfig from './route-config'
-import config, {ROUTE_NAMES} from "@/config";
+/**
+ * 注册路由
+ */
+export const router: Router = createRouter({
+	history: judgeRouterHistoryMode(import.meta.env.VITE_ROUTER_MODE),
+	routes: staticRoutes.concat(constantRoutes as RouteRecordRaw[]),
+	scrollBehavior: () => ({ top: 0, left: 0 })
+});
 
-//-创建路由对象
-const router = createRouter({
-	history: createWebHistory(`${import.meta.env.BASE_URL}`),
-	routes: routeConfig as RouteRecordRaw[],
-})
+/**
+ * 重置路由
+ */
+export const resetRouter = (): void => {
+	const resetWhiteNameList = ['Login'];
+	router.getRoutes().forEach((route) => {
+		const { name } = route;
+		if (name && !resetWhiteNameList.includes(name as string)) {
+			router.hasRoute(name) && router.removeRoute(name);
+		}
+	});
+};
 
-
-//全局守卫  访问非Login界面时，验证是否已登录
-router.beforeEach((to, from, next) => {
-
-	console.log("111111111111111111111111")
-
-	//判断是否已登录 查sessionStorage中是否有token信息
-	let token = sessionStorage.getItem(config.TOKEN)
-
-	if (to.name !== ROUTE_NAMES.loginRouteName && !token) {
-		// 未登录，跳转到登录页
-		next({name: ROUTE_NAMES.loginRouteName});
-	} else if (to.name === ROUTE_NAMES.loginRouteName && token) {
-		// 已登录，不允许进入登录页，否则去Home页
-		next({name: ROUTE_NAMES.homeRouteName});
-	} else {
-		next()
-	}
-
-})
-
-export default router
+export async function setupRouter(app: App) {
+	app.use(router);
+	await router.isReady();
+}
+export default router;

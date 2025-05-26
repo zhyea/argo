@@ -1,25 +1,27 @@
-import {createApp} from 'vue'
-import {createPinia} from 'pinia'
+import { createApp } from 'vue';
+// 加载静态资源
+import './plugins/assets';
+// 插件
+import { setupLoading, setupDirectives, setupParticles, setupI18n } from '@/plugins';
+// router
+import { setupRouter } from '@/router';
+// pinia
+import { setupStore } from '@/store';
 
-import * as icons from '@element-plus/icons-vue'
-import i18n from '@/lang/index'
+import App from './App.vue';
 
+// 权限认证
+import './permission';
 
-import App from './App.vue'
-import router from '@/router'
+const setApp = async () => {
+	await setupLoading();
+	const app = createApp(App);
+	setupStore(app);
+	await setupRouter(app);
+	await setupDirectives(app);
+	setupParticles(app);
+	setupI18n(app);
+	app.mount('#app');
+};
 
-import './assets/style.css'
-
-
-const app = createApp(App)
-const pinia = createPinia()
-
-
-app.use(router).use(pinia).use(i18n)
-
-
-for (const [iconName, iconComponent] of Object.entries(icons as Record<string, any>)) {
-	app.component(iconName, iconComponent)
-}
-
-app.mount('#app')
+setApp();

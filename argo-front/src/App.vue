@@ -1,70 +1,18 @@
-<!-- 配置信息 -->
+<script setup lang="ts">
+	import { useAppStore } from '@/store';
+	import { useTheme } from '@/layouts/hooks/useTheme';
+	import zhCN from 'element-plus/es/locale/lang/zh-cn';
+	import en from 'element-plus/es/locale/lang/en';
 
-<template>
-	<router-view/>
-</template>
+	const appStore = useAppStore();
+	const language = computed(() => (appStore.language === 'zh-CN' ? zhCN : en));
 
-<script setup>
-import {onMounted, watch} from 'vue'
-import {useBreadcrumbStore} from "@/store/breadcrumb";
-import {useRoute} from "vue-router";
-import {useI18n} from "vue-i18n";
-import {getLocale} from "@/utils/localforage";
-import {useAppStore} from "@/store/app";
-import {ROUTE_NAMES} from "@/config/index";
-import {useTagStore} from "@/store/tag";
-import zh from 'element-plus/es/locale/lang/zh-cn'
-import en from 'element-plus/es/locale/lang/en'
-import {routeFormatTag} from "@/utils/helper/index";
-
-const route = useRoute();
-const breadcrumbStore = useBreadcrumbStore();
-const appStore = useAppStore();
-const tagStore = useTagStore();
-
-onMounted(() => {
-	breadcrumbStore.set(route.matched);
-})
-
-
-const i18n = useI18n();
-getLocale().then(lang => {
-	if (!lang) {
-		return;
-	}
-	appStore.setLocale(lang)
-	i18n.locale.value = lang
-})
-
-watch(route, () => {
-	breadcrumbStore.set(route.matched)
-	if (route.name !== ROUTE_NAMES.homeRouteName) {
-		const tag = routeFormatTag(route)
-		tagStore.openTagView(tag)
-	}
-})
-
-
-const locale = ref(computed(() => {
-	return appStore.locale === getLocale() ? zh : en
-}))
-
-
+	const { initTheme } = useTheme();
+	initTheme();
 </script>
 
-<style scoped>
-
-html, body {
-	width: 100%;
-	height: 100%;
-}
-
-body {
-	margin: 0;
-}
-
-#app {
-	height: 100%;
-	width: 100%;
-}
-</style>
+<template>
+	<el-config-provider :locale="language">
+		<router-view />
+	</el-config-provider>
+</template>

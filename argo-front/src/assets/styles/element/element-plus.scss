@@ -1,0 +1,144 @@
+@import '../mixins';
+
+// el菜单样式
+.el-menu-layout {
+	width: 100%;
+	height: 100%;
+
+	--el-menu-bg-color: transparent;
+
+	// 常规菜单
+	.el-menu {
+		border-right: 0;
+
+		.el-sub-menu {
+			&.is-active > .el-sub-menu__title {
+				color: var(--el-color-primary);
+				border-bottom: none;
+			}
+
+			.el-sub-menu__title {
+				color: var(--left-menu-text-color);
+				border-bottom: none;
+
+				& > * {
+					z-index: 1;
+				}
+
+				&:hover {
+					color: var(--el-color-primary);
+					background-color: transparent;
+				}
+
+				&:hover::before {
+					@include menu-before;
+
+					background: var(--left-menu-hover-bg-color);
+				}
+
+				&.is-active::before {
+					@include menu-before;
+
+					background: var(--left-menu-active-bg-color);
+				}
+			}
+		}
+
+		@include menu-style;
+	}
+
+	// 折叠动画隐藏文字
+	.horizontal-collapse-transition {
+		.el-menu__title {
+			display: none;
+		}
+	}
+
+	// 垂直菜单popper样式
+	&-popper {
+		&.el-menu--horizontal {
+			--el-menu-bg-color: transparent;
+
+			background: var(--left-menu-bg-color);
+			border-radius: var(--el-border-radius-small);
+
+			@include menu-style;
+		}
+	}
+
+	// 垂直菜单
+	&__horizontal,
+	&__vertical {
+		.el-menu--vertical {
+			width: 100%;
+			height: 100%;
+			background: var(--left-menu-bg-color);
+		}
+
+		.el-menu--horizontal {
+			background: var(--left-menu-bg-color);
+			border: none;
+
+			.el-sub-menu {
+				.el-sub-menu__title {
+					&:hover::before,
+					&.is-active::before {
+						display: none;
+					}
+				}
+			}
+
+			.el-menu-item {
+				&.is-active {
+					color: var(--el-color-primary);
+					background-color: transparent !important;
+				}
+
+				&:not(.is-active):hover {
+					color: var(--el-color-primary);
+					background-color: transparent !important;
+				}
+
+				&:hover::before,
+				&.is-active::before {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+// 滚动条高度设置为100%
+.el-scrollbar__view {
+	height: 100%;
+}
+
+.scrollbar-wrapper {
+	overflow-x: hidden !important;
+}
+
+// element-plus from
+.el-form .el-col {
+	.el-select,
+	.el-form-item {
+		width: 100%;
+	}
+}
+
+/* 去除el-drawer头部margin */
+.el-drawer {
+	font-size: 14px;
+	.el-drawer__body {
+		padding: 0;
+	}
+	.el-drawer__header {
+		margin: 0;
+	}
+}
+
+// 去除el-dropdown focus 黑框
+.el-dropdown {
+	.el-tooltip__trigger:focus {
+		outline: none; // unset 这个也行
+	}
+}

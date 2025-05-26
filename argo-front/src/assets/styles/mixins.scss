@@ -1,0 +1,40 @@
+// 菜单通用样式
+@mixin menu-before {
+	position: absolute;
+	inset: 2px 5px;
+	clear: both;
+	content: '';
+	border-radius: 6px;
+}
+
+@mixin menu-style() {
+	.el-menu-item {
+		color: var(--left-menu-text-color);
+
+		& > * {
+			z-index: 1;
+		}
+
+		&.is-active {
+			color: var(--left-menu-active-text-color);
+			background-color: transparent !important;
+		}
+
+		&:not(.is-active):hover {
+			color: var(--el-color-primary);
+			background-color: transparent !important;
+		}
+
+		&:hover::before {
+			@include menu-before;
+
+			background: var(--left-menu-hover-bg-color);
+		}
+
+		&.is-active::before {
+			@include menu-before;
+
+			background: var(--left-menu-active-bg-color);
+		}
+	}
+}
