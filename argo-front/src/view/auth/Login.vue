@@ -112,106 +112,106 @@
 
 
 <script setup>
-// import {ref} from 'vue';
-// import {useRouter} from 'vue-router';
-// import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
-// import {useAuthStore} from '@/store/auth';
-// import {ROUTE_NAMES} from "@/config";
-//
-//
-// const loginFormRef = ref();
-// const registerFormRef = ref();
-// //密码图标显示标识
-// const showPwd = ref(false)
-//
-//
-// const loginForm = ref({
-// 	username: '',
-// 	password: '',
-// });
-//
-//
-// const registerForm = ref({
-// 	username: '',
-// 	password: '',
-// 	confirmPassword: '',
-// 	invitationCode: '',
-// });
-//
-//
-// const loginRules = {
-// 	username: [
-// 		{required: true, message: '请输入用户名', trigger: 'blur'},
-// 	],
-// 	password: [
-// 		{required: true, message: '请输入密码', trigger: 'blur'},
-// 		{min: 5, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
-// 	],
-// };
-//
-//
-// const validatePassword = (rule, value, callback) => {
-// 	return (value === registerForm.value.password);
-// }
-//
-// const registerRules = {
-// 	username: [
-// 		{required: true, message: '请输入用户名', trigger: 'blur'},
-// 	],
-// 	password: [
-// 		{required: true, message: '请输入密码', trigger: 'blur'},
-// 		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
-// 	],
-// 	confirmPassword: [
-// 		{required: true, message: '请再次输入密码', trigger: 'blur'},
-// 		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
-// 		{validator: validatePassword, message: '两次输入的密码不一致', trigger: 'blur'},
-// 	],
-// 	invitationCode: [
-// 		{required: true, message: '请输入邀请码', trigger: 'blur'},
-// 		{min: 7, max: 9, message: '邀请码长度在7到9个字符', trigger: 'blur'},
-// 	],
-// };
-//
-//
-// const containerRef = ref()
-//
-//
-// const switchToRegister = () => {
-// 	containerRef.value.classList.remove("right-panel-active");
-// 	loginFormRef.value.resetFields();
-// }
-//
-//
-// const switchToLogin = () => {
-// 	containerRef.value.classList.add("right-panel-active");
-// 	registerFormRef.value.resetFields();
-// }
-//
-//
-// const router = useRouter();
-// const authStore = useAuthStore();
-//
-//
-// const submitRegister = (e) => {
-// 	e.preventDefault()
-// }
-//
-// const submitLogin = (e) => {
-// 	loginFormRef.value.validate((valid) => {
-// 		if (valid) {
-// 			const formData = {...loginForm.value,}
-// 			authStore.useLogin(formData).then(() => {
-// 				console.log('login success')
-// 				router.push({name: ROUTE_NAMES.homeRouteName})
-// 			}).catch(err => {
-// 				console.log('login fail，error: ' + err)
-// 			})
-// 		} else {
-// 			return false
-// 		}
-// 	})
-// }
+import {ref} from 'vue';
+import {useRouter} from 'vue-router';
+import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
+import {useAuthStore} from '@/store/auth';
+import {ROUTE_NAMES} from "@/config";
+
+
+const loginFormRef = ref();
+const registerFormRef = ref();
+//密码图标显示标识
+const showPwd = ref(false)
+
+
+const loginForm = ref({
+	username: '',
+	password: '',
+});
+
+
+const registerForm = ref({
+	username: '',
+	password: '',
+	confirmPassword: '',
+	invitationCode: '',
+});
+
+
+const loginRules = {
+	username: [
+		{required: true, message: '请输入用户名', trigger: 'blur'},
+	],
+	password: [
+		{required: true, message: '请输入密码', trigger: 'blur'},
+		{min: 5, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+	],
+};
+
+
+const validatePassword = (rule, value, callback) => {
+	return (value === registerForm.value.password);
+}
+
+const registerRules = {
+	username: [
+		{required: true, message: '请输入用户名', trigger: 'blur'},
+	],
+	password: [
+		{required: true, message: '请输入密码', trigger: 'blur'},
+		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+	],
+	confirmPassword: [
+		{required: true, message: '请再次输入密码', trigger: 'blur'},
+		{min: 6, max: 16, message: '密码长度在6到16个字符', trigger: 'blur'},
+		{validator: validatePassword, message: '两次输入的密码不一致', trigger: 'blur'},
+	],
+	invitationCode: [
+		{required: true, message: '请输入邀请码', trigger: 'blur'},
+		{min: 7, max: 9, message: '邀请码长度在7到9个字符', trigger: 'blur'},
+	],
+};
+
+
+const containerRef = ref()
+
+
+const switchToRegister = () => {
+	containerRef.value.classList.remove("right-panel-active");
+	loginFormRef.value.resetFields();
+}
+
+
+const switchToLogin = () => {
+	containerRef.value.classList.add("right-panel-active");
+	registerFormRef.value.resetFields();
+}
+
+
+const router = useRouter();
+const authStore = useAuthStore();
+
+
+const submitRegister = (e) => {
+	e.preventDefault()
+}
+
+const submitLogin = (e) => {
+	loginFormRef.value.validate((valid) => {
+		if (valid) {
+			const formData = {...loginForm.value,}
+			authStore.useLogin(formData).then(() => {
+				console.log('login success')
+				router.push({name: ROUTE_NAMES.homeRouteName})
+			}).catch(err => {
+				console.log('login fail，error: ' + err)
+			})
+		} else {
+			return false
+		}
+	})
+}
 
 
 </script>

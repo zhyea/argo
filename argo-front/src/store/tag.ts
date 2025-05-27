@@ -31,7 +31,10 @@ export const useTagStore = defineStore("tag", {
 			if (tag.name !== dashboardName &&
 				(this.tagList.length === 0 || this.tagList[0].name !== dashboardName)) {
 
-				const dashboardTag = routeFormatTag(routeByName(dashboardName));
+				const dashboardRoute = routeByName(dashboardName);
+				console.log('dashboard', dashboardRoute);
+
+				const dashboardTag = routeFormatTag(dashboardRoute);
 				dashboardTag.fullPath = ROUTE_NAMES.dashboardFullPath;
 				this.tagList.splice(0, 0, dashboardTag);
 			}

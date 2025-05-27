@@ -21,8 +21,18 @@ export const cacheToken = (token: string) => {
 	return localforage.setItem(getTokenKey(), token)
 }
 
-export const getCachedToken = () => {
-	return localforage.getItem(getTokenKey())
+export const getCachedToken = async () => {
+	try {
+		const token = await localforage.getItem(getTokenKey());
+		if (typeof token !== 'string') {
+			console.error('get invalid token:', token);
+			return '';
+		}
+		return token;
+	} catch (error) {
+		console.error('Failed to get cached token:', error);
+		throw new Error('Failed to retrieve cached token');
+	}
 }
 
 export const removeCachedToken = () => {

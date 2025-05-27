@@ -14,7 +14,7 @@ import {MenuItem} from "@/model/route";
 export const routeByName = (name: string): MenuItem => {
 
 	let router: MenuItem;
-	const each = (routers: MenuItem[], name: string) => {
+	const find = (routers: MenuItem[], name: string) => {
 		for (const item of routers) {
 			if (item.name === name) {
 				router = item
@@ -25,17 +25,18 @@ export const routeByName = (name: string): MenuItem => {
 			}
 
 			if (item.children && item.children.length > 0) {
-				each(item.children, name)
+				find(item.children, name)
 			}
 		}
 		return router;
 	}
 
-	return each(routers, name)
+	return find(routers, name)
 }
 
 
 export const routeFormatTag = (route: MenuItem): TagItem => {
+	console.log(`helper router format route:${route}`)
 	if (!route) {
 		throw new Error('Route parameter is required');
 	}

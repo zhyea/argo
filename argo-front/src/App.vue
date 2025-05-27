@@ -38,10 +38,13 @@ getLocale().then(lang => {
 
 watch(route, () => {
 	breadcrumbStore.set(route.matched)
-	if (route.name !== ROUTE_NAMES.homeRouteName) {
-		const tag = routeFormatTag(route)
-		tagStore.openTagView(tag)
+	if (route.name === ROUTE_NAMES.homeRouteName
+		|| route.name === ROUTE_NAMES.loginRouteName) {
+		return;
 	}
+
+	const tag = routeFormatTag(route)
+	tagStore.openTagView(tag)
 })
 
 
