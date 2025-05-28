@@ -36,7 +36,9 @@ export const routeByName = (name: string): MenuItem => {
 
 
 export const routeFormatTag = (route: MenuItem): TagItem => {
-	console.log(`helper router format route:${route}`)
+
+	console.log(`helper router format route: ${JSON.stringify(route)}`)
+
 	if (!route) {
 		throw new Error('Route parameter is required');
 	}

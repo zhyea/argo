@@ -25,7 +25,9 @@ export const useTagStore = defineStore("tag", {
 
 		// 打开标签
 		openTagView(tag: TagItem) {
-			const dashboardName = ROUTE_NAMES.dashboardName;
+			console.log(`openTagView: ${JSON.stringify(tag)}`);
+
+			const dashboardName = ROUTE_NAMES.homeRouteName;
 
 			// 如果不是仪表盘标签且 tagList 为空或者第一个标签不是仪表盘，则插入仪表盘标签
 			if (tag.name !== dashboardName &&

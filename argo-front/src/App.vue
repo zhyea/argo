@@ -37,12 +37,12 @@ getLocale().then(lang => {
 })
 
 watch(route, () => {
+	console.log(`route detail: ${JSON.stringify(route)}`)
 	breadcrumbStore.set(route.matched)
-	if (route.name === ROUTE_NAMES.homeRouteName
-		|| route.name === ROUTE_NAMES.loginRouteName) {
+
+	if (route.name === ROUTE_NAMES.loginRouteName) {
 		return;
 	}
-
 	const tag = routeFormatTag(route)
 	tagStore.openTagView(tag)
 })

@@ -1,25 +1,31 @@
 import {defineStore} from "pinia";
+import {MenuItem} from "@/model/route";
 
 export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 	state: () => ({
 		local: '',
-		breadcrumb: Array<string>(),
+		breadcrumb: Array<MenuItem>(),
 	}),
 
 
 	actions: {
 
 		// 设置面包屑
-		set(breadcrumb: any[]) {
-			const title: Array<string> = []
-			breadcrumb.filter((item: any) => {
-					return (title.indexOf(item.meta.title) < 0)
+		set(route: MenuItem[]) {
+
+			console.log(`set breadcrumb, route:${JSON.stringify(route)}`)
+
+			const title: Array<string> = this.breadcrumb.map((item: MenuItem) => {item.meta!.title})
+			route.filter((item: MenuItem) => {
+					return title.indexOf(item.meta!.title) < 0
 				}
-			).forEach((item: any) => {
-				title.push(item.meta.title)
-				this.breadcrumb.push(item.meta.title)
+			).forEach((item: MenuItem) => {
+				title.push(item.meta!.title)
+				this.breadcrumb.push(item)
 			})
+
+			console.log(`after set breadcrumb, route:${JSON.stringify(this.breadcrumb)}`)
 		}
 	}
 

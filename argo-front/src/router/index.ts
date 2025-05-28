@@ -17,6 +17,7 @@ router.beforeEach((to, from, next) => {
 
 	//判断是否已登录 查sessionStorage中是否有token信息
 	getCachedToken().then((token: string) => {
+
 		if (!token) {
 			next({name: ROUTE_NAMES.loginRouteName});
 		}

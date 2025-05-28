@@ -66,8 +66,10 @@ const emit = defineEmits(['menu'])
 const authStore = useAuthStore()
 const breadcrumbStore = useBreadcrumbStore()
 
-
-const breadcrumb = computed(() => breadcrumbStore.breadcrumb);
+const breadcrumb = computed(() => {
+	const r = breadcrumbStore.breadcrumb
+	console.log(`breadcrumb:${r}`)
+});
 
 
 /**
