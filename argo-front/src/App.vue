@@ -5,17 +5,17 @@
 </template>
 
 <script setup>
-import {ref, onMounted, watch, computed} from 'vue'
-import {useBreadcrumbStore} from "@/store/breadcrumb";
-import {useRoute} from "vue-router";
-import {useI18n} from "vue-i18n";
-import {getLocale} from "@/utils/localforage";
-import {useAppStore} from "@/store/app";
-import {ROUTE_NAMES} from "@/config/index";
-import {useTagStore} from "@/store/tag";
-import zh from 'element-plus/es/locale/lang/zh-cn'
-import en from 'element-plus/es/locale/lang/en'
-import {routeFormatTag} from "@/utils/helper/index";
+import {ref, onMounted, watch, computed} from 'vue';
+import {useBreadcrumbStore} from '@/store/breadcrumb';
+import {useRoute} from 'vue-router';
+import {useI18n} from 'vue-i18n';
+import {getLocale} from '@/utils/cache';
+import {useAppStore} from '@/store/app';
+import {ROUTE_NAMES} from '@/config/index';
+import {useTagStore} from '@/store/tag';
+import zh from 'element-plus/es/locale/lang/zh-cn';
+import en from 'element-plus/es/locale/lang/en';
+import {routeFormatTag} from '@/utils/helper/index';
 
 const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();

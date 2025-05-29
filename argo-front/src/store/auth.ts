@@ -2,7 +2,7 @@
 
 import {defineStore} from 'pinia'
 import {doLogin, doLogout, doPing, removeHttpToken, setHttpToken} from '@/api/auth'
-import {cacheToken, removeCachedToken} from "@/utils/localforage";
+import {cacheToken, removeCachedToken} from '@/utils/cache';
 
 
 export const useAuthStore = defineStore('auth', {
@@ -17,15 +17,15 @@ export const useAuthStore = defineStore('auth', {
 		// set token function
 		setToken(token: string) {
 			this.token = token
-			//sessionStorage.setItem(route.TOKEN, token)
-			setHttpToken(token)
+			setHttpToken(token);
+			cacheToken(token)
 		},
 
 
 		// remove token function
 		removeToken() {
 			this.token = ''
-			//sessionStorage.removeItem(route.TOKEN)
+			removeCachedToken();
 			removeHttpToken()
 		},
 
@@ -36,7 +36,6 @@ export const useAuthStore = defineStore('auth', {
 				const response = await doLogin(data);
 				const token = response.data;
 				this.setToken(token);
-				return await cacheToken(token);
 			} catch (error) {
 				throw error;
 			}
@@ -48,7 +47,6 @@ export const useAuthStore = defineStore('auth', {
 			try {
 				await doLogout();
 				this.removeToken();
-				await removeCachedToken();
 				return Promise.resolve();
 			} catch (error) {
 				return Promise.reject(error);

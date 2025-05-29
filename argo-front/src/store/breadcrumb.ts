@@ -16,7 +16,9 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 			console.log(`set breadcrumb, route:${JSON.stringify(route)}`)
 
-			const title: Array<string> = this.breadcrumb.map((item: MenuItem) => {item.meta!.title})
+			const title: Array<string> = this.breadcrumb.map((item: MenuItem) => {
+				return item.meta!.title
+			})
 			route.filter((item: MenuItem) => {
 					return title.indexOf(item.meta!.title) < 0
 				}
