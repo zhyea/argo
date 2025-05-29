@@ -11,26 +11,24 @@
 			</div>
 
 			<div class="nav-box">
-				<el-scrollbar height="100%">
-					<el-menu class="el-menu-vertical"
-					         :collapse="collapsed"
-					         :router="true"
-					         :collapse-transition="false"
-					         background-color="#263238"
-					         text-color="#afb5bd"
-					         active-text-color="#ffffff">
-						<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
-					</el-menu>
+				<el-menu class="el-menu-vertical"
+				         :collapse="collapsed"
+				         :router="true"
+				         :collapse-transition="false"
+				         background-color="#263238"
+				         text-color="#afb5bd"
+				         active-text-color="#ffffff">
+					<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
 
-					<el-menu>
-						<el-menu-item index="999">
-							底部菜单项
-						</el-menu-item>
-					</el-menu>
-				</el-scrollbar>
+
+					<el-menu-item class="el-menu-collapse">
+						<el-icon>
+							<ArgoLogo/>
+						</el-icon>
+						<span>折叠</span>
+					</el-menu-item>
+				</el-menu>
 			</div>
-
-
 		</div>
 	</el-aside>
 </template>
@@ -83,5 +81,12 @@ defineProps({
 .el-menu-vertical {
 	height: 100%;
 	border-right: 0;
+}
+
+.el-menu-collapse {
+	bottom: 0;
+	height: 100%;
+	border-right: 0;
+
 }
 </style>

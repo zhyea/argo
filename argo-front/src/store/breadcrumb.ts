@@ -14,8 +14,6 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 		// 设置面包屑
 		set(route: MenuItem[]) {
 
-			console.log(`set breadcrumb, route:${JSON.stringify(route)}`)
-
 			const title: Array<string> = this.breadcrumb.map((item: MenuItem) => {
 				return item.meta!.title
 			})
@@ -27,7 +25,6 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 				this.breadcrumb.push(item)
 			})
 
-			console.log(`after set breadcrumb, route:${JSON.stringify(this.breadcrumb)}`)
 		}
 	}
 

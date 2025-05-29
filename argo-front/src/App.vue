@@ -1,7 +1,10 @@
 <!-- 配置信息 -->
 
 <template>
-	<router-view/>
+
+	<el-config-provider :locale="locale">
+		<router-view/>
+	</el-config-provider>
 </template>
 
 <script setup>
@@ -37,7 +40,7 @@ getLocale().then(lang => {
 })
 
 watch(route, () => {
-	console.log(`route detail: ${JSON.stringify(route)}`)
+
 	breadcrumbStore.set(route.matched)
 
 	if (route.name === ROUTE_NAMES.loginRouteName) {

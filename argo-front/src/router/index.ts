@@ -15,8 +15,6 @@ const router = createRouter({
 //全局守卫  访问非Login界面时，验证是否已登录
 router.beforeEach((to, from, next) => {
 
-	console.log('全局守卫', to, from);
-
 	let token = getCachedToken()
 
 	const authStore = useAuthStore();
