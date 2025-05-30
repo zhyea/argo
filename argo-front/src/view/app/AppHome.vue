@@ -4,7 +4,7 @@
 		<sidebar :collapsed="collapseFlag" :menu-items="appMenu"/>
 
 		<el-container direction="vertical">
-			<head-bar :show-breadcrumb="true" @menu="changeSideBarState"/>
+			<head-bar :show-breadcrumb="true"/>
 			<el-main>
 				<router-view :key="$route.fullPath"/>
 			</el-main>
@@ -31,14 +31,6 @@ import {getApp} from "@/api/app";
 
 
 const route = useRoute()
-
-const collapseFlag = ref(false)
-
-// 调整侧边折起状态
-function changeSideBarState(status) {
-	collapseFlag.value = status
-}
-
 
 const appMenu = ref([])
 

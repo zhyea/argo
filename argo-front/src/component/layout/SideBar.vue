@@ -20,14 +20,6 @@
 					         text-color="#afb5bd"
 					         active-text-color="#ffffff">
 						<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
-
-
-						<el-menu-item class="el-menu-collapse">
-							<el-icon>
-								<ArgoLogo/>
-							</el-icon>
-							<span>折叠</span>
-						</el-menu-item>
 					</el-menu>
 				</el-scrollbar>
 			</div>
@@ -36,14 +28,13 @@
 			<div class="collapse-box" @click="sidebarSwitch">
 				<div class="normal" v-if="!collapsed">
 					<el-icon>
-						<expand/>
+						<fold/>
 					</el-icon>
-					ARGO 内容管理
+					折叠菜单
 				</div>
 				<div class="mini" v-else>
-					<el-icon @click="sidebarSwitch">
-						<expand v-if="collapsed"/>
-						<fold v-if="!collapsed"/>
+					<el-icon>
+						<expand/>
 					</el-icon>
 				</div>
 			</div>
@@ -58,7 +49,7 @@ import MenuItem from '@/component/layout/MenuItem.vue'
 import ArgoLogo from "@/component/icons/argo-logo.vue";
 import {Expand, Fold} from "@element-plus/icons-vue";
 
-const props = defineProps({
+let props = defineProps({
 	collapsed: Boolean,
 	menuItems: Array,
 })
@@ -70,7 +61,6 @@ const emit = defineEmits(['menu'])
  */
 function sidebarSwitch() {
 	emit('menu', !props.collapsed)
-	console.log(props.collapsed)
 }
 
 </script>
@@ -132,7 +122,12 @@ function sidebarSwitch() {
 	border-right: 0;
 }
 
-.el-menu-collapse {
+.collapse-box {
 	margin-top: auto;
+	cursor: pointer;
+}
+
+.collapse-box:hover {
+	cursor: pointer;
 }
 </style>

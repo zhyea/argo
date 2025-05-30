@@ -2,10 +2,11 @@
 	<el-container class="home_container">
 
 		<sidebar :collapsed="collapseFlag"
-		         :menu-items="menuItems.home"/>
+		         :menu-items="menuItems.home"
+		         @menu="changeSideBarState"/>
 
 		<el-container direction="vertical">
-			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true" @menu="changeMenuState"/>
+			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true"/>
 			<el-main>
 				<router-view :key="$route.fullPath"/>
 			</el-main>
@@ -25,9 +26,11 @@ import menuItems from '@/view/home/menu'
 
 const collapseFlag = ref(false)
 
-function changeMenuState(status) {
+// 调整侧边折起状态
+function changeSideBarState(status) {
 	collapseFlag.value = status
 }
+
 </script>
 
 <style lang="less" scoped>
