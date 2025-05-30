@@ -11,24 +11,43 @@
 			</div>
 
 			<div class="nav-box">
-				<el-menu class="el-menu-vertical"
-				         :collapse="collapsed"
-				         :router="true"
-				         :collapse-transition="false"
-				         background-color="#263238"
-				         text-color="#afb5bd"
-				         active-text-color="#ffffff">
-					<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
+				<el-scrollbar height="100%">
+					<el-menu class="el-menu-vertical"
+					         :collapse="collapsed"
+					         :router="true"
+					         :collapse-transition="false"
+					         background-color="#263238"
+					         text-color="#afb5bd"
+					         active-text-color="#ffffff">
+						<menu-item v-for="item in menuItems" :item="item" :key="item.id"/>
 
 
-					<el-menu-item class="el-menu-collapse">
-						<el-icon>
-							<ArgoLogo/>
-						</el-icon>
-						<span>折叠</span>
-					</el-menu-item>
-				</el-menu>
+						<el-menu-item class="el-menu-collapse">
+							<el-icon>
+								<ArgoLogo/>
+							</el-icon>
+							<span>折叠</span>
+						</el-menu-item>
+					</el-menu>
+				</el-scrollbar>
 			</div>
+
+
+			<div class="collapse-box" @click="sidebarSwitch">
+				<div class="normal" v-if="!collapsed">
+					<el-icon>
+						<expand/>
+					</el-icon>
+					ARGO 内容管理
+				</div>
+				<div class="mini" v-else>
+					<el-icon @click="sidebarSwitch">
+						<expand v-if="collapsed"/>
+						<fold v-if="!collapsed"/>
+					</el-icon>
+				</div>
+			</div>
+
 		</div>
 	</el-aside>
 </template>
@@ -37,11 +56,23 @@
 
 import MenuItem from '@/component/layout/MenuItem.vue'
 import ArgoLogo from "@/component/icons/argo-logo.vue";
+import {Expand, Fold} from "@element-plus/icons-vue";
 
-defineProps({
+const props = defineProps({
 	collapsed: Boolean,
 	menuItems: Array,
 })
+const emit = defineEmits(['menu'])
+
+
+/**
+ * 侧边栏开关
+ */
+function sidebarSwitch() {
+	emit('menu', !props.collapsed)
+	console.log(props.collapsed)
+}
+
 </script>
 
 
@@ -73,6 +104,24 @@ defineProps({
 	}
 }
 
+.collapse-box {
+	height: 60px;
+	display: flex;
+	line-height: 60px;
+	color: #42b983;
+	width: 100%;
+
+	.normal {
+		padding-left: 20px;
+	}
+
+	.mini {
+		width: 100%;
+		text-align: center;
+		padding-right: 6px;
+	}
+}
+
 .nav-box {
 	flex: auto;
 	overflow-y: auto;
@@ -84,9 +133,6 @@ defineProps({
 }
 
 .el-menu-collapse {
-	bottom: 0;
-	height: 100%;
-	border-right: 0;
-
+	margin-top: auto;
 }
 </style>

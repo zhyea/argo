@@ -1,17 +1,8 @@
 <template>
 	<el-header>
 		<el-row>
-			<!-- sidebar switch-->
-			<el-col :span="1" :class="{'open-menu': showBreadcrumb}">
-				<el-icon @click="sidebarSwitch" v-if="showBreadcrumb">
-					<expand v-if="collapsed"/>
-					<fold v-if="!collapsed"/>
-				</el-icon>
-			</el-col>
-
-
 			<!-- breadcrumb -->
-			<el-col :span="15">
+			<el-col :span="16">
 				<el-breadcrumb separator="/">
 					<el-breadcrumb-item v-for="item in breadcrumb"
 					                    :to="item.path"
@@ -20,7 +11,6 @@
 					</el-breadcrumb-item>
 				</el-breadcrumb>
 			</el-col>
-
 
 			<!-- avatar -->
 			<el-col :span="8" class="header-avatar">
@@ -55,14 +45,13 @@ import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
 import {ArrowDown, Avatar, Expand, Fold} from "@element-plus/icons-vue";
 
-const props = defineProps({
-	collapsed: Boolean,
+
+defineProps({
 	showBreadcrumb: Boolean,
 })
 
 
 const router = useRouter()
-const emit = defineEmits(['menu'])
 const authStore = useAuthStore()
 const breadcrumbStore = useBreadcrumbStore()
 
@@ -71,12 +60,7 @@ const breadcrumb = computed(() => {
 });
 
 
-/**
- * 侧边栏开关
- */
-function sidebarSwitch() {
-	emit('menu', !props.collapsed)
-}
+
 
 
 /**
