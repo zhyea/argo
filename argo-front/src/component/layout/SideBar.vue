@@ -30,7 +30,7 @@
 					<el-icon>
 						<fold/>
 					</el-icon>
-					折叠菜单
+					<span>折叠菜单</span>
 				</div>
 				<div class="mini" v-else>
 					<el-icon>
@@ -95,11 +95,11 @@ function sidebarSwitch() {
 }
 
 .collapse-box {
+	overflow: hidden;
 	display: flex;
 	height: 56px;
 	line-height: 56px;
-	align-items: center;
-	color: #F0FFF0;
+	color: #AFB5BD;
 	width: 100%;
 	font-size: 14px;
 
@@ -117,6 +117,12 @@ function sidebarSwitch() {
 		width: 24px;
 		height: 18px;
 		font-size: 18px;
+		vertical-align: middle;
+	}
+
+	.el-icon + span {
+		margin-left: 5px;
+		vertical-align: middle;
 	}
 }
 

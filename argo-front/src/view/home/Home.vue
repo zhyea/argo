@@ -7,8 +7,16 @@
 
 		<el-container direction="vertical">
 			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true"/>
+			<tags-view></tags-view>
 			<el-main>
 				<router-view :key="$route.fullPath"/>
+				<router-view v-slot="{ Component }">
+					<el-scrollbar height="100%">
+						<keep-alive :include="cacheTags">
+							<component :is="Component" />
+						</keep-alive>
+					</el-scrollbar>
+				</router-view>
 			</el-main>
 		</el-container>
 
@@ -22,6 +30,7 @@ import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
 
 import menuItems from '@/view/home/menu'
+import TagsView from "@/component/layout/TagsView.vue";
 
 
 const collapseFlag = ref(false)

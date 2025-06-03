@@ -42,7 +42,7 @@
 <script setup>
 import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-import config from '@/config'
+import config, {ROUTE_NAMES} from '@/config'
 import {getTagTitleName} from '@/utils/helper'
 import {Close, ArrowLeft, ArrowRight, StarFilled} from "@element-plus/icons-vue"
 import {useTagStore} from "@/store/tag"
@@ -66,7 +66,7 @@ const closeAll = (tag) => {
 	})
 
 	tagStore.closeTagHandle(tagList)
-	router.push({path: config.dashboardFullPath})
+	router.push({path: ROUTE_NAMES.dashboardFullPath})
 }
 
 const closeOther = () => {
@@ -135,7 +135,7 @@ const isActive = (tag) => tag.fullPath === route.fullPath ? '' : '#fff'
 const openTagPage = (tag) => router.push({path: tag.fullPath})
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style lang="less" scoped>
 .tags-box {
 	position: relative;
 	height: 40px;
