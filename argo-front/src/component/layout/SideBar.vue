@@ -95,11 +95,13 @@ function sidebarSwitch() {
 }
 
 .collapse-box {
-	height: 60px;
 	display: flex;
-	line-height: 60px;
-	color: #42b983;
+	height: 56px;
+	line-height: 56px;
+	align-items: center;
+	color: #F0FFF0;
 	width: 100%;
+	font-size: 14px;
 
 	.normal {
 		padding-left: 20px;
@@ -109,6 +111,12 @@ function sidebarSwitch() {
 		width: 100%;
 		text-align: center;
 		padding-right: 6px;
+	}
+
+	.el-icon {
+		width: 24px;
+		height: 18px;
+		font-size: 18px;
 	}
 }
 
