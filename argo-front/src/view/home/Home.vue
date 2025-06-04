@@ -7,13 +7,13 @@
 
 		<el-container direction="vertical">
 			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true"/>
-			<tags-view></tags-view>
+			<tag-view></tag-view>
 			<el-main>
 				<router-view :key="$route.fullPath"/>
 				<router-view v-slot="{ Component }">
 					<el-scrollbar height="100%">
 						<keep-alive :include="cacheTags">
-							<component :is="Component" />
+							<component :is="Component"/>
 						</keep-alive>
 					</el-scrollbar>
 				</router-view>
@@ -24,13 +24,14 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
 
 import menuItems from '@/view/home/menu'
-import TagsView from "@/component/layout/TagsView.vue";
+import TagView from "@/component/layout/TagView.vue";
+import {useTagStore} from "@/store/tag";
 
 
 const collapseFlag = ref(false)
@@ -39,6 +40,11 @@ const collapseFlag = ref(false)
 function changeSideBarState(status) {
 	collapseFlag.value = status
 }
+
+
+const cacheTags = computed(() => {
+	return useTagStore.cacheTags
+})
 
 </script>
 
