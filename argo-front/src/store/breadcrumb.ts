@@ -14,9 +14,13 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 		// 设置面包屑
 		set(route: MenuItem[]) {
 
+			console.log('-------------------------------------------', route)
+			
+
 			const title: Array<string> = this.breadcrumb.map((item: MenuItem) => {
 				return item.meta!.title
 			})
+
 			route.filter((item: MenuItem) => {
 					return title.indexOf(item.meta!.title) < 0
 				}
@@ -24,7 +28,6 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 				title.push(item.meta!.title)
 				this.breadcrumb.push(item)
 			})
-
 		}
 	}
 

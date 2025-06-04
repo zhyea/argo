@@ -41,11 +41,12 @@ getLocale().then(lang => {
 
 watch(route, () => {
 
-	breadcrumbStore.set(route.matched)
-
 	if (route.name === ROUTE_NAMES.loginRouteName) {
 		return;
 	}
+
+	breadcrumbStore.set(route.matched)
+
 	const tag = routeFormatTag(route)
 	tagStore.openTagView(tag)
 })
@@ -55,10 +56,9 @@ const locale = ref(computed(() => {
 	return appStore.locale === getLocale() ? zh : en
 }))
 
-
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 html, body {
 	width: 100%;
