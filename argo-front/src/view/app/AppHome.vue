@@ -1,7 +1,7 @@
 <template>
 
 	<el-container v-if="validAppFlag" class="home_container">
-		<sidebar :collapsed="collapseFlag" :menu-items="appMenu"/>
+		<sidebar :collapsed="collapseFlag" :menu-items="appMenu" @menu="changeSideBarState"/>
 
 		<el-container direction="vertical">
 			<head-bar :show-breadcrumb="true"/>
@@ -85,6 +85,14 @@ function loadAppData() {
 	})
 }
 
+
+
+const collapseFlag = ref(false)
+
+// 调整侧边折起状态
+function changeSideBarState(status) {
+	collapseFlag.value = status
+}
 
 </script>
 

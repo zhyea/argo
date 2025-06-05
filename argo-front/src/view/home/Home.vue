@@ -6,7 +6,7 @@
 		         @menu="changeSideBarState"/>
 
 		<el-container direction="vertical">
-			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true"/>
+			<head-bar :show-breadcrumb="true"/>
 			<tag-view/>
 			<el-main>
 				<router-view :key="$route.fullPath" v-slot="{ Component }">
