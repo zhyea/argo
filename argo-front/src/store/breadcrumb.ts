@@ -15,19 +15,25 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 		set(route: MenuItem[]) {
 
 			console.log('-------------------------------------------', route)
-			
 
-			const title: Array<string> = this.breadcrumb.map((item: MenuItem) => {
-				return item.meta!.title
-			})
 
-			route.filter((item: MenuItem) => {
-					return title.indexOf(item.meta!.title) < 0
+			const title: Array<string> = Array<string>();
+
+			this.breadcrumb = route.filter((item: MenuItem) => {
+
+					if (title.includes(item.meta!.title)) {
+						return false;
+					}
+
+					title.push(item.meta!.title)
+
+					return true;
 				}
-			).forEach((item: MenuItem) => {
-				title.push(item.meta!.title)
-				this.breadcrumb.push(item)
-			})
+			)
+			/*				.forEach((item: MenuItem) => {
+							title.push(item.meta!.title)
+							this.breadcrumb.push(item)
+						})*/
 		}
 	}
 

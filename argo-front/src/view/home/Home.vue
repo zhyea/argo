@@ -7,10 +7,9 @@
 
 		<el-container direction="vertical">
 			<head-bar :collapsed="collapseFlag" :show-breadcrumb="true"/>
-			<tag-view></tag-view>
+			<tag-view/>
 			<el-main>
-				<router-view :key="$route.fullPath"/>
-				<router-view v-slot="{ Component }">
+				<router-view :key="$route.fullPath" v-slot="{ Component }">
 					<el-scrollbar height="100%">
 						<keep-alive :include="cacheTags">
 							<component :is="Component"/>
