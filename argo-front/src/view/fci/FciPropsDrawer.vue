@@ -1,0 +1,73 @@
+<template>
+	<el-drawer :title="`${fci.name}`"
+	           v-model="fciPropsDrawer" :with-header=true size="40%">
+		<el-container>
+		</el-container>
+	</el-drawer>
+</template>
+
+<script setup>
+
+import {ref} from "vue";
+import {loadEnums} from "@/api/common";
+import {submitForm} from "@/utils/common";
+import {addFci, editFci, getFci} from "@/api/fci";
+
+const fciPropsDrawer = ref(false)
+
+const fci = ref({
+	id: 0,
+	fcmId: 0,
+	appId: 0,
+	name: '',
+	dataBindFlag: 0,
+	dataUrl: '',
+	switchFlag: 1,
+	effectivePeriodType: 1,
+	effectiveTimeRange: null,
+
+	remark: '',
+})
+
+
+
+// 枚举相关信息
+const allEnumMap = ref()
+const effectivePeriodTypeEnum = ref()
+
+
+// 打开组件实例抽屉前的准备
+const openPrepare = () => {
+
+	// 加载枚举数据
+	loadEnums(allEnumMap, () => {
+		effectivePeriodTypeEnum.value = allEnumMap.value.get('EffectivePeriodTypeEnum')
+	})
+}
+
+
+// 打开组件实例抽屉-用于编辑
+const openDrawerForEdit = (fciId, appId) => {
+	openPrepare()
+}
+
+
+// 打开组件实例抽屉-用于新增
+const openDrawerForAdd = (fcmRow) => {
+	openPrepare()
+}
+
+
+
+defineExpose({
+	openFciDrawerForEdit: openDrawerForEdit,
+	openFciDrawerForAdd: openDrawerForAdd,
+})
+
+</script>
+
+<style scoped lang="less">
+.fci-form {
+	width: 100%;
+}
+</style>

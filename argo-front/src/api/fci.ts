@@ -32,8 +32,16 @@ export function editFci(formData: any) {
 
 
 // 删除组件记录
-export function delFci(fciId: any) {
+export function delFci(fciId: number) {
 	return request.post('/cms/fci/delete', {
+		fciId: fciId,
+	})
+}
+
+
+// 获取组件属性列表
+export function fciPropList(fciId: number) {
+	return request.post('/cms/fci/prop/list', {
 		fciId: fciId,
 	})
 }

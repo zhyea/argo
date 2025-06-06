@@ -1,5 +1,5 @@
 <template>
-	<el-drawer :title="`${fcmForm.fcmId ? '编辑' : '新增'}组件模型`"
+	<el-drawer :title="`${fcmForm.fcmId ? '编辑' : '新增'}${fcmForm.name}`"
 	           v-model="fcmEditDrawer" :with-header=true size="70%">
 		<!--表单信息-->
 		<el-form
@@ -139,7 +139,6 @@ import {queryApps} from "@/api/app";
 import {addFcm, editFcm, getFcm} from "@/api/fcm";
 import {submitForm} from "@/utils/common";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
-import {useRoute} from "vue-router";
 
 const fcmEditDrawer = ref(false)
 
