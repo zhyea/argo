@@ -1,5 +1,5 @@
 <template>
-	<el-drawer :title="`${fciForm.id ? '编辑' : '新增'}组件实例`"
+	<el-drawer :title="`${fciForm.id ? '编辑' : '新增'}组件实例 - ${fciForm.name}`"
 	           v-model="fciItemDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->

@@ -31,7 +31,7 @@
 				<el-table-column label="操作" align="center" fixed="right" width=200>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-						<el-button type="warning" size="small" @click="showDetail(scope.row)">详情</el-button>
+						<el-button type="warning" size="small" @click="showProps(scope.row)">详情</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
@@ -49,6 +49,7 @@
 	</div>
 
 	<fci-drawer ref="fciEditDrawerRef" @after-fci-edit="loadFciListData"/>
+	<props-drawer ref="fciPropsDrawerRef"/>
 </template>
 
 <script setup>
@@ -57,6 +58,7 @@ import {useRoute, useRouter} from "vue-router";
 import {loadEnums} from "@/api/common";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
+import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
 
 
@@ -137,17 +139,13 @@ function handleDelete(row) {
 }
 
 
-// 打开属性管理窗口
-function showDetail(row) {
-	const target = {
-		name: 'FciDetail',
-		params: {
-			fciId: row.id,
-			appId: row.appId
-		}
-	}
+// 组件属性管理抽屉
+const fciPropsDrawerRef = ref()
 
-	window.open(router.resolve(target).href, '_blank');
+
+// 打开属性管理窗口
+function showProps(row) {
+	fciPropsDrawerRef.value.openFciPropsDrawer(row.id)
 }
 
 

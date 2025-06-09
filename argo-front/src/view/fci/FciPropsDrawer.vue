@@ -1,6 +1,6 @@
 <template>
-	<el-drawer :title="`${fci.name}`"
-	           v-model="fciPropsDrawer" :with-header=true size="40%">
+	<el-drawer :title="`${fci.name}属性`"
+	           v-model="fciPropsDrawer" :with-header=true size="60%">
 		<el-container>
 		</el-container>
 	</el-drawer>
@@ -28,7 +28,6 @@ const fci = ref({
 })
 
 
-
 // 枚举相关信息
 const allEnumMap = ref()
 const effectivePeriodTypeEnum = ref()
@@ -45,21 +44,13 @@ const openPrepare = () => {
 
 
 // 打开组件实例抽屉-用于编辑
-const openDrawerForEdit = (fciId, appId) => {
+const openFciPropsDrawer = (fciId, appId) => {
 	openPrepare()
 }
-
-
-// 打开组件实例抽屉-用于新增
-const openDrawerForAdd = (fcmRow) => {
-	openPrepare()
-}
-
 
 
 defineExpose({
-	openFciDrawerForEdit: openDrawerForEdit,
-	openFciDrawerForAdd: openDrawerForAdd,
+	openFciPropsDrawer,
 })
 
 </script>
