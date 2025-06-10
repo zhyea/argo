@@ -61,8 +61,23 @@ export function submitForm<T extends Record<string, any>>(
  * @param value 值
  * @returns {Map<any, any>} Map对象
  */
-export function mapOf(key: any, value: any) {
-	const map = new Map()
-	map.set(key, value)
-	return map
+export function mapOf<K, V>(key: K, value: V): Map<K, V> {
+	const map = new Map<K, V>();
+	map.set(key, value);
+	return map;
+}
+
+
+/**
+ * 格式化有效期
+ * @param row
+ */
+export function formatEffectivePeriod(row: any) {
+	let result = '~'
+	if (row.effectiveStartTime && row.effectiveEndTime) {
+		result = row.effectiveStartTime + ' ~ ' + row.effectiveEndTime;
+	} else if (row.effectiveStartTime) {
+		result = row.effectiveStartTime + ' ~ ';
+	}
+	return result
 }

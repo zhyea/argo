@@ -137,7 +137,7 @@ import {ref} from "vue";
 import {loadEnums} from "@/api/common";
 import {queryApps} from "@/api/app";
 import {addFcm, editFcm, getFcm} from "@/api/fcm";
-import {submitForm} from "@/utils/common";
+import {submitForm} from "@/view/helper";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 
 const fcmEditDrawer = ref(false)

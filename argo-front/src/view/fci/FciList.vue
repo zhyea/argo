@@ -60,6 +60,7 @@ import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
+import {formatEffectivePeriod} from "@/view/helper";
 
 
 const route = useRoute();
@@ -145,7 +146,7 @@ const fciPropsDrawerRef = ref()
 
 // 打开属性管理窗口
 function showProps(row) {
-	fciPropsDrawerRef.value.openFciPropsDrawer(row.id)
+	fciPropsDrawerRef.value.openFciPropsDrawer(row)
 }
 
 
@@ -168,17 +169,6 @@ function mapTypeEnum(row, column, cellValue, index) {
 
 function mapDataBindFlag(row, column, cellValue, index) {
 	return mapEnum('YesOrNo', row.dataBindFlag)
-}
-
-
-function formatEffectivePeriod(row, column, cellValue, index) {
-	let result = '~'
-	if (row.effectiveStartTime && row.effectiveEndTime) {
-		result = row.effectiveStartTime + ' ~ ' + row.effectiveEndTime;
-	} else if (row.effectiveStartTime) {
-		result = row.effectiveStartTime + ' ~ ';
-	}
-	return result
 }
 
 

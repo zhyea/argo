@@ -153,16 +153,3 @@ export async function submitForm(formRef: Ref<any>,
 		submitFlag.value = false;
 	}
 }
-
-
-/**
- * 将k/v 对转为Map对象
- * @param key key
- * @param value 值
- * @returns {Map<any, any>} Map对象
- */
-export function mapOf<K, V>(key: K, value: V): Map<K, V> {
-	const map = new Map<K, V>();
-	map.set(key, value);
-	return map;
-}

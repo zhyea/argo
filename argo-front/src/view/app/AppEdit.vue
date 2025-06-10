@@ -34,7 +34,7 @@
 <script setup>
 import {ref} from "vue";
 import {addApp, editApp} from "@/api/app";
-import {submitForm} from "@/utils/common";
+import {submitForm} from "@/view/helper";
 
 // app 表单数据
 const appForm = ref({
