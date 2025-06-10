@@ -55,16 +55,18 @@
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
-import {loadEnums} from "@/api/common";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
 import {formatEffectivePeriod} from "@/view/helper";
+import {useEnumStore} from "@/store/enum";
 
 
 const route = useRoute();
 const router = useRouter();
+
+const enumStore = useEnumStore()
 
 // 分页数据
 const pageData = ref({
@@ -150,36 +152,24 @@ function showProps(row) {
 }
 
 
-// 枚举数据
-const allEnumsMap = ref()
-
 // 页面渲染前执行一些必要的操作
 onMounted(() => {
 	// 加载枚举数据
-	loadEnums(allEnumsMap)
+	enumStore.refresh()
 	// 加载页面数据
 	loadFciListData()
 })
 
 
 function mapTypeEnum(row, column, cellValue, index) {
-	return mapEnum('FcmTypeEnum', row.type)
+	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
 
 
 function mapDataBindFlag(row, column, cellValue, index) {
-	return mapEnum('YesOrNo', row.dataBindFlag)
+	return enumStore.getEnumDesc('YesOrNo', row.dataBindFlag)
 }
 
-
-function mapEnum(enumType, enumCode) {
-	let enumMap = allEnumsMap.value.get(enumType)
-	let result
-	if (enumMap) {
-		result = enumMap.get(enumCode)
-	}
-	return result ? result : ''
-}
 
 </script>
 

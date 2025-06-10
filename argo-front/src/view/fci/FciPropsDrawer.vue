@@ -55,7 +55,7 @@
 
 import {ref} from "vue";
 import {loadEnums} from "@/api/common";
-import {findFciList} from "@/api/fci.js";
+import {findFciList} from "@/api/fci";
 import {useRouter} from "vue-router";
 import {formatEffectivePeriod} from "@/view/helper";
 

@@ -27,7 +27,7 @@ export async function loadEnumMap() {
  * @param res 响应信息
  * @returns {Map<any, any>} 枚举信息
  */
-function readResponse(res: any): Map<any, any> {
+function readResponse(res: any): Map<string, Map<number, string>> {
 	if (!res?.data) return new Map();
 
 	return new Map(
