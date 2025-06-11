@@ -59,7 +59,7 @@ import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
-import {formatEffectivePeriod} from "@/view/helper";
+import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
 import {useEnumStore} from "@/store/enum";
 
 
@@ -86,7 +86,7 @@ const keywordForm = ref({
 })
 
 
-// FCM列表数据
+// FCI列表数据
 const fciListData = ref([])
 
 // 加载方法列表数据
@@ -164,13 +164,6 @@ onMounted(() => {
 function mapTypeEnum(row, column, cellValue, index) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
-
-
-function mapDataBindFlag(row, column, cellValue, index) {
-	return enumStore.getEnumDesc('YesOrNo', row.dataBindFlag)
-}
-
-
 </script>
 
 <style scoped lang="less">

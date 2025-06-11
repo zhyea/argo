@@ -1,9 +1,10 @@
 /**
  * 通用工具
  */
-import {ref, Ref} from "vue";
+import {Ref} from "vue";
 import {ElMessage} from "element-plus";
 import type {FormInstance} from "element-plus";
+import {useEnumStore} from "@/store/enum";
 
 /**
  * 提交表单
@@ -80,4 +81,13 @@ export function formatEffectivePeriod(row: any) {
 		result = row.effectiveStartTime + ' ~ ';
 	}
 	return result
+}
+
+
+/**
+ * 数据绑定标志
+ * @param row
+ */
+export function mapDataBindFlag(row: any) {
+	return useEnumStore().getEnumDesc('YesOrNo', row.dataBindFlag)
 }
