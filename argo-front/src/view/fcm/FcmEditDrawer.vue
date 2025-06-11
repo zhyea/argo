@@ -134,11 +134,14 @@
 <script setup>
 import {ref} from "vue";
 
-import {loadEnums} from "@/api/common";
 import {queryApps} from "@/api/app";
 import {addFcm, editFcm, getFcm} from "@/api/fcm";
 import {submitForm} from "@/view/helper";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
+import {useEnumStore} from "@/store/enum";
+
+
+const enumStore = useEnumStore()
 
 const fcmEditDrawer = ref(false)
 
@@ -217,7 +220,6 @@ const fcmPropFormRules = {
 
 
 // 枚举相关信息
-const allEnumMap = ref()
 const fcmTypeEnum = ref()
 const fcScopeEnum = ref()
 const fcmPropTypeEnum = ref()
@@ -274,12 +276,9 @@ const openFcmEditDrawer = (fcmId, appId) => {
 
 	defaultAppFcmFlag.value = (null != appId)
 
-	// 加载枚举数据
-	loadEnums(allEnumMap, () => {
-		fcmTypeEnum.value = allEnumMap.value.get('FcmTypeEnum')
-		fcScopeEnum.value = allEnumMap.value.get('FcScopeEnum')
-		fcmPropTypeEnum.value = allEnumMap.value.get('FcmPropTypeEnum')
-	})
+	fcmTypeEnum.value = enumStore.getEnumMap('FcmTypeEnum')
+	fcScopeEnum.value = enumStore.getEnumMap('FcScopeEnum')
+	fcmPropTypeEnum.value = enumStore.getEnumMap('FcmPropTypeEnum')
 
 	// 加载组件模型数据
 	if (fcmId) {

@@ -1,7 +1,7 @@
 <template>
 	<el-drawer :title="`组件${fci.name}-属性`"
 	           v-model="fciPropsDrawer" :with-header=true size="60%">
-		<el-container>
+		<table-container>
 			<div class="table-header">
 				<el-form :model="propsSearchForm" label-width="60px" label-suffix=":" :inline="true"
 				         @submit.native.prevent>
@@ -47,7 +47,7 @@
 				               layout="total, prev, pager, next, ->, jumper"/>
 			</div>
 
-		</el-container>
+		</table-container>
 	</el-drawer>
 </template>
 
@@ -129,7 +129,7 @@ const propsSearchForm = ref({
 
 
 // FCM列表数据
-const fciListData = ref([])
+const fciPropsData = ref([])
 
 // 加载方法列表数据
 function loadFciPropsData() {

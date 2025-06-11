@@ -23,7 +23,7 @@
 				<el-table-column show-overflow-tooltip min-width=90 prop="type" label="类型"
 				                 :formatter="mapTypeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=70 prop="scope" label="作用域"
-				                 :formatter="mapScopeEnum" />
+				                 :formatter="mapScopeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=160 prop="appName" label="应用"/>
 				<el-table-column show-overflow-tooltip min-width=60 prop="dataBindFlag" label="绑定数据"
 				                 :formatter="mapDataBindFlag" align="center"/>
@@ -59,15 +59,17 @@
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {delFcm, findFcmList} from "@/api/fcm";
-import {loadEnums} from "@/api/common";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 import {ROUTE_NAMES} from "@/config";
+import {useEnumStore} from "@/store/enum";
 
 
 const route = useRoute();
 const router = useRouter();
+const enumStore = useEnumStore();
+
 
 // 分页数据
 const pageData = ref({
@@ -153,41 +155,29 @@ function handleEdit(row) {
 	fcmEditDrawerRef.value.openFcmEditDrawer(row.fcmId, row.appId)
 }
 
-// 枚举数据
-const allEnumsMap = ref()
-
 // 页面渲染前执行一些必要的操作
 onMounted(() => {
 	// 加载枚举数据
-	loadEnums(allEnumsMap)
+	enumStore.refresh();
 	// 加载页面数据
-	loadFcmListData()
+	loadFcmListData();
 })
 
 
 function mapTypeEnum(row, column, cellValue, index) {
-	return mapEnum('FcmTypeEnum', row.type)
+	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
 
 
 function mapScopeEnum(row, column, cellValue, index) {
-	return mapEnum('FcScopeEnum', row.scope)
+	return enumStore.getEnumDesc('FcScopeEnum', row.scope)
 }
 
 
 function mapDataBindFlag(row, column, cellValue, index) {
-	return mapEnum('YesOrNo', row.dataBindFlag)
+	return enumStore.getEnumDesc('YesOrNo', row.dataBindFlag)
 }
 
-
-function mapEnum(enumType, enumCode) {
-	let enumMap = allEnumsMap.value.get(enumType)
-	let result
-	if (enumMap) {
-		result = enumMap.get(enumCode)
-	}
-	return result ? result : ''
-}
 </script>
 
 <style scoped lang="less">

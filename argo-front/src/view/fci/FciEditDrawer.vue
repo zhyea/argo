@@ -69,6 +69,9 @@ import {ref} from "vue";
 import {loadEnums} from "@/api/common";
 import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
+import {useEnumStore} from "@/store/enum";
+
+const enumStore = useEnumStore()
 
 const fciItemDrawer = ref(false)
 
@@ -118,7 +121,6 @@ const isFciFormSubmitted = ref(false)
 
 
 // 枚举相关信息
-const allEnumMap = ref()
 const effectivePeriodTypeEnum = ref()
 
 
@@ -133,9 +135,7 @@ const openPrepare = () => {
 	isFciFormSubmitted.value = false
 
 	// 加载枚举数据
-	loadEnums(allEnumMap, () => {
-		effectivePeriodTypeEnum.value = allEnumMap.value.get('EffectivePeriodTypeEnum')
-	})
+	effectivePeriodTypeEnum.value = enumStore.getEnumMap('EffectivePeriodTypeEnum')
 }
 
 
