@@ -55,6 +55,57 @@
 					</el-form-item>
 				</el-card>
 
+
+
+				<el-card>
+					<el-form :model="fciPropForm" ref="fcmPropFormRef">
+						<table class="fcm-prop-table">
+							<tbody>
+							<tr>
+								<td class="fcm-prop-td-key">属性key</td>
+								<td class="fcm-prop-td-type">类型</td>
+								<td class="fcm-prop-td-required">必填</td>
+								<td class="fcm-prop-td-desc">描述</td>
+								<td class="fcm-prop-td-opt"></td>
+							</tr>
+							<tr v-for="(e, idx) in fciPropForm.props"
+							    :key="idx">
+								<td class="fcm-prop-td-key">
+									<el-form-item :prop="`props.${idx}.propKey`" :rules="fcmPropFormRules.propKey">
+										<el-input v-model="e.propKey"/>
+									</el-form-item>
+								</td>
+								<td class="fcm-prop-td-type">
+									<el-form-item :prop="`props.${idx}.propType`" :rules="fcmPropFormRules.propType">
+										<el-select v-model="e.propType"
+										           placeholder="请选择属性类型">
+											<el-option v-for="e in fciPropTypeEnum"
+											           :key="e[0]"
+											           :label="e[1]"
+											           :value="e[0]"/>
+										</el-select>
+									</el-form-item>
+								</td>
+								<td class="fcm-prop-td-required">
+									<el-form-item>
+										<el-switch v-model.number="e.required" inline-prompt
+										           active-text="是" :active-value='1'
+										           inactive-text="否" :inactive-value='0'
+										/>
+									</el-form-item>
+								</td>
+								<td class="fcm-prop-td-desc">
+									<el-tooltip content="`${e.propDesc}`" placement="top">
+										<i class="el-icon-warning"></i> <!-- 或者使用其他图标库的图标 -->
+									</el-tooltip>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</el-form>
+				</el-card>
+
+
 				<el-card class="fcm-region">
 					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
 				</el-card>
@@ -66,7 +117,6 @@
 <script setup>
 
 import {ref} from "vue";
-import {loadEnums} from "@/api/common";
 import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
@@ -99,6 +149,17 @@ const fciFormRules = {
 		{required: true, message: '请输入返回值', trigger: 'blur'},
 	],
 };
+
+
+// fcm 属性表单数据
+const fciPropForm = ref({
+	props: [{
+		propKey: '',
+		propType: '',
+		propDesc: '',
+		required: 0,
+	}]
+})
 
 
 // 加载组件实例数据
