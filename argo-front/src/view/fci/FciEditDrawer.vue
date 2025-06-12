@@ -56,9 +56,8 @@
 				</el-card>
 
 
-
 				<el-card>
-					<el-form :model="fciPropForm" ref="fcmPropFormRef">
+					<el-form :model="fciPropForm" ref="fciPropFormRef">
 						<table class="fcm-prop-table">
 							<tbody>
 							<tr>
@@ -68,36 +67,27 @@
 								<td class="fcm-prop-td-desc">描述</td>
 								<td class="fcm-prop-td-opt"></td>
 							</tr>
-							<tr v-for="(e, idx) in fciPropForm.props"
-							    :key="idx">
+							<tr v-for="(e, idx) in fciPropFormRef.props" :key="idx">
 								<td class="fcm-prop-td-key">
-									<el-form-item :prop="`props.${idx}.propKey`" :rules="fcmPropFormRules.propKey">
-										<el-input v-model="e.propKey"/>
-									</el-form-item>
+									{{ e.propKey }}
 								</td>
 								<td class="fcm-prop-td-type">
-									<el-form-item :prop="`props.${idx}.propType`" :rules="fcmPropFormRules.propType">
-										<el-select v-model="e.propType"
-										           placeholder="请选择属性类型">
-											<el-option v-for="e in fciPropTypeEnum"
-											           :key="e[0]"
-											           :label="e[1]"
-											           :value="e[0]"/>
-										</el-select>
-									</el-form-item>
+									{{ fcmPropType(e.propType) }}
+								</td>
+								<td class="fcm-prop-td-required">
+									{{ isRequired(e.required) }}
+								</td>
+								<td class="fcm-prop-td-desc">
+									<el-tooltip :content="`${e.propDesc}`" placement="top">
+										<el-icon>
+											<Warning/>
+										</el-icon>
+									</el-tooltip>
 								</td>
 								<td class="fcm-prop-td-required">
 									<el-form-item>
-										<el-switch v-model.number="e.required" inline-prompt
-										           active-text="是" :active-value='1'
-										           inactive-text="否" :inactive-value='0'
-										/>
+										<el-input />
 									</el-form-item>
-								</td>
-								<td class="fcm-prop-td-desc">
-									<el-tooltip content="`${e.propDesc}`" placement="top">
-										<i class="el-icon-warning"></i> <!-- 或者使用其他图标库的图标 -->
-									</el-tooltip>
 								</td>
 							</tr>
 							</tbody>
@@ -120,6 +110,8 @@ import {ref} from "vue";
 import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
+import {getFcm} from "@/api/fcm";
+import {Warning} from "@element-plus/icons-vue";
 
 const enumStore = useEnumStore()
 
@@ -150,6 +142,7 @@ const fciFormRules = {
 	],
 };
 
+const fciPropFormRef = ref()
 
 // fcm 属性表单数据
 const fciPropForm = ref({
@@ -161,6 +154,14 @@ const fciPropForm = ref({
 	}]
 })
 
+
+const fcmPropType = (code) => {
+	return enumStore.getEnumDesc('FcmPropTypeEnum', code)
+}
+
+const isRequired = (code) => {
+	return code === 1 ? '必填' : '非必填'
+}
 
 // 加载组件实例数据
 const loadFciData = async (fciId) => {
@@ -186,14 +187,20 @@ const effectivePeriodTypeEnum = ref()
 
 
 // 打开组件实例抽屉前的准备
-const openPrepare = () => {
+const openPrepare = (fcmId) => {
 	fciItemDrawer.value = true
 
 	if (fciFormRef.value) {
 		fciFormRef.value.resetFields();
 	}
+	if (fciPropFormRef.value) {
+		fciPropFormRef.value.resetFields()
+	}
 
 	isFciFormSubmitted.value = false
+	getFcm(fcmId).then(response => {
+		fciPropForm.value.props = response.data.props;
+	})
 
 	// 加载枚举数据
 	effectivePeriodTypeEnum.value = enumStore.getEnumMap('EffectivePeriodTypeEnum')
