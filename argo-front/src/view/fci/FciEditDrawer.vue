@@ -67,7 +67,7 @@
 								<td class="fcm-prop-td-desc">描述</td>
 								<td class="fcm-prop-td-opt"></td>
 							</tr>
-							<tr v-for="(e, idx) in fciPropFormRef.props" :key="idx">
+							<tr v-for="(e, idx) in fciPropForm.props" :key="idx">
 								<td class="fcm-prop-td-key">
 									{{ e.propKey }}
 								</td>
@@ -78,7 +78,7 @@
 									{{ isRequired(e.required) }}
 								</td>
 								<td class="fcm-prop-td-desc">
-									<el-tooltip :content="`${e.propDesc}`" placement="top">
+									<el-tooltip content="测试测试" placement="right">
 										<el-icon>
 											<Warning/>
 										</el-icon>

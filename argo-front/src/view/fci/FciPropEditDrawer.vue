@@ -66,7 +66,6 @@
 <script setup>
 
 import {ref} from "vue";
-import {loadEnums} from "@/api/common";
 import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";

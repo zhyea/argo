@@ -15,6 +15,10 @@
 			</div>
 
 			<div class="table-body">
+				<div class="table-button">
+					<el-button type="primary" @click="showPropEditor">新增属性</el-button>
+				</div>
+
 				<el-table :data="fciPropsData" border stripe style="width: 100%">
 					<el-table-column show-overflow-tooltip min-width=80 prop="propKey" label="属性key"/>
 					<el-table-column show-overflow-tooltip min-width=90 prop="propValue" label="属性值"/>
@@ -48,6 +52,8 @@
 			</div>
 
 		</div>
+
+		<props-edit-drawer ref="propsEditDrawer" />
 	</el-drawer>
 </template>
 
@@ -58,6 +64,7 @@ import {loadEnums} from "@/api/common";
 import { findFciProps} from "@/api/fci";
 import {useRouter} from "vue-router";
 import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
+import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue.vue";
 
 const fciPropsDrawer = ref(false)
 
@@ -96,7 +103,7 @@ const openPrepare = () => {
 }
 
 
-// 打开组件实例抽屉-用于编辑
+// 打开组件属性抽屉
 const openFciPropsDrawer = (fciRecord) => {
 	fci.value = fciRecord
 	openPrepare()
@@ -106,6 +113,17 @@ const openFciPropsDrawer = (fciRecord) => {
 defineExpose({
 	openFciPropsDrawer,
 })
+
+// --------------------------- 添加按钮点击处理
+// 组件属性管理抽屉
+const fciPropEditDrawerRef = ref()
+
+
+// 打开属性管理窗口
+function showPropEditor(row) {
+	fciPropEditDrawerRef.value.openFciPropsDrawer(row)
+}
+
 
 // --------------------------- 以下是列表数据
 const router = useRouter();
