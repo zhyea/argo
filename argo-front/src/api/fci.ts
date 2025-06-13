@@ -45,3 +45,10 @@ export function findFciProps(fciId: number) {
 		fciId: fciId,
 	})
 }
+
+
+export function getFciProp(fciPropId: number) {
+	return request.post('/cms/fci/prop/get', {
+		fciPropId: fciPropId,
+	})
+}

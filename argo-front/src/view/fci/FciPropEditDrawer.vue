@@ -1,26 +1,44 @@
 <template>
 	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}组件实例 - ${propForm.name}`"
-	           v-model="fciItemDrawer" :with-header=true size="40%">
+	           v-model="fciPropEditDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->
 			<el-form status-icon
 			         label-position="right"
 			         label-width="100px"
 			         label-suffix=":"
-			         :model="propForm" ref="fciFormRef" :rules="fciFormRules" class="fci-form">
+			         :model="propForm" ref="fciPropFormRef" :rules="fciFormRules" class="fci-form">
 
 				<el-card class="fcm-region">
-					<el-form-item prop="fcmId">
-						<el-input type="hidden" v-model="propForm.fcmId"/>
-						<el-input type="hidden" v-model="propForm.appId"/>
+					<el-form-item prop="fciId">
+						<el-input type="hidden" v-model="propForm.fciId"/>
 					</el-form-item>
 
-					<el-form-item label="名称" prop="name">
-						<el-input id="name" v-model="propForm.name"/>
+					<el-form-item label="Key" prop="propKey">
+						<el-input id="propKey" v-model="propForm.propKey"/>
+					</el-form-item>
+
+					<el-form-item label="数据绑定" prop="dataBindFlag">
+						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
+						           inline-prompt size="large"
+						           active-text="是" :active-value="1"
+						           inactive-text="否" :inactive-value="0"/>
+					</el-form-item>
+
+					<el-form-item label="值" v-if="0===propForm.dataBindFlag" prop="propValue">
+						<el-input id="propValue" v-model="propForm.propValue"/>
+					</el-form-item>
+
+					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
+						<el-input id="propValue" v-model="propForm.propValue"/>
+					</el-form-item>
+
+					<el-form-item label="数据链接" v-if="1===propForm.dataBindFlag" prop="dataUrl">
+						<el-input id="name" v-model="propForm.dataUrl"/>
 					</el-form-item>
 
 					<el-form-item label="是否启用" prop="switchFlag">
-						<el-switch id="switchFlag" v-model="propForm.switchFlag"
+						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
 						           inline-prompt size="large"
 						           active-text="是" :active-value="1"
 						           inactive-text="否" :inactive-value="0"/>
@@ -35,7 +53,7 @@
 						</el-radio-group>
 					</el-form-item>
 
-					<el-form-item label="生效时间" prop="effectivePeriodType"
+					<el-form-item label="生效时间" prop="effectiveTimeRange"
 					              v-if="propForm.effectivePeriodType === 2">
 						<el-date-picker
 							v-model="propForm.effectiveTimeRange"
@@ -46,17 +64,13 @@
 							value-format="YYYY-MM-DD HH:mm:ss"/>
 					</el-form-item>
 
-					<el-form-item label="数据链接" v-if="1===propForm.dataBindFlag" prop="dataUrl">
-						<el-input id="name" v-model="propForm.dataUrl"/>
-					</el-form-item>
-
 					<el-form-item label="备注" prop="remark">
 						<el-input id="remark" type="textarea" v-model="propForm.remark" :autosize="{ minRows: 4,}"/>
 					</el-form-item>
 				</el-card>
 
 				<el-card class="fcm-region">
-					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
+					<el-button type="primary" :disabled="isFciPropFormSubmitted" @click="submitFciPropForm">提交</el-button>
 				</el-card>
 			</el-form>
 		</el-container>
@@ -72,23 +86,25 @@ import {useEnumStore} from "@/store/enum";
 
 const enumStore = useEnumStore()
 
-const fciItemDrawer = ref(false)
+const fciPropEditDrawer = ref(false)
 
 const propForm = ref({
 	id: 0,
-	fcmId: 0,
-	appId: 0,
-	name: '',
+	fciId: 0,
+	propKey: '',
+	propValue: '',
 	dataBindFlag: 0,
 	dataUrl: '',
+	propValueSelector: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
-	effectiveTimeRange: null,
-
+	effectiveStartTime: '',
+	effectiveEndTime: '',
+	status: 0,
 	remark: '',
 })
 
-const fciFormRef = ref()
+const fciPropFormRef = ref()
 
 const fciFormRules = {
 	name: [
@@ -101,12 +117,12 @@ const fciFormRules = {
 
 
 // 加载组件实例数据
-const loadFciData = async (fciId) => {
-	if (!fciId) {
+const loadFciPropData = async (propId) => {
+	if (!propId) {
 		return
 	}
 
-	getFci(fciId).then(response => {
+	getFci(propId).then(response => {
 		if (response && response.data) {
 			const fciData = response.data;
 			propForm.value = fciData;
@@ -116,7 +132,7 @@ const loadFciData = async (fciId) => {
 }
 
 
-const isFciFormSubmitted = ref(false)
+const isFciPropFormSubmitted = ref(false)
 
 
 // 枚举相关信息
@@ -125,13 +141,13 @@ const effectivePeriodTypeEnum = ref()
 
 // 打开组件实例抽屉前的准备
 const openPrepare = () => {
-	fciItemDrawer.value = true
+	fciPropEditDrawer.value = true
 
-	if (fciFormRef.value) {
-		fciFormRef.value.resetFields();
+	if (fciPropFormRef.value) {
+		fciPropFormRef.value.resetFields();
 	}
 
-	isFciFormSubmitted.value = false
+	isFciPropFormSubmitted.value = false
 
 	// 加载枚举数据
 	effectivePeriodTypeEnum.value = enumStore.getEnumMap('EffectivePeriodTypeEnum')
@@ -141,15 +157,13 @@ const openPrepare = () => {
 // 打开组件实例抽屉-用于编辑
 const openDrawerForEdit = (fciId, appId) => {
 	openPrepare()
-	loadFciData(fciId)
+	loadFciPropData(fciId)
 }
 
 
 // 打开组件实例抽屉-用于新增
 const openDrawerForAdd = (fcmRow) => {
 	openPrepare()
-	propForm.value.fcmId = fcmRow.fcmId
-	propForm.value.appId = fcmRow.appId
 	propForm.value.dataBindFlag = fcmRow.dataBindFlag
 }
 
@@ -158,8 +172,8 @@ const emit = defineEmits(['afterFciEdit'])
 
 
 // 提交组件实例表单
-const submitFciForm = async () => {
-	if (!fciFormRef.value.validate()) {
+const submitFciPropForm = async () => {
+	if (!fciPropFormRef.value.validate()) {
 		return;
 	}
 
@@ -167,9 +181,9 @@ const submitFciForm = async () => {
 
 	const maintainMethod = formData.id ? editFci : addFci;
 
-	submitForm(fciFormRef, formData, isFciFormSubmitted, maintainMethod, () => {
+	submitForm(fciPropFormRef, formData, isFciPropFormSubmitted, maintainMethod, () => {
 		emit('afterFciEdit');
-		fciItemDrawer.value = false
+		fciPropEditDrawer.value = false
 	})
 }
 

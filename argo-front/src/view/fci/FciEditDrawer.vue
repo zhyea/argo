@@ -56,46 +56,6 @@
 				</el-card>
 
 
-				<el-card>
-					<el-form :model="fciPropForm" ref="fciPropFormRef">
-						<table class="fcm-prop-table">
-							<tbody>
-							<tr>
-								<td class="fcm-prop-td-key">属性key</td>
-								<td class="fcm-prop-td-type">类型</td>
-								<td class="fcm-prop-td-required">必填</td>
-								<td class="fcm-prop-td-desc">描述</td>
-								<td class="fcm-prop-td-opt"></td>
-							</tr>
-							<tr v-for="(e, idx) in fciPropForm.props" :key="idx">
-								<td class="fcm-prop-td-key">
-									{{ e.propKey }}
-								</td>
-								<td class="fcm-prop-td-type">
-									{{ fcmPropType(e.propType) }}
-								</td>
-								<td class="fcm-prop-td-required">
-									{{ isRequired(e.required) }}
-								</td>
-								<td class="fcm-prop-td-desc">
-									<el-tooltip content="测试测试" placement="right">
-										<el-icon>
-											<Warning/>
-										</el-icon>
-									</el-tooltip>
-								</td>
-								<td class="fcm-prop-td-required">
-									<el-form-item>
-										<el-input />
-									</el-form-item>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</el-form>
-				</el-card>
-
-
 				<el-card class="fcm-region">
 					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
 				</el-card>
@@ -111,7 +71,6 @@ import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
-import {Warning} from "@element-plus/icons-vue";
 
 const enumStore = useEnumStore()
 
@@ -141,27 +100,6 @@ const fciFormRules = {
 		{required: true, message: '请输入返回值', trigger: 'blur'},
 	],
 };
-
-const fciPropFormRef = ref()
-
-// fcm 属性表单数据
-const fciPropForm = ref({
-	props: [{
-		propKey: '',
-		propType: '',
-		propDesc: '',
-		required: 0,
-	}]
-})
-
-
-const fcmPropType = (code) => {
-	return enumStore.getEnumDesc('FcmPropTypeEnum', code)
-}
-
-const isRequired = (code) => {
-	return code === 1 ? '必填' : '非必填'
-}
 
 // 加载组件实例数据
 const loadFciData = async (fciId) => {
@@ -193,14 +131,8 @@ const openPrepare = (fcmId) => {
 	if (fciFormRef.value) {
 		fciFormRef.value.resetFields();
 	}
-	if (fciPropFormRef.value) {
-		fciPropFormRef.value.resetFields()
-	}
 
 	isFciFormSubmitted.value = false
-	getFcm(fcmId).then(response => {
-		fciPropForm.value.props = response.data.props;
-	})
 
 	// 加载枚举数据
 	effectivePeriodTypeEnum.value = enumStore.getEnumMap('EffectivePeriodTypeEnum')

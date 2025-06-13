@@ -64,7 +64,7 @@ import {loadEnums} from "@/api/common";
 import { findFciProps} from "@/api/fci";
 import {useRouter} from "vue-router";
 import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
-import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue.vue";
+import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue";
 
 const fciPropsDrawer = ref(false)
 
