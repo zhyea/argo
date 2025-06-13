@@ -56,6 +56,12 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 
 
 	/**
+	 * 数据相关URL
+	 */
+	private String dataUrl;
+
+
+	/**
 	 * 数据值选择器
 	 */
 	private String propValueSelector;
@@ -106,8 +112,11 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 			}
 		}
 
-		if (YesOrNo.YES.is(getDataBindFlag()) && isBlank(getPropValueSelector())
-				|| YesOrNo.NO.is(getDataBindFlag()) && isBlank(getPropValue())) {
+		if(YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))){
+			return false;
+		}
+
+		if (YesOrNo.NO.is(getDataBindFlag()) && isBlank(getPropValue())) {
 			return false;
 		}
 		return true;

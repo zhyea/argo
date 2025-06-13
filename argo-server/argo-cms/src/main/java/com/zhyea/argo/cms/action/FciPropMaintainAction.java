@@ -113,7 +113,7 @@ public class FciPropMaintainAction {
 	private void checkForEdit(FciPropEditRequest request) {
 		commonCheck(request);
 
-		FciPropItem history = fciPropService.get(request.getPropId());
+		FciPropItem history = fciPropService.get(request.getId());
 
 		if (null == history || YesOrNo.YES.is(history.getDeleted())) {
 			throw new ArgoServerException(ResponseCode.RECORD_NOT_EXISTS_ERROR);
@@ -137,7 +137,7 @@ public class FciPropMaintainAction {
 
 		// 取出同属性所有记录，检查起止时间是否存在重叠
 		List<FciPropItem> all = fciPropService.findByPropKey(request.getFciId(), request.getPropKey());
-		all = all.stream().filter(e -> ObjKit.nonEquals(e.getId(), request.getPropId()))
+		all = all.stream().filter(e -> ObjKit.nonEquals(e.getId(), request.getId()))
 				.collect(Collectors.toList());
 
 		FciPropItem tmp = fciPropConverter.editRequest2Item(request);

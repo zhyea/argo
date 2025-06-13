@@ -25,7 +25,7 @@ public class FciPropEditRequest extends FciPropAddRequest {
 	 * 属性Id
 	 */
 	@NotNull(message = "属性Id不能为空")
-	private Long propId;
+	private Long id;
 
 
 	@Override
