@@ -14,9 +14,19 @@
 						<el-input type="hidden" v-model="propForm.fciId"/>
 					</el-form-item>
 
-					<el-form-item label="Key" prop="propKey">
-						<el-input id="propKey" v-model="propForm.propKey"/>
+					<el-form-item label="Key" v-if="propForm.propKey" prop="propKey">
+						<el-input id="propKey" v-model="propForm.propKey" readonly />
 					</el-form-item>
+
+					<el-form-item v-if="!propForm.propKey">
+						<el-select placeholder="请选择属性">
+							<el-option v-for="e in fcmProps"
+							           :key="e[0]"
+							           :label="e[1]"
+							           :value="e[0]"/>
+						</el-select>
+					</el-form-item>
+
 
 					<el-form-item label="数据绑定" prop="dataBindFlag">
 						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
@@ -38,7 +48,7 @@
 					</el-form-item>
 
 					<el-form-item label="是否启用" prop="switchFlag">
-						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
+						<el-switch id="switchFlag" v-model="propForm.switchFlag"
 						           inline-prompt size="large"
 						           active-text="是" :active-value="1"
 						           inactive-text="否" :inactive-value="0"/>
@@ -70,7 +80,7 @@
 				</el-card>
 
 				<el-card class="fcm-region">
-					<el-button type="primary" :disabled="isFciPropFormSubmitted" @click="submitFciPropForm">提交</el-button>
+					<el-button type="primary" :disabled="isPropFormSubmitted" @click="submitFciPropForm">提交</el-button>
 				</el-card>
 			</el-form>
 		</el-container>
@@ -81,8 +91,9 @@
 
 import {ref} from "vue";
 import {submitForm} from "@/view/helper";
-import {addFci, editFci, getFci} from "@/api/fci";
+import {addFci, editFci, getFci, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
+import {getFcm} from "@/api/fcm.js";
 
 const enumStore = useEnumStore()
 
@@ -122,17 +133,17 @@ const loadFciPropData = async (propId) => {
 		return
 	}
 
-	getFci(propId).then(response => {
+	getFciProp(propId).then(response => {
 		if (response && response.data) {
-			const fciData = response.data;
-			propForm.value = fciData;
-			propForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
+			const propData = response.data;
+			propForm.value = propData;
+			propForm.value.effectiveTimeRange = [propData.effectiveStartTime, propData.effectiveEndTime];
 		}
 	})
 }
 
 
-const isFciPropFormSubmitted = ref(false)
+const isPropFormSubmitted = ref(false)
 
 
 // 枚举相关信息
@@ -147,7 +158,7 @@ const openPrepare = () => {
 		fciPropFormRef.value.resetFields();
 	}
 
-	isFciPropFormSubmitted.value = false
+	isPropFormSubmitted.value = false
 
 	// 加载枚举数据
 	effectivePeriodTypeEnum.value = enumStore.getEnumMap('EffectivePeriodTypeEnum')
@@ -168,7 +179,7 @@ const openDrawerForAdd = (fcmRow) => {
 }
 
 
-const emit = defineEmits(['afterFciEdit'])
+const emit = defineEmits(['afterPropEdit'])
 
 
 // 提交组件实例表单
@@ -181,9 +192,20 @@ const submitFciPropForm = async () => {
 
 	const maintainMethod = formData.id ? editFci : addFci;
 
-	submitForm(fciPropFormRef, formData, isFciPropFormSubmitted, maintainMethod, () => {
-		emit('afterFciEdit');
+	submitForm(fciPropFormRef, formData, isPropFormSubmitted, maintainMethod, () => {
+		emit('afterPropEdit');
 		fciPropEditDrawer.value = false
+	})
+}
+
+
+const fcmProps = ref([])
+
+const loadFcmProps = async (fcmId) => {
+	getFcm(fcmId).then(response => {
+		if (response && response.data) {
+			fcmProps.value = response.data.props;
+		}
 	})
 }
 
