@@ -1,5 +1,5 @@
 <template>
-	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}组件实例 - ${propForm.name}`"
+	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}实例属性${propForm.id? '-'+ propForm.name : '' }`"
 	           v-model="fciPropEditDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->
@@ -15,7 +15,7 @@
 					</el-form-item>
 
 					<el-form-item label="Key" v-if="propForm.propKey" prop="propKey">
-						<el-input id="propKey" v-model="propForm.propKey" readonly />
+						<el-input id="propKey" v-model="propForm.propKey" readonly/>
 					</el-form-item>
 
 					<el-form-item v-if="!propForm.propKey">
@@ -80,7 +80,8 @@
 				</el-card>
 
 				<el-card class="fcm-region">
-					<el-button type="primary" :disabled="isPropFormSubmitted" @click="submitFciPropForm">提交</el-button>
+					<el-button type="primary" :disabled="isPropFormSubmitted" @click="submitFciPropForm">提交
+					</el-button>
 				</el-card>
 			</el-form>
 		</el-container>
@@ -91,7 +92,7 @@
 
 import {ref} from "vue";
 import {submitForm} from "@/view/helper";
-import {addFci, editFci,  getFciProp} from "@/api/fci";
+import {addFci, editFci, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
 
@@ -173,9 +174,9 @@ const openDrawerForEdit = (fciId, appId) => {
 
 
 // 打开组件实例抽屉-用于新增
-const openDrawerForAdd = (fcmRow) => {
+const openDrawerForAdd = (fci) => {
 	openPrepare()
-	propForm.value.dataBindFlag = fcmRow.dataBindFlag
+	loadFcmProps(fci.fcmId)
 }
 
 
@@ -201,7 +202,7 @@ const submitFciPropForm = async () => {
 
 const fcmProps = ref([])
 
-const loadFcmProps = async (fcmId) => {
+const loadFcmProps =  (fcmId) => {
 	getFcm(fcmId).then(response => {
 		if (response && response.data) {
 			fcmProps.value = response.data.props;

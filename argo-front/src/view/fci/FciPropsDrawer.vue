@@ -1,5 +1,5 @@
 <template>
-	<el-drawer :title="`组件${fci.name}-属性`"
+	<el-drawer :title="`${fci.name}-属性`"
 	           v-model="fciPropsDrawer" :with-header=true size="60%">
 		<div class="table-container">
 			<div class="table-header">
@@ -16,7 +16,7 @@
 
 			<div class="table-body">
 				<div class="table-button">
-					<el-button type="primary" @click="showPropEditor">新增属性</el-button>
+					<el-button type="primary" @click="showPropAddDrawer">新增属性</el-button>
 				</div>
 
 				<el-table :data="fciPropsData" border stripe style="width: 100%">
@@ -53,7 +53,7 @@
 
 		</div>
 
-		<props-edit-drawer ref="propsEditDrawer" />
+		<props-edit-drawer ref="fciPropEditDrawerRef"/>
 	</el-drawer>
 </template>
 
@@ -61,7 +61,7 @@
 
 import {ref} from "vue";
 import {loadEnums} from "@/api/common";
-import { findFciProps} from "@/api/fci";
+import {findFciProps} from "@/api/fci";
 import {useRouter} from "vue-router";
 import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
 import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue";
@@ -120,8 +120,8 @@ const fciPropEditDrawerRef = ref()
 
 
 // 打开属性管理窗口
-function showPropEditor(row) {
-	fciPropEditDrawerRef.value.openFciPropsDrawer(row)
+function showPropAddDrawer() {
+	fciPropEditDrawerRef.value.openPropDrawerForAdd(fci.value)
 }
 
 
