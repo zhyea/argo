@@ -33,7 +33,6 @@ public interface FciPropConverter {
      * @param request 修改组件实例请求
      * @return 实体
      */
-    @Mapping(target = "id", source = "propId")
     FciPropEntity editRequest2Entity(FciPropEditRequest request);
 
 
@@ -89,6 +88,5 @@ public interface FciPropConverter {
      * @param request 修改组件实例请求
      * @return 组件实例信息
      */
-    @Mapping(target = "id", source = "propId")
     FciPropItem editRequest2Item(FciPropEditRequest request);
 }

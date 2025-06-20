@@ -91,9 +91,9 @@
 
 import {ref} from "vue";
 import {submitForm} from "@/view/helper";
-import {addFci, editFci, getFci, getFciProp} from "@/api/fci";
+import {addFci, editFci,  getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
-import {getFcm} from "@/api/fcm.js";
+import {getFcm} from "@/api/fcm";
 
 const enumStore = useEnumStore()
 
@@ -211,8 +211,8 @@ const loadFcmProps = async (fcmId) => {
 
 
 defineExpose({
-	openFciDrawerForEdit: openDrawerForEdit,
-	openFciDrawerForAdd: openDrawerForAdd,
+	openPropDrawerForEdit: openDrawerForEdit,
+	openPropDrawerForAdd: openDrawerForAdd,
 })
 
 </script>
