@@ -1,7 +1,6 @@
 <!-- 配置信息 -->
 
 <template>
-
 	<el-config-provider :locale="locale">
 		<router-view/>
 	</el-config-provider>
@@ -13,7 +12,7 @@ import {useBreadcrumbStore} from '@/store/breadcrumb';
 import {useRoute} from 'vue-router';
 import {useI18n} from 'vue-i18n';
 import {getLocale} from '@/utils/cache';
-import {useAppStore} from '@/store/app';
+import {useConfStore} from '@/store/conf';
 import {ROUTE_NAMES} from '@/config/index';
 import {useTagStore} from '@/store/tag';
 import zh from 'element-plus/es/locale/lang/zh-cn';
@@ -22,7 +21,7 @@ import {routeFormatTag} from '@/utils/helper/index';
 
 const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();
-const appStore = useAppStore();
+const confStore = useConfStore();
 const tagStore = useTagStore();
 
 onMounted(() => {
@@ -35,7 +34,7 @@ getLocale().then(lang => {
 	if (!lang) {
 		return;
 	}
-	appStore.setLocale(lang)
+	confStore.setLocale(lang)
 	i18n.locale.value = lang
 })
 
@@ -53,7 +52,9 @@ watch(route, () => {
 
 
 const locale = ref(computed(() => {
-	return appStore.locale === getLocale() ? zh : en
+	const locale = confStore.locale === 'en' ? en : zh
+	console.log(`the locale of app: ${locale}`);
+	return locale
 }))
 
 </script>

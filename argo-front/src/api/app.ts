@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 // 获取应用列表
-export function findAllApps() {
+export async function findAllApps() {
 	return request.get('/cms/app/all')
 }
 

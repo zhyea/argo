@@ -1,14 +1,6 @@
 <template>
 	<el-aside :width="collapsed ? '72px' : '250px'">
 		<div class="sidebar-box">
-			<div class="logo-box">
-				<div class="normal" v-if="!collapsed">
-					ARGO 内容管理
-				</div>
-				<div class="mini" v-else>
-					<ArgoLogo/>
-				</div>
-			</div>
 
 			<div class="nav-box">
 				<el-scrollbar height="100%">
@@ -46,7 +38,6 @@
 <script setup>
 
 import MenuItem from '@/component/layout/MenuItem.vue'
-import ArgoLogo from "@/component/icons/argo-logo.vue";
 import {Expand, Fold} from "@element-plus/icons-vue";
 
 let props = defineProps({

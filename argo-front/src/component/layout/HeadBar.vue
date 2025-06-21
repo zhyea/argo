@@ -1,15 +1,23 @@
 <template>
 	<el-header>
 		<el-row>
-			<!-- breadcrumb -->
+
+			<!-- logo, selector, menu or breadcrumb  -->
 			<el-col :span="16">
+				<div class="logo-box">
+					<div class="normal">
+						ARGO 内容管理
+					</div>
+				</div>
+				<!--
 				<el-breadcrumb separator="/">
 					<el-breadcrumb-item v-for="item in breadcrumb"
-					                    :to="item.path"
-					                    :key="item.path">
-						{{ item.meta.title }}
+						:to="item.path"
+						:key="item.path">
+							{{ item.meta.title }}
 					</el-breadcrumb-item>
 				</el-breadcrumb>
+				-->
 			</el-col>
 
 			<!-- avatar -->
@@ -30,9 +38,9 @@
 					</template>
 				</el-dropdown>
 			</el-col>
-
 		</el-row>
 	</el-header>
+
 </template>
 
 
@@ -58,8 +66,6 @@ const breadcrumbStore = useBreadcrumbStore()
 const breadcrumb = computed(() => {
 	return breadcrumbStore.breadcrumb
 });
-
-
 
 
 /**
@@ -103,8 +109,9 @@ function logout() {
 
 <style lang="less" scoped>
 .el-header {
-	border-bottom: 1px solid #e6e6e6;
-	background-color: #FFFFFF;
+	border-bottom: 1px solid #374349;
+	background: #263238;
+	color: #AFB5BD;
 	height: 60px;
 	line-height: 60px;
 }
@@ -124,6 +131,7 @@ function logout() {
 
 .header-avatar {
 	text-align: right;
+	color: #AFB5BD;
 }
 
 .el-breadcrumb {
