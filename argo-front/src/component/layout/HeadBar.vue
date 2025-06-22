@@ -18,6 +18,22 @@
 					</el-breadcrumb-item>
 				</el-breadcrumb>
 				-->
+				<el-select
+					v-model="currentAppId"
+					multiple
+					filterable
+					remote
+					reserve-keyword
+					placeholder="请选择一个应用"
+					style="width: 240px"
+				>
+					<el-option v-for="app in appList"
+					           :key="app.id"
+					           :label="app.appName"
+					           :value="app.id"
+					           change="changeSelectedApp"
+					/>
+				</el-select>
 			</el-col>
 
 			<!-- avatar -->
@@ -51,7 +67,8 @@ import {useRouter} from 'vue-router'
 import {useAuthStore} from "@/store/auth";
 import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
-import {ArrowDown, Avatar, Expand, Fold} from "@element-plus/icons-vue";
+import {ArrowDown, Avatar} from "@element-plus/icons-vue";
+import {useAppStore} from "@/store/app";
 
 
 defineProps({
@@ -62,10 +79,31 @@ defineProps({
 const router = useRouter()
 const authStore = useAuthStore()
 const breadcrumbStore = useBreadcrumbStore()
+const appStore = useAppStore()
 
 const breadcrumb = computed(() => {
-	return breadcrumbStore.breadcrumb
+	return breadcrumbStore.breadcrumb;
 });
+
+
+const appList = computed(() => {
+	return appStore.getAppList();
+})
+
+
+const currentAppId = computed(() => {
+	if (appStore.currentApp) {
+		return appStore.currentApp.id;
+	}
+	return 0;
+});
+
+
+function changeSelectedApp(appId) {
+	console.log("changeSelectedApp", appId)
+	appStore.changeCurrent(appId)
+	currentAppId.value = appStore.currentApp.id
+}
 
 
 /**

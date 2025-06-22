@@ -90,7 +90,7 @@
 
 <script setup>
 
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
@@ -148,7 +148,9 @@ const isPropFormSubmitted = ref(false)
 
 
 // 枚举相关信息
-const effectivePeriodTypeEnum = ref()
+const effectivePeriodTypeEnum = computed(()=>{
+	return enumStore.getEnumMap('EffectivePeriodTypeEnum');
+})
 
 
 // 打开组件实例抽屉前的准备
@@ -160,9 +162,6 @@ const openPrepare = () => {
 	}
 
 	isPropFormSubmitted.value = false
-
-	// 加载枚举数据
-	effectivePeriodTypeEnum.value = enumStore.getEnumMap('EffectivePeriodTypeEnum')
 }
 
 

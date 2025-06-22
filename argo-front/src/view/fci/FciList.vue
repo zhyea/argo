@@ -52,21 +52,21 @@
 	<props-drawer ref="fciPropsDrawerRef"/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {ElMessage} from "element-plus";
 import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
-import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
 import {useEnumStore} from "@/store/enum";
+import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
 
 
 const route = useRoute();
 const router = useRouter();
+const enumStore = useEnumStore();
 
-const enumStore = useEnumStore()
 
 // 分页数据
 const pageData = ref({
@@ -110,8 +110,8 @@ function loadFciListData() {
 
 // 处理页面切换
 const handlePageChange = async (val) => {
-	let appId = route.params.appId
-	router.push({name: route.fciListRouteName, query: {appId: appId, page: val}})
+	let appId = route.params['appId']
+	router.push({name: route['fciListRouteName'], query: {appId: appId, page: val}})
 		.then(() => {
 			loadFciListData()
 		})
@@ -161,6 +161,7 @@ onMounted(() => {
 })
 
 
+// 获取FCM类型枚举
 function mapTypeEnum(row, column, cellValue, index) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }

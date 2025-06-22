@@ -131,7 +131,7 @@
 	</el-drawer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref} from "vue";
 
 import {queryApps} from "@/api/app";
@@ -220,9 +220,15 @@ const fcmPropFormRules = {
 
 
 // 枚举相关信息
-const fcmTypeEnum = ref()
-const fcScopeEnum = ref()
-const fcmPropTypeEnum = ref()
+const fcmTypeEnum = computed(()=>{
+	return enumStore.getEnumMap('FcmTypeEnum');
+})
+const fcScopeEnum = computed(()=>{
+	return enumStore.getEnumMap('FcScopeEnum');
+})
+const fcmPropTypeEnum = computed(()=>{
+	return enumStore.getEnumMap('FcmPropTypeEnum');
+})
 
 // 标记组件模型的作用域是否默认是应用内，用于在应用页新增编辑组件模型
 const defaultAppFcmFlag = ref(false)
@@ -275,10 +281,6 @@ const openFcmEditDrawer = (fcmId, appId) => {
 	isFcmFormSubmitted.value = false
 
 	defaultAppFcmFlag.value = (null != appId)
-
-	fcmTypeEnum.value = enumStore.getEnumMap('FcmTypeEnum')
-	fcScopeEnum.value = enumStore.getEnumMap('FcScopeEnum')
-	fcmPropTypeEnum.value = enumStore.getEnumMap('FcmPropTypeEnum')
 
 	// 加载组件模型数据
 	if (fcmId) {

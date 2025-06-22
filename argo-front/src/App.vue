@@ -38,6 +38,7 @@ getLocale().then(lang => {
 	i18n.locale.value = lang
 })
 
+
 watch(route, () => {
 
 	if (route.name === ROUTE_NAMES.loginRouteName) {

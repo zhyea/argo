@@ -3,9 +3,12 @@ import {ElMessage} from "element-plus";
 import router from '@/router'
 import config, {ROUTE_NAMES} from "@/config";
 import {setHttpToken} from "@/api/auth";
+import {useAuthStore} from "@/store/auth";
+import {cacheToken, getCachedToken, removeCachedToken} from "@/utils/cache";
 
 // axios.defaults.withCredentials = true
 // axios.defaults.crossDomain = true
+
 
 //1. 创建axios对象
 const axiosInst = axios.create({
@@ -21,11 +24,11 @@ const axiosInst = axios.create({
 
 //2. 请求拦截器
 axiosInst.interceptors.request.use(cfg => {
-		let token = sessionStorage.getItem(config.TOKEN)
+		/*let token = getCachedToken()
 		if (token) {
 			console.log(`token:${token}`)
 			cfg.headers.Authorization = `${token}`
-		}
+		}*/
 		return cfg;
 	},
 	error => {
@@ -39,20 +42,22 @@ axiosInst.interceptors.request.use(cfg => {
 //3. 响应拦截器
 axiosInst.interceptors.response.use(
 	resp => {
-		let result = resp.data
+		const authStore = useAuthStore()
+
+		const result = resp.data
 
 		//判断code码
-		let code = result.code;
+		const code = result.code;
 		if (code === 0) {
 			if (result?.authToken) {
 				console.log(`received new authToken:${result.authToken}`)
-				sessionStorage.setItem(config.TOKEN, result.authToken)
-				setHttpToken(result.authToken)
+				authStore.setToken(result.authToken)
 			}
 			return result;
 		} else if (code === 100 || code === 102 || code === 103) {
 			// 执行跳转到登录页
-			sessionStorage.removeItem(config.TOKEN)
+			console.log("token was removed")
+			authStore.removeToken()
 			router.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
 				console.log(name)
 			})

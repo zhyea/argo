@@ -2,13 +2,12 @@
 
 import {defineStore} from 'pinia'
 import {doLogin, doLogout, doPing, removeHttpToken, setHttpToken} from '@/api/auth'
-import {cacheToken, removeCachedToken} from '@/utils/cache';
+import {cacheToken, removeCachedToken, getCachedToken} from '@/utils/cache';
 
 
 export const useAuthStore = defineStore('auth', {
 
 	state: () => ({
-		//token: sessionStorage.getItem(route.TOKEN),
 		token: '',
 	}),
 
@@ -25,8 +24,14 @@ export const useAuthStore = defineStore('auth', {
 		// remove token function
 		removeToken() {
 			this.token = ''
-			removeCachedToken();
 			removeHttpToken()
+			removeCachedToken();
+		},
+
+
+		// 获取token
+		getToken() {
+			return this.token || getCachedToken()
 		},
 
 

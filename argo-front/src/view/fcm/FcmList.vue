@@ -64,6 +64,7 @@ import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 import {ROUTE_NAMES} from "@/config";
 import {useEnumStore} from "@/store/enum";
+import {mapDataBindFlag} from "@/view/helper/index";
 
 
 const route = useRoute();
@@ -174,9 +175,6 @@ function mapScopeEnum(row, column, cellValue, index) {
 }
 
 
-function mapDataBindFlag(row, column, cellValue, index) {
-	return enumStore.getEnumDesc('YesOrNo', row.dataBindFlag)
-}
 
 </script>
 

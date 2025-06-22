@@ -4,7 +4,6 @@ import {MenuItem} from "@/model/route";
 export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 	state: () => ({
-		local: '',
 		breadcrumb: Array<MenuItem>(),
 	}),
 
@@ -13,10 +12,6 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 
 		// 设置面包屑
 		set(route: MenuItem[]) {
-
-			console.log('-------------------------------------------', route)
-
-
 			const title: Array<string> = Array<string>();
 
 			this.breadcrumb = route.filter((item: MenuItem) => {
@@ -30,10 +25,6 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
 					return true;
 				}
 			)
-			/*				.forEach((item: MenuItem) => {
-							title.push(item.meta!.title)
-							this.breadcrumb.push(item)
-						})*/
 		}
 	}
 

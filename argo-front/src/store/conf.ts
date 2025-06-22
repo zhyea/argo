@@ -1,7 +1,7 @@
 import config from '@/config'
 import {defineStore} from "pinia"
 
-export const useConfStore = defineStore("app", {
+export const useConfStore = defineStore("conf", {
 
 	state: () => ({
 		locale: config.locale,

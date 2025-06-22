@@ -111,12 +111,13 @@
 </template>
 
 
-<script setup>
+<script lang="ts" setup>
 import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
 import {useAuthStore} from '@/store/auth';
 import {ROUTE_NAMES} from "@/config";
+import {useAppStore} from "@/store/app.js";
 
 
 const loginFormRef = ref();
@@ -191,6 +192,7 @@ const switchToLogin = () => {
 
 const router = useRouter();
 const authStore = useAuthStore();
+const appStore = useAppStore();
 
 
 const submitRegister = (e) => {
@@ -203,6 +205,7 @@ const submitLogin = (e) => {
 			const formData = {...loginForm.value,}
 			authStore.useLogin(formData).then(() => {
 				console.log('login success')
+				appStore.fetchAllApps();
 				router.push({name: ROUTE_NAMES.homeRouteName})
 			}).catch(err => {
 				console.log('login fail，error: ' + err)

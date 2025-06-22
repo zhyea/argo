@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 // 获取应用列表
 export async function findAllApps() {
-	return request.get('/cms/app/all')
+	return await request.get('/cms/app/all')
 }
 
 
