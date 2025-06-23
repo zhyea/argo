@@ -25,7 +25,8 @@ export function cacheToken(token: string) {
 
 export function getCachedToken(): string {
 	try {
-		return sessionStorage.getItem(keyOfToken());
+		const token = sessionStorage.getItem(keyOfToken());
+		return token || '';
 	} catch (error) {
 		console.error('Failed to get cached token:', error);
 		throw new Error('Failed to retrieve cached token');
@@ -41,21 +42,23 @@ export function keyOfToken() {
 }
 
 
-export function cacheAppList(appList: Arra<any>) {
-	return sessionStorage.setItem(APP_LIST, appList)
+export function cacheAppList(appList: Array<any>) {
+	return sessionStorage.setItem(APP_LIST, JSON.stringify(appList))
 }
 
 
 export function getCachedAppList() {
-	return sessionStorage.getItem(APP_LIST)
+	const json = sessionStorage.getItem(APP_LIST)
+	return json ? JSON.parse(json) : []
 }
 
 
 export function cacheCurrentApp(app: any) {
-	return sessionStorage.setItem(CURRENT_APP, app)
+	return sessionStorage.setItem(CURRENT_APP, JSON.stringify(app))
 }
 
 
 export function getCachedCurrentApp() {
-	return sessionStorage.getItem(CURRENT_APP)
+	const json = sessionStorage.getItem(CURRENT_APP)
+	return json ? JSON.parse(json) : null
 }

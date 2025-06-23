@@ -1,7 +1,7 @@
 // auth store
 
 import {defineStore} from 'pinia'
-import {doLogin, doLogout, doPing, removeHttpToken, setHttpToken} from '@/api/auth'
+import {doLogin, doLogout, doPing} from '@/api/auth'
 import {cacheToken, removeCachedToken, getCachedToken} from '@/utils/cache';
 
 
@@ -16,7 +16,6 @@ export const useAuthStore = defineStore('auth', {
 		// set token function
 		setToken(token: string) {
 			this.token = token
-			setHttpToken(token);
 			cacheToken(token)
 		},
 
@@ -24,7 +23,6 @@ export const useAuthStore = defineStore('auth', {
 		// remove token function
 		removeToken() {
 			this.token = ''
-			removeHttpToken()
 			removeCachedToken();
 		},
 

@@ -27,7 +27,7 @@ export const useAppStore = defineStore("app", {
 
 
 		// 获取app列表
-		async getAppList() {
+		async getAppList(): Promise<Array<any>> {
 			const r = this.appList || getCachedAppList();
 			if (!r || r.length === 0) {
 				await this.refresh();
@@ -37,19 +37,21 @@ export const useAppStore = defineStore("app", {
 
 
 		// 删除app
-		delete(appId: number) {
-			const idx = this.getAppList().findIndex(item => item.appId === appId)
+		async delete(appId: number) {
+			const appList = await this.getAppList();
+			const idx = appList.findIndex(item => item.id === appId)
 			if (idx < 0) {
 				return
 			}
-			this.appList = this.getAppList().splice(idx, 1)
+			this.appList = appList.splice(idx, 1)
 			cacheAppList(this.appList)
 		},
 
 
 		// 设置当前app
-		changeCurrent(appId: number) {
-			this.currentApp = this.getAppList().find(item => item.appId === appId)
+		async changeCurrent(appId: number) {
+			const appList = await this.getAppList();
+			this.currentApp = appList.find(item => item.appId === appId)
 			cacheCurrentApp(this.currentApp)
 		},
 

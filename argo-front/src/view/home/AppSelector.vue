@@ -1,10 +1,10 @@
 <template>
 	<el-dialog v-model="appSelectorDialogRef"
 	           title="选择应用"
-	           colose-on-click-modal="false"
-	           close-on-press-escape="false"
-	           show-close="false"
-	           destroy-on-close="true">
+	           :close-on-click-modal="false"
+	           :close-on-press-escape="false"
+	           :show-close="false"
+	           :destroy-on-close="true">
 		<el-form :model="form" ref="formRef">
 			<el-form-item label="应用">
 				<el-select v-model="form.app" placeholder="请选择应用">
@@ -24,7 +24,7 @@
 	</el-dialog>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {reactive, ref, computed} from 'vue'
 import {useAppStore} from "@/store/app";
 
@@ -42,7 +42,9 @@ const form = reactive({
 
 const appList = computed(async () => {
 	console.log(appStore.appList)
-	return await appStore.getAppList()
+	const appList = await appStore.getAppList()
+	console.log(appList)
+	return appList
 })
 
 

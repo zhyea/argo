@@ -30,19 +30,3 @@ export function doLogout() {
 export function doPing() {
 	return request.post(API.LOGOUT)
 }
-
-
-/**
- * 设置token
- */
-export function setHttpToken(token: string) {
-	request.defaults.headers.common.Authorization = `${token}`
-}
-
-
-/**
- * 设置token
- */
-export function removeHttpToken() {
-	request.defaults.headers.common.Authorization = ``
-}

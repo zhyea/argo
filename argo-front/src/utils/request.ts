@@ -2,7 +2,6 @@ import axios from 'axios';
 import {ElMessage} from "element-plus";
 import router from '@/router'
 import config, {ROUTE_NAMES} from "@/config";
-import {setHttpToken} from "@/api/auth";
 import {useAuthStore} from "@/store/auth";
 import {cacheToken, getCachedToken, removeCachedToken} from "@/utils/cache";
 
@@ -24,11 +23,11 @@ const axiosInst = axios.create({
 
 //2. 请求拦截器
 axiosInst.interceptors.request.use(cfg => {
-		/*let token = getCachedToken()
+		let token = getCachedToken()
 		if (token) {
 			console.log(`token:${token}`)
 			cfg.headers.Authorization = `${token}`
-		}*/
+		}
 		return cfg;
 	},
 	error => {

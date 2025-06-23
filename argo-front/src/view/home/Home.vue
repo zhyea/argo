@@ -42,7 +42,7 @@ import {useAppStore} from "@/store/app";
 const collapseFlag = ref(false)
 
 // 调整侧边折起状态
-function changeSideBarState(status) {
+function changeSideBarState(status: any) {
 	collapseFlag.value = status
 }
 
