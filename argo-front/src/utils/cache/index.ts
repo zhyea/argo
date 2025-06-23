@@ -54,11 +54,24 @@ export function getCachedAppList() {
 
 
 export function cacheCurrentApp(app: any) {
+	if (!app) {
+		return;
+	}
 	return sessionStorage.setItem(CURRENT_APP, JSON.stringify(app))
 }
 
 
 export function getCachedCurrentApp() {
 	const json = sessionStorage.getItem(CURRENT_APP)
-	return json ? JSON.parse(json) : null
+	console.log('getCachedCurrentApp', json);
+	if (json) {
+		return JSON.parse(json);
+	}
+	return null;
+}
+
+
+export function clearCachedAppInfo() {
+	sessionStorage.removeItem(APP_LIST)
+	sessionStorage.removeItem(CURRENT_APP)
 }

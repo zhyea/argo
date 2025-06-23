@@ -13,7 +13,9 @@ export const useTagStore = defineStore("tag", {
 
 
 	getters: {
-		tags: state => state.tagList,
+		tags: state => {
+			return state.tagList
+		},
 		cacheTags: state => {
 			return state.tagList?.filter((item: TagItem) => item.cache)
 				.map(item => item.name) || [];

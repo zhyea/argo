@@ -5,9 +5,9 @@
 	           :close-on-press-escape="false"
 	           :show-close="false"
 	           :destroy-on-close="true">
-		<el-form :model="form" ref="formRef">
-			<el-form-item label="应用">
-				<el-select v-model="form.app" placeholder="请选择应用">
+		<el-form :model="form" ref="formRef" :rules="formRules">
+			<el-form-item label="应用" prop="appId">
+				<el-select v-model="form.appId" placeholder="请选择应用">
 					<el-option v-for="app in appList"
 					           :key="app.id"
 					           :label="app.appName"
@@ -36,22 +36,34 @@ const appSelectorDialogRef = ref(false)
 const formRef = ref()
 
 const form = reactive({
-	app: 0,
+	appId: null,
 })
 
+const formRules = {
+	appId: [
+		{required: true, message: '请选择应用', trigger: 'blur'},
+	],
+}
 
-const appList = computed(async () => {
-	console.log(appStore.appList)
-	const appList = await appStore.getAppList()
+
+const appList = computed(() => {
+	const appList = appStore.getAppList()
 	console.log(appList)
 	return appList
 })
 
 
 const selectApp = () => {
-	appStore.changeCurrent(form.app)
-	appSelectorDialogRef.value = false
+	formRef.value.validate((valid) => {
+		if (valid) {
+			appStore.changeCurrent(form.appId)
+			appSelectorDialogRef.value = false
+		} else {
+			return false
+		}
+	})
 }
+
 
 const openAppSelectorDialog = () => {
 	console.log('openAppSelectorDialog')

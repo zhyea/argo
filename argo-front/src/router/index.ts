@@ -17,8 +17,6 @@ router.beforeEach((to, from, next) => {
 	const authStore = useAuthStore();
 	const token = authStore.getToken();
 
-	console.log("token", token);
-
 	if (!token && to.name !== ROUTE_NAMES.loginRouteName) {
 		next({name: ROUTE_NAMES.loginRouteName});
 		return;

@@ -9,7 +9,7 @@
 			         @menu="changeSideBarState"/>
 
 			<el-container direction="vertical">
-				<tag-view/>
+<!--				<tag-view/>-->
 				<el-main>
 					<router-view :key="$route.fullPath" v-slot="{ Component }">
 						<el-scrollbar height="100%">
@@ -57,8 +57,7 @@ const appSelectorRef = ref()
 
 
 onMounted(() => {
-	if (!appStore.currentApp) {
-		console.log(appSelectorRef.value)
+	if (!appStore.getCurrent()) {
 		appSelectorRef.value.openAppSelectorDialog()
 	}
 })

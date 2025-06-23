@@ -1,6 +1,6 @@
 import {defineStore} from "pinia"
 import {findAllApps} from "@/api/app";
-import {cacheAppList, cacheCurrentApp, getCachedAppList, getCachedCurrentApp} from "@/utils/cache";
+import {cacheAppList, cacheCurrentApp, clearCachedAppInfo, getCachedAppList, getCachedCurrentApp} from "@/utils/cache";
 
 export const useAppStore = defineStore("app", {
 
@@ -27,38 +27,43 @@ export const useAppStore = defineStore("app", {
 
 
 		// 获取app列表
-		async getAppList(): Promise<Array<any>> {
-			const r = this.appList || getCachedAppList();
-			if (!r || r.length === 0) {
-				await this.refresh();
-			}
-			return this.appList;
+		getAppList(): Array<any> {
+			return this.appList || getCachedAppList();
 		},
 
 
 		// 删除app
-		async delete(appId: number) {
-			const appList = await this.getAppList();
-			const idx = appList.findIndex(item => item.id === appId)
+		delete(appId: number) {
+			const appList = this.getAppList();
+			const idx = appList.findIndex(item => item.id === appId);
 			if (idx < 0) {
-				return
+				return;
 			}
-			this.appList = appList.splice(idx, 1)
-			cacheAppList(this.appList)
+			this.appList = appList.splice(idx, 1);
+			cacheAppList(this.appList);
 		},
 
 
 		// 设置当前app
-		async changeCurrent(appId: number) {
-			const appList = await this.getAppList();
-			this.currentApp = appList.find(item => item.appId === appId)
-			cacheCurrentApp(this.currentApp)
+		changeCurrent(appId: number) {
+			const appList = this.getAppList();
+			console.log("appId", appId, appList)
+			this.currentApp = appList.find(item => item.id === appId);
+			console.log("this.currentApp", this.currentApp)
+			cacheCurrentApp(this.currentApp);
 		},
 
 
 		// 获取当前app
 		getCurrent() {
-			return this.currentApp || getCachedCurrentApp()
+			return this.currentApp || getCachedCurrentApp();
+		},
+
+
+		clear() {
+			this.appList = [];
+			this.currentApp = null;
+			clearCachedAppInfo();
 		}
 	}
 });

@@ -6,26 +6,29 @@
 	</el-config-provider>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref, onMounted, watch, computed} from 'vue';
 import {useBreadcrumbStore} from '@/store/breadcrumb';
 import {useRoute} from 'vue-router';
 import {useI18n} from 'vue-i18n';
 import {getLocale} from '@/utils/cache';
 import {useConfStore} from '@/store/conf';
-import {ROUTE_NAMES} from '@/config/index';
+import {ROUTE_NAMES} from '@/config';
 import {useTagStore} from '@/store/tag';
 import zh from 'element-plus/es/locale/lang/zh-cn';
 import en from 'element-plus/es/locale/lang/en';
-import {routeFormatTag} from '@/utils/helper/index';
+import {routeFormatTag} from '@/utils/helper';
+import {useAppStore} from "@/store/app";
 
 const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();
 const confStore = useConfStore();
 const tagStore = useTagStore();
+const appStore = useAppStore();
 
-onMounted(() => {
+onMounted(async () => {
 	breadcrumbStore.set(route.matched);
+	await appStore.fetchAllApps()
 })
 
 

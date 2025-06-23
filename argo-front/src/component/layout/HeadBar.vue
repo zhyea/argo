@@ -18,7 +18,7 @@
 					</el-breadcrumb-item>
 				</el-breadcrumb>
 				-->
-				<el-select
+				<!--<el-select
 					v-model="currentAppId"
 					multiple
 					filterable
@@ -33,7 +33,7 @@
 					           :value="app.id"
 					           change="changeSelectedApp"
 					/>
-				</el-select>
+				</el-select>-->
 			</el-col>
 
 			<!-- avatar -->
@@ -128,6 +128,7 @@ function logout() {
 			type: 'warning',
 		}
 	).then(() => {
+		appStore.clear()
 		authStore.useLogout()
 			.then(() => {
 				router.push({
