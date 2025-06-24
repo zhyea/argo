@@ -3078,3 +3078,78 @@ create table if not exists ag_adm_user_options ( id int not null default 0 auto_
 2025-06-24 08:34:22 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table if not exists ag_adm_user_options ( id int not null default 0 auto_increment comment 'id', username varchar(32) not null default '' comment '用户名', option_key varchar(32) not null default '' comment '配置key', option_val varchar(1024) not null default '' comment '配置值', operator_code varchar(32) not null default 0 comment '操作人ID', deleted tinyint not null default 0 comment '删除标记', create_time datetime not null default now() comment '创建时间', update_time timestamp not null default current_timestamp on update current_timestamp comment '更新时间', primary key (id), unique [*]idx_opt_key (username, option_key) ) "; expected "("; SQL statement:
 create table if not exists ag_adm_user_options ( id int not null default 0 auto_increment comment 'id', username varchar(32) not null default '' comment '用户名', option_key varchar(32) not null default '' comment '配置key', option_val varchar(1024) not null default '' comment '配置值', operator_code varchar(32) not null default 0 comment '操作人ID', deleted tinyint not null default 0 comment '删除标记', create_time datetime not null default now() comment '创建时间', update_time timestamp not null default current_timestamp on update current_timestamp comment '更新时间', primary key (id), unique idx_opt_key (username, option_key) )  [42001-214]
+2025-06-24 23:42:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "insert into ag_adm_user_options (username, option_key, option_val)\000a        values (?, ?, ?) [*]on duplicate key\000a        update option_val = ?"; SQL statement:
+insert into ag_adm_user_options (username, option_key, option_val)
+        values (?, ?, ?) on duplicate key
+        update option_val = ? [42000-214]
+2025-06-24 23:44:37 database: wrong user or password; user: "ADMIN"
+org.h2.message.DbException: Wrong user name or password [28000-214]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.Engine.openSession(Engine.java:154)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:808)
+	at org.h2.server.web.WebApp.login(WebApp.java:1033)
+	at org.h2.server.web.WebApp.process(WebApp.java:226)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:114)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:510)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 58 more
+2025-06-24 23:44:49 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "insert into ag_adm_user_options (username, option_key, option_val)         values ('zhangsan', 'a', 'b') [*]on duplicate key         update option_val = 'b'"; SQL statement:
+insert into ag_adm_user_options (username, option_key, option_val)         values ('zhangsan', 'a', 'b') on duplicate key         update option_val = 'b' [42000-214]
+2025-06-24 23:54:09 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "insert into ag_adm_user_options (username, option_key, option_val)         values ('zhangsan', 'a', 'b') [*]on duplicate key         update option_val = 'b'AG_ADM_USER_OPTIONS"; SQL statement:
+insert into ag_adm_user_options (username, option_key, option_val)         values ('zhangsan', 'a', 'b') on duplicate key         update option_val = 'b'AG_ADM_USER_OPTIONS [42000-214]
