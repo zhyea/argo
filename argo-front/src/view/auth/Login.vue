@@ -118,6 +118,7 @@ import {User, Lock, Promotion, View, Hide} from '@element-plus/icons-vue';
 import {useAuthStore} from '@/store/auth';
 import {ROUTE_NAMES} from "@/config";
 import {useAppStore} from "@/store/app.js";
+import {getLastVisitedApp} from "@/api/preference";
 
 
 const loginFormRef = ref();
@@ -151,7 +152,7 @@ const loginRules = {
 };
 
 
-const validatePassword = (rule, value, callback) => {
+const validatePassword = (rule: any, value: string, callback: any) => {
 	return (value === registerForm.value.password);
 }
 
@@ -195,24 +196,27 @@ const authStore = useAuthStore();
 const appStore = useAppStore();
 
 
-const submitRegister = (e) => {
-	e.preventDefault()
+const submitRegister = () => {
+
 }
 
-const submitLogin = (e) => {
-	loginFormRef.value.validate((valid) => {
-		if (valid) {
-			const formData = {...loginForm.value,}
-			authStore.useLogin(formData).then(() => {
-				console.log('login success')
-				appStore.fetchAllApps();
-				router.push({name: ROUTE_NAMES.homeRouteName})
-			}).catch(err => {
-				console.log('login fail，error: ' + err)
-			})
-		} else {
-			return false
+const submitLogin = () => {
+	loginFormRef.value.validate((valid: any) => {
+		if (!valid) {
+			return false;
 		}
+		const formData = {...loginForm.value,}
+		authStore.useLogin(formData).then(async () => {
+			console.log('login success')
+			await appStore.fetchAllApps();
+			const appId = await getLastVisitedApp();
+			if (appId) {
+				appStore.changeCurrent(appId);
+			}
+			await router.push({name: ROUTE_NAMES.homeRouteName})
+		}).catch(err => {
+			console.log('login fail，error: ' + err)
+		})
 	})
 }
 

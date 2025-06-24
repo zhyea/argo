@@ -11,8 +11,7 @@
 					<el-option v-for="app in appList"
 					           :key="app.id"
 					           :label="app.appName"
-					           :value="app.id"
-					           change="changeSelectedApp"/>
+					           :value="app.id"/>
 				</el-select>
 			</el-form-item>
 		</el-form>
@@ -25,8 +24,9 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive, ref, computed} from 'vue'
+import {computed, ref} from 'vue'
 import {useAppStore} from "@/store/app";
+import {setLastVisitedApp} from "@/api/preference";
 
 const appStore = useAppStore()
 
@@ -35,7 +35,7 @@ const appSelectorDialogRef = ref(false)
 
 const formRef = ref()
 
-const form = reactive({
+const form = ref({
 	appId: null,
 })
 
@@ -47,27 +47,32 @@ const formRules = {
 
 
 const appList = computed(() => {
-	const appList = appStore.getAppList()
-	console.log(appList)
-	return appList
+	return appStore.getAppList()
 })
 
 
 const selectApp = () => {
-	formRef.value.validate((valid) => {
-		if (valid) {
-			appStore.changeCurrent(form.appId)
+	formRef.value.validate((valid: any) => {
+		if (!valid) {
+			return false;
+		}
+		if (form.value.appId) {
+			appStore.changeCurrent(form.value.appId)
+			setLastVisitedApp(form.value.appId)
 			appSelectorDialogRef.value = false
-		} else {
-			return false
 		}
 	})
 }
 
 
 const openAppSelectorDialog = () => {
-	console.log('openAppSelectorDialog')
-	appSelectorDialogRef.value = true
+	appSelectorDialogRef.value = true;
+	const appList = appStore.getAppList();
+	if (!appList || appList.length === 0) {
+		appStore.fetchAllApps().catch(err => {
+			console.log(err)
+		})
+	}
 }
 
 defineExpose({

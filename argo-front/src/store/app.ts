@@ -47,7 +47,6 @@ export const useAppStore = defineStore("app", {
 		// 设置当前app
 		changeCurrent(appId: number) {
 			const appList = this.getAppList();
-			console.log("appId", appId, appList)
 			this.currentApp = appList.find(item => item.id === appId);
 			console.log("this.currentApp", this.currentApp)
 			cacheCurrentApp(this.currentApp);
@@ -60,6 +59,7 @@ export const useAppStore = defineStore("app", {
 		},
 
 
+		// 清空app列表
 		clear() {
 			this.appList = [];
 			this.currentApp = null;

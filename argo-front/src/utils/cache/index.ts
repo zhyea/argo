@@ -63,7 +63,6 @@ export function cacheCurrentApp(app: any) {
 
 export function getCachedCurrentApp() {
 	const json = sessionStorage.getItem(CURRENT_APP)
-	console.log('getCachedCurrentApp', json);
 	if (json) {
 		return JSON.parse(json);
 	}
