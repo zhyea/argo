@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhyea.argo.data.mapper.adm.UserOptionsMapper">
+
+
+    <!-- 新增或更新配置 -->
+    <insert id="set">
+        insert into ag_adm_user_options (username, option_key, option_val)
+        values (#{username}, #{optionKey}, #{optionVal}) on duplicate key
+        update option_val = #{optionVal}
+    </insert>
+
+</mapper>
