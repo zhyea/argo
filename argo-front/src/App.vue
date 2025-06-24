@@ -24,11 +24,9 @@ const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();
 const confStore = useConfStore();
 const tagStore = useTagStore();
-const appStore = useAppStore();
 
 onMounted(async () => {
 	breadcrumbStore.set(route.matched);
-	await appStore.fetchAllApps()
 })
 
 
