@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, onMounted, watch, computed} from 'vue';
+import {computed, onMounted, watch} from 'vue';
 import {useBreadcrumbStore} from '@/store/breadcrumb';
 import {useRoute} from 'vue-router';
 import {useI18n} from 'vue-i18n';
@@ -18,7 +18,6 @@ import {useTagStore} from '@/store/tag';
 import zh from 'element-plus/es/locale/lang/zh-cn';
 import en from 'element-plus/es/locale/lang/en';
 import {routeFormatTag} from '@/utils/helper';
-import {useAppStore} from "@/store/app";
 
 const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();
@@ -47,17 +46,14 @@ watch(route, () => {
 	}
 
 	breadcrumbStore.set(route.matched)
-
 	const tag = routeFormatTag(route)
-	tagStore.openTagView(tag)
+	tagStore.openTagView(tag);
 })
 
 
-const locale = ref(computed(() => {
-	const locale = confStore.locale === 'en' ? en : zh
-	console.log(`the locale of app: ${locale}`);
-	return locale
-}))
+const locale = computed(() => {
+	return confStore.locale === 'en' ? en : zh
+})
 
 </script>
 

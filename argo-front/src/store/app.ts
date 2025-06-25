@@ -48,7 +48,6 @@ export const useAppStore = defineStore("app", {
 		changeCurrent(appId: number) {
 			const appList = this.getAppList();
 			this.currentApp = appList.find(item => item.id === appId);
-			console.log("this.currentApp", this.currentApp)
 			cacheCurrentApp(this.currentApp);
 		},
 

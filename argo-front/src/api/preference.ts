@@ -12,8 +12,9 @@ export function setLastVisitedApp(appId: number) {
 // 获取最后访问的app
 export async function getLastVisitedApp() {
 	const res = await request.get('/admin/user/last-visit-app')
-	if (!res || !res.data || !res.data.data) {
+
+	if (!res || !res.data) {
 		return null;
 	}
-	return res.data.data as number
+	return res.data as number
 }

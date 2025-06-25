@@ -58,7 +58,7 @@ axiosInst.interceptors.response.use(
 			console.log("token was removed")
 			authStore.removeToken()
 			router.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
-				console.log(name)
+				console.log('go back to login page')
 			})
 		} else {
 			let msg = (result.msg ? result.msg : resp.statusText)

@@ -7,7 +7,7 @@
 	           :destroy-on-close="true">
 		<el-form :model="form" ref="formRef" :rules="formRules">
 			<el-form-item label="应用" prop="appId">
-				<el-select v-model="form.appId" placeholder="请选择应用">
+				<el-select v-model="form.appId" id="appId" placeholder="请选择应用">
 					<el-option v-for="app in appList"
 					           :key="app.id"
 					           :label="app.appName"
@@ -56,6 +56,7 @@ const selectApp = () => {
 		if (!valid) {
 			return false;
 		}
+		console.log(form.value)
 		if (form.value.appId) {
 			appStore.changeCurrent(form.value.appId)
 			setLastVisitedApp(form.value.appId)

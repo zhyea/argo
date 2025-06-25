@@ -1,60 +1,52 @@
 <template>
 	<el-header>
-		<el-row>
+		<el-menu mode="horizontal" :ellipsis="false"
+		         background-color="#263238" text-color="#FFF" active-text-color="#FFD04B">
+			<el-menu-item index="0">
+				ARGO 内容管理
+			</el-menu-item>
 
-			<!-- logo, selector, menu or breadcrumb  -->
-			<el-col :span="16">
-				<div class="logo-box">
-					<div class="normal">
-						ARGO 内容管理
-					</div>
-				</div>
-				<!--
-				<el-breadcrumb separator="/">
-					<el-breadcrumb-item v-for="item in breadcrumb"
-						:to="item.path"
-						:key="item.path">
-							{{ item.meta.title }}
-					</el-breadcrumb-item>
-				</el-breadcrumb>
-				-->
-				<!--<el-select
-					v-model="currentAppId"
-					multiple
-					filterable
-					remote
-					reserve-keyword
-					placeholder="请选择一个应用"
-					style="width: 240px"
-				>
-					<el-option v-for="app in appList"
-					           :key="app.id"
-					           :label="app.appName"
-					           :value="app.id"
-					           change="changeSelectedApp"
-					/>
-				</el-select>-->
-			</el-col>
 
-			<!-- avatar -->
-			<el-col :span="8" class="header-avatar">
-				<el-dropdown>
-					<span>
-						<el-icon><avatar/></el-icon>
-						<el-icon class="el-icon--right">
-							<arrow-down/>
-						</el-icon>
-					</span>
+			<el-sub-menu index="2">
+				<template #title>
+					<el-icon>
+						<avatar/>
+					</el-icon>
+				</template>
+				<el-menu-item index="2-1" @click="openChangePasswordPage">
+					<el-icon>
+						<Key/>
+					</el-icon>
+					<span>修改密码</span>
+				</el-menu-item>
+				<el-menu-item index="2-2" @click="logout">
+					<el-icon>
+						<SwitchButton/>
+					</el-icon>
+					退出登录
+				</el-menu-item>
+			</el-sub-menu>
 
-					<template #dropdown>
-						<el-dropdown-menu>
-							<el-dropdown-item @click="openChangePasswordPage">修改密码</el-dropdown-item>
-							<el-dropdown-item @click="logout">退出登录</el-dropdown-item>
-						</el-dropdown-menu>
-					</template>
-				</el-dropdown>
-			</el-col>
-		</el-row>
+
+			<!--			&lt;!&ndash; avatar &ndash;&gt;-->
+			<!--			<el-col :span="8" class="header-avatar">-->
+			<!--				<el-dropdown>-->
+			<!--					<span>-->
+			<!--						<el-icon><avatar/></el-icon>-->
+			<!--						<el-icon class="el-icon&#45;&#45;right">-->
+			<!--							<arrow-down/>-->
+			<!--						</el-icon>-->
+			<!--					</span>-->
+
+			<!--					<template #dropdown>-->
+			<!--						<el-dropdown-menu>-->
+			<!--							<el-dropdown-item @click="openChangePasswordPage">修改密码</el-dropdown-item>-->
+			<!--							<el-dropdown-item @click="logout">退出登录</el-dropdown-item>-->
+			<!--						</el-dropdown-menu>-->
+			<!--					</template>-->
+			<!--				</el-dropdown>-->
+			<!--			</el-col>-->
+		</el-menu>
 	</el-header>
 
 </template>
@@ -148,11 +140,20 @@ function logout() {
 
 <style lang="less" scoped>
 .el-header {
-	border-bottom: 1px solid #374349;
+	border-bottom: 1px solid #263238;
 	background: #263238;
 	color: #AFB5BD;
 	height: 60px;
 	line-height: 60px;
+}
+
+
+.el-menu--horizontal {
+	border-bottom: 1px solid #263238;
+}
+
+.el-menu--horizontal > .el-menu-item:nth-child(1) {
+	margin-right: auto;
 }
 
 .el-dropdown {
