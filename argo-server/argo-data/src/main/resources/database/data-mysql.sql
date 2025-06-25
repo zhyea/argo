@@ -36,4 +36,4 @@ select 'liens-shop-center',
        '千原商城APP',
        'admin'
 from dual
-where not exists(select 1 from ag_cms_app where app_code = 'argo-front');
+where not exists(select 1 from ag_cms_app where app_code = 'liens-shop-center');
