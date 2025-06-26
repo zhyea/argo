@@ -3,7 +3,7 @@ import request from "@/utils/request";
 
 // 设置最后访问的app
 export function setLastVisitedApp(appId: number) {
-	return request.post('/admin/user/last-visit-app', {
+	return request.post('/admin/user/last-visit-app/set', {
 		appId: appId,
 	})
 }

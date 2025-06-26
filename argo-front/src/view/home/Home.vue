@@ -31,7 +31,7 @@ import {ref, computed, onMounted} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
-import AppSelectDialog from "@/view/home/AppSelectDialog.vue";
+import AppSelectDialog from "@/component/parts/AppSelectDialog.vue";
 
 import menuItems from '@/view/home/menu'
 import {useTagStore} from "@/store/tag";

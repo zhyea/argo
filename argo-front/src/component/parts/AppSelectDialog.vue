@@ -59,7 +59,6 @@ const selectApp = () => {
 		console.log(form.value)
 		if (form.value.appId) {
 			appStore.changeCurrent(form.value.appId)
-			setLastVisitedApp(form.value.appId)
 			appSelectorDialogRef.value = false
 		}
 	})

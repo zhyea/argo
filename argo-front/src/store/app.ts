@@ -1,6 +1,7 @@
 import {defineStore} from "pinia"
 import {findAllApps} from "@/api/app";
 import {cacheAppList, cacheCurrentApp, clearCachedAppInfo, getCachedAppList, getCachedCurrentApp} from "@/utils/cache";
+import {setLastVisitedApp} from "@/api/preference";
 
 export const useAppStore = defineStore("app", {
 
@@ -14,8 +15,10 @@ export const useAppStore = defineStore("app", {
 		async fetchAllApps(): Promise<Array<any>> {
 			const response = await findAllApps()
 			console.log("response", response)
-			this.appList = response.data;
-			cacheAppList(this.appList)
+			if (response.data) {
+				this.appList.push(...response.data)
+				cacheAppList(this.appList)
+			}
 			return this.appList
 		},
 
@@ -28,7 +31,7 @@ export const useAppStore = defineStore("app", {
 
 		// 获取app列表
 		getAppList(): Array<any> {
-			return this.appList || getCachedAppList();
+			return (this.appList && this.appList.length > 0) || getCachedAppList();
 		},
 
 
@@ -46,9 +49,11 @@ export const useAppStore = defineStore("app", {
 
 		// 设置当前app
 		changeCurrent(appId: number) {
-			const appList = this.getAppList();
-			this.currentApp = appList.find(item => item.id === appId);
-			cacheCurrentApp(this.currentApp);
+			setLastVisitedApp(appId).then(() => {
+				const appList = this.getAppList();
+				this.currentApp = appList.find(item => item.id === appId);
+				cacheCurrentApp(this.currentApp);
+			});
 		},
 
 

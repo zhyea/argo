@@ -25,7 +25,7 @@ const confStore = useConfStore();
 const tagStore = useTagStore();
 
 onMounted(async () => {
-	breadcrumbStore.set(route.matched);
+	//breadcrumbStore.set(route.matched);
 })
 
 
@@ -45,9 +45,9 @@ watch(route, () => {
 		return;
 	}
 
-	breadcrumbStore.set(route.matched)
-	const tag = routeFormatTag(route)
-	tagStore.openTagView(tag);
+	//breadcrumbStore.set(route.matched)
+	//const tag = routeFormatTag(route)
+	//tagStore.openTagView(tag);
 })
 
 

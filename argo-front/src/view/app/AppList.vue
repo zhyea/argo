@@ -26,7 +26,7 @@ defineProps({
 })
 
 
-let appItems = ref([])
+const appItems = ref([])
 
 // 获取应用信息
 findAllApps().then(response => {

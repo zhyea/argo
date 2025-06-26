@@ -6,6 +6,10 @@
 				ARGO 内容管理
 			</el-menu-item>
 
+			<el-menu-item class="logo" index="1">
+				<app-selector title="选择应用"/>
+			</el-menu-item>
+
 			<el-sub-menu index="2">
 				<template #title>
 					<el-icon>
@@ -27,24 +31,6 @@
 			</el-sub-menu>
 
 
-			<!--			&lt;!&ndash; avatar &ndash;&gt;-->
-			<!--			<el-col :span="8" class="header-avatar">-->
-			<!--				<el-dropdown>-->
-			<!--					<span>-->
-			<!--						<el-icon><avatar/></el-icon>-->
-			<!--						<el-icon class="el-icon&#45;&#45;right">-->
-			<!--							<arrow-down/>-->
-			<!--						</el-icon>-->
-			<!--					</span>-->
-
-			<!--					<template #dropdown>-->
-			<!--						<el-dropdown-menu>-->
-			<!--							<el-dropdown-item @click="openChangePasswordPage">修改密码</el-dropdown-item>-->
-			<!--							<el-dropdown-item @click="logout">退出登录</el-dropdown-item>-->
-			<!--						</el-dropdown-menu>-->
-			<!--					</template>-->
-			<!--				</el-dropdown>-->
-			<!--			</el-col>-->
 		</el-menu>
 	</el-header>
 
@@ -60,6 +46,7 @@ import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
 import {Avatar, Key, SwitchButton} from "@element-plus/icons-vue";
 import {useAppStore} from "@/store/app";
+import AppSelector from "@/component/parts/AppSelectPopover.vue";
 
 
 defineProps({
@@ -75,11 +62,6 @@ const appStore = useAppStore()
 const breadcrumb = computed(() => {
 	return breadcrumbStore.breadcrumb;
 });
-
-
-const appList = computed(() => {
-	return appStore.getAppList();
-})
 
 
 const currentAppId = computed(() => {
