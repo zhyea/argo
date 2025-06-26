@@ -2,7 +2,7 @@
 	<el-header>
 		<el-menu mode="horizontal" :ellipsis="false"
 		         background-color="#263238" text-color="#FFF" active-text-color="#FFD04B">
-			<el-menu-item index="0">
+			<el-menu-item class="logo" index="0">
 				ARGO 内容管理
 			</el-menu-item>
 
@@ -58,7 +58,7 @@ import {useRouter} from 'vue-router'
 import {useAuthStore} from "@/store/auth";
 import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
-import {ArrowDown, Avatar} from "@element-plus/icons-vue";
+import {Avatar, Key, SwitchButton} from "@element-plus/icons-vue";
 import {useAppStore} from "@/store/app";
 
 
@@ -153,6 +153,16 @@ function logout() {
 
 .el-menu--horizontal > .el-menu-item:nth-child(1) {
 	margin-right: auto;
+}
+
+.el-menu--horizontal .logo:hover {
+	background-color: #263238;
+}
+
+.el-menu--horizontal .logo {
+	color: #AFB5BD !important;
+	border-bottom-color: #263238 !important;
+	background: #263238 !important;
 }
 
 .el-dropdown {

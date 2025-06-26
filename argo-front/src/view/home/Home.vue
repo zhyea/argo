@@ -23,7 +23,7 @@
 		</el-container>
 	</el-container>
 
-	<app-selector ref="appSelectorRef"/>
+	<app-select-dialog ref="appSelectorRef"/>
 </template>
 
 <script lang="ts" setup>
@@ -31,7 +31,7 @@ import {ref, computed, onMounted} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
-import AppSelector from "@/view/home/AppSelector.vue";
+import AppSelectDialog from "@/view/home/AppSelectDialog.vue";
 
 import menuItems from '@/view/home/menu'
 import {useTagStore} from "@/store/tag";
