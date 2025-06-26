@@ -38,7 +38,7 @@ public class UserController {
 	}
 
 
-	@PostMapping("/last-visit-app")
+	@PostMapping("/last-visit-app/set")
 	public boolean setLastVisitApp(@RequestBody @Validated AppIdRelateRequest request) {
 		return userOptionsService.setLastVisitApp(request.getAppId());
 	}
