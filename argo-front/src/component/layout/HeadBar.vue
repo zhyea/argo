@@ -7,7 +7,7 @@
 			</el-menu-item>
 
 			<el-menu-item class="logo" index="1">
-				<app-selector title="选择应用"/>
+				<app-selector />
 			</el-menu-item>
 
 			<el-sub-menu index="2">
@@ -133,7 +133,7 @@ function logout() {
 	border-bottom: 1px solid #263238;
 }
 
-.el-menu--horizontal > .el-menu-item:nth-child(1) {
+.el-menu--horizontal > .el-menu-item:nth-child(2) {
 	margin-right: auto;
 }
 

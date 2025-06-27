@@ -31,7 +31,10 @@ export const useAppStore = defineStore("app", {
 
 		// 获取app列表
 		getAppList(): Array<any> {
-			return (this.appList && this.appList.length > 0) || getCachedAppList();
+			if (this.appList && this.appList.length > 0) {
+				return this.appList;
+			}
+			return getCachedAppList();
 		},
 
 
@@ -51,6 +54,10 @@ export const useAppStore = defineStore("app", {
 		changeCurrent(appId: number) {
 			setLastVisitedApp(appId).then(() => {
 				const appList = this.getAppList();
+				if (!appList || appList.length === 0) {
+					console.error("appList is empty");
+				}
+				console.log("appList", appList);
 				this.currentApp = appList.find(item => item.id === appId);
 				cacheCurrentApp(this.currentApp);
 			});

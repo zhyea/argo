@@ -1,24 +1,28 @@
 <template>
-	<el-popover placement="bottom" :width="400" trigger="click">
+	<el-popover placement="bottom" :width="270" :visible="visible" trigger="click">
 		<template #reference>
-			{{ prop.title }}
+			<span @click="visible = true">
+				{{ currentApp['appName'] }}
+				<el-icon class="app-arrow"><ArrowDown/></el-icon>
+			</span>
 		</template>
-		<el-table :data="appData" :row-click="selectApp">
-			<el-table-column width="150" property="appName" label="date"/>
+		<el-table :data="appData" @row-click="selectApp" :show-header="false">
+			<el-table-column property="appName" label="date"/>
 		</el-table>
 	</el-popover>
 </template>
 
 <script setup lang="ts">
 
-import {computed} from 'vue'
+import {computed, ref} from 'vue'
 import {useAppStore} from "@/store/app";
-
-const prop = defineProps({
-	title: '',
-})
+import {ArrowDown} from "@element-plus/icons-vue";
 
 const appStore = useAppStore()
+
+const currentApp = computed(() => {
+	return appStore.getCurrent();
+})
 
 const appData = computed(() => {
 	const appList = appStore.getAppList()
@@ -27,12 +31,29 @@ const appData = computed(() => {
 })
 
 
-function selectApp(row: any) {
-	appStore.changeCurrent(row.appId)
+const visible = ref(false)
+
+const selectApp = (row: any) => {
+	appStore.changeCurrent(row.id)
+	visible.value = false
+	console.log(visible)
 }
 
 </script>
 
 <style scoped lang="less">
+.app-arrow {
+	font-size: 12px;
+	display: inline-block;
+	animation: rotateArrow 2s infinite linear;
+}
 
+@keyframes rotateArrow {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
 </style>
