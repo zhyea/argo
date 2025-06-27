@@ -7,22 +7,43 @@
 			</el-menu-item>
 
 			<el-menu-item class="logo" index="1">
-				<app-selector />
+				<app-selector/>
 			</el-menu-item>
 
 			<el-sub-menu index="2">
 				<template #title>
 					<el-icon>
+						<setting/>
+					</el-icon>
+					系统管理
+				</template>
+				<el-menu-item index="3-1" @click="openChangePasswordPage">
+					<el-icon>
+						<grid/>
+					</el-icon>
+					<span>应用管理</span>
+				</el-menu-item>
+				<el-menu-item index="3-2" @click="logout">
+					<el-icon>
+						<user/>
+					</el-icon>
+					用户管理
+				</el-menu-item>
+			</el-sub-menu>
+
+			<el-sub-menu index="3">
+				<template #title>
+					<el-icon>
 						<avatar/>
 					</el-icon>
 				</template>
-				<el-menu-item index="2-1" @click="openChangePasswordPage">
+				<el-menu-item index="3-1" @click="openChangePasswordPage">
 					<el-icon>
 						<Key/>
 					</el-icon>
 					<span>修改密码</span>
 				</el-menu-item>
-				<el-menu-item index="2-2" @click="logout">
+				<el-menu-item index="3-2" @click="logout">
 					<el-icon>
 						<SwitchButton/>
 					</el-icon>
@@ -44,7 +65,7 @@ import {useRouter} from 'vue-router'
 import {useAuthStore} from "@/store/auth";
 import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
-import {Avatar, Key, SwitchButton} from "@element-plus/icons-vue";
+import {Avatar, Grid, Key, Setting, SwitchButton, User} from "@element-plus/icons-vue";
 import {useAppStore} from "@/store/app";
 import AppSelector from "@/component/parts/AppSelectPopover.vue";
 
@@ -145,6 +166,10 @@ function logout() {
 	color: #AFB5BD !important;
 	border-bottom-color: #263238 !important;
 	background: #263238 !important;
+}
+
+.el-menu--horizontal .el-sub-menu {
+	margin-right: 30px !important;
 }
 
 .el-dropdown {

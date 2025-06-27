@@ -25,7 +25,6 @@ const axiosInst = axios.create({
 axiosInst.interceptors.request.use(cfg => {
 		let token = getCachedToken()
 		if (token) {
-			console.log(`token:${token}`)
 			cfg.headers.Authorization = `${token}`
 		}
 		return cfg;

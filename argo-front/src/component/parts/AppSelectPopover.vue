@@ -1,11 +1,15 @@
 <template>
-	<el-popover placement="bottom" :width="270" :visible="visible" trigger="click">
+	<el-popover placement="bottom" :width="240" ref="popover" trigger="hover"
+	            @show="showPopover" @hide="hidePopover">
 		<template #reference>
-			<span @click="visible = true">
+			<span>
 				{{ currentApp['appName'] }}
-				<el-icon class="app-arrow"><ArrowDown/></el-icon>
+				<el-icon :class="{'rotate-180':isOpen, 'rotate-360':!isOpen, 'app-arrow': true}">
+					<ArrowDown/>
+				</el-icon>
 			</span>
 		</template>
+
 		<el-table :data="appData" @row-click="selectApp" :show-header="false">
 			<el-table-column property="appName" label="date"/>
 		</el-table>
@@ -20,23 +24,33 @@ import {ArrowDown} from "@element-plus/icons-vue";
 
 const appStore = useAppStore()
 
+
+const isOpen = ref(false)
+
+function showPopover() {
+	appStore.refresh().catch((e) => {
+		console.error(e)
+	});
+	isOpen.value = true
+}
+
+function hidePopover() {
+	isOpen.value = false
+}
+
 const currentApp = computed(() => {
 	return appStore.getCurrent();
 })
 
 const appData = computed(() => {
-	const appList = appStore.getAppList()
-	console.log(appList)
-	return appList
+	return appStore.getAppList()
 })
 
-
-const visible = ref(false)
+const popover = ref()
 
 const selectApp = (row: any) => {
 	appStore.changeCurrent(row.id)
-	visible.value = false
-	console.log(visible)
+	popover.value.hide()
 }
 
 </script>
@@ -45,15 +59,15 @@ const selectApp = (row: any) => {
 .app-arrow {
 	font-size: 12px;
 	display: inline-block;
-	animation: rotateArrow 2s infinite linear;
 }
 
-@keyframes rotateArrow {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+.rotate-180 {
+	transform: rotate(-180deg); /* 旋转180度 */
+	transition: transform 0.5s; /* 平滑过渡效果 */
+}
+
+.rotate-360 {
+	transform: rotate(-360deg); /* 旋转360度 */
+	transition: transform 0.5s; /* 平滑过渡效果 */
 }
 </style>

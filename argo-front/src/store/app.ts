@@ -16,7 +16,7 @@ export const useAppStore = defineStore("app", {
 			const response = await findAllApps()
 			console.log("response", response)
 			if (response.data) {
-				this.appList.push(...response.data)
+				this.appList = response.data
 				cacheAppList(this.appList)
 			}
 			return this.appList
@@ -57,7 +57,6 @@ export const useAppStore = defineStore("app", {
 				if (!appList || appList.length === 0) {
 					console.error("appList is empty");
 				}
-				console.log("appList", appList);
 				this.currentApp = appList.find(item => item.id === appId);
 				cacheCurrentApp(this.currentApp);
 			});
