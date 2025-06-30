@@ -14,7 +14,6 @@ export const useAppStore = defineStore("app", {
 		// 获取全部的app
 		async fetchAllApps(): Promise<Array<any>> {
 			const response = await findAllApps()
-			console.log("response", response)
 			if (response.data) {
 				this.appList = response.data
 				cacheAppList(this.appList)

@@ -1,6 +1,5 @@
-import appRoutes from '@/view/app/routes'
 import fcmRoutes from '@/view/fcm/routes'
-import appHomeRoutes from '@/view/app/routes-app'
+import {appMaintainRoutes, appSubRoutes} from '@/view/app/routes'
 import appPageRoutes from '@/view/page/routes'
 
 
@@ -13,7 +12,7 @@ export default [
 			title: '首页',
 		},
 		children: [
-			...appRoutes,
+			...appMaintainRoutes,
 			...fcmRoutes,
 		],
 	}, {
@@ -28,7 +27,7 @@ export default [
 			title: '应用首页',
 		},
 		children: [
-			...appHomeRoutes,
+			...appSubRoutes,
 			...appPageRoutes,
 		],
 	}, {

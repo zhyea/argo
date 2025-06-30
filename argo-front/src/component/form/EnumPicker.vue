@@ -1,12 +1,19 @@
 <template>
 
-	<el-radio-group id="effectivePeriodType" v-if="props.type==='radio'" v-model="fciForm.effectivePeriodType">
+	<el-radio-group :id="id" v-if="props.type==='radio'" v-model="model" :placeholder="placeholder">
 		<el-radio v-for="e in enumRef"
 		          :value="e[0]">
 			{{ e[1] }}
 		</el-radio>
 	</el-radio-group>
 
+
+	<el-select :id="id" v-if="props.type==='select'" v-model="model" :placeholder="placeholder">
+		<el-option v-for="e in enumRef"
+		           :key="e[0]"
+		           :label="e[1]"
+		           :value="e[0]"/>
+	</el-select>
 
 </template>
 
@@ -18,6 +25,8 @@ const props = defineProps({
 	id: String,
 	type: String,
 	enum: String,
+	model: String,
+	placeholder: String,
 })
 
 
