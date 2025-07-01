@@ -5,7 +5,7 @@
 
 		<el-container direction="horizontal">
 			<sidebar :collapsed="collapseFlag"
-			         :menu-items="menuItems.home"
+			         :menu-items="menuItems.system"
 			         @menu="changeSideBarState"/>
 
 			<el-container direction="vertical">

@@ -1,13 +1,8 @@
 
-export interface MenuItem{
-
-}
-
-
 
 export default {
 
-	home: [
+	system: [
 		{
 			name: 'Dashboard',
 			icon: 'platform',
