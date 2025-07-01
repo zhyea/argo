@@ -94,8 +94,8 @@ public class AppController {
 	 * @param request 查询请求
 	 * @return 应用记录
 	 */
-	@GetMapping("/list")
-	public PageResult<AppItem> findInPage(AppPageRequest request) {
+	@PostMapping("/list")
+	public PageResult<AppItem> findInPage(@RequestBody AppPageRequest request) {
 		return appService.findInPage(request);
 	}
 
