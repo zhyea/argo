@@ -6,6 +6,12 @@ export async function findAllApps() {
 }
 
 
+// 获取应用列表
+export async function findAppList(keyword: string, pageNo: number, pageSize: number) {
+	return await request.post('/cms/app/list', {keyword, pageNo, pageSize})
+}
+
+
 // 根据关键字查询应用列表
 export function queryApps(keyword: string) {
 	return request.post('/cms/app/query', {

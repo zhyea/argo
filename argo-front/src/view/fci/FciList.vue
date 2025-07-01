@@ -99,7 +99,7 @@ function loadFciListData() {
 		pageInfo.pageNo = parseInt(route.query.page)
 	}
 
-	findFciList(appId, keyword, pageInfo).then(response => {
+	findFciList(Number(appId),  keyword, pageInfo).then(response => {
 		if (response && response.data && response.data.data) {
 			fciListData.value = response.data.data
 			pageInfo.total = response.data.total
@@ -109,8 +109,8 @@ function loadFciListData() {
 
 
 // 处理页面切换
-const handlePageChange = async (val) => {
-	let appId = route.params['appId']
+const handlePageChange = async (val: any) => {
+	const appId = route.params['appId']
 	router.push({name: route['fciListRouteName'], query: {appId: appId, page: val}})
 		.then(() => {
 			loadFciListData()
@@ -123,13 +123,13 @@ const fciEditDrawerRef = ref()
 
 
 // 处理FCI编辑
-function handleEdit(row) {
+function handleEdit(row: any) {
 	fciEditDrawerRef.value.openFciDrawerForEdit(row.id, row.appId)
 }
 
 
 // 处理FCM删除
-function handleDelete(row) {
+function handleDelete(row: any) {
 	delFci(row.id).then(response => {
 		if (response && response.data) {
 			ElMessage.success({
