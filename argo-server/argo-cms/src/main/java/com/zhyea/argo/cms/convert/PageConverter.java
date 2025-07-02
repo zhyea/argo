@@ -34,7 +34,6 @@ public interface PageConverter {
 	 * @param modifyRequest 应用页面修改请求
 	 * @return 实体
 	 */
-	@Mapping(source = "pageId", target = "id")
 	PageEntity modifyRequest2Entity(PageEditRequest modifyRequest);
 
 

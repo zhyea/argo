@@ -28,3 +28,4 @@ argo:
     iv: Z3M6RQGU5C80KTJ70DZIN2RDYW
     token-duration-minutes: 30
     idle-timeout-minutes: 10
+    strict-check: false

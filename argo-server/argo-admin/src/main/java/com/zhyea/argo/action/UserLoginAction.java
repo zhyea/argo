@@ -55,6 +55,8 @@ public class UserLoginAction {
 	private int tokenDurationMinutes;
 	@Value("${argo.auth.idle-timeout-minutes}")
 	private int idleTimeoutMinutes;
+	@Value("${argo.auth.strict-check}")
+	private boolean strictCheck;
 
 
 	/**
@@ -96,6 +98,14 @@ public class UserLoginAction {
 		if (null == authInfo) {
 			logger.warn("UserLoginAction#decodeToken invalid token:{}", token);
 			throw new ArgoServerException(ResponseCode.INVALID_TOKEN_ERROR);
+		}
+
+		if (strictCheck) {
+			UserEntity user = userService.getByUserPwd(authInfo.getUsername(), authInfo.getPassword());
+			if (null == user) {
+				logger.warn("UserLoginAction#decodeToken invalid user info:{}", authInfo.getUsername());
+				throw new ArgoServerException(ResponseCode.INVALID_TOKEN_ERROR);
+			}
 		}
 
 		long expireTime = authInfo.getExpireTime();
