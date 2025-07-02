@@ -1,16 +1,15 @@
 <template>
-	<el-drawer :title="`${appForm.id ? '编辑' : '新增'} 应用信息 - ${appForm.appName}`"
+	<el-drawer :title="`${appForm.id && appForm.id > 0 ? '编辑 ' + appForm.appName : '新增应用'}`"
 	           v-model="appEditDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->
+			<el-form :model="appForm" ref="appFormRef" :rules="appFormRules"
+			         label-suffix=":" label-width="90px"
+			         status-icon class="full-region">
 
-			<el-card class="fcm-region">
-				<el-form
-					:model="appForm" ref="appFormRef" :rules="appFormRules"
-					label-suffix=":" label-width="90px"
-					status-icon>
+				<el-card>
 
-					<el-form-item prop="appId">
+					<el-form-item prop="id">
 						<el-input type="hidden" v-model="appForm.id"/>
 					</el-form-item>
 
@@ -29,13 +28,13 @@
 					<el-form-item label="备注" prop="remark">
 						<el-input id="remark" type="textarea" v-model="appForm.remark" :autosize="{ minRows: 4,}"/>
 					</el-form-item>
-				</el-form>
-			</el-card>
+				</el-card>
 
 
-			<el-card class="fcm-region">
-				<el-button type="primary" :disabled="isAppFormSubmitted" @click="submitAppForm">提交</el-button>
-			</el-card>
+				<el-card>
+					<el-button type="primary" :disabled="isAppFormSubmitted" @click="submitAppForm">提交</el-button>
+				</el-card>
+			</el-form>
 		</el-container>
 	</el-drawer>
 </template>
@@ -47,7 +46,7 @@ import {submitForm} from "@/view/helper";
 
 // app 表单数据
 const appForm = ref({
-	id: '',
+	id: 0,
 	appCode: '',
 	appName: '',
 	icon: '',
@@ -101,8 +100,8 @@ function openPrepare() {
 
 
 // 加载组件实例数据
-function loadAppData(appId) {
-	if (!appId) return;
+function loadAppData(appId: number) {
+	if (!appId || appId <= 0) return;
 	getApp(appId).then(response => {
 		if (response && response.data) {
 			appForm.value = response.data;
@@ -111,7 +110,7 @@ function loadAppData(appId) {
 }
 
 // 打开组件实例抽屉-用于编辑
-function openAppEditDrawer(appId) {
+function openAppEditDrawer(appId: number) {
 	openPrepare()
 	loadAppData(appId)
 }

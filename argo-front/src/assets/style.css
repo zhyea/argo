@@ -178,6 +178,9 @@ button:focus-visible {
 	text-align: left;
 }
 
+.full-region {
+	width: 100%;
+}
 
 @media (prefers-color-scheme: light) {
 	:root {

@@ -19,7 +19,7 @@
 			</div>
 
 			<el-table :data="appList" border stripe style="width: 100%">
-				<el-table-column min-width=60 prop="icon" label="图标">
+				<el-table-column width="80px" prop="icon" label="图标" align="center">
 					<template #default="scope">
 						<img :src="scope.row.icon" :alt="scope.row.appName" style="width: 40px; height: 40px;">
 					</template>
@@ -28,9 +28,10 @@
 				<el-table-column show-overflow-tooltip min-width=90 prop="appCode" label="应用Code"
 				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="appName" label="应用名称"/>
-				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
+				<el-table-column show-overflow-tooltip min-width=150 prop="remark" label="备注"/>
+				<el-table-column show-overflow-tooltip min-width=180 prop="createTime" label="创建时间"
 				                 align="center"/>
-				<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="修改时间"
+				<el-table-column show-overflow-tooltip min-width=180 prop="updateTime" label="修改时间"
 				                 align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=200>
 					<template #default="scope">
@@ -55,9 +56,9 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 
-import { findAppList} from "@/api/app";
+import {delApp, findAppList} from "@/api/app";
 import {useRouter} from "vue-router";
 import AppDrawer from "@/view/app/AppEditDrawer.vue";
 
@@ -94,24 +95,35 @@ function loadAppList() {
 	})
 }
 
+onMounted(() => {
+	loadAppList()
+})
 
-function handleAdd(){
-	console.log('add app')
+
+function handleAdd() {
+	appEditDrawerRef.value.openAppEditDrawer(0)
 }
 
 
+// 打开应用编辑抽屉
 function handleEdit(row) {
-	console.log('handle edit', row)
+	appEditDrawerRef.value.openAppEditDrawer(row.id)
 }
 
 
 function handleDelete(row) {
-	console.log('handle delete', row)
+	delApp(row.id).then(() => {
+		ElMessage.success({
+			message: '删除成功',
+			duration: 1500,
+		});
+		loadAppList()
+	})
 }
 
 
 // 处理页面切换
-function handlePageChange(val){
+function handlePageChange(val) {
 	const appId = route.params['appId']
 	router.push({name: route['fciListRouteName'], query: {appId: appId, page: val}})
 		.then(() => {
@@ -122,13 +134,6 @@ function handlePageChange(val){
 
 // 应用编辑抽屉
 const appEditDrawerRef = ref()
-
-
-// 打开应用编辑抽屉
-function handleEdit(row) {
-	appEditDrawerRef.value.openAppEditDrawer(row.id)
-}
-
 
 
 const router = useRouter();
