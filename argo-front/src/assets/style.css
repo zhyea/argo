@@ -108,6 +108,9 @@ button:focus-visible {
 	font-size: 16px;
 }
 
+/**
+ * Table class
+ */
 
 .table-container {
 	margin: 0;
@@ -174,6 +177,7 @@ button:focus-visible {
 	padding-left: 8px;
 	text-align: left;
 }
+
 
 @media (prefers-color-scheme: light) {
 	:root {

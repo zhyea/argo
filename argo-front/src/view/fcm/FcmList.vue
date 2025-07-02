@@ -180,29 +180,5 @@ function mapScopeEnum(row, column, cellValue, index) {
 
 <style scoped lang="less">
 
-.table-container {
-	margin: 0;
-	padding: 12px;
-	background-color: #2b4b6b;
-}
 
-.table-header, .table-body, .table-footer {
-	display: block;
-	margin: 0;
-	padding: 12px;
-	background-color: #FFFFFF;
-	border: #535bf2 1px solid;
-}
-
-.table-header, .table-body {
-	margin-bottom: 9px;
-}
-
-.table-header {
-	padding-top: 24px;
-}
-
-.table-button {
-	padding-bottom: 9px;
-}
 </style>

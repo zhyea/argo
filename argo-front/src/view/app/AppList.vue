@@ -51,15 +51,15 @@
 		</div>
 	</div>
 
+	<app-drawer ref="appEditDrawerRef" @after-edit="loadAppList"/>
 </template>
 
 <script setup>
 import {ref} from 'vue'
 
-import {findAllApps, findAppList} from "@/api/app";
+import { findAppList} from "@/api/app";
 import {useRouter} from "vue-router";
-import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
-import FciDrawer from "@/view/fci/FciEditDrawer.vue";
+import AppDrawer from "@/view/app/AppEditDrawer.vue";
 
 // 搜索数据
 const keywordForm = ref({
@@ -110,16 +110,25 @@ function handleDelete(row) {
 }
 
 
-
-
 // 处理页面切换
-function handlePageChange(val: any){
+function handlePageChange(val){
 	const appId = route.params['appId']
 	router.push({name: route['fciListRouteName'], query: {appId: appId, page: val}})
 		.then(() => {
-			loadFciListData()
+			loadAppList()
 		})
 }
+
+
+// 应用编辑抽屉
+const appEditDrawerRef = ref()
+
+
+// 打开应用编辑抽屉
+function handleEdit(row) {
+	appEditDrawerRef.value.openAppEditDrawer(row.id)
+}
+
 
 
 const router = useRouter();
