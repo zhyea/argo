@@ -20,9 +20,9 @@ public interface AppMapper {
      * @param app 应用信息
      */
     @Insert({
-            "insert into ag_cms_app (app_code, app_name, icon, remark)",
+            "insert into ag_cms_app (app_code, app_name, app_type, icon, remark)",
             "values",
-            "(#{e.appCode}, #{e.appName}, ",
+            "(#{e.appCode}, #{e.appName}, #{e.appType},",
             "#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler},",
             "#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler})"
     })
@@ -38,7 +38,7 @@ public interface AppMapper {
      */
     @Update({
             "update ag_cms_app set",
-            "app_code=#{e.appCode}, app_name=#{e.appName}, ",
+            "app_code=#{e.appCode}, app_name=#{e.appName}, app_type=#{e.appType},",
             "icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
             "remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}",
             "where id=#{e.id}"

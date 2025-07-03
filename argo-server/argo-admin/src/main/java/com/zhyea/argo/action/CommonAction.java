@@ -28,7 +28,8 @@ public class CommonAction {
 				.add(YesOrNo.class)
 				.add(FcmPropTypeEnum.class)
 				.add(EffectivePeriodTypeEnum.class)
-				.add(TimeRelateStatusEnum.class);
+				.add(TimeRelateStatusEnum.class)
+				.add(AppTypeEnum.class);
 
 		return builder.build();
 	}

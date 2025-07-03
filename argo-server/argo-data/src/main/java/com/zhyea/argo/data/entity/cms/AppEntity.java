@@ -25,6 +25,12 @@ public class AppEntity extends BaseEntity {
 
 
 	/**
+	 * 应用类型
+	 */
+	private Integer appType;
+
+
+	/**
 	 * 应用icon地址
 	 */
 	private String icon;

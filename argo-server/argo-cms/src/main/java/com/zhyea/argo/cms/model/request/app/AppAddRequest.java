@@ -1,9 +1,11 @@
 package com.zhyea.argo.cms.model.request.app;
 
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
-import lombok.Data;
-
+import com.zhyea.argo.constants.enums.AppTypeEnum;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+import org.chobit.commons.validation.EnumVal;
 
 
 /**
@@ -28,6 +30,13 @@ public class AppAddRequest extends BaseOperateRequest {
 	@NotBlank(message = "应用名称不能为空")
 	private String appName;
 
+
+	/**
+	 * 应用类型
+	 */
+	@EnumVal(enumClass = AppTypeEnum.class, message = "应用类型错误")
+	@NotNull(message = "应用类型不能为空")
+	private Integer appType;
 
 	/**
 	 * 应用图标

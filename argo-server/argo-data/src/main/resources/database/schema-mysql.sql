@@ -14,6 +14,7 @@ create table if not exists ag_cms_app
 
     app_code      varchar(32)  not null default '' comment '应用编码',
     app_name      varchar(64)  not null default '' comment '应用名称',
+    app_type      tinyint      not null default 0 comment '应用类型',
     icon          varchar(128) not null default '' comment '图标',
     remark        varchar(128) not null default '' comment '备注',
 
