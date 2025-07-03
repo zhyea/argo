@@ -21,6 +21,10 @@
 						<el-input id="appName" v-model="appForm.appName"/>
 					</el-form-item>
 
+					<el-form-item label="应用类型" prop="appType">
+						<enum-picker id="appType" type="radio" enum="AppTypeEnum" v-model="appForm.appType"/>
+					</el-form-item>
+
 					<el-form-item label="应用图标" prop="icon">
 						<el-input id="icon" v-model="appForm.icon"/>
 					</el-form-item>
@@ -43,12 +47,14 @@
 import {ref} from "vue";
 import {addApp, editApp, getApp} from "@/api/app";
 import {submitForm} from "@/view/helper";
+import EnumPicker from "@/component/form/EnumPicker.vue";
 
 // app 表单数据
 const appForm = ref({
 	id: 0,
 	appCode: '',
 	appName: '',
+	appType: 1,
 	icon: '',
 	remark: '',
 })

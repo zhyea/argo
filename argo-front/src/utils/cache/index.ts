@@ -5,6 +5,7 @@ const PERMISSION = 'permissions:'
 const LOCALE = 'locale:'
 const APP_LIST = 'appList:'
 const CURRENT_APP = 'current_app:'
+const CACHE_KEY = 'cache:'
 
 
 export function setLocale(lang: string) {
@@ -73,4 +74,20 @@ export function getCachedCurrentApp() {
 export function clearCachedAppInfo() {
 	sessionStorage.removeItem(APP_LIST)
 	sessionStorage.removeItem(CURRENT_APP)
+}
+
+
+export function cacheEnums(enums: any) {
+	if (enums) {
+		sessionStorage.setItem(CACHE_KEY, JSON.stringify(enums))
+	}
+}
+
+
+export function getCachedEnums() {
+	const json = sessionStorage.getItem(CACHE_KEY)
+	if (json) {
+		return JSON.parse(json);
+	}
+	return null;
 }
