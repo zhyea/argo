@@ -14,6 +14,7 @@ import com.zhyea.argo.data.entity.cms.AppEntity;
 import com.zhyea.argo.data.mapper.cms.AppMapper;
 import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.model.response.PageResult;
+import org.chobit.commons.tools.ShortCode;
 import org.chobit.commons.utils.Collections2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -142,5 +143,21 @@ public class AppService {
 		} else {
 			return appConverter.entityList2ItemList(list);
 		}
+	}
+
+
+	/**
+	 * 生成页面编码
+	 *
+	 * @return 页面编码
+	 */
+	public String generateAppCode() {
+		String appCode = ShortCode.genUpper();
+		long count = appMapper.countByAppCode(appCode);
+		while (count > 0) {
+			appCode = ShortCode.genUpper();
+			count = appMapper.countByAppCode(appCode);
+		}
+		return appCode;
 	}
 }

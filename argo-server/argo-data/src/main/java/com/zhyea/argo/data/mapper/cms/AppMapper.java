@@ -92,5 +92,4 @@ public interface AppMapper {
      * @return 应用列表
      */
     List<AppEntity> query(@Param("keyword") String keyword);
-
 }

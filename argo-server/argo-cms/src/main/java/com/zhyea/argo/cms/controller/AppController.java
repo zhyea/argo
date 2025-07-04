@@ -111,4 +111,15 @@ public class AppController {
 		return appService.query(request);
 	}
 
+
+	/**
+	 * 生成应用编码
+	 *
+	 * @return 应用编码
+	 */
+	@RequestMapping("/app-code")
+	public String generateAppCode() {
+		return appService.generateAppCode();
+	}
+
 }
