@@ -1,6 +1,6 @@
 <template>
 
-	<el-radio-group :id="id" v-if="formType==='radio'" v-model="enumValue" :placeholder="placeholder"
+	<el-radio-group :id="id" v-if="formType==='radio'" v-model="enumValue"
 	                @change="handleChange">
 		<el-radio v-for="e in enumRef"
 		          :value="e[0]">
@@ -40,10 +40,7 @@ const formType = ref(props.type)
 const enumStore = useEnumStore();
 
 const enumRef = computed(() => {
-	console.log(props.enum);
-	const enums = enumStore.getEnumMap(props.enum!);
-	console.log(enums);
-	return enums;
+	return enumStore.getEnumMap(props.enum!);
 })
 
 
@@ -54,7 +51,7 @@ watch(() => props.modelValue, (newVal) => {
 
 // 定义事件处理函数，用于更新父组件中的值
 const emit = defineEmits(['update:modelValue']);
-const handleChange = (value) => {
+const handleChange = (value: any) => {
 	emit('update:modelValue', value);
 };
 

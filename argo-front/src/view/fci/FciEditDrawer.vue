@@ -64,13 +64,12 @@
 	</el-drawer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import {ref, computed} from "vue";
 import {submitForm} from "@/view/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
-import {getFcm} from "@/api/fcm";
 
 const enumStore = useEnumStore()
 
@@ -85,7 +84,7 @@ const fciForm = ref({
 	dataUrl: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
-	effectiveTimeRange: null,
+	effectiveTimeRange: ['', ''],
 
 	remark: '',
 })
@@ -102,7 +101,7 @@ const fciFormRules = {
 };
 
 // 加载组件实例数据
-const loadFciData = async (fciId) => {
+const loadFciData = async (fciId: number) => {
 	if (!fciId) {
 		return
 	}
@@ -127,7 +126,7 @@ const effectivePeriodTypeEnum = computed(() => {
 
 
 // 打开组件实例抽屉前的准备
-const openPrepare = (fcmId) => {
+const openPrepare = () => {
 	fciItemDrawer.value = true
 
 	if (fciFormRef.value) {
@@ -139,14 +138,14 @@ const openPrepare = (fcmId) => {
 
 
 // 打开组件实例抽屉-用于编辑
-const openDrawerForEdit = (fciId, appId) => {
+const openDrawerForEdit = (fciId: number, appId: number) => {
 	openPrepare()
 	loadFciData(fciId)
 }
 
 
 // 打开组件实例抽屉-用于新增
-const openDrawerForAdd = (fcmRow) => {
+const openDrawerForAdd = (fcmRow: any) => {
 	openPrepare()
 	fciForm.value.fcmId = fcmRow.fcmId
 	fciForm.value.appId = fcmRow.appId

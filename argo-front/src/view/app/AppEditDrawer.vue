@@ -13,8 +13,8 @@
 						<el-input type="hidden" v-model="appForm.id"/>
 					</el-form-item>
 
-					<el-form-item label="应用Code" prop="appCode">
-						<el-input id="appCode" v-model="appForm.appCode"/>
+					<el-form-item label="应用编码" prop="appCode">
+						<el-input id="appCode" readonly v-model="appForm.appCode"/>
 					</el-form-item>
 
 					<el-form-item label="应用名称" prop="appName">
@@ -22,7 +22,7 @@
 					</el-form-item>
 
 					<el-form-item label="应用类型" prop="appType">
-						<enum-picker id="appType" type="radio" enum="AppTypeEnum" v-model="appForm.appType"/>
+						<enum-picker id="appType" type="select" enum="AppTypeEnum" v-model="appForm.appType"/>
 					</el-form-item>
 
 					<el-form-item label="应用图标" prop="icon">
@@ -45,7 +45,7 @@
 
 <script lang="ts" setup>
 import {ref} from "vue";
-import {addApp, editApp, getApp} from "@/api/app";
+import {addApp, editApp, generateAppCode, getApp} from "@/api/app";
 import {submitForm} from "@/view/helper";
 import EnumPicker from "@/component/form/EnumPicker.vue";
 
@@ -94,11 +94,17 @@ function submitAppForm() {
 const appEditDrawer = ref(false)
 
 // 打开组件实例抽屉前的准备
-function openPrepare() {
+function openPrepare(appId: number) {
 	appEditDrawer.value = true
 
 	if (appFormRef.value) {
 		appFormRef.value.resetFields();
+	}
+
+	if (!appId) {
+		generateAppCode().then(response => {
+			appForm.value.appCode = response.data;
+		})
 	}
 
 	isAppFormSubmitted.value = false
@@ -117,7 +123,7 @@ function loadAppData(appId: number) {
 
 // 打开组件实例抽屉-用于编辑
 function openAppEditDrawer(appId: number) {
-	openPrepare()
+	openPrepare(appId)
 	loadAppData(appId)
 }
 

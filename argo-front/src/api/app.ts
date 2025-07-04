@@ -46,3 +46,9 @@ export function delApp(appId: number) {
 		appId: appId,
 	})
 }
+
+
+// 生成应用编码
+export function generateAppCode() {
+	return request.get('/cms/app/app-code')
+}
