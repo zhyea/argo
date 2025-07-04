@@ -1,5 +1,3 @@
-
-
 export default {
 
 	system: [
@@ -15,12 +13,9 @@ export default {
 			children: [{
 				name: '应用列表',
 				index: '/app-list',
-			}, {
-				name: '新增应用',
-				index: '/app-add',
 			}]
 		}, {
-			name: '组件模型',
+			name: '通用模型',
 			icon: 'cpu',
 			index: '/fcm-main',
 

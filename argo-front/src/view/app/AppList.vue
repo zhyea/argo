@@ -36,6 +36,7 @@
 				<el-table-column label="操作" align="center" fixed="right" width=200>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+						<el-button type="success" size="small" @click="goToApp(scope.row.id)">跳转</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
@@ -61,6 +62,7 @@ import {ref, onMounted} from 'vue'
 import {delApp, findAppList} from "@/api/app";
 import {useRouter} from "vue-router";
 import AppDrawer from "@/view/app/AppEditDrawer.vue";
+import {ElMessage} from "element-plus";
 
 // 搜索数据
 const keywordForm = ref({
@@ -139,9 +141,7 @@ const appEditDrawerRef = ref()
 const router = useRouter();
 
 // 跳转到应用页面
-const goToAppPage = (appId) => {
-	console.log(appId)
-	let params = {appId: appId}
+const goToApp = (appId) => {
 	router.push({path: '/app/' + appId})
 }
 </script>

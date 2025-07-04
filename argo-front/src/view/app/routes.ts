@@ -7,23 +7,9 @@ export const appMaintainRoutes = [{
 	meta: {
 		title: '应用列表',
 	},
-}, {
-	name: 'AppAdd',
-	path: '/app-add',
-	component: () => import('./AppEdit.vue'),
-	meta: {
-		title: '新增应用',
-	},
 }]
 
 export const appSubRoutes = [{
-	name: 'AppEdit',
-	path: '/app/:appId/edit',
-	component: () => import('./AppEdit.vue'),
-	meta: {
-		title: '新增应用',
-	},
-}, {
 	name: 'AppFcmList',
 	path: '/app/:appId/app-fcm-list',
 	component: () => import('../fcm/FcmList.vue'),
@@ -44,11 +30,4 @@ export const appSubRoutes = [{
 	meta: {
 		title: '新增组件模型',
 	},
-}, {
-	name: 'AppFcmEdit',
-	path: '/app/:appId/app-fcm-edit/:fcmId',
-	component: () => import('../fcm/FcmEditDrawer.vue'),
-	meta: {
-		title: '编辑组件模型',
-	},
-},]
+}]
