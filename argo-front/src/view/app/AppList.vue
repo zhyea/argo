@@ -62,7 +62,7 @@ import {ref, onMounted} from 'vue'
 import {delApp, findAppList} from "@/api/app";
 import {useRouter} from "vue-router";
 import AppDrawer from "@/view/app/AppEditDrawer.vue";
-import {ElMessage} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 
 // 搜索数据
 const keywordForm = ref({
@@ -102,10 +102,13 @@ onMounted(() => {
 })
 
 
+// 应用编辑抽屉
+const appEditDrawerRef = ref()
+
+// 打开新增应用抽屉
 function handleAdd() {
 	appEditDrawerRef.value.openAppEditDrawer(0)
 }
-
 
 // 打开应用编辑抽屉
 function handleEdit(row) {
@@ -113,13 +116,27 @@ function handleEdit(row) {
 }
 
 
+// 处理应用删除
 function handleDelete(row) {
-	delApp(row.id).then(() => {
-		ElMessage.success({
-			message: '删除成功',
-			duration: 1500,
-		});
-		loadAppList()
+	ElMessageBox.prompt('请输入应用名称以确认删除', '删除确认', {
+		confirmButtonText: '确认',
+		cancelButtonText: '取消',
+		inputErrorMessage: '应用名称错误',
+		inputValidator: (value) => {
+			return row.appName === value;
+		}
+	}).then(() => {
+		delApp(row.id).then(() => {
+			ElMessage.success({
+				message: '删除成功',
+				duration: 1500,
+			});
+			loadAppList()
+		})
+	}).catch(() => {
+		ElMessage.info({
+			message: '取消删除',
+		})
 	})
 }
 
@@ -134,75 +151,14 @@ function handlePageChange(val) {
 }
 
 
-// 应用编辑抽屉
-const appEditDrawerRef = ref()
-
-
 const router = useRouter();
-
 // 跳转到应用页面
-const goToApp = (appId) => {
-	router.push({path: '/app/' + appId})
+const goToApp = async (appId) => {
+	await router.push({path: '/app/' + appId})
 }
 </script>
 
+
 <style scoped lang="less">
 
-.app-container {
-	display: flex;
-}
-
-.app-box {
-	display: grid;
-	width: 150px;
-	height: 150px;
-	justify-content: center;
-
-	.app-icon {
-		display: flex;
-		margin: 20px 30px 0 30px;
-		padding: 0;
-		height: 90px;
-		width: 90px;
-		overflow: hidden;
-		border: 3px solid #42b983;
-		border-radius: 50%;
-		background-color: #FFFFFF;
-		align-items: center;
-		justify-content: center;
-		font-size: 36px;
-		font-weight: bold;
-		color: #42b983;
-	}
-
-	.app-icon-img {
-		display: block;
-		margin: 0;
-		padding: 0;
-		width: 80px;
-		height: 80px;
-	}
-
-	.app-title {
-		display: block;
-		margin: 0 20px 6px 20px;
-		padding: 0;
-		width: 110px;
-		height: 20px;
-		overflow: hidden;
-		text-align: center;
-		font-family: 'Monospaced', 'serif';
-		font-weight: bolder;
-		color: #1a1a1a;
-	}
-}
-
-.app-box:hover {
-	background-color: #F0FFF0;
-	cursor: pointer;
-
-	.app-title {
-		color: #888888;
-	}
-}
 </style>

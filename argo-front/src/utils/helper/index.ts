@@ -1,4 +1,4 @@
-import routers from '@/router/routes';
+import routers from '@/view/home/routes';
 import i18n from '@/lang/index.js'
 import {ElMessage} from "element-plus";
 import {Ref} from "vue";

@@ -16,15 +16,14 @@ export const useTagStore = defineStore("tag", {
 		tags: state => {
 			return state.tagList
 		},
-		cacheTags: state => {
+		cachedTags: state => {
 			return state.tagList?.filter((item: TagItem) => item.cache)
 				.map(item => item.name) || [];
-		}
+		},
 	},
 
 
 	actions: {
-
 		// 打开标签
 		openTagView(tag: TagItem) {
 			console.log(`openTagView: ${JSON.stringify(tag)}`);
@@ -73,6 +72,6 @@ export const useTagStore = defineStore("tag", {
 			[...tagIndices].sort((a, b) => b - a).forEach(index => {
 				this.tagList.splice(index, 1);
 			});
-		}
+		},
 	}
 });

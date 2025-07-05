@@ -5,15 +5,15 @@
 
 		<el-container direction="horizontal">
 			<sidebar :collapsed="collapseFlag"
-			         :menu-items="menuItems.system"
+			         :menu-items="sideMenuRef"
 			         @menu="changeSideBarState"/>
 
 			<el-container direction="vertical">
-<!--				<tag-view/>-->
+				<!--				<tag-view/>-->
 				<el-main>
 					<router-view :key="$route.fullPath" v-slot="{ Component }">
 						<el-scrollbar height="100%">
-							<keep-alive :include="cacheTags">
+							<keep-alive :include="cachedTags">
 								<component :is="Component"/>
 							</keep-alive>
 						</el-scrollbar>
@@ -37,6 +37,7 @@ import menuItems from '@/view/home/menu'
 import {useTagStore} from "@/store/tag";
 import TagView from "@/component/layout/TagView.vue";
 import {useAppStore} from "@/store/app";
+import {useRoute} from "vue-router";
 
 
 const collapseFlag = ref(false)
@@ -47,16 +48,26 @@ function changeSideBarState(status: any) {
 }
 
 
-const cacheTags = computed(() => {
-	return useTagStore.cacheTags
+const tagStore = useTagStore()
+const cachedTags = computed(() => {
+	return tagStore.cachedTags
 })
 
+
+const route = useRoute()
+const sideMenuRef = ref()
+
 const appStore = useAppStore()
-
 const appSelectorRef = ref()
-
-
 onMounted(() => {
+	const appId = route.params.appId
+
+	if (appId) {
+		sideMenuRef.value = menuItems.app
+	} else {
+		sideMenuRef.value = menuItems.system
+	}
+
 	if (!appStore.getCurrent()) {
 		appSelectorRef.value.openAppSelectorDialog()
 	}
@@ -66,14 +77,4 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-
-.home_container {
-	height: 100%;
-	background-color: #FFFFFF;
-}
-
-.el-main {
-	padding: 0;
-	height: 100%;
-}
 </style>

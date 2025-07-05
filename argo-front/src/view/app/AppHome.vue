@@ -78,7 +78,7 @@ onActivated(() => {
 
 // 加载应用数据判断应用ID是否有效
 function loadAppData() {
-	let appId = route.params.appId
+	const appId = route.params.appId
 
 	getApp(appId).then(response => {
 		validAppFlag.value = response && response.data
@@ -97,14 +97,6 @@ function changeSideBarState(status) {
 </script>
 
 <style scoped lang="less">
-.home_container {
-	height: 100%;
-	background-color: #FFFFFF;
-}
 
-.el-main {
-	padding: 0;
-	height: 100%;
-}
 
 </style>

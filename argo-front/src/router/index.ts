@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 
-import routeConfig from './routes'
+import routeConfig from '../view/home/routes'
 import {ROUTE_NAMES} from "@/config";
 import {useAuthStore} from "@/store/auth";
 

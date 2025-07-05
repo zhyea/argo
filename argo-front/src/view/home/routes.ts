@@ -22,7 +22,7 @@ export default [
 	}, {
 		name: 'AppHome',
 		path: '/app/:appId',
-		component: () => import( '@/view/app/AppHome.vue'),
+		component: () => import('@/view/home/Home.vue'),
 		meta: {
 			title: '应用首页',
 		},

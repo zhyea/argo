@@ -48,6 +48,11 @@ export default {
 
 	app: [
 		{
+			name: '应用首页',
+			icon: 'grid',
+			index: '/app/:appId',
+		},
+		{
 			name: '组件模型',
 			icon: 'cpu',
 			index: '/app-fcm-list',
