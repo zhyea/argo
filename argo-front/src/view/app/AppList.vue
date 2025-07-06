@@ -28,7 +28,8 @@
 				<el-table-column show-overflow-tooltip min-width=90 prop="appCode" label="应用Code"
 				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="appName" label="应用名称"/>
-				<el-table-column show-overflow-tooltip min-width=50 prop="appType" label="类型" formatter=""/>
+				<el-table-column show-overflow-tooltip min-width=50 prop="appType" label="类型"
+				                 :formatter="mapAppTypeEnum" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="remark" label="备注"/>
 				<el-table-column show-overflow-tooltip min-width=180 prop="createTime" label="创建时间"
 				                 align="center"/>
@@ -57,13 +58,14 @@
 	<app-drawer ref="appEditDrawerRef" @after-edit="loadAppList"/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref, onMounted} from 'vue'
 
 import {delApp, findAppList} from "@/api/app";
 import {useRouter} from "vue-router";
 import AppDrawer from "@/view/app/AppEditDrawer.vue";
 import {ElMessage, ElMessageBox} from "element-plus";
+import {getEnumDesc} from "@/utils/helper";
 
 // 搜索数据
 const keywordForm = ref({
@@ -159,8 +161,8 @@ const goToApp = async (appId) => {
 }
 
 
-function mapScopeEnum(row, column, cellValue, index) {
-	return enumStore.getEnumDesc('FcScopeEnum', row.scope)
+function mapAppTypeEnum(row) {
+	return getEnumDesc('AppTypeEnum', row.appType)
 }
 </script>
 

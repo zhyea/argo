@@ -196,3 +196,13 @@ export function formatEffectivePeriod(row: any) {
 export function mapDataBindFlag(row: any) {
 	return useEnumStore().getEnumDesc('YesOrNo', row.dataBindFlag)
 }
+
+
+/**
+ * 获取枚举描述
+ * @param enumName 枚举类名称
+ * @param enumCode 枚举值
+ */
+export function getEnumDesc(enumName: string, enumCode: number) {
+	return useEnumStore().getEnumDesc(enumName, enumCode)
+}

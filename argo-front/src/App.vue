@@ -2,7 +2,7 @@
 
 <template>
 	<el-config-provider :locale="locale">
-		<router-view/>
+		<router-view :key="$route.fullPath"/>
 	</el-config-provider>
 </template>
 
