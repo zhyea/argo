@@ -67,7 +67,7 @@
 <script lang="ts" setup>
 
 import {ref, computed} from "vue";
-import {submitForm} from "@/view/helper";
+import {submitForm} from "@/utils/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 

@@ -1,9 +1,64 @@
-import routers from '@/view/home/routes';
-import i18n from '@/lang/index.js'
-import {ElMessage} from "element-plus";
+/**
+ * 通用工具
+ */
 import {Ref} from "vue";
-import {TagItem} from "@/model/tag";
+import {ElMessage} from "element-plus";
+import type {FormInstance} from "element-plus";
+import {useEnumStore} from "@/store/enum";
 import {MenuItem} from "@/model/route";
+import routers from "@/view/home/routes";
+import {TagItem} from "@/model/tag";
+import i18n from "@/lang";
+
+
+/**
+ * 提交表单
+ * @param formRef 表单引用
+ * @param formData 表单数据
+ * @param submitFlag 提交状态标志
+ * @param maintainMethod 远程交互的方法
+ * @param extraAction 额外的操作
+ */
+export function submitForm<T extends Record<string, any>>(
+	formRef: { value: FormInstance },
+	formData: T,
+	submitFlag: Ref<boolean>,
+	maintainMethod: (data: T) => Promise<{ data: any }>,
+	extraAction?: () => void
+): void {
+	formRef.value.validate().then((valid) => {
+		if (!valid) {
+			console.log("表单验证失败");
+			return;
+		}
+
+		submitFlag.value = true;
+
+		maintainMethod(formData).then((response) => {
+			if (response.data) {
+				ElMessage.success({
+					message: "保存成功",
+					duration: 1500,
+				});
+
+				if (extraAction) {
+					extraAction();
+				}
+			} else {
+				submitFlag.value = false;
+			}
+		}).catch((error) => {
+			submitFlag.value = false;
+			console.error("提交表单时发生错误:", error);
+			ElMessage.error({
+				message: "保存失败，请稍后重试",
+				duration: 1500,
+			});
+		});
+	}).catch((error) => {
+		console.log("表单验证失败", error);
+	});
+}
 
 
 /**
@@ -120,36 +175,24 @@ export const getTagTitleName = (titleKey: string) => {
 
 
 /**
- * 提交表单
- * @param formRef 表单引用
- * @param formData 表单数据
- * @param submitFlag 提交标记
- * @param maintainMethod 远程交互的方法
- * @param extraAction 额外的操作
+ * 格式化有效期
+ * @param row
  */
-export async function submitForm(formRef: Ref<any>,
-                                 formData: any,
-                                 submitFlag: Ref<boolean>,
-                                 maintainMethod: (data: any) => Promise<any>,
-                                 extraAction?: () => void) {
-	try {
-		const isValid = await formRef.value.validate();
-		if (!isValid) return;
-
-		submitFlag.value = true;
-
-		const response = await maintainMethod(formData);
-		if (response.data) {
-			ElMessage.success({
-				message: '保存成功',
-				duration: 1500,
-			});
-
-			extraAction?.();
-		} else {
-			submitFlag.value = false;
-		}
-	} catch (error) {
-		submitFlag.value = false;
+export function formatEffectivePeriod(row: any) {
+	let result = '~'
+	if (row.effectiveStartTime && row.effectiveEndTime) {
+		result = row.effectiveStartTime + ' ~ ' + row.effectiveEndTime;
+	} else if (row.effectiveStartTime) {
+		result = row.effectiveStartTime + ' ~ ';
 	}
+	return result
+}
+
+
+/**
+ * 数据绑定标志
+ * @param row
+ */
+export function mapDataBindFlag(row: any) {
+	return useEnumStore().getEnumDesc('YesOrNo', row.dataBindFlag)
 }

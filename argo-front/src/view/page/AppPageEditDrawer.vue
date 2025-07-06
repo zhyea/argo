@@ -42,7 +42,7 @@
 
 import {ref} from "vue";
 import {addPage, editPage, generatePageCode, getPage} from "@/api/page";
-import {submitForm} from "@/view/helper";
+import {submitForm} from "@/utils/helper/index.ts";
 
 const appPageItemDrawer = ref(false)
 

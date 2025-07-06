@@ -28,6 +28,7 @@
 				<el-table-column show-overflow-tooltip min-width=90 prop="appCode" label="应用Code"
 				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="appName" label="应用名称"/>
+				<el-table-column show-overflow-tooltip min-width=50 prop="appType" label="类型" formatter=""/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="remark" label="备注"/>
 				<el-table-column show-overflow-tooltip min-width=180 prop="createTime" label="创建时间"
 				                 align="center"/>
@@ -155,6 +156,11 @@ const router = useRouter();
 // 跳转到应用页面
 const goToApp = async (appId) => {
 	await router.push({path: '/app/' + appId})
+}
+
+
+function mapScopeEnum(row, column, cellValue, index) {
+	return enumStore.getEnumDesc('FcScopeEnum', row.scope)
 }
 </script>
 

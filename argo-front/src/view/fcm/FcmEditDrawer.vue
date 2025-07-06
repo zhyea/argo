@@ -136,7 +136,7 @@ import {ref} from "vue";
 
 import {queryApps} from "@/api/app";
 import {addFcm, editFcm, getFcm} from "@/api/fcm";
-import {submitForm} from "@/view/helper";
+import {submitForm} from "@/utils/helper";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useEnumStore} from "@/store/enum";
 

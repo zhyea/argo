@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 import {addApp, editApp, generateAppCode, getApp} from "@/api/app";
-import {submitForm} from "@/view/helper";
+import {submitForm} from "@/utils/helper";
 import EnumPicker from "@/component/form/EnumPicker.vue";
 
 // app 表单数据

@@ -60,7 +60,7 @@ import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
-import {formatEffectivePeriod, mapDataBindFlag} from "@/view/helper";
+import {formatEffectivePeriod, mapDataBindFlag} from "@/utils/helper";
 
 
 const route = useRoute();

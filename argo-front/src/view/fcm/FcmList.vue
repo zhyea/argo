@@ -64,7 +64,7 @@ import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 import {ROUTE_NAMES} from "@/config";
 import {useEnumStore} from "@/store/enum";
-import {mapDataBindFlag} from "@/view/helper/index";
+import {mapDataBindFlag} from "@/utils/helper/index.ts";
 
 
 const route = useRoute();
