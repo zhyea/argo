@@ -68,6 +68,13 @@ export const useAppStore = defineStore("app", {
 		},
 
 
+		// 获取当前appId
+		getCurrentAppId() {
+			const app = this.getCurrent();
+			return app ? app.id : null;
+		},
+
+
 		// 清空app列表
 		clear() {
 			this.appList = [];

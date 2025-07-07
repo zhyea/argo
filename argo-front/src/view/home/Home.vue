@@ -37,7 +37,8 @@ import menuItems from '@/view/home/menu'
 import {useTagStore} from "@/store/tag";
 import TagView from "@/component/layout/TagView.vue";
 import {useAppStore} from "@/store/app";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+import {changeMenuRoutes} from "@/utils/helper";
 
 
 const collapseFlag = ref(false)
@@ -54,21 +55,22 @@ const cachedTags = computed(() => {
 })
 
 
+const router = useRouter();
 const route = useRoute()
 const sideMenuRef = ref()
 
 const appStore = useAppStore()
 const appSelectorRef = ref()
-onMounted(() => {
-	const appId = route.params.appId
+onMounted(async () => {
+	const appId = route.params.appId || appStore.getCurrentAppId()
 
 	if (appId) {
-		sideMenuRef.value = menuItems.app
+		const appMenuItems = menuItems.app;
+		changeMenuRoutes(appMenuItems, appId)
+		sideMenuRef.value = appMenuItems;
+		await router.push({path: '/app/' + appId})
 	} else {
 		sideMenuRef.value = menuItems.system
-	}
-
-	if (!appStore.getCurrent()) {
 		appSelectorRef.value.openAppSelectorDialog()
 	}
 })

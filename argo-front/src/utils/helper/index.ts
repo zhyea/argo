@@ -206,3 +206,24 @@ export function mapDataBindFlag(row: any) {
 export function getEnumDesc(enumName: string, enumCode: number) {
 	return useEnumStore().getEnumDesc(enumName, enumCode)
 }
+
+
+// 调整菜单路由
+export function changeMenuRoutes(menus: any, appId: number) {
+
+	if (!appId || !menus || menus.length === 0) return;
+
+	menus.forEach(menu => {
+		if (menu.index) {
+			menu.index = menu.index.replace(':appId', appId);
+		}
+
+		if (!menu.children) return;
+
+		menu.children.forEach(child => {
+			if (child.index) {
+				child.index = child.index.replace(':appId', appId);
+			}
+		})
+	})
+}

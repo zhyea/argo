@@ -19,7 +19,7 @@
 
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref, onMounted, onActivated} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
@@ -84,7 +84,6 @@ function loadAppData() {
 		validAppFlag.value = response && response.data
 	})
 }
-
 
 
 const collapseFlag = ref(false)

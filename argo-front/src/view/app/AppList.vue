@@ -114,13 +114,13 @@ function handleAdd() {
 }
 
 // 打开应用编辑抽屉
-function handleEdit(row) {
+function handleEdit(row: any) {
 	appEditDrawerRef.value.openAppEditDrawer(row.id)
 }
 
 
 // 处理应用删除
-function handleDelete(row) {
+function handleDelete(row: any) {
 	ElMessageBox.prompt('请输入应用名称以确认删除', '删除确认', {
 		confirmButtonText: '确认',
 		cancelButtonText: '取消',
@@ -154,14 +154,15 @@ function handlePageChange(val) {
 }
 
 
-const router = useRouter();
 // 跳转到应用页面
-const goToApp = async (appId) => {
+const router = useRouter();
+const goToApp = async (appId: number) => {
 	await router.push({path: '/app/' + appId})
 }
 
 
-function mapAppTypeEnum(row) {
+// 映射应用类型枚举
+function mapAppTypeEnum(row: any) {
 	return getEnumDesc('AppTypeEnum', row.appType)
 }
 </script>
