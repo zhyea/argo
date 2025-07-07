@@ -17,13 +17,13 @@
 					</el-icon>
 					系统管理
 				</template>
-				<el-menu-item index="3-1" @click="openChangePasswordPage">
+				<el-menu-item index="2-1" @click="openChangePasswordPage">
 					<el-icon>
 						<grid/>
 					</el-icon>
 					<span>应用管理</span>
 				</el-menu-item>
-				<el-menu-item index="3-2" @click="logout">
+				<el-menu-item index="1-2" @click="logout">
 					<el-icon>
 						<user/>
 					</el-icon>

@@ -132,7 +132,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue";
+import {ref, computed} from "vue";
 
 import {queryApps} from "@/api/app";
 import {addFcm, editFcm, getFcm} from "@/api/fcm";
@@ -220,13 +220,13 @@ const fcmPropFormRules = {
 
 
 // 枚举相关信息
-const fcmTypeEnum = computed(()=>{
+const fcmTypeEnum = computed(() => {
 	return enumStore.getEnumMap('FcmTypeEnum');
 })
-const fcScopeEnum = computed(()=>{
+const fcScopeEnum = computed(() => {
 	return enumStore.getEnumMap('FcScopeEnum');
 })
-const fcmPropTypeEnum = computed(()=>{
+const fcmPropTypeEnum = computed(() => {
 	return enumStore.getEnumMap('FcmPropTypeEnum');
 })
 

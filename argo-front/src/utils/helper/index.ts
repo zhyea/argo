@@ -213,14 +213,14 @@ export function changeMenuRoutes(menus: any, appId: number) {
 
 	if (!appId || !menus || menus.length === 0) return;
 
-	menus.forEach(menu => {
+	menus.forEach((menu: any) => {
 		if (menu.index) {
 			menu.index = menu.index.replace(':appId', appId);
 		}
 
 		if (!menu.children) return;
 
-		menu.children.forEach(child => {
+		menu.children.forEach((child: any) => {
 			if (child.index) {
 				child.index = child.index.replace(':appId', appId);
 			}
