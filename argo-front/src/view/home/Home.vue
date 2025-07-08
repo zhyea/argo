@@ -68,7 +68,6 @@ onMounted(async () => {
 		const appMenuItems = menuItems.app;
 		changeMenuRoutes(appMenuItems, appId)
 		sideMenuRef.value = appMenuItems;
-		await router.push({path: '/app/' + appId})
 	} else {
 		sideMenuRef.value = menuItems.system
 		appSelectorRef.value.openAppSelectorDialog()

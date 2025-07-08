@@ -212,8 +212,10 @@ const submitLogin = () => {
 			const appId = await getLastVisitedApp();
 			if (appId) {
 				appStore.changeCurrent(appId);
+				await router.push({path: '/app/' + appId})
+			} else {
+				await router.push({name: ROUTE_NAMES.homeRouteName})
 			}
-			await router.push({name: ROUTE_NAMES.homeRouteName})
 		}).catch(err => {
 			console.log('login fail，error: ' + err)
 		})
