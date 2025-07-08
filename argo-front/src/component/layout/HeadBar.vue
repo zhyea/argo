@@ -17,7 +17,7 @@
 					</el-icon>
 					系统管理
 				</template>
-				<el-menu-item index="2-1" @click="openChangePasswordPage">
+				<el-menu-item index="AppList" @click="goTo">
 					<el-icon>
 						<grid/>
 					</el-icon>
@@ -93,10 +93,10 @@ const currentAppId = computed(() => {
 });
 
 
-function changeSelectedApp(appId) {
-	console.log("changeSelectedApp", appId)
-	appStore.changeCurrent(appId)
-	currentAppId.value = appStore.currentApp.id
+async function goTo(menu) {
+	await router.push({
+		name: menu.index
+	})
 }
 
 
