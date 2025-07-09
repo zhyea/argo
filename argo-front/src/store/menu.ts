@@ -10,6 +10,11 @@ export const useMenuStore = defineStore("menu", {
 	actions: {
 		setLocale(lang: string) {
 			this.menu = lang
-		}
+		},
+
+
+		check(path: string) {
+
+		},
 	}
 });

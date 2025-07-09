@@ -9,6 +9,7 @@ import {MenuItem} from "@/model/route";
 import routers from "@/view/home/routes";
 import {TagItem} from "@/model/tag";
 import i18n from "@/lang";
+import menuItems from '@/view/home/menu'
 
 
 /**
@@ -208,7 +209,11 @@ export function getEnumDesc(enumName: string, enumCode: number) {
 }
 
 
-// 调整菜单路由
+/**
+ * 调整菜单路由路径
+ * @param menus 菜单信息
+ * @param appId 项目ID
+ */
 export function changeMenuRoutes(menus: any, appId: number) {
 
 	if (!appId || !menus || menus.length === 0) return;
@@ -226,4 +231,23 @@ export function changeMenuRoutes(menus: any, appId: number) {
 			}
 		})
 	})
+}
+
+
+export function checkMenu(currentAppId: number, path: string) {
+	if (!currentAppId) return menuItems.system;
+
+	const systemMenu = menuItems.system.find(item => {
+		const r = item.index === path;
+		if (r) {
+			return true;
+		}
+		return item.children && item.children.find(child => child.index === path)
+	})
+
+	if (systemMenu) {
+		return menuItems.system;
+	}
+
+	return changeMenuRoutes(menuItems.app, currentAppId)
 }
