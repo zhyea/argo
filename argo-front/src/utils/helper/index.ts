@@ -234,20 +234,12 @@ export function changeMenuRoutes(menus: any, appId: number) {
 }
 
 
-export function checkMenu(currentAppId: number, path: string) {
-	if (!currentAppId) return menuItems.system;
+/**
+ * 检出菜单
+ * @param currentAppId 当前项目ID
+ * @param path 路径
+ * @returns 菜单
+ */
+export function findMenu(currentAppId: number, path: string): any[] {
 
-	const systemMenu = menuItems.system.find(item => {
-		const r = item.index === path;
-		if (r) {
-			return true;
-		}
-		return item.children && item.children.find(child => child.index === path)
-	})
-
-	if (systemMenu) {
-		return menuItems.system;
-	}
-
-	return changeMenuRoutes(menuItems.app, currentAppId)
 }
