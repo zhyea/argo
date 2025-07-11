@@ -1,7 +1,7 @@
 /**
  * 路由配置
  */
-export declare class MenuItem implements Route {
+export declare class MenuItem {
 
 	/**
 	 * 路由唯一标识

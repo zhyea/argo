@@ -7,7 +7,7 @@
 			<sidebar :collapsed="collapseFlag" :menu-items="sideMenuRef" @menu="changeSideBarState"/>
 
 			<el-container direction="vertical">
-								<tag-view/>
+				<tag-view/>
 				<el-main>
 					<router-view :key="$route.fullPath" v-slot="{ Component }">
 						<el-scrollbar height="100%">
@@ -36,7 +36,7 @@ import {useTagStore} from "@/store/tag";
 import TagView from "@/component/layout/TagView.vue";
 import {useAppStore} from "@/store/app";
 import {useRoute, useRouter} from "vue-router";
-import {changeMenuRoutes, findMenu} from "@/utils/helper";
+import {changeMenuRoutes} from "@/utils/helper";
 
 
 const collapseFlag = ref(false)
@@ -53,7 +53,6 @@ const cachedTags = computed(() => {
 })
 
 
-const router = useRouter();
 const route = useRoute()
 const sideMenuRef = ref()
 
@@ -65,9 +64,14 @@ onMounted(async () => {
 
 	if (!appId) {
 		appSelectorRef.value.openAppSelectorDialog();
-		sideMenuRef.value = menuItems.system;
-		return;
 	}
+
+	sideMenuRef.value = findMenu(appId, path);
+})
+
+
+function findMenu(currentAppId: number, path: string): any[] {
+	if (!currentAppId) return menuItems.system;
 
 	const systemMenu = menuItems.system.find(item => {
 		const r = item.index === path;
@@ -78,12 +82,16 @@ onMounted(async () => {
 	})
 
 	if (systemMenu) {
-		sideMenuRef.value = menuItems.system;
-	} else {
-		changeMenuRoutes(menuItems.app, appId);
-		sideMenuRef.value = menuItems.app;
+		return menuItems.system;
 	}
-})
+
+	changeMenuRoutes(menuItems.app, currentAppId)
+
+	return menuItems.app;
+}
+
+
+
 </script>
 
 <style lang="less" scoped>

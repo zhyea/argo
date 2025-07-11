@@ -10,6 +10,7 @@ import routers from "@/view/home/routes";
 import {TagItem} from "@/model/tag";
 import i18n from "@/lang";
 import menuItems from '@/view/home/menu'
+import {RouteLocationNormalizedLoadedGeneric} from "vue-router";
 
 
 /**
@@ -231,15 +232,4 @@ export function changeMenuRoutes(menus: any, appId: number) {
 			}
 		})
 	})
-}
-
-
-/**
- * 检出菜单
- * @param currentAppId 当前项目ID
- * @param path 路径
- * @returns 菜单
- */
-export function findMenu(currentAppId: number, path: string): any[] {
-
 }

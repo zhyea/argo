@@ -18,6 +18,7 @@ import {useTagStore} from '@/store/tag';
 import zh from 'element-plus/es/locale/lang/zh-cn';
 import en from 'element-plus/es/locale/lang/en';
 import {routeFormatTag} from '@/utils/helper';
+import {MenuItem} from "@/model/route";
 
 const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();
@@ -48,8 +49,8 @@ watch(route, () => {
 	console.log('route', route)
 
 	//breadcrumbStore.set(route.matched)
-	//const tag = routeFormatTag(route)
-	//tagStore.openTagView(tag);
+	const tag = routeFormatTag(route as MenuItem)
+	tagStore.openTagView(tag);
 })
 
 
