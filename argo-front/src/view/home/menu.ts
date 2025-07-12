@@ -4,7 +4,7 @@ export default {
 		{
 			name: 'Dashboard',
 			icon: 'platform',
-			index: '/home',
+			index: '/',
 		}, {
 			name: '应用',
 			icon: 'grid',

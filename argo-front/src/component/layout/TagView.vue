@@ -132,7 +132,14 @@ const tagsScroll = (offset) => {
 const tagList = tagStore.tags
 const closeTagPage = (tag) => tagStore.closeTagView(tag.fullPath)
 const isActive = (tag) => tag.fullPath === route.fullPath ? '' : '#fff'
-const openTagPage = (tag) => router.push({path: tag.fullPath})
+
+function openTagPage(tag) {
+	console.log(tag)
+	if (tag.fullPath === route.fullPath) {
+		return
+	}
+	router.push({path: tag.fullPath})
+}
 </script>
 
 <style lang="less" scoped>

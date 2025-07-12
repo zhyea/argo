@@ -26,7 +26,7 @@ export const ROUTE_NAMES = {
 	fciListRouteName: 'AppFciList',
 	//dashboard
 	dashboardName: 'Dashboard',
-	dashboardFullPath: '/home',
+	dashboardFullPath: '/dashboard',
 }
 
 

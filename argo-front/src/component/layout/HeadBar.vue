@@ -2,7 +2,7 @@
 	<el-header>
 		<el-menu mode="horizontal" :ellipsis="false"
 		         background-color="#263238" text-color="#FFF" active-text-color="#FFD04B">
-			<el-menu-item class="logo" index="0">
+			<el-menu-item class="logo" index="Home" @click="goTo">
 				ARGO 内容管理
 			</el-menu-item>
 

@@ -62,16 +62,25 @@ onMounted(async () => {
 	const appId = route.params.appId || appStore.getCurrentAppId()
 	const path = route.path
 
+	console.log(path)
+
 	if (!appId) {
 		appSelectorRef.value.openAppSelectorDialog();
 	}
 
-	sideMenuRef.value = findMenu(appId, path);
+	console.log('-------------------', sideMenuRef.value)
+
+	const sideMenu = findMenu(appId, path);
+	if (sideMenuRef.value === sideMenu) {
+		return;
+	}
+	sideMenuRef.value = sideMenu;
 })
 
 
 function findMenu(currentAppId: number, path: string): any[] {
 	if (!currentAppId) return menuItems.system;
+	if (!path || path === '' || path === '/' || path === '/home') return menuItems.system;
 
 	const systemMenu = menuItems.system.find(item => {
 		const r = item.index === path;
@@ -89,7 +98,6 @@ function findMenu(currentAppId: number, path: string): any[] {
 
 	return menuItems.app;
 }
-
 
 
 </script>

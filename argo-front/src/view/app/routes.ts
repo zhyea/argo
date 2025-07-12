@@ -17,14 +17,14 @@ export const appSubRoutes = [
 		path: '/app/:appId/app-fcm-list',
 		component: () => import('../fcm/FcmList.vue'),
 		meta: {
-			title: '模型列表',
+			title: '组件模型列表',
 		},
 	}, {
 		name: ROUTE_NAMES.fciListRouteName,
 		path: '/app/:appId/fci-list',
 		component: () => import('../fci/FciList.vue'),
 		meta: {
-			title: '模型列表',
+			title: '组件实例列表',
 		},
 	}, {
 		name: 'AppFcmAdd',
