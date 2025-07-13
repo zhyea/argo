@@ -7,6 +7,7 @@
 					<el-menu class="el-menu-vertical"
 					         :collapse="collapsed"
 					         :router="true"
+					         :default-active="activeIndex"
 					         :collapse-transition="false"
 					         background-color="#263238"
 					         text-color="#afb5bd"
@@ -43,6 +44,7 @@ import {Expand, Fold} from "@element-plus/icons-vue";
 let props = defineProps({
 	collapsed: Boolean,
 	menuItems: Array,
+	activeIndex: String,
 })
 const emit = defineEmits(['menu'])
 

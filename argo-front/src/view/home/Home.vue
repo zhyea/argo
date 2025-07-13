@@ -4,7 +4,7 @@
 		<head-bar :show-breadcrumb="true"/>
 
 		<el-container direction="horizontal">
-			<sidebar :collapsed="collapseFlag" :menu-items="sideMenuRef" @menu="changeSideBarState"/>
+			<sidebar :collapsed="collapseFlag" :menu-items="sideMenuRef" :active-index="route.path" @menu="changeSideBarState"/>
 
 			<el-container direction="vertical">
 				<tag-view/>

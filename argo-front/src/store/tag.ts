@@ -28,7 +28,7 @@ export const useTagStore = defineStore("tag", {
 		openTagView(tag: TagItem) {
 			console.log(`openTagView: ${JSON.stringify(tag)}`);
 
-			const dashboardName = ROUTE_NAMES.homeRouteName;
+			/*const dashboardName = ROUTE_NAMES.homeRouteName;
 
 			// 如果不是仪表盘标签且 tagList 为空或者第一个标签不是仪表盘，则插入仪表盘标签
 			if (tag.name !== dashboardName &&
@@ -40,7 +40,7 @@ export const useTagStore = defineStore("tag", {
 				const dashboardTag = routeFormatTag(dashboardRoute);
 				dashboardTag.fullPath = ROUTE_NAMES.dashboardFullPath;
 				this.tagList.splice(0, 0, dashboardTag);
-			}
+			}*/
 
 			// 如果标签尚未打开，则添加新标签
 			if (!this.tagList.some(item => item.fullPath === tag.fullPath)) {
