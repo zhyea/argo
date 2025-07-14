@@ -153,7 +153,7 @@ const fcmForm = ref({
 	icon: '',
 	type: 1,
 	scope: 1,
-	id: '',
+	id: 0,
 	dataBindFlag: '',
 	remark: '',
 	props: [],
@@ -237,7 +237,7 @@ const defaultAppFcmFlag = ref(false)
 const appList = ref()
 
 // 加载组件模型数据
-const loadFcmData = async (fcmId) => {
+function loadFcmData(fcmId: number) {
 	if (!fcmId) {
 		return
 	}
@@ -254,7 +254,7 @@ const loadFcmData = async (fcmId) => {
 }
 
 // 加载应用
-function fetchApps(keyword) {
+function fetchApps(keyword: string) {
 	queryApps(keyword).then(response => {
 		if (response && response.data) {
 			appList.value = response.data
@@ -266,7 +266,7 @@ function fetchApps(keyword) {
 
 
 // 打开组件模型编辑抽屉
-const openFcmEditDrawer = (fcmId, appId) => {
+function openFcmEditDrawer(fcmId: number, appId: number) {
 	if (fcmFormRef.value) {
 		fcmFormRef.value.resetFields()
 	}
@@ -275,9 +275,7 @@ const openFcmEditDrawer = (fcmId, appId) => {
 	}
 
 	fcmEditDrawer.value = true
-	fcmForm.value = {
-		id: appId,
-	}
+	fcmForm.value.id = appId
 	isFcmFormSubmitted.value = false
 
 	defaultAppFcmFlag.value = (null != appId)

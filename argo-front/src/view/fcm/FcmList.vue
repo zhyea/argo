@@ -15,7 +15,7 @@
 
 		<div class="table-body">
 			<div class="table-button">
-				<el-button type="primary" @click="handleAdd">新增模型</el-button>
+				<el-button type="primary" @click="handleAddFcm">新增模型</el-button>
 			</div>
 
 			<el-table :data="fcmListData" border style="width: 100%">
@@ -55,7 +55,7 @@
 	<fcm-drawer @after-fcm-add="loadFcmListData" ref="fcmEditDrawerRef"/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from "vue-router";
 import {delFcm, findFcmList} from "@/api/fcm";
@@ -147,7 +147,7 @@ function handleAddFci(row) {
 }
 
 // 新增FCM
-function handleAdd() {
+function handleAddFcm() {
 	fcmEditDrawerRef.value.openFcmEditDrawer()
 }
 
