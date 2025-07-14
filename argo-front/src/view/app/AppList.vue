@@ -63,6 +63,7 @@ import {ref, onMounted} from 'vue'
 
 import {delApp, findAppList} from "@/api/app";
 import {useRouter} from "vue-router";
+import {useRoute} from "vue-router";
 import AppDrawer from "@/view/app/AppEditDrawer.vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import {getEnumDesc} from "@/utils/helper";
@@ -143,11 +144,12 @@ function handleDelete(row: any) {
 	})
 }
 
+const route = useRoute()
 
 // 处理页面切换
-function handlePageChange(val) {
+function handlePageChange(val: any) {
 	const appId = route.params['appId']
-	router.push({name: route['fciListRouteName'], query: {appId: appId, page: val}})
+	router.push({name: 'fciListRouteName', query: {appId: appId, page: val}})
 		.then(() => {
 			loadAppList()
 		})

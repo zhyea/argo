@@ -64,7 +64,7 @@ import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 import {ROUTE_NAMES} from "@/config";
 import {useEnumStore} from "@/store/enum";
-import {mapDataBindFlag} from "@/utils/helper/index.ts";
+import {mapDataBindFlag} from "@/utils/helper";
 
 
 const route = useRoute();
@@ -96,11 +96,11 @@ const fcmListData = ref([])
 // 加载方法列表数据
 function loadFcmListData() {
 	let keyword = keywordForm.value.keyword
-	let appId = route.params.appId
+	let appId = parseInt(route.params.appId as string)
 	let pageInfo = pageData.value
 
 	if (route.query.page) {
-		pageInfo.pageNo = parseInt(route.query.page)
+		pageInfo.pageNo = parseInt(route.query.page as string)
 	}
 
 	findFcmList(appId, keyword, pageInfo).then(response => {
@@ -123,7 +123,7 @@ const handlePageChange = async (val) => {
 }
 
 // 处理FCM删除
-function handleDelete(row) {
+function handleDelete(row:any) {
 	delFcm(row.fcmId).then(response => {
 		if (response && response.data) {
 			ElMessage.success({
@@ -142,7 +142,7 @@ const fciEditDrawerRef = ref()
 const fcmEditDrawerRef = ref()
 
 // 打开新增组件实例抽屉
-function handleAddFci(row) {
+function handleAddFci(row:any) {
 	fciEditDrawerRef.value.openFciDrawerForAdd(row)
 }
 
@@ -152,7 +152,7 @@ function handleAddFcm() {
 }
 
 // 处理FCM编辑
-function handleEdit(row) {
+function handleEdit(row:any) {
 	fcmEditDrawerRef.value.openFcmEditDrawer(row.fcmId, row.appId)
 }
 
@@ -165,12 +165,12 @@ onMounted(() => {
 })
 
 
-function mapTypeEnum(row, column, cellValue, index) {
+function mapTypeEnum(row:any) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
 
 
-function mapScopeEnum(row, column, cellValue, index) {
+function mapScopeEnum(row:any) {
 	return enumStore.getEnumDesc('FcScopeEnum', row.scope)
 }
 

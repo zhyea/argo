@@ -156,7 +156,7 @@ const fcmForm = ref({
 	id: 0,
 	dataBindFlag: '',
 	remark: '',
-	props: [],
+	props: [{}],
 })
 
 
@@ -296,7 +296,7 @@ function addFcmProp() {
 }
 
 // 删除fcm属性
-function removeFcmProp(idx) {
+function removeFcmProp(idx:number) {
 	fcmPropForm.value.props.splice(idx, 1)
 }
 
