@@ -113,8 +113,8 @@ function loadFcmListData() {
 
 
 // 处理页面切换
-const handlePageChange = async (val) => {
-	let appId = route.params.appId
+function handlePageChange(val: any) {
+	const appId = route.params.appId
 	router.push({name: ROUTE_NAMES.fcmListRouteName, query: {appId: appId, page: val}})
 		.then(() => {
 			loadFcmListData()
@@ -123,7 +123,7 @@ const handlePageChange = async (val) => {
 }
 
 // 处理FCM删除
-function handleDelete(row:any) {
+function handleDelete(row: any) {
 	delFcm(row.fcmId).then(response => {
 		if (response && response.data) {
 			ElMessage.success({
@@ -142,17 +142,18 @@ const fciEditDrawerRef = ref()
 const fcmEditDrawerRef = ref()
 
 // 打开新增组件实例抽屉
-function handleAddFci(row:any) {
+function handleAddFci(row: any) {
 	fciEditDrawerRef.value.openFciDrawerForAdd(row)
 }
 
 // 新增FCM
 function handleAddFcm() {
-	fcmEditDrawerRef.value.openFcmEditDrawer()
+	const appId = route.params.appId
+	fcmEditDrawerRef.value.openFcmEditDrawer(0, appId)
 }
 
 // 处理FCM编辑
-function handleEdit(row:any) {
+function handleEdit(row: any) {
 	fcmEditDrawerRef.value.openFcmEditDrawer(row.fcmId, row.appId)
 }
 
@@ -165,15 +166,14 @@ onMounted(() => {
 })
 
 
-function mapTypeEnum(row:any) {
+function mapTypeEnum(row: any) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
 
 
-function mapScopeEnum(row:any) {
+function mapScopeEnum(row: any) {
 	return enumStore.getEnumDesc('FcScopeEnum', row.scope)
 }
-
 
 
 </script>
