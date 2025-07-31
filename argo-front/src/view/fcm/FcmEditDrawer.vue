@@ -38,7 +38,7 @@
 					</el-form-item>
 
 					<el-form-item label="应用" v-if="2===fcmForm.scope && !defaultAppFcmFlag" prop="appId">
-						<el-select id="appId" v-model.lazy="fcmForm.id"
+						<el-select id="appId" v-model.lazy="fcmForm.appId"
 						           placeholder="请选择应用"
 						           remote-show-suffix
 						           filterable remote :remote-method="fetchApps">
@@ -156,7 +156,7 @@ const fcmForm = ref({
 	icon: '',
 	type: 1,
 	scope: 1,
-	id: 0,
+	appId: 0,
 	dataBindFlag: '',
 	remark: '',
 	props: [{}],
@@ -199,7 +199,7 @@ const fcmFormRules = {
 	],
 	appCode: [
 		{
-			validator: (rule, value, callback) => {
+			validator: (rule:any, value:any, callback:any) => {
 				return !(2 === fcmForm.value.scope && !value);
 			}, message: '请选择应用', trigger: 'blur'
 		}
@@ -278,7 +278,7 @@ function openFcmEditDrawer(fcmId: number, appId: number) {
 	}
 
 	fcmEditDrawer.value = true
-	fcmForm.value.id = appId
+	fcmForm.value.appId = appId
 	isFcmFormSubmitted.value = false
 
 	defaultAppFcmFlag.value = (null != appId)
