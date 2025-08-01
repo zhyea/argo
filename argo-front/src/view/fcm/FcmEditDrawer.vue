@@ -199,7 +199,7 @@ const fcmFormRules = {
 	],
 	appCode: [
 		{
-			validator: (rule:any, value:any, callback:any) => {
+			validator: (rule: any, value: any, callback: any) => {
 				return !(2 === fcmForm.value.scope && !value);
 			}, message: '请选择应用', trigger: 'blur'
 		}
@@ -279,6 +279,7 @@ function openFcmEditDrawer(fcmId: number, appId: number) {
 
 	fcmEditDrawer.value = true
 	fcmForm.value.appId = appId
+	fcmForm.value.scope = appId ? 2 : 1;
 	isFcmFormSubmitted.value = false
 
 	defaultAppFcmFlag.value = (null != appId)
