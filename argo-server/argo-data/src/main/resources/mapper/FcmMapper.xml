@@ -25,11 +25,14 @@
 
     <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query" resultType="com.zhyea.argo.data.dto.FcmDto">
-        select f.*, a.app_name from
+        select f.id, f.name, f.type, f.scope, f.data_bind_flag, f.remark, f.create_time, f.update_time,
+        case when f.app_id=0 then #{appId} else app_id end as app_id,
+        a.app_name
+        from
         ag_cms_fcm f left join ag_cms_app a on f.app_id=a.id
         where f.deleted=0
         <if test="null != appId">
-            and f.app_id=#{appId}
+            and f.app_id in (#{appId}, 0)
         </if>
 
         <if test="null != keyword and keyword != ''">
@@ -39,7 +42,7 @@
             )
         </if>
 
-        order by f.create_time desc
+        order by app_id desc, f.create_time desc
     </select>
 
 
