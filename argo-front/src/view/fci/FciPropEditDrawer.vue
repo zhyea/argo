@@ -14,16 +14,16 @@
 						<el-input type="hidden" v-model="propForm.fciId"/>
 					</el-form-item>
 
-					<el-form-item label="Key" v-if="propForm.propKey" prop="propKey">
+					<el-form-item label="属性Key" v-if="propForm.propKey" prop="propKey">
 						<el-input id="propKey" v-model="propForm.propKey" readonly/>
 					</el-form-item>
 
-					<el-form-item v-if="!propForm.propKey">
+					<el-form-item label="属性Key" v-if="!propForm.propKey">
 						<el-select placeholder="请选择属性">
 							<el-option v-for="e in fcmProps"
-							           :key="e[0]"
-							           :label="e[1]"
-							           :value="e[0]"/>
+							           :key="e.propKey"
+							           :label="e.propKey"
+							           :value="e.propKey"/>
 						</el-select>
 					</el-form-item>
 
@@ -35,7 +35,7 @@
 						           inactive-text="否" :inactive-value="0"/>
 					</el-form-item>
 
-					<el-form-item label="值" v-if="0===propForm.dataBindFlag" prop="propValue">
+					<el-form-item label="属性值" v-if="0===propForm.dataBindFlag" prop="propValue">
 						<el-input id="propValue" v-model="propForm.propValue"/>
 					</el-form-item>
 
@@ -148,7 +148,7 @@ const isPropFormSubmitted = ref(false)
 
 
 // 枚举相关信息
-const effectivePeriodTypeEnum = computed(()=>{
+const effectivePeriodTypeEnum = computed(() => {
 	return enumStore.getEnumMap('EffectivePeriodTypeEnum');
 })
 
@@ -201,10 +201,11 @@ const submitFciPropForm = async () => {
 
 const fcmProps = ref([])
 
-const loadFcmProps =  (fcmId) => {
+const loadFcmProps = (fcmId) => {
 	getFcm(fcmId).then(response => {
 		if (response && response.data) {
 			fcmProps.value = response.data.props;
+			console.log(fcmProps.value)
 		}
 	})
 }

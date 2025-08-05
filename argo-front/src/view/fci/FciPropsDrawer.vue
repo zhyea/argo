@@ -21,7 +21,7 @@
 
 				<el-table :data="fciPropsData" border stripe style="width: 100%">
 					<el-table-column show-overflow-tooltip min-width=80 prop="propKey" label="属性key"/>
-					<el-table-column show-overflow-tooltip min-width=90 prop="propValue" label="属性值"/>
+					<el-table-column show-overflow-tooltip min-width=180 prop="propValue" label="属性值"/>
 					<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
 					<el-table-column width=55 prop="dataBindFlag" label="绑定数据"
 					                 :formatter="mapDataBindFlag" align="center"/>
