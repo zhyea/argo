@@ -14,19 +14,15 @@
 						<el-input type="hidden" v-model="propForm.fciId"/>
 					</el-form-item>
 
-					<el-form-item label="属性Key" v-if="propForm.propKey" prop="propKey">
-						<el-input id="propKey" v-model="propForm.propKey" readonly/>
-					</el-form-item>
-
-					<el-form-item label="属性Key" v-if="!propForm.propKey">
-						<el-select placeholder="请选择属性">
+					<el-form-item label="属性Key" prop="propKey">
+						<el-select placeholder="请选择属性" v-model="propForm.propKey">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
-							           :label="e.propKey"
-							           :value="e.propKey"/>
+							           :label="e.propDesc"
+							           :value="e.propKey">
+							</el-option>
 						</el-select>
 					</el-form-item>
-
 
 					<el-form-item label="数据绑定" prop="dataBindFlag">
 						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
@@ -35,16 +31,16 @@
 						           inactive-text="否" :inactive-value="0"/>
 					</el-form-item>
 
-					<el-form-item label="属性值" v-if="0===propForm.dataBindFlag" prop="propValue">
-						<el-input id="propValue" v-model="propForm.propValue"/>
-					</el-form-item>
-
-					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
+					<el-form-item label="属性Value" v-if="0===propForm.dataBindFlag" prop="propValue">
 						<el-input id="propValue" v-model="propForm.propValue"/>
 					</el-form-item>
 
 					<el-form-item label="数据链接" v-if="1===propForm.dataBindFlag" prop="dataUrl">
 						<el-input id="name" v-model="propForm.dataUrl"/>
+					</el-form-item>
+
+					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
+						<el-input id="propValue" v-model="propForm.propValue"/>
 					</el-form-item>
 
 					<el-form-item label="是否启用" prop="switchFlag">
