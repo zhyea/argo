@@ -15,7 +15,7 @@
 					</el-form-item>
 
 					<el-form-item label="属性Key" prop="propKey">
-						<el-select placeholder="请选择属性" v-model="propForm.propKey">
+						<el-select placeholder="请选择属性" v-model="propForm.propKey" :readonly="isEditReadonly">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
 							           :label="e.propDesc"
@@ -161,10 +161,14 @@ const openPrepare = () => {
 }
 
 
+const  isEditReadonly = ref(false)
 // 打开组件实例抽屉-用于编辑
 const openDrawerForEdit = (fciId, appId) => {
 	openPrepare()
 	loadFciPropData(fciId)
+	if(propForm.value.propKey){
+		isEditReadonly.value = true
+	}
 }
 
 
