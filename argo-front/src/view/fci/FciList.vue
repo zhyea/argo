@@ -96,10 +96,10 @@ function loadFciListData() {
 	let pageInfo = pageData.value
 
 	if (route.query.page) {
-		pageInfo.pageNo = parseInt(route.query.page)
+		pageInfo.pageNo = parseInt(route.query.page as string)
 	}
 
-	findFciList(Number(appId),  keyword, pageInfo).then(response => {
+	findFciList(Number(appId), keyword, pageInfo).then(response => {
 		if (response && response.data && response.data.data) {
 			fciListData.value = response.data.data
 			pageInfo.total = response.data.total
@@ -147,7 +147,7 @@ const fciPropsDrawerRef = ref()
 
 
 // 打开属性管理窗口
-function showProps(row) {
+function showProps(row: any) {
 	fciPropsDrawerRef.value.openFciPropsDrawer(row)
 }
 
@@ -162,7 +162,7 @@ onMounted(() => {
 
 
 // 获取FCM类型枚举
-function mapTypeEnum(row, column, cellValue, index) {
+function mapTypeEnum(row: any, column: any, cellValue: any, index: number) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
 </script>

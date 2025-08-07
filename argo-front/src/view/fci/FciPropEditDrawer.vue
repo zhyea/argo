@@ -18,7 +18,7 @@
 						<el-select placeholder="请选择属性" v-model="propForm.propKey" :readonly="isEditReadonly">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
-							           :label="e.propDesc"
+							           :label="e.propKey"
 							           :value="e.propKey">
 							</el-option>
 						</el-select>
@@ -84,7 +84,7 @@
 	</el-drawer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import {ref, computed} from "vue";
 import {submitForm} from "@/utils/helper/index.ts";
@@ -173,9 +173,10 @@ const openDrawerForEdit = (fciId, appId) => {
 
 
 // 打开组件实例抽屉-用于新增
-const openDrawerForAdd = (fci) => {
+function openDrawerForAdd(fci: any) {
 	openPrepare()
 	loadFcmProps(fci.fcmId)
+	propForm.value.fciId = fci.id
 }
 
 
@@ -189,7 +190,6 @@ const submitFciPropForm = async () => {
 	}
 
 	const formData = {...propForm.value}
-
 	const maintainMethod = formData.id ? editFciProp : addFciProp;
 
 	submitForm(fciPropFormRef, formData, isPropFormSubmitted, maintainMethod, () => {
