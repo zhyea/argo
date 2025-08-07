@@ -52,3 +52,20 @@ export function getFciProp(fciPropId: number) {
 		fciPropId: fciPropId,
 	})
 }
+
+
+export function addFciProp(formData: any) {
+	return request.post('/cms/fci/prop/add', formData)
+}
+
+
+export function editFciProp(formData: any) {
+	return request.post('/cms/fci/prop/edit', formData)
+}
+
+
+export function delFciProp(fciPropId: number) {
+	return request.post('/cms/fci/prop/delete', {
+		propId: fciPropId,
+	})
+}

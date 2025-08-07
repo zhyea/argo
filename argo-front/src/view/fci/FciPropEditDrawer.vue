@@ -88,7 +88,7 @@
 
 import {ref, computed} from "vue";
 import {submitForm} from "@/utils/helper/index.ts";
-import {addFci, editFci, getFciProp} from "@/api/fci";
+import {addFci, addFciProp, editFci, editFciProp, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
 
@@ -161,12 +161,12 @@ const openPrepare = () => {
 }
 
 
-const  isEditReadonly = ref(false)
+const isEditReadonly = ref(false)
 // 打开组件实例抽屉-用于编辑
 const openDrawerForEdit = (fciId, appId) => {
 	openPrepare()
 	loadFciPropData(fciId)
-	if(propForm.value.propKey){
+	if (propForm.value.propKey) {
 		isEditReadonly.value = true
 	}
 }
@@ -190,7 +190,7 @@ const submitFciPropForm = async () => {
 
 	const formData = {...propForm.value}
 
-	const maintainMethod = formData.id ? editFci : addFci;
+	const maintainMethod = formData.id ? editFciProp : addFciProp;
 
 	submitForm(fciPropFormRef, formData, isPropFormSubmitted, maintainMethod, () => {
 		emit('afterPropEdit');
