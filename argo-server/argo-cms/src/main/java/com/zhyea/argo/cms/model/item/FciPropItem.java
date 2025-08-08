@@ -1,5 +1,6 @@
 package com.zhyea.argo.cms.model.item;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
 import lombok.Data;
@@ -101,5 +102,18 @@ public class FciPropItem {
 	 * 状态描述
 	 */
 	private String statusDesc;
+
+
+	/**
+	 * 创建时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime createTime;
+
+	/**
+	 * 更新时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime updateTime;
 
 }

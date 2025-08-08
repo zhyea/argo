@@ -57,7 +57,7 @@ public interface FciPropMapper {
 	 * @param fciId 组件id
 	 * @return 组件属性记录
 	 */
-	@Select("select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=1")
+	@Select("select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=0")
 	List<FciPropEntity> findByFciId(@Param("fciId") Long fciId);
 
 
