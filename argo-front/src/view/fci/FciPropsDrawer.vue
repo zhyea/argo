@@ -20,12 +20,11 @@
 				</div>
 
 				<el-table :data="fciPropsData" border stripe style="width: 100%">
-					<el-table-column show-overflow-tooltip min-width=80 prop="propKey" label="属性key"/>
-					<el-table-column show-overflow-tooltip min-width=180 prop="propValue" label="属性值"/>
-					<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
+					<el-table-column show-overflow-tooltip min-width=120 prop="propKey" label="属性key"/>
+					<el-table-column show-overflow-tooltip min-width=200 prop="propValue" label="属性值"/>
 					<el-table-column width=55 prop="dataBindFlag" label="绑定数据"
 					                 :formatter="mapDataBindFlag" align="center"/>
-					<el-table-column show-overflow-tooltip min-width=220 prop="type" label="生效周期" align="center"
+					<el-table-column show-overflow-tooltip min-width=350 prop="type" label="生效周期" align="center"
 					                 :formatter="formatEffectivePeriod"/>
 					<el-table-column width=55 prop="statusDesc" label="状态"
 					                 :formatter="mapDataBindFlag" align="center"/>
@@ -33,7 +32,7 @@
 					                 align="center"/>
 					<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="修改时间"
 					                 align="center"/>
-					<el-table-column label="操作" align="center" fixed="right" width=200>
+					<el-table-column label="操作" align="center" fixed="right" width=150>
 						<template #default="scope">
 							<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
 							<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
