@@ -43,12 +43,10 @@
 			</div>
 
 			<div class="table-footer">
-				<el-pagination background
-				               :page-size="pageData.pageSize"
+				<el-pagination :page-size="pageData.pageSize"
 				               :current-page="pageData.pageNo"
 				               :total="pageData.total"
-				               @current-change="handlePageChange"
-				               layout="total, prev, pager, next, ->, jumper"/>
+				               @current-change="handlePageChange" />
 			</div>
 
 		</div>
@@ -57,13 +55,13 @@
 	</el-drawer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import {ref} from "vue";
 import {loadEnums} from "@/api/common";
 import {findFciProps} from "@/api/fci";
 import {useRouter} from "vue-router";
-import {formatEffectivePeriod, mapDataBindFlag} from "@/utils/helper/index.ts";
+import {formatEffectivePeriod, mapDataBindFlag} from "@/utils/helper";
 import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue";
 
 const fciPropsDrawer = ref(false)
@@ -104,9 +102,10 @@ const openPrepare = () => {
 
 
 // 打开组件属性抽屉
-const openFciPropsDrawer = (fciRecord) => {
+const openFciPropsDrawer = (fciRecord: any) => {
 	fci.value = fciRecord
 	openPrepare()
+	loadFciPropsData()
 }
 
 
@@ -156,8 +155,8 @@ function loadFciPropsData() {
 
 
 	findFciProps(fci.value.id).then(response => {
-		if (response && response.data && response.data.data) {
-			fciPropsData.value = response.data.data
+		if (response && response.data) {
+			fciPropsData.value = response.data
 			pageInfo.total = response.data.total
 		}
 	})
@@ -165,7 +164,7 @@ function loadFciPropsData() {
 
 
 // 处理页面切换
-const handlePageChange = async (val) => {
+const handlePageChange = async (val:any) => {
 	// let appId = route.params.appId
 	// router.push({name: route.fciListRouteName, query: {appId: appId, page: val}})
 	// 	.then(() => {
