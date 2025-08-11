@@ -45,7 +45,7 @@
 				<el-pagination :page-size="pageData.pageSize"
 				               :current-page="pageData.pageNo"
 				               :total="pageData.total"
-				               @current-change="handlePageChange" />
+				               @current-change="handlePageChange"/>
 			</div>
 
 		</div>
@@ -124,7 +124,6 @@ function showPropAddDrawer() {
 
 
 // --------------------------- 以下是列表数据
-const router = useRouter();
 
 // 分页数据
 const pageData = ref({
@@ -163,12 +162,22 @@ function loadFciPropsData() {
 
 
 // 处理页面切换
-const handlePageChange = async (val:any) => {
+function handlePageChange(val: any) {
 	// let appId = route.params.appId
 	// router.push({name: route.fciListRouteName, query: {appId: appId, page: val}})
 	// 	.then(() => {
 	// 		loadFciPropsData()
 	// 	})
+}
+
+
+function handleEdit(row: any) {
+	fciPropEditDrawerRef.value.openPropDrawerForEdit(row)
+}
+
+
+function handleDelete(row: any) {
+	console.log('handleDelete', row)
 }
 
 </script>
