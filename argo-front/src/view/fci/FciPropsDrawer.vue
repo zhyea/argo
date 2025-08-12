@@ -154,9 +154,9 @@ function loadFciPropsData() {
 	let pageInfo = pageData.value
 
 
-	findFciProps(fci.value.id).then(response => {
-		if (response && response.data) {
-			fciPropsData.value = response.data
+	findFciProps(fci.value.id, keyword, pageInfo).then(response => {
+		if (response && response.data && response.data.data) {
+			fciPropsData.value = response.data.data
 			pageInfo.total = response.data.total
 		}
 	})

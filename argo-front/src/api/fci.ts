@@ -40,9 +40,12 @@ export function delFci(fciId: number) {
 
 
 // 获取组件属性列表
-export function findFciProps(fciId: number) {
+export function findFciProps(fciId: number, keyword: string, pageInfo: any) {
 	return request.post('/cms/fci/prop/list', {
 		fciId: fciId,
+		keyword: keyword,
+		pageNo: pageInfo.pageNo,
+		pageSize: pageInfo.pageSize,
 	})
 }
 
