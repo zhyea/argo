@@ -42,10 +42,12 @@
 			</div>
 
 			<div class="table-footer">
-				<el-pagination :page-size="pageData.pageSize"
+				<el-pagination background
+				               :page-size="pageData.pageSize"
 				               :current-page="pageData.pageNo"
 				               :total="pageData.total"
-				               @current-change="handlePageChange"/>
+				               @current-change="handlePageChange"
+				               layout="total, prev, pager, next, ->, jumper"/>
 			</div>
 
 		</div>
@@ -162,11 +164,11 @@ function loadFciPropsData() {
 
 
 // 处理页面切换
-function handlePageChange(val: any) {
-	// let appId = route.params.appId
-	// router.push({name: route.fciListRouteName, query: {appId: appId, page: val}})
+const handlePageChange = async (val: any) => {
+	// const appId = route.params['appId']
+	// router.push({name: route['fciListRouteName'], query: {appId: appId, page: val}})
 	// 	.then(() => {
-	// 		loadFciPropsData()
+	// 		loadFciListData()
 	// 	})
 }
 
