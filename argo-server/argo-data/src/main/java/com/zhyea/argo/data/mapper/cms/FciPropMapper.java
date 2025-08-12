@@ -54,11 +54,11 @@ public interface FciPropMapper {
 	/**
 	 * 根据组件id获取组件属性记录
 	 *
-	 * @param fciId 组件id
+	 * @param fciId   组件id
+	 * @param keyword 关键字
 	 * @return 组件属性记录
 	 */
-	@Select("select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=0")
-	List<FciPropEntity> findByFciId(@Param("fciId") Long fciId);
+	List<FciPropEntity> findInPage(@Param("fciId") Long fciId, @Param("keyword") String keyword);
 
 
 	/**

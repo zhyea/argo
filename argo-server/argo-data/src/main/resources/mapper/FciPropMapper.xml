@@ -45,4 +45,11 @@
     </select>
 
 
+    <select id="findInPage" resultType="com.zhyea.argo.data.entity.cms.FciPropEntity">
+        select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=0
+        <if test="null != keyword and keyword != ''">
+            and (remark like concat('%', #{keyword}, '%') or prop_key like concat('%', #{keyword}, '%') or prop_value like concat('%', #{keyword}, '%'))
+        </if>
+    </select>
+
 </mapper>

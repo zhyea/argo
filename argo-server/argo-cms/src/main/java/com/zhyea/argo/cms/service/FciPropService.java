@@ -1,12 +1,17 @@
 package com.zhyea.argo.cms.service;
 
-import com.zhyea.argo.constants.NumConstants;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.zhyea.argo.cms.convert.FciPropConverter;
-import com.zhyea.argo.data.entity.cms.FciPropEntity;
 import com.zhyea.argo.cms.model.item.FciPropItem;
 import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
+import com.zhyea.argo.cms.model.request.fci.FciPropQueryRequest;
+import com.zhyea.argo.constants.NumConstants;
+import com.zhyea.argo.data.entity.cms.FciEntity;
+import com.zhyea.argo.data.entity.cms.FciPropEntity;
 import com.zhyea.argo.data.mapper.cms.FciPropMapper;
+import org.chobit.commons.model.response.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,12 +90,22 @@ public class FciPropService {
 	/**
 	 * 根据组件实例id获取组件属性列表
 	 *
-	 * @param fciId 组件id
+	 * @param request 组件属性查询请求
 	 * @return 组件属性列表
 	 */
-	public List<FciPropItem> findByFciId(Long fciId) {
-		List<FciPropEntity> list = propMapper.findByFciId(fciId);
-		return propConverter.listEntity2Item(list);
+	public PageResult<FciPropItem> findByFciId(FciPropQueryRequest request) {
+		PageResult<FciPropItem> result = new PageResult<>();
+
+		try (Page<FciEntity> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
+			List<FciPropEntity> list = propMapper.findInPage(request.getFciId(), request.getKeyword());
+
+			result.setData(propConverter.listEntity2Item(list));
+			result.setPageNo(page.getPageNum());
+			result.setPageSize(page.getPageSize());
+			result.setTotal(page.getTotal());
+		}
+
+		return result;
 	}
 
 
