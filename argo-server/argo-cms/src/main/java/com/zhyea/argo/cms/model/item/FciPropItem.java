@@ -71,12 +71,14 @@ public class FciPropItem {
 	/**
 	 * 属性生效开始时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime effectiveStartTime;
 
 
 	/**
 	 * 属性生效结束时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime effectiveEndTime;
 
 
