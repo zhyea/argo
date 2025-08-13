@@ -52,7 +52,7 @@ export function findFciProps(fciId: number, keyword: string, pageInfo: any) {
 
 export function getFciProp(fciPropId: number) {
 	return request.post('/cms/fci/prop/get', {
-		fciPropId: fciPropId,
+		propId: fciPropId,
 	})
 }
 

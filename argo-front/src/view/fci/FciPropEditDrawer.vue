@@ -87,7 +87,7 @@
 <script lang="ts" setup>
 
 import {ref, computed} from "vue";
-import {submitForm} from "@/utils/helper/index.ts";
+import {submitForm} from "@/utils/helper";
 import {addFci, addFciProp, editFci, editFciProp, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
@@ -106,8 +106,7 @@ const propForm = ref({
 	propValueSelector: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
-	effectiveStartTime: '',
-	effectiveEndTime: '',
+	effectiveTimeRange: ['', ''],
 	status: 0,
 	remark: '',
 })
@@ -125,7 +124,7 @@ const fciFormRules = {
 
 
 // 加载组件实例数据
-const loadFciPropData = async (propId) => {
+function loadFciPropData(propId: number) {
 	if (!propId) {
 		return
 	}
@@ -150,7 +149,7 @@ const effectivePeriodTypeEnum = computed(() => {
 
 
 // 打开组件实例抽屉前的准备
-const openPrepare = () => {
+function openPrepare() {
 	fciPropEditDrawer.value = true
 
 	if (fciPropFormRef.value) {
@@ -162,8 +161,9 @@ const openPrepare = () => {
 
 
 const isEditReadonly = ref(false)
+
 // 打开组件实例抽屉-用于编辑
-const openDrawerForEdit = (fciId, appId) => {
+function openDrawerForEdit(fciId: number) {
 	openPrepare()
 	loadFciPropData(fciId)
 	if (propForm.value.propKey) {
@@ -184,7 +184,7 @@ const emit = defineEmits(['afterPropEdit'])
 
 
 // 提交组件实例表单
-const submitFciPropForm = async () => {
+function submitFciPropForm() {
 	if (!fciPropFormRef.value.validate()) {
 		return;
 	}
@@ -201,7 +201,7 @@ const submitFciPropForm = async () => {
 
 const fcmProps = ref([])
 
-const loadFcmProps = (fcmId) => {
+function loadFcmProps(fcmId: number) {
 	getFcm(fcmId).then(response => {
 		if (response && response.data) {
 			fcmProps.value = response.data.props;

@@ -26,8 +26,7 @@
 					                 :formatter="mapDataBindFlag" align="center"/>
 					<el-table-column show-overflow-tooltip min-width=350 prop="type" label="生效周期" align="center"
 					                 :formatter="formatEffectivePeriod"/>
-					<el-table-column width=55 prop="statusDesc" label="状态"
-					                 :formatter="mapDataBindFlag" align="center"/>
+					<el-table-column width=80 prop="statusDesc" label="状态" align="center"/>
 					<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
 					                 align="center"/>
 					<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="修改时间"
@@ -174,7 +173,7 @@ const handlePageChange = async (val: any) => {
 
 
 function handleEdit(row: any) {
-	fciPropEditDrawerRef.value.openPropDrawerForEdit(row)
+	fciPropEditDrawerRef.value.openPropDrawerForEdit(row.fciId)
 }
 
 

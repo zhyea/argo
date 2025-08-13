@@ -31,7 +31,7 @@
 				<el-table-column label="操作" align="center" fixed="right" width=200>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-						<el-button type="warning" size="small" @click="showProps(scope.row)">详情</el-button>
+						<el-button type="warning" size="small" @click="showProps(scope.row)">属性</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>

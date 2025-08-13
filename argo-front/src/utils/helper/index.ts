@@ -182,9 +182,10 @@ export const getTagTitleName = (titleKey: string) => {
  */
 export function formatEffectivePeriod(row: any) {
 	let result = '~'
-	if (row.effectiveStartTime && row.effectiveEndTime) {
+	if (row.effectiveStartTime && row.effectiveStartTime !== '1970-01-01 08:00:00'
+		&& row.effectiveEndTime && row.effectiveEndTime !== '1970-01-01 08:00:00') {
 		result = row.effectiveStartTime + ' ~ ' + row.effectiveEndTime;
-	} else if (row.effectiveStartTime) {
+	} else if (row.effectiveStartTime && row.effectiveStartTime !== '1970-01-01 08:00:00') {
 		result = row.effectiveStartTime + ' ~ ';
 	}
 	return result
