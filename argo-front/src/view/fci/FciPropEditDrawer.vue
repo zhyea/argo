@@ -1,5 +1,5 @@
 <template>
-	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}实例属性${propForm.id? '-'+ propForm.name : '' }`"
+	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}实例属性${propForm.id? '-'+ propForm.propKey : '' }`"
 	           v-model="fciPropEditDrawer" :with-header=true size="40%">
 		<el-container>
 			<!--表单信息-->
@@ -15,7 +15,7 @@
 					</el-form-item>
 
 					<el-form-item label="属性Key" prop="propKey">
-						<el-select placeholder="请选择属性" v-model="propForm.propKey" :readonly="isEditReadonly">
+						<el-select placeholder="请选择属性" v-model="propForm.propKey" :disabled="isEditReadonly">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
 							           :label="e.propKey"
@@ -91,6 +91,7 @@ import {submitForm} from "@/utils/helper";
 import {addFci, addFciProp, editFci, editFciProp, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
+import {Ref} from "@vue/reactivity";
 
 const enumStore = useEnumStore()
 
@@ -160,7 +161,7 @@ function openPrepare() {
 }
 
 
-const isEditReadonly = ref(false)
+const isEditReadonly: Ref<boolean> = ref(false)
 
 // 打开组件实例抽屉-用于编辑
 function openDrawerForEdit(fciId: number) {
@@ -199,7 +200,7 @@ function submitFciPropForm() {
 }
 
 
-const fcmProps = ref([])
+const fcmProps: Ref<any[]> = ref([])
 
 function loadFcmProps(fcmId: number) {
 	getFcm(fcmId).then(response => {
