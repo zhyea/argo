@@ -5,6 +5,14 @@
 <mapper namespace="com.zhyea.argo.data.mapper.cms.FciPropMapper">
 
 
+    <resultMap id="QueryResultMap" type="com.zhyea.argo.data.entity.cms.FciPropEntity">
+        <result column="effective_start_time" jdbcType="TIMESTAMP" property="effectiveStartTime"
+                typeHandler="com.zhyea.argo.data.type.NullTimeHandler"/>
+        <result column="effective_end_time" jdbcType="TIMESTAMP" property="effectiveEndTime"
+                typeHandler="com.zhyea.argo.data.type.NullTimeHandler"/>
+    </resultMap>
+
+
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, data_bind_flag, prop_value_selector,
         effective_period_type, effective_start_time, effective_end_time, remark)
@@ -28,8 +36,14 @@
     </update>
 
 
+    <!-- getById -->
+    <select id="getById" resultMap="QueryResultMap">
+        select * from ag_cms_fci_prop where id=#{id}
+    </select>
+
+
     <!-- 根据组件ID获取当前有效的组件属性集合 -->
-    <select id="findValidByFciId" resultType="com.zhyea.argo.data.entity.cms.FciPropEntity">
+    <select id="findValidByFciId" resultMap="QueryResultMap">
         select * from (
 
         select * from ag_cms_fci_prop
@@ -45,10 +59,11 @@
     </select>
 
 
-    <select id="findInPage" resultType="com.zhyea.argo.data.entity.cms.FciPropEntity">
+    <select id="findInPage" resultMap="QueryResultMap">
         select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=0
         <if test="null != keyword and keyword != ''">
-            and (remark like concat('%', #{keyword}, '%') or prop_key like concat('%', #{keyword}, '%') or prop_value like concat('%', #{keyword}, '%'))
+            and (remark like concat('%', #{keyword}, '%') or prop_key like concat('%', #{keyword}, '%') or prop_value
+            like concat('%', #{keyword}, '%'))
         </if>
     </select>
 

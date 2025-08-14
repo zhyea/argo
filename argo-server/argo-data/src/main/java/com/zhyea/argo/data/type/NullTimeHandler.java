@@ -34,20 +34,20 @@ public class NullTimeHandler extends BaseTypeHandler<Timestamp> {
 	@Override
 	public Timestamp getNullableResult(ResultSet rs, String columnName) throws SQLException {
 		Timestamp value = rs.getTimestamp(columnName);
-		return null == value ? new Timestamp(0L) : value;
+		return (null == value || 0 == value.getTime() ? null : value);
 	}
 
 
 	@Override
 	public Timestamp getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
 		Timestamp value = rs.getTimestamp(columnIndex);
-		return null == value ? new Timestamp(0L) : value;
+		return (null == value || 0 == value.getTime() ? null : value);
 	}
 
 
 	@Override
 	public Timestamp getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
 		Timestamp value = cs.getTimestamp(columnIndex);
-		return null == value ? new Timestamp(0L) : value;
+		return (null == value || 0 == value.getTime() ? null : value);
 	}
 }

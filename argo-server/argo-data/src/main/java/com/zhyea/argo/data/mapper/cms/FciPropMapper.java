@@ -37,7 +37,6 @@ public interface FciPropMapper {
 	 * @param id 组件属性id
 	 * @return 组件属性记录
 	 */
-	@Select("select * from ag_cms_fci_prop where id=#{id}")
 	FciPropEntity getById(@Param("id") Long id);
 
 
