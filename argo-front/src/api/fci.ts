@@ -58,12 +58,37 @@ export function getFciProp(fciPropId: number) {
 
 
 export function addFciProp(formData: any) {
-	return request.post('/cms/fci/prop/add', formData)
+	return request.post('/cms/fci/prop/add', {
+		switchFlag: formData.switchFlag,
+		dataBindFlag: formData.dataBindFlag,
+		dataUrl: formData.dataUrl,
+		effectivePeriodType: formData.effectivePeriodType,
+		effectiveStartTime: formData.effectiveTimeRange[0],
+		effectiveEndTime: formData.effectiveTimeRange[1],
+		fciId: formData.fciId,
+		propKey: formData.propKey,
+		propValue: formData.propValue,
+		propValueSelector: formData.propValueSelector,
+		remark: formData.remark,
+	})
 }
 
 
 export function editFciProp(formData: any) {
-	return request.post('/cms/fci/prop/edit', formData)
+	return request.post('/cms/fci/prop/edit', {
+		id: formData.id,
+		switchFlag: formData.switchFlag,
+		dataBindFlag: formData.dataBindFlag,
+		dataUrl: formData.dataUrl,
+		effectivePeriodType: formData.effectivePeriodType,
+		effectiveStartTime: formData.effectiveTimeRange[0],
+		effectiveEndTime: formData.effectiveTimeRange[1],
+		fciId: formData.fciId,
+		propKey: formData.propKey,
+		propValue: formData.propValue,
+		propValueSelector: formData.propValueSelector,
+		remark: formData.remark,
+	})
 }
 
 

@@ -40,7 +40,7 @@
 					</el-form-item>
 
 					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
-						<el-input id="propValue" v-model="propForm.propValue"/>
+						<el-input id="propValue" v-model="propForm.propValueSelector"/>
 					</el-form-item>
 
 					<el-form-item label="是否启用" prop="switchFlag">
