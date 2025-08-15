@@ -28,7 +28,7 @@
     <update id="edit">
         update ag_cms_fci_prop set
         fci_id=#{e.fciId}, prop_key=#{e.propKey}, prop_value=#{e.propValue}, prop_value_selector=#{e.propValueSelector},
-        data_bind_flag=#{dataBindFlag}, effective_period_type=#{e.effectivePeriodType},
+        data_bind_flag=#{e.dataBindFlag}, effective_period_type=#{e.effectivePeriodType},
         effective_start_time=#{e.effectiveStartTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
         effective_end_time=#{e.effectiveEndTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
         remark=#{e.remark}
