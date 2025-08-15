@@ -1,5 +1,6 @@
 package com.zhyea.argo.cms.model.request.fci;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
@@ -78,12 +79,14 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 	/**
 	 * 属性生效开始时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime effectiveStartTime;
 
 
 	/**
 	 * 属性生效结束时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime effectiveEndTime;
 
 
@@ -112,7 +115,7 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 			}
 		}
 
-		if(YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))){
+		if (YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))) {
 			return false;
 		}
 

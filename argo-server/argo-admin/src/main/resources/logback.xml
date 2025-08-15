@@ -23,9 +23,9 @@
 
     <logger name="ch.qos.logback" level="ERROR"/>
 
-    <logger name="com.zhyea.argo" level="INFO" additivity="false">
+    <!--<logger name="com.zhyea.argo" level="INFO" additivity="false">
         <appender-ref ref="ROLLING_FILE"/>
-    </logger>
+    </logger>-->
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
