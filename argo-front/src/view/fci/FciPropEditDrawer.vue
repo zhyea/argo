@@ -88,7 +88,7 @@
 
 import {ref, computed} from "vue";
 import {submitForm} from "@/utils/helper";
-import {addFci, addFciProp, editFci, editFciProp, getFciProp} from "@/api/fci";
+import {addFciProp, editFciProp, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
 import {Ref} from "@vue/reactivity";
@@ -125,18 +125,17 @@ const fciFormRules = {
 
 
 // 加载组件实例数据
-function loadFciPropData(propId: number) {
+async function loadFciPropData(propId: number) {
 	if (!propId) {
 		return
 	}
 
-	getFciProp(propId).then(response => {
-		if (response && response.data) {
-			const propData = response.data;
-			propForm.value = propData;
-			propForm.value.effectiveTimeRange = [propData.effectiveStartTime, propData.effectiveEndTime];
-		}
-	})
+	const response = await getFciProp(propId);
+	if (response && response.data) {
+		const propData = response.data;
+		propForm.value = propData;
+		propForm.value.effectiveTimeRange = [propData.effectiveStartTime, propData.effectiveEndTime];
+	}
 }
 
 
@@ -164,12 +163,15 @@ function openPrepare() {
 const isEditReadonly: Ref<boolean> = ref(false)
 
 // 打开组件实例抽屉-用于编辑
-function openDrawerForEdit(fciId: number) {
-	openPrepare()
-	loadFciPropData(fciId)
+async function openDrawerForEdit(fciId: number) {
+	openPrepare();
+	await loadFciPropData(fciId);
+
+	console.log(propForm.value)
 	if (propForm.value.propKey) {
 		isEditReadonly.value = true
 	}
+	console.log(isEditReadonly)
 }
 
 

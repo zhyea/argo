@@ -9,8 +9,6 @@ import {MenuItem} from "@/model/route";
 import routers from "@/view/home/routes";
 import {TagItem} from "@/model/tag";
 import i18n from "@/lang";
-import menuItems from '@/view/home/menu'
-import {RouteLocationNormalizedLoadedGeneric} from "vue-router";
 
 
 /**
@@ -49,14 +47,7 @@ export function submitForm<T extends Record<string, any>>(
 			} else {
 				submitFlag.value = false;
 			}
-		}).catch((error) => {
-			submitFlag.value = false;
-			console.error("提交表单时发生错误:", error);
-			ElMessage.error({
-				message: "保存失败，请稍后重试",
-				duration: 1500,
-			});
-		});
+		})
 	}).catch((error) => {
 		console.log("表单验证失败", error);
 	});
