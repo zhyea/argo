@@ -15,7 +15,7 @@
 					</el-form-item>
 
 					<el-form-item label="属性Key" prop="propKey">
-						<el-select placeholder="请选择属性" v-model="propForm.propKey" :disabled="isEditReadonly">
+						<el-select placeholder="请选择属性" v-model="propForm.propKey" :disabled="editableFlag">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
 							           :label="e.propKey"
@@ -160,7 +160,7 @@ function openPrepare() {
 }
 
 
-const isEditReadonly: Ref<boolean> = ref(false)
+const editableFlag: Ref<boolean> = ref(false)
 
 // 打开组件实例抽屉-用于编辑
 async function openDrawerForEdit(fciId: number) {
@@ -169,9 +169,9 @@ async function openDrawerForEdit(fciId: number) {
 
 	console.log(propForm.value)
 	if (propForm.value.propKey) {
-		isEditReadonly.value = true
+		editableFlag.value = true
 	}
-	console.log(isEditReadonly)
+	console.log(editableFlag)
 }
 
 
