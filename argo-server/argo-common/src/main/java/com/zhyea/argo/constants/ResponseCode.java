@@ -95,9 +95,15 @@ public enum ResponseCode implements CodeDescEnum {
 
 	FCI_PROP_EFFECTIVE_END_TIME_AFTER_START(40305, "组件属性生效结束时间需要大于开始时间"),
 
-	DATA_BIND_URL_IS_EMPTY(40306, "数据链接不能为空"),
+	DATA_BIND_URL_IS_EMPTY(40306, "数据链接或者值选择器不能为空"),
 
 	FCI_NOT_EXISTS_ERROR(40310, "组件实例不存在"),
+
+	FCI_EFFECTIVE_TIME_IS_EMPTY(40331, "组件实例生效时间错误"),
+
+	FCI_EFFECTIVE_START_TIME_AFTER_NOW(40332, "组件实例生效开始时间不能小于当前时间"),
+
+	FCI_EFFECTIVE_END_TIME_AFTER_START(40333, "组件实例生效结束时间需要大于开始时间"),
 
 
 	/**

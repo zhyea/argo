@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
+import com.zhyea.argo.except.ArgoServerException;
 import lombok.Data;
 import org.chobit.commons.contract.Checkable;
 import org.chobit.commons.exception.ParamException;
@@ -15,6 +16,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
+import static com.zhyea.argo.constants.ResponseCode.*;
+import static com.zhyea.argo.constants.ResponseCode.FCI_PROP_EFFECTIVE_END_TIME_AFTER_START;
 import static org.chobit.commons.utils.StrKit.isBlank;
 
 
@@ -100,28 +103,25 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 	public boolean check() throws ParamException {
 		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
 			if (null == effectiveStartTime || null == effectiveEndTime) {
-				return false;
+				throw new ArgoServerException(FCI_PROP_EFFECTIVE_TIME_IS_EMPTY);
 			}
 
 			// 新增时，开始时间不能<=当前时间
 			if (effectiveStartTime.isBefore(LocalDateTime.now())
 					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
-				return false;
+				throw new ArgoServerException(FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW);
 			}
 
 			// 结束时间需要大于开始时间
 			if (!effectiveEndTime.isAfter(effectiveStartTime)) {
-				return false;
+				throw new ArgoServerException(FCI_PROP_EFFECTIVE_END_TIME_AFTER_START);
 			}
 		}
 
 		if (YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))) {
-			return false;
+			throw new ArgoServerException(DATA_BIND_URL_IS_EMPTY);
 		}
 
-		if (YesOrNo.NO.is(getDataBindFlag()) && isBlank(getPropValue())) {
-			return false;
-		}
 		return true;
 	}
 }

@@ -19,8 +19,8 @@
         values
         (#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.dataBindFlag}, #{e.propValueSelector},
         #{e.effectivePeriodType},
-        #{e.effectiveStartTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
-        #{e.effectiveEndTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
+        #{e.effectiveStartTime},
+        #{e.effectiveEndTime},
         #{e.remark})
     </insert>
 

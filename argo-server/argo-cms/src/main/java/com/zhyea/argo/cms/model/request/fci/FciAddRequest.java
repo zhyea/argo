@@ -87,7 +87,7 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	public boolean check() throws ParamException {
 		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
 			if (Collections2.isEmpty(effectiveTimeRange) || effectiveTimeRange.size() < 2) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_TIME_IS_EMPTY);
+				throw new ArgoServerException(FCI_EFFECTIVE_TIME_IS_EMPTY);
 			}
 
 			LocalDateTime effectiveStartTime = effectiveTimeRange.get(0);
@@ -96,12 +96,12 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 			// 新增时，开始时间不能<=当前时间
 			if (effectiveStartTime.isBefore(LocalDateTime.now())
 					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW);
+				throw new ArgoServerException(FCI_EFFECTIVE_START_TIME_AFTER_NOW);
 			}
 
 			// 结束时间需要大于开始时间
 			if (!effectiveEndTime.isAfter(effectiveStartTime)) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_END_TIME_AFTER_START);
+				throw new ArgoServerException(FCI_EFFECTIVE_END_TIME_AFTER_START);
 			}
 		}
 
