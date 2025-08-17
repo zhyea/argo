@@ -157,6 +157,7 @@ function openPrepare() {
 	}
 
 	isPropFormSubmitted.value = false
+	editableFlag.value = false
 }
 
 
@@ -167,11 +168,9 @@ async function openDrawerForEdit(fciId: number) {
 	openPrepare();
 	await loadFciPropData(fciId);
 
-	console.log(propForm.value)
 	if (propForm.value.propKey) {
 		editableFlag.value = true
 	}
-	console.log(editableFlag)
 }
 
 

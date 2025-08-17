@@ -45,8 +45,12 @@ export function submitForm<T extends Record<string, any>>(
 					extraAction();
 				}
 			} else {
+				console.log("submit failed");
 				submitFlag.value = false;
 			}
+		}).catch( error=>{
+			console.log("submit failed", error);
+			submitFlag.value = false;
 		})
 	}).catch((error) => {
 		console.log("表单验证失败", error);
