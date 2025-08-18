@@ -46,10 +46,6 @@
 							value-format="YYYY-MM-DD HH:mm:ss"/>
 					</el-form-item>
 
-					<el-form-item label="数据链接" v-if="1===fciForm.dataBindFlag" prop="dataUrl">
-						<el-input id="name" v-model="fciForm.dataUrl"/>
-					</el-form-item>
-
 					<el-form-item label="备注" prop="remark">
 						<el-input id="remark" type="textarea" v-model="fciForm.remark" :autosize="{ minRows: 4,}"/>
 					</el-form-item>
@@ -80,8 +76,6 @@ const fciForm = ref({
 	fcmId: 0,
 	appId: 0,
 	name: '',
-	dataBindFlag: 0,
-	dataUrl: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
 	effectiveTimeRange: ['', ''],
@@ -149,7 +143,6 @@ const openDrawerForAdd = (fcmRow: any) => {
 	openPrepare()
 	fciForm.value.fcmId = fcmRow.fcmId
 	fciForm.value.appId = fcmRow.appId
-	fciForm.value.dataBindFlag = fcmRow.dataBindFlag
 }
 
 
@@ -177,7 +170,6 @@ defineExpose({
 	openFciDrawerForEdit: openDrawerForEdit,
 	openFciDrawerForAdd: openDrawerForAdd,
 })
-
 </script>
 
 <style scoped lang="less">

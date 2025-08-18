@@ -173,7 +173,7 @@ const handlePageChange = async (val: any) => {
 
 
 function handleEdit(row: any) {
-	fciPropEditDrawerRef.value.openPropDrawerForEdit(row.fciId)
+	fciPropEditDrawerRef.value.openPropDrawerForEdit(row.id)
 }
 
 

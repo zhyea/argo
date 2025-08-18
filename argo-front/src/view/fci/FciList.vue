@@ -20,8 +20,6 @@
 				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
 				<el-table-column min-width=60 prop="type" label="类型" :formatter="mapTypeEnum"/>
-				<el-table-column width=55 prop="dataBindFlag" label="绑定数据"
-				                 :formatter="mapDataBindFlag" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=220 prop="type" label="生效周期" align="center"
 				                 :formatter="formatEffectivePeriod"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
@@ -60,7 +58,6 @@ import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import PropsDrawer from "@/view/fci/FciPropsDrawer.vue";
 import {delFci, findFciList} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
-import {formatEffectivePeriod, mapDataBindFlag} from "@/utils/helper";
 
 
 const route = useRoute();

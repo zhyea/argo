@@ -49,14 +49,6 @@
 						</el-select>
 					</el-form-item>
 
-					<el-form-item label="绑定数据" prop="dataBindFlag">
-						<el-switch id="dataBindFlag" v-model="fcmForm.dataBindFlag"
-						           inline-prompt size="large"
-						           active-text="是" :active-value="1"
-						           inactive-text="否" :inactive-value="0"
-						/>
-					</el-form-item>
-
 					<el-form-item label="图标" prop="icon">
 						<el-input id="icon" v-model="fcmForm.icon"/>
 					</el-form-item>
@@ -157,7 +149,6 @@ const fcmForm = ref({
 	type: 1,
 	scope: 1,
 	appId: 0,
-	dataBindFlag: '',
 	remark: '',
 	props: [{}],
 })
@@ -193,9 +184,6 @@ const fcmFormRules = {
 	],
 	scope: [
 		{required: true, message: '请选择组件模型作用域', trigger: 'blur'},
-	],
-	dataBindFlag: [
-		{required: true, message: '绑定数据标记必填', trigger: 'blur'}
 	],
 	appCode: [
 		{

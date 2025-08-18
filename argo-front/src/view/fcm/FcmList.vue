@@ -25,8 +25,6 @@
 				<el-table-column show-overflow-tooltip min-width=70 prop="scope" label="作用域"
 				                 :formatter="mapScopeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=160 prop="appName" label="应用"/>
-				<el-table-column show-overflow-tooltip min-width=60 prop="dataBindFlag" label="绑定数据"
-				                 :formatter="mapDataBindFlag" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
 				                 align="center"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="修改时间"
@@ -64,7 +62,6 @@ import FciDrawer from "@/view/fci/FciEditDrawer.vue";
 import FcmDrawer from "@/view/fcm/FcmEditDrawer.vue";
 import {ROUTE_NAMES} from "@/config";
 import {useEnumStore} from "@/store/enum";
-import {mapDataBindFlag} from "@/utils/helper";
 
 
 const route = useRoute();
