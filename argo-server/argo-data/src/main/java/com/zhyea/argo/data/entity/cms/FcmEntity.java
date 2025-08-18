@@ -54,14 +54,6 @@ public class FcmEntity extends BaseEntity {
 
 
 	/**
-	 * 是否需要绑定数据标记
-	 * <p>
-	 * see also {@link YesOrNo}
-	 */
-	private Integer dataBindFlag;
-
-
-	/**
 	 * 组件备注
 	 */
 	private String remark;

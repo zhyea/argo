@@ -60,7 +60,6 @@ create table if not exists ag_cms_fcm
     app_id         int          not null default 0 comment '应用ID',
     scope          tinyint      not null default 0 comment '作用域',
     props          tinytext     not null default '[]' comment '属性',
-    data_bind_flag tinyint      not null default 0 comment '是否绑定数据',
     uniq_code      varchar(32)  not null default '' comment '唯一编码',
     remark         varchar(128) not null default '' comment '备注',
 
@@ -86,7 +85,6 @@ create table if not exists ag_cms_fci
 
     name                  varchar(64)  not null default '' comment '名称',
     fci_code              varchar(16)  not null default '' comment '组件实例编码',
-    data_url              varchar(128) not null default '' comment '数据URL',
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
     effective_end_time    datetime     not null default '1970-01-01 08:00:00.000' comment '生效结束时间',
@@ -114,6 +112,7 @@ create table if not exists ag_cms_fci_prop
     prop_key              varchar(64)  not null default 0 comment '属性key',
     prop_value            varchar(256) not null default '' comment '属性值',
     data_bind_flag        tinyint      not null default 0 comment '是否绑定数据',
+    data_url              varchar(128) not null default '' comment '数据URL',
     prop_value_selector   varchar(64)  not null default '' comment '属性值选择器',
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',

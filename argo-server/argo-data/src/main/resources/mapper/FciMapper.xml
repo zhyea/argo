@@ -13,7 +13,6 @@
         fcm_id,
         fci_code,
         name,
-        data_url,
         switch_flag,
         effective_period_type,
         <if test="null != e.effectiveStartTime">
@@ -29,7 +28,6 @@
         #{e.fcmId},
         #{e.fciCode},
         #{e.name},
-        #{e.dataUrl},
         #{e.switchFlag},
         #{e.effectivePeriodType},
         <if test="null != e.effectiveStartTime">
@@ -47,7 +45,6 @@
     <update id="modify" parameterType="com.zhyea.argo.data.entity.cms.FciEntity">
         update ag_cms_fci
         set `name`=#{e.name},
-        data_url=#{e.dataUrl},
         switch_flag=#{e.switchFlag},
         effective_period_type=#{e.effectivePeriodType},
         <if test="null != e.effectiveStartTime">
@@ -64,7 +61,7 @@
 
     <!-- 根据应用id获取组件实例 -->
     <select id="getById" resultType="com.zhyea.argo.data.dto.FciDto">
-        select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
+        select fci.*, fcm.id as fcm_id, fcm.name as fcm_name, fcm.type
         from ag_cms_fci fci
         left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
         where fci.deleted=0 and fci.id=#{id}
@@ -73,7 +70,7 @@
 
     <!-- 根据应用id获取组件实例 -->
     <select id="findByAppId" resultType="com.zhyea.argo.data.dto.FciDto">
-        select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
+        select fci.*, fcm.id as fcm_id, fcm.name as fcm_name, fcm.type
         from ag_cms_fci fci
         left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
         where fci.deleted=0
@@ -87,13 +84,13 @@
 
     <!-- 根据页面编码获取组件实例 -->
     <select id="findByPageCode" resultType="com.zhyea.argo.data.dto.FciDto">
-        select fci.*, fcm.id as fcm_id, fcm.data_bind_flag, fcm.name as fcm_name, fcm.type
+        select fci.*, fcm.id as fcm_id, fcm.name as fcm_name, fcm.type
         from ag_cms_fci fci
-                 left join ag_cms_page_fci pf on fci.id = pf.fci_id
-                 left join ag_cms_app_page page on pf.page_id = page.id
-                 left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
+        left join ag_cms_page_fci pf on fci.id = pf.fci_id
+        left join ag_cms_app_page page on pf.page_id = page.id
+        left join ag_cms_fcm fcm on fci.fcm_id = fcm.id
         where fci.deleted = 0
-          and page.page_code = #{pageCode}
+        and page.page_code = #{pageCode}
     </select>
 
 </mapper>

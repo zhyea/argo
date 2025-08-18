@@ -3,7 +3,6 @@ package com.zhyea.argo.cms.model.item;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.constants.enums.FcScopeEnum;
 import com.zhyea.argo.constants.enums.FcmTypeEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -66,13 +65,6 @@ public class FcmItem {
 	 * 属性
 	 */
 	private Set<FcmPropItem> props;
-
-	/**
-	 * 是否需要绑定数据标记
-	 * <p>
-	 * see also {@link YesOrNo}
-	 */
-	private Integer dataBindFlag;
 
 	/**
 	 * 组件备注

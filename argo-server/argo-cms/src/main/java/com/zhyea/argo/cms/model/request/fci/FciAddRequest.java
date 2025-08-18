@@ -57,12 +57,6 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 
 
 	/**
-	 * 数据链接
-	 */
-	private String dataUrl;
-
-
-	/**
 	 * 组件生效周期类型
 	 */
 	@EnumVal(enumClass = EffectivePeriodTypeEnum.class, message = "生效周期类型错误")
