@@ -22,8 +22,6 @@
 				<el-table-column show-overflow-tooltip min-width=120 prop="scope" label="作用域"
 				                 :formatter="mapScopeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=270 prop="appName" label="应用"/>
-				<el-table-column show-overflow-tooltip min-width=80 prop="dataBindFlag" label="绑定数据"
-				                 :formatter="mapDataBindFlag" align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="warning" size="small" @click="handleAddFci(scope.row)">创建实例</el-button>
@@ -162,11 +160,6 @@ function mapTypeEnum(row, column, cellValue, index) {
 
 function mapScopeEnum(row, column, cellValue, index) {
 	return mapEnum('FcScopeEnum', row.scope)
-}
-
-
-function mapDataBindFlag(row, column, cellValue, index) {
-	return mapEnum('YesOrNo', row.dataBindFlag)
 }
 
 

@@ -22,14 +22,6 @@
 					<el-col :span="17" class="item-value">{{ fciData.typeName }}</el-col>
 				</el-row>
 				<el-row class="item-row">
-					<el-col :span="7" class="item-label">是否绑定数据</el-col>
-					<el-col :span="17" class="item-value">{{ fciData.dataBindFlag > 0 ? '是' : '否' }}</el-col>
-				</el-row>
-				<el-row class="item-row" v-if="fciData.dataBindFlag">
-					<el-col :span="7" class="item-label">数据连接</el-col>
-					<el-col :span="17" class="item-value">{{ fciData.dataUrl }}</el-col>
-				</el-row>
-				<el-row class="item-row">
 					<el-col :span="7" class="item-label">生效周期类型</el-col>
 					<el-col :span="17" class="item-value">{{ fciData.effectivePeriodTypeName }}
 					</el-col>
@@ -76,8 +68,6 @@ const fciData = ref({
 	fciCode: '',
 	fcmName: '',
 	typeName: '',
-	dataBindFlag: 0,
-	dataUrl: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
 	effectivePeriodTypeName: '',
