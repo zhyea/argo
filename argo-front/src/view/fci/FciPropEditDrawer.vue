@@ -67,7 +67,9 @@
 							range-separator="到"
 							start-placeholder="请选择生效开始时间"
 							end-placeholder="请选择生效结束时间"
-							value-format="YYYY-MM-DD HH:mm:ss"/>
+							value-format="YYYY-MM-DD HH:mm:ss"
+							:disabled-date="timeRangePickerOpt.disabledDate"
+						/>
 					</el-form-item>
 
 					<el-form-item label="备注" prop="remark">
@@ -122,6 +124,11 @@ const fciFormRules = {
 		{required: true, message: '请输入返回值', trigger: 'blur'},
 	],
 };
+
+
+const timeRangePickerOpt = {
+	disabledDate: (time: Date) => time.getTime() < new Date().setHours(0, 0, 0, 0),
+}
 
 
 // 加载组件实例数据
