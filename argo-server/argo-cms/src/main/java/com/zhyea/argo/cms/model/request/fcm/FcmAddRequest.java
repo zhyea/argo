@@ -4,17 +4,15 @@ import com.zhyea.argo.cms.model.item.FcmPropItem;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.FcScopeEnum;
 import com.zhyea.argo.constants.enums.FcmTypeEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.chobit.commons.contract.Checkable;
 import org.chobit.commons.exception.ParamException;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -69,14 +67,6 @@ public class FcmAddRequest extends BaseOperateRequest implements Checkable {
 	@Valid
 	@NotEmpty(message = "组件属性不能为空")
 	private Set<FcmPropItem> props;
-
-
-	/**
-	 * 是否需要绑定数据标记
-	 */
-	@EnumVal(enumClass = YesOrNo.class, message = "是否需要绑定数据标记错误")
-	@NotNull(message = "是否需要绑定数据标记不能为空")
-	private Integer dataBindFlag;
 
 
 	/**

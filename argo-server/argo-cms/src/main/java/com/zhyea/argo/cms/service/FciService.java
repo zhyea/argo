@@ -11,7 +11,6 @@ import com.zhyea.argo.cms.model.request.fci.FciEditRequest;
 import com.zhyea.argo.cms.model.request.fci.FciQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
 import com.zhyea.argo.constants.ResponseCode;
-import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.data.dto.FciDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.data.mapper.cms.FciMapper;
@@ -23,8 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static org.chobit.commons.utils.StrKit.isBlank;
 
 
 /**
@@ -59,9 +56,6 @@ public class FciService {
 		FcmItem fcmItem = fcmService.getById(request.getFcmId());
 		if (null == fcmItem) {
 			throw new ArgoServerException(ResponseCode.FCM_NOT_EXISTS_ERROR);
-		}
-		if (YesOrNo.YES.is(fcmItem.getDataBindFlag()) && isBlank(request.getDataUrl())) {
-			throw new ArgoServerException(ResponseCode.DATA_BIND_URL_IS_EMPTY);
 		}
 
 		FciEntity entity = fciConverter.addRequest2Entity(request);

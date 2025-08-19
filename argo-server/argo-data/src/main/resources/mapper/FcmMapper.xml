@@ -7,7 +7,7 @@
 
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into ag_cms_fcm(scope, app_id, name, icon, type, props, data_bind_flag, uniq_code, remark)
+        insert into ag_cms_fcm(scope, app_id, name, icon, type, props, uniq_code, remark)
         values
         (
         #{e.scope},
@@ -16,7 +16,6 @@
         #{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler},
         #{e.type},
         #{e.props, typeHandler=com.zhyea.argo.data.type.NullStringHandler},
-        #{e.dataBindFlag},
         #{e.uniqCode},
         #{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}
         )
@@ -25,7 +24,7 @@
 
     <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query" resultType="com.zhyea.argo.data.dto.FcmDto">
-        select f.id, f.name, f.type, f.scope, f.data_bind_flag, f.remark, f.create_time, f.update_time,
+        select f.id, f.name, f.type, f.scope, f.remark, f.create_time, f.update_time,
         case when f.app_id=0 then #{appId} else app_id end as app_id,
         a.app_name
         from

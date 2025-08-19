@@ -37,7 +37,6 @@ public interface FcmMapper {
 			"icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
 			"type=#{e.type}, ",
 			"props=#{e.props, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
-			"data_bind_flag=#{e.dataBindFlag}, ",
 			"remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}",
 			"where id=#{e.id}"
 	})

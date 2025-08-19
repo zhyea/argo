@@ -2,7 +2,6 @@ package com.zhyea.argo.data.dto;
 
 import com.zhyea.argo.constants.enums.FcScopeEnum;
 import com.zhyea.argo.constants.enums.FcmTypeEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -66,14 +65,6 @@ public class FcmDto {
      * 属性
      */
     private String props;
-
-
-    /**
-     * 是否需要绑定数据标记
-     * <p>
-     * see also {@link YesOrNo}
-     */
-    private Integer dataBindFlag;
 
 
     /**
