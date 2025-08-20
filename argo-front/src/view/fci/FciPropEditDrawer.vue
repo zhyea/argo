@@ -63,6 +63,7 @@
 					              v-if="propForm.effectivePeriodType === 2">
 						<el-date-picker
 							v-model="propForm.effectiveTimeRange"
+							:readonly="true"
 							type="datetimerange"
 							range-separator="到"
 							start-placeholder="请选择生效开始时间"
