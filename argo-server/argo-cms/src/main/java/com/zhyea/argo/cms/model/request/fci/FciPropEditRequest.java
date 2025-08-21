@@ -32,7 +32,7 @@ public class FciPropEditRequest extends FciPropAddRequest {
 	@Override
 	public boolean check() throws ParamException {
 
-		if (YesOrNo.YES.is(getDataBindFlag()) && isBlank(getPropValueSelector())) {
+		if (YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))) {
 			throw new ArgoServerException(DATA_BIND_URL_IS_EMPTY);
 		}
 
@@ -42,12 +42,6 @@ public class FciPropEditRequest extends FciPropAddRequest {
 
 			if (null == effectiveStartTime || null == effectiveEndTime) {
 				throw new ArgoServerException(FCI_PROP_EFFECTIVE_TIME_IS_EMPTY);
-			}
-
-			// 新增时，开始时间不能<=当前时间
-			if (effectiveStartTime.isBefore(LocalDateTime.now())
-					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW);
 			}
 
 			// 结束时间需要大于开始时间

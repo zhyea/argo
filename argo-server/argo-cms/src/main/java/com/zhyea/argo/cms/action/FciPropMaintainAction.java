@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.zhyea.argo.constants.NumConstants.ONE;
@@ -137,13 +138,49 @@ public class FciPropMaintainAction {
 
 		// 取出同属性所有记录，检查起止时间是否存在重叠
 		List<FciPropItem> all = fciPropService.findByPropKey(request.getFciId(), request.getPropKey());
+		FciPropItem his = all.stream().filter(e -> Objects.equals(e.getId(), request.getId())).findFirst().orElse(null);
+
+		// 需要存在历史记录，不然编辑没有意义
+		if (null == his) {
+			throw new ArgoServerException(ResponseCode.RECORD_NOT_EXISTS_ERROR);
+		}
+
+		// 属性key不允许修改
+		if(ObjKit.nonEquals(his.getPropKey(), his.getPropKey())){
+			throw new ArgoServerException(ResponseCode.FCI_PROP_KEY_NOT_ALLOWED_EDIT);
+		}
+
+		// 历史记录已过期不允许做任何调整
+		if (TimeRelateStatusEnum.EXPIRED.is(his.getStatus())) {
+			throw new ArgoServerException(ResponseCode.EDIT_EXPIRED_RECORD_ERROR);
+		}
+		// 历史记录已生效不允许修改开始时间、数据绑定标记、数据URL、数据选择器
+		this.checkInEffectivePropEdit(request, his);
+
+		// 历史记录未生效不做任何限制
+
 		all = all.stream().filter(e -> ObjKit.nonEquals(e.getId(), request.getId()))
 				.collect(Collectors.toList());
-
 		FciPropItem tmp = fciPropConverter.editRequest2Item(request);
 		all.add(tmp);
 
 		checkTimeOverlap(all);
+
+
+	}
+
+
+	private void checkInEffectivePropEdit(FciPropEditRequest curr, FciPropItem his) {
+		if (TimeRelateStatusEnum.IN_EFFECT.isNot(his.getStatus())) {
+			return;
+		}
+
+		if (ObjKit.nonEquals(curr.getEffectiveStartTime(), his.getEffectiveStartTime())
+				|| ObjKit.nonEquals(curr.getDataBindFlag(), his.getDataBindFlag())
+				|| ObjKit.nonEquals(curr.getDataUrl(), his.getDataUrl())
+				|| ObjKit.nonEquals(curr.getPropValueSelector(), his.getPropValueSelector())) {
+			throw new ArgoServerException(ResponseCode.FCI_PROP_EFFECTIVE_DATA_NOT_ALLOW_EDIT);
+		}
 	}
 
 

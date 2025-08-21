@@ -54,6 +54,8 @@ public enum ResponseCode implements CodeDescEnum {
 
 	MODIFY_FIXED_INFO_ERROR(10010, "固定属性不允许修改"),
 
+	EDIT_EXPIRED_RECORD_ERROR(10011, "已过期记录不允许修改"),
+
 	/**
 	 * 用户名或密码错误
 	 */
@@ -83,7 +85,7 @@ public enum ResponseCode implements CodeDescEnum {
 	/**
 	 * CMS fci相关问题
 	 */
-	EDIT_EXPIRED_RECORD_ERROR(40300, "已过期记录不允许修改"),
+	FCI_PROP_KEY_NOT_ALLOWED_EDIT(40300, "属性key不允许修改"),
 
 	FCI_PROP_EFFECTIVE_TIME_OVERLAP(40301, "组件属性生效时间存在重叠"),
 
@@ -96,6 +98,8 @@ public enum ResponseCode implements CodeDescEnum {
 	FCI_PROP_EFFECTIVE_END_TIME_AFTER_START(40305, "组件属性生效结束时间需要大于开始时间"),
 
 	DATA_BIND_URL_IS_EMPTY(40306, "数据链接或者值选择器不能为空"),
+
+	FCI_PROP_EFFECTIVE_DATA_NOT_ALLOW_EDIT(40307, "生效中的配置项不允许修改"),
 
 	FCI_NOT_EXISTS_ERROR(40310, "组件实例不存在"),
 
