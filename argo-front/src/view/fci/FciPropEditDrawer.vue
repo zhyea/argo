@@ -15,7 +15,7 @@
 					</el-form-item>
 
 					<el-form-item label="属性Key" prop="propKey">
-						<el-select placeholder="请选择属性" v-model="propForm.propKey" :disabled="editableFlag">
+						<el-select placeholder="请选择属性" v-model="propForm.propKey" :disabled="fixedPropFlag">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
 							           :label="e.propKey"
@@ -28,7 +28,8 @@
 						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
 						           inline-prompt size="large"
 						           active-text="是" :active-value="1"
-						           inactive-text="否" :inactive-value="0"/>
+						           inactive-text="否" :inactive-value="0"
+						/>
 					</el-form-item>
 
 					<el-form-item label="属性Value" v-if="0===propForm.dataBindFlag" prop="propValue">
@@ -132,6 +133,13 @@ const timeRangePickerOpt = {
 }
 
 
+
+const fixedPropFlag: Ref<boolean> = ref(false)
+const pendingStatusFlag: Ref<boolean> = ref(false)
+const effectiveStatusFlag: Ref<boolean> = ref(false)
+const expiredStatusFlag: Ref<boolean> = ref(false)
+
+
 // 加载组件实例数据
 async function loadFciPropData(propId: number) {
 	if (!propId) {
@@ -143,6 +151,9 @@ async function loadFciPropData(propId: number) {
 		const propData = response.data;
 		propForm.value = propData;
 		propForm.value.effectiveTimeRange = [propData.effectiveStartTime, propData.effectiveEndTime];
+		expiredStatusFlag.value = propData.status === 1
+		effectiveStatusFlag.value = propData.status === 2
+		pendingStatusFlag.value = propData.status === 3
 	}
 }
 
@@ -165,11 +176,9 @@ function openPrepare() {
 	}
 
 	isPropFormSubmitted.value = false
-	editableFlag.value = false
+	fixedPropFlag.value = false
 }
 
-
-const editableFlag: Ref<boolean> = ref(false)
 
 // 打开组件实例抽屉-用于编辑
 async function openDrawerForEdit(fciId: number) {
@@ -177,8 +186,11 @@ async function openDrawerForEdit(fciId: number) {
 	await loadFciPropData(fciId);
 
 	if (propForm.value.propKey) {
-		editableFlag.value = true
+		fixedPropFlag.value = true
 	}
+	pendingStatusFlag.value = false
+	effectiveStatusFlag.value = false
+	expiredStatusFlag.value = false
 }
 
 
