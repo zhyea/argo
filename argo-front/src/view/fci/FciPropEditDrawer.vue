@@ -72,24 +72,20 @@
 					<el-form-item label="生效时间" prop="effectiveTimeRange"
 					              v-if="propForm.effectivePeriodType === 2">
 						<el-date-picker
-							:readonly="true"
+							v-model="propForm.effectiveStartTime"
 							type="datetimerange"
 							range-separator="到"
 							start-placeholder="请选择生效开始时间"
 							end-placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
 							:disabled-date="timeRangePickerOpt.disabledDate"
-						>
-							<template #default="{ propForm }">
-								<el-input v-model="propForm.effectiveStartTime" readonly></el-input>
-								<span>-</span>
-								<el-input v-model="propForm.effectiveEndTime"></el-input>
-							</template>
-						</el-date-picker>
+						/>
 					</el-form-item>
 
 					<el-form-item label="备注" prop="remark">
-						<el-input id="remark" type="textarea" v-model="propForm.remark" :autosize="{ minRows: 4,}"/>
+						<el-input id="remark" type="textarea" v-model="propForm.remark" :autosize="{ minRows: 4,}"
+						          :disabled="expiredStatusFlag"
+						/>
 					</el-form-item>
 				</el-card>
 
@@ -166,11 +162,10 @@ async function loadFciPropData(propId: number) {
 		const propData = response.data;
 		propForm.value = propData;
 		propForm.value.effectiveTimeRange = [propData.effectiveStartTime, propData.effectiveEndTime];
+
 		expiredStatusFlag.value = propData.status === 1
 		effectiveStatusFlag.value = propData.status === 2
 		pendingStatusFlag.value = propData.status === 3
-
-		console.log(propForm)
 	}
 }
 
@@ -192,8 +187,12 @@ function openPrepare() {
 		fciPropFormRef.value.resetFields();
 	}
 
-	isPropFormSubmitted.value = false
-	fixedPropDisabledFlag.value = false
+	isPropFormSubmitted.value = false;
+	fixedPropDisabledFlag.value = false;
+
+	expiredStatusFlag.value = false;
+	effectiveStatusFlag.value = false;
+	pendingStatusFlag.value = false;
 }
 
 
@@ -205,9 +204,6 @@ async function openDrawerForEdit(fciId: number) {
 	if (propForm.value.propKey) {
 		fixedPropDisabledFlag.value = true
 	}
-	pendingStatusFlag.value = false
-	effectiveStatusFlag.value = false
-	expiredStatusFlag.value = false
 }
 
 
@@ -244,7 +240,6 @@ function loadFcmProps(fcmId: number) {
 	getFcm(fcmId).then(response => {
 		if (response && response.data) {
 			fcmProps.value = response.data.props;
-			console.log(fcmProps.value)
 		}
 	})
 }
