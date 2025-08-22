@@ -15,7 +15,8 @@
 					</el-form-item>
 
 					<el-form-item label="属性Key" prop="propKey">
-						<el-select placeholder="请选择属性" v-model="propForm.propKey" :disabled="fixedPropFlag">
+						<el-select placeholder="请选择属性" v-model="propForm.propKey"
+						           :disabled="fixedPropDisabledFlag">
 							<el-option v-for="e in fcmProps"
 							           :key="e.propKey"
 							           :label="e.propKey"
@@ -29,19 +30,26 @@
 						           inline-prompt size="large"
 						           active-text="是" :active-value="1"
 						           inactive-text="否" :inactive-value="0"
+						           :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
 					<el-form-item label="属性Value" v-if="0===propForm.dataBindFlag" prop="propValue">
-						<el-input id="propValue" v-model="propForm.propValue"/>
+						<el-input id="propValue" v-model="propForm.propValue"
+						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+						/>
 					</el-form-item>
 
 					<el-form-item label="数据链接" v-if="1===propForm.dataBindFlag" prop="dataUrl">
-						<el-input id="name" v-model="propForm.dataUrl"/>
+						<el-input id="name" v-model="propForm.dataUrl"
+						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+						/>
 					</el-form-item>
 
 					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
-						<el-input id="propValue" v-model="propForm.propValueSelector"/>
+						<el-input id="propValue" v-model="propForm.propValueSelector"
+						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+						/>
 					</el-form-item>
 
 					<el-form-item label="是否启用" prop="switchFlag">
@@ -52,7 +60,8 @@
 					</el-form-item>
 
 					<el-form-item label="生效周期" prop="effectivePeriodType">
-						<el-radio-group id="effectivePeriodType" v-model="propForm.effectivePeriodType">
+						<el-radio-group id="effectivePeriodType" v-model="propForm.effectivePeriodType"
+						                :disabled="expiredStatusFlag || effectiveStatusFlag">
 							<el-radio v-for="e in effectivePeriodTypeEnum"
 							          :value="e[0]">
 								{{ e[1] }}
@@ -63,7 +72,6 @@
 					<el-form-item label="生效时间" prop="effectiveTimeRange"
 					              v-if="propForm.effectivePeriodType === 2">
 						<el-date-picker
-							v-model="propForm.effectiveTimeRange"
 							:readonly="true"
 							type="datetimerange"
 							range-separator="到"
@@ -71,7 +79,13 @@
 							end-placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
 							:disabled-date="timeRangePickerOpt.disabledDate"
-						/>
+						>
+							<template #default="{ propForm }">
+								<el-input v-model="propForm.effectiveStartTime" readonly></el-input>
+								<span>-</span>
+								<el-input v-model="propForm.effectiveEndTime"></el-input>
+							</template>
+						</el-date-picker>
 					</el-form-item>
 
 					<el-form-item label="备注" prop="remark">
@@ -112,6 +126,8 @@ const propForm = ref({
 	switchFlag: 1,
 	effectivePeriodType: 1,
 	effectiveTimeRange: ['', ''],
+	effectiveStartTime: '',
+	effectiveEndTime: '',
 	status: 0,
 	remark: '',
 })
@@ -133,11 +149,10 @@ const timeRangePickerOpt = {
 }
 
 
-
-const fixedPropFlag: Ref<boolean> = ref(false)
-const pendingStatusFlag: Ref<boolean> = ref(false)
-const effectiveStatusFlag: Ref<boolean> = ref(false)
+const fixedPropDisabledFlag: Ref<boolean> = ref(false)
 const expiredStatusFlag: Ref<boolean> = ref(false)
+const effectiveStatusFlag: Ref<boolean> = ref(false)
+const pendingStatusFlag: Ref<boolean> = ref(false)
 
 
 // 加载组件实例数据
@@ -154,6 +169,8 @@ async function loadFciPropData(propId: number) {
 		expiredStatusFlag.value = propData.status === 1
 		effectiveStatusFlag.value = propData.status === 2
 		pendingStatusFlag.value = propData.status === 3
+
+		console.log(propForm)
 	}
 }
 
@@ -176,7 +193,7 @@ function openPrepare() {
 	}
 
 	isPropFormSubmitted.value = false
-	fixedPropFlag.value = false
+	fixedPropDisabledFlag.value = false
 }
 
 
@@ -186,7 +203,7 @@ async function openDrawerForEdit(fciId: number) {
 	await loadFciPropData(fciId);
 
 	if (propForm.value.propKey) {
-		fixedPropFlag.value = true
+		fixedPropDisabledFlag.value = true
 	}
 	pendingStatusFlag.value = false
 	effectiveStatusFlag.value = false
