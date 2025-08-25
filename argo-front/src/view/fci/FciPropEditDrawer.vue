@@ -73,10 +73,18 @@
 					              v-if="propForm.effectivePeriodType === 2">
 						<el-date-picker
 							v-model="propForm.effectiveStartTime"
-							type="datetimerange"
-							range-separator="到"
-							start-placeholder="请选择生效开始时间"
-							end-placeholder="请选择生效结束时间"
+							type="datetime"
+							placeholder="请选择生效开始时间"
+							value-format="YYYY-MM-DD HH:mm:ss"
+							:disabled-date="timeRangePickerOpt.disabledDate"
+						/>
+
+							到
+
+						<el-date-picker
+							v-model="propForm.effectiveEndTime"
+							type="datetime"
+							placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
 							:disabled-date="timeRangePickerOpt.disabledDate"
 						/>
