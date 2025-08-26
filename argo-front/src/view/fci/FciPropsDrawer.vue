@@ -21,7 +21,6 @@
 
 				<el-table :data="fciPropsData" border stripe style="width: 100%">
 					<el-table-column show-overflow-tooltip min-width=120 prop="propKey" label="属性key"/>
-					<el-table-column show-overflow-tooltip min-width=200 prop="propValue" label="属性值"/>
 					<el-table-column width=55 prop="dataBindFlag" label="绑定数据"
 					                 :formatter="mapDataBindFlag" align="center"/>
 					<el-table-column show-overflow-tooltip min-width=350 prop="type" label="生效周期" align="center"

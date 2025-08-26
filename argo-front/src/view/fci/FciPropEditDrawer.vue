@@ -7,7 +7,7 @@
 			         label-position="right"
 			         label-width="100px"
 			         label-suffix=":"
-			         :model="propForm" ref="fciPropFormRef" :rules="fciFormRules" class="fci-form">
+			         :model="propForm" ref="fciPropFormRef" :rules="fciPropRules" class="fci-form">
 
 				<el-card class="fcm-region">
 					<el-form-item prop="fciId">
@@ -48,7 +48,7 @@
 
 					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
 						<el-input id="propValue" v-model="propForm.propValueSelector"
-						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+						          :readonly="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
@@ -76,6 +76,7 @@
 							type="datetime"
 							placeholder="请选择生效开始时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
+							:readonly="expiredStatusFlag || effectiveStatusFlag"
 							:disabled-date="timeRangeOpt.disabledStartTime"
 						/>
 						　到　
@@ -84,6 +85,7 @@
 							type="datetime"
 							placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
+							:readonly="expiredStatusFlag"
 							:disabled-date="timeRangeOpt.disabledEndTime"
 						/>
 					</el-form-item>
@@ -127,7 +129,6 @@ const propForm = ref({
 	propValueSelector: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
-	effectiveTimeRange: ['', ''],
 	effectiveStartTime: '',
 	effectiveEndTime: '',
 	status: 0,
@@ -136,12 +137,27 @@ const propForm = ref({
 
 const fciPropFormRef = ref()
 
-const fciFormRules = {
-	name: [
+const fciPropRules = {
+	propKey: [
 		{required: true, message: '请输入组件名称', trigger: 'blur'},
 	],
-	response: [
+	propValue: [
+		{required: true, message: '属性值不可为空', trigger: 'blur'},
+	],
+	dataUrl: [
+		{required: true, message: '数据连接不可为空', trigger: 'blur'},
+	],
+	propValueSelector: [
+		{required: true, message: '属性值选择器不可为空', trigger: 'blur'},
+	],
+	effectivePeriodType: [
 		{required: true, message: '请输入返回值', trigger: 'blur'},
+	],
+	effectiveStartTime: [
+		{required: true, message: '生效开始时间不可为空', trigger: 'blur'},
+	],
+	effectiveEndTime: [
+		{required: true, message: '生效结束时间不可为空', trigger: 'blur'},
 	],
 };
 
@@ -184,7 +200,6 @@ async function loadFciPropData(propId: number) {
 	if (response && response.data) {
 		const propData = response.data;
 		propForm.value = propData;
-		propForm.value.effectiveTimeRange = [propData.effectiveStartTime, propData.effectiveEndTime];
 
 		expiredStatusFlag.value = propData.status === 1
 		effectiveStatusFlag.value = propData.status === 2
