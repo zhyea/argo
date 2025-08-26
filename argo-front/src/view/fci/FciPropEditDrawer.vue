@@ -76,17 +76,15 @@
 							type="datetime"
 							placeholder="请选择生效开始时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
-							:disabled-date="timeRangePickerOpt.disabledDate"
+							:disabled-date="timeRangeOpt.disabledStartTime"
 						/>
-
-							到
-
+						　到　
 						<el-date-picker
 							v-model="propForm.effectiveEndTime"
 							type="datetime"
 							placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
-							:disabled-date="timeRangePickerOpt.disabledDate"
+							:disabled-date="timeRangeOpt.disabledEndTime"
 						/>
 					</el-form-item>
 
@@ -148,8 +146,25 @@ const fciFormRules = {
 };
 
 
-const timeRangePickerOpt = {
-	disabledDate: (time: Date) => time.getTime() < new Date().setHours(0, 0, 0, 0),
+const timeRangeOpt = {
+	disabledStartTime: (time: Date) => {
+		const minTime = new Date().setHours(0, 0, 0, 0)
+		if (propForm.value.effectiveEndTime) {
+			const maxTime = new Date(propForm.value.effectiveEndTime).getTime()
+			return !(time.getTime() < maxTime && time.getTime() >= minTime)
+		}
+		return !(time.getTime() >= minTime)
+	},
+
+	disabledEndTime: (time: Date) => {
+		let todayEarliest = new Date().setHours(0, 0, 0, 0)
+		if (propForm.value.effectiveStartTime) {
+			const t = new Date(propForm.value.effectiveStartTime).getTime()
+			return !(time.getTime() > Math.max(todayEarliest, t))
+		} else {
+			return !(time.getTime() > todayEarliest)
+		}
+	}
 }
 
 
