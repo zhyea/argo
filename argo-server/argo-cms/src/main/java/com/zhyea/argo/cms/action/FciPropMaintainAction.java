@@ -165,8 +165,6 @@ public class FciPropMaintainAction {
 		all.add(tmp);
 
 		checkTimeOverlap(all);
-
-
 	}
 
 
