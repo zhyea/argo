@@ -151,7 +151,7 @@ const timeRangeOpt = {
 		const minTime = new Date().setHours(0, 0, 0, 0)
 		if (propForm.value.effectiveEndTime) {
 			const maxTime = new Date(propForm.value.effectiveEndTime).getTime()
-			return !(time.getTime() < maxTime && time.getTime() >= minTime)
+			return !(time.getTime() <= maxTime && time.getTime() >= minTime)
 		}
 		return !(time.getTime() >= minTime)
 	},
@@ -160,7 +160,7 @@ const timeRangeOpt = {
 		let todayEarliest = new Date().setHours(0, 0, 0, 0)
 		if (propForm.value.effectiveStartTime) {
 			const t = new Date(propForm.value.effectiveStartTime).getTime()
-			return !(time.getTime() > Math.max(todayEarliest, t))
+			return !(time.getTime() >= Math.max(todayEarliest, t))
 		} else {
 			return !(time.getTime() > todayEarliest)
 		}
