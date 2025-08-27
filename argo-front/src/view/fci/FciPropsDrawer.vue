@@ -21,15 +21,12 @@
 
 				<el-table :data="fciPropsData" border stripe style="width: 100%">
 					<el-table-column show-overflow-tooltip min-width=120 prop="propKey" label="属性key"/>
-					<el-table-column width=55 prop="dataBindFlag" label="绑定数据"
-					                 :formatter="mapDataBindFlag" align="center"/>
-
-					<el-table-column prop="switchFlag" label="是否启用" width="80" align="center">
-						<template #default="scope">
-							<el-switch id="switchFlag" :model-value="scope.row.switchFlag" inline-prompt
-							           @update:modelValue="switchProp(scope.row, val)"
+					<el-table-column prop="switchFlag" label="是否启用" width="96" align="center">
+						<template v-slot="{row}">
+							<el-switch v-model="row.switchFlag" inline-prompt
 							           active-text="是" :active-value="1"
-							           inactive-text="否" :inactive-value="0"/>
+							           inactive-text="否" :inactive-value="0"
+							           @change="handleSwitch(row)"/>
 						</template>
 					</el-table-column>
 					<el-table-column show-overflow-tooltip min-width=350 prop="type" label="生效周期" align="center"
@@ -67,10 +64,10 @@
 
 import {ref} from "vue";
 import {loadEnums} from "@/api/common";
-import {findFciProps} from "@/api/fci";
-import {useRouter} from "vue-router";
-import {formatEffectivePeriod, mapDataBindFlag} from "@/utils/helper";
+import {delFciProp, findFciProps, switchProp} from "@/api/fci";
+import {formatEffectivePeriod} from "@/utils/helper";
 import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue";
+import {ElMessage} from "element-plus";
 
 const fciPropsDrawer = ref(false)
 
@@ -132,6 +129,18 @@ function showPropAddDrawer() {
 }
 
 
+function handleSwitch(row: any) {
+	const fciPropId = row.id
+	const switchFlag = row.switchFlag
+	switchProp(fciPropId, switchFlag).then(response => {
+		ElMessage.success({
+			message: (switchFlag === 1 ? '启用成功' : '禁用成功'),
+			duration: 1500,
+		});
+		loadFciPropsData()
+	})
+}
+
 // --------------------------- 以下是列表数据
 
 // 分页数据
@@ -186,7 +195,15 @@ function handleEdit(row: any) {
 
 
 function handleDelete(row: any) {
-	console.log('handleDelete', row)
+	delFciProp(row.id).then(response => {
+		if (response && response.data) {
+			ElMessage.success({
+				message: '删除成功',
+				duration: 1500,
+			})
+			loadFciPropsData()
+		}
+	})
 }
 
 </script>

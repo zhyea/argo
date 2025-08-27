@@ -97,3 +97,11 @@ export function delFciProp(fciPropId: number) {
 		propId: fciPropId,
 	})
 }
+
+
+export function switchProp(fciPropId: number, switchFlag: number) {
+	return request.post('/cms/fci/prop/switch', {
+		propId: fciPropId,
+		switchFlag: switchFlag
+	})
+}
