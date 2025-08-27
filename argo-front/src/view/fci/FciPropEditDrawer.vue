@@ -52,13 +52,6 @@
 						/>
 					</el-form-item>
 
-					<el-form-item label="是否启用" prop="switchFlag">
-						<el-switch id="switchFlag" v-model="propForm.switchFlag"
-						           inline-prompt size="large"
-						           active-text="是" :active-value="1"
-						           inactive-text="否" :inactive-value="0"/>
-					</el-form-item>
-
 					<el-form-item label="生效周期" prop="effectivePeriodType">
 						<el-radio-group id="effectivePeriodType" v-model="propForm.effectivePeriodType"
 						                :disabled="expiredStatusFlag || effectiveStatusFlag">

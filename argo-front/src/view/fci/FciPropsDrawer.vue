@@ -23,6 +23,15 @@
 					<el-table-column show-overflow-tooltip min-width=120 prop="propKey" label="属性key"/>
 					<el-table-column width=55 prop="dataBindFlag" label="绑定数据"
 					                 :formatter="mapDataBindFlag" align="center"/>
+
+					<el-table-column prop="switchFlag" label="是否启用" width="80" align="center">
+						<template #default="scope">
+							<el-switch id="switchFlag" :model-value="scope.row.switchFlag" inline-prompt
+							           @update:modelValue="switchProp(scope.row, val)"
+							           active-text="是" :active-value="1"
+							           inactive-text="否" :inactive-value="0"/>
+						</template>
+					</el-table-column>
 					<el-table-column show-overflow-tooltip min-width=350 prop="type" label="生效周期" align="center"
 					                 :formatter="formatEffectivePeriod"/>
 					<el-table-column width=80 prop="statusDesc" label="状态" align="center"/>
