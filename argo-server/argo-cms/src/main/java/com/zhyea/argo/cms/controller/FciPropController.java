@@ -3,10 +3,7 @@ package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.cms.action.FciPropMaintainAction;
 import com.zhyea.argo.cms.model.item.FciPropItem;
-import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
-import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
-import com.zhyea.argo.cms.model.request.fci.FciPropIdRelateRequest;
-import com.zhyea.argo.cms.model.request.fci.FciPropQueryRequest;
+import com.zhyea.argo.cms.model.request.fci.*;
 import com.zhyea.argo.cms.service.FciPropService;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 组件属性相关接口
@@ -101,8 +96,15 @@ public class FciPropController {
 	}
 
 
-	public List<FciPropItem> findByPropKey(Long fciId) {
-		return null;
+	/**
+	 * 根据组件ID获取组件属性列表
+	 *
+	 * @param request 请求
+	 * @return 组件属性列表
+	 */
+	@PostMapping("/switch")
+	public boolean switchProp(@RequestBody @Validated FciPropSwitchRequest request) {
+		return fciPropService.switchProp(request.getPropId(), request.getSwitchFlag());
 	}
 
 }

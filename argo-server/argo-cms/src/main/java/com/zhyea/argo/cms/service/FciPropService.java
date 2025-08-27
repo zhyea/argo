@@ -137,12 +137,12 @@ public class FciPropService {
 	/**
 	 * 关闭停用组件属性
 	 *
-	 * @param fciId   组件ID
+	 * @param propId   组件属性ID
 	 * @param propKey 属性key
 	 * @return 是否关闭成功
 	 */
-	public boolean closePropKey(Long fciId, String propKey) {
-		return propMapper.closePropKey(fciId, propKey);
+	public boolean switchProp(Long propId, Integer propKey) {
+		return propMapper.switchProp(propId, propKey);
 	}
 
 }

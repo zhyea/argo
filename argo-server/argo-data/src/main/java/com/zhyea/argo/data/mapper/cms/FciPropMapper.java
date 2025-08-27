@@ -76,17 +76,15 @@ public interface FciPropMapper {
 	 * @param propKey 属性key
 	 * @return 组件属性记录
 	 */
-	@Select("select * from ag_cms_fci_prop where deleted=1 and fci_id=#{fciId} and prop_key=#{propKey}")
 	List<FciPropEntity> findByPropKey(@Param("fciId") Long fciId, @Param("propKey") String propKey);
 
 
 	/**
 	 * 关闭组件属性
 	 *
-	 * @param fciId   组件实例ID
-	 * @param propKey 组件属性key
+	 * @param id         组件实例属性ID
+	 * @param switchFlag 开关标记
 	 * @return 是否关闭成功
 	 */
-	@Update("update ag_cms_fci_prop set switch_flag=0 where fci_id=#{fciId} and prop_key=#{propKey}")
-	Boolean closePropKey(@Param("fciId") Long fciId, @Param("propKey") String propKey);
+	Boolean switchProp(@Param("id") Long id, @Param("switchFlag") Integer switchFlag);
 }
