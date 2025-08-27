@@ -101,6 +101,10 @@ public enum ResponseCode implements CodeDescEnum {
 
 	FCI_PROP_EFFECTIVE_DATA_NOT_ALLOW_EDIT(40307, "生效中的配置项不允许修改"),
 
+	EXPIRED_FCI_PROP_CANNOT_BE_DELETED(40308, "已过期的配置项不允许删除"),
+
+	EFFECTIVE_FCI_PROP_CANNOT_BE_DELETED(40309, "生效中的配置项不允许删除"),
+
 	FCI_NOT_EXISTS_ERROR(40310, "组件实例不存在"),
 
 	FCI_EFFECTIVE_TIME_IS_EMPTY(40331, "组件实例生效时间错误"),

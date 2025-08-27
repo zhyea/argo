@@ -80,7 +80,7 @@ public class FciPropController {
 	 */
 	@PostMapping("/delete")
 	public boolean delete(@RequestBody @Validated FciPropIdRelateRequest request) {
-		return fciPropService.delete(request.getPropId());
+		return fciPropMaintainAction.delete(request.getPropId());
 	}
 
 

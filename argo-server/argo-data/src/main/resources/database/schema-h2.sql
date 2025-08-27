@@ -88,7 +88,7 @@ create table if not exists ag_cms_fci
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
     effective_end_time    datetime     not null default '1970-01-01 08:00:00.000' comment '生效结束时间',
-    switch_flag           tinyint      not null default 0 comment '开关标记',
+    switch_flag           tinyint      not null default 1 comment '开关标记',
     remark                varchar(128) not null default '' comment '备注',
 
     operator_code         varchar(32)  not null default 0 comment '操作人ID',
@@ -117,6 +117,7 @@ create table if not exists ag_cms_fci_prop
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
     effective_end_time    datetime     not null default '1970-01-01 08:00:00.000' comment '生效结束时间',
+    switch_flag           tinyint      not null default 1 comment '开关标记',
     remark                varchar(128) not null default '' comment '备注',
 
     operator_code         varchar(32)  not null default 0 comment '操作人ID',

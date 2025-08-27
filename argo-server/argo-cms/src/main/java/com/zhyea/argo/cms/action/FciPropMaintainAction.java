@@ -146,7 +146,7 @@ public class FciPropMaintainAction {
 		}
 
 		// 属性key不允许修改
-		if(ObjKit.nonEquals(his.getPropKey(), his.getPropKey())){
+		if (ObjKit.nonEquals(his.getPropKey(), his.getPropKey())) {
 			throw new ArgoServerException(ResponseCode.FCI_PROP_KEY_NOT_ALLOWED_EDIT);
 		}
 
@@ -237,4 +237,25 @@ public class FciPropMaintainAction {
 	}
 
 
+	/**
+	 * 根据id删除组件属性
+	 *
+	 * @param id 组件属性id
+	 * @return 是否删除成功
+	 */
+	public boolean delete(Long id) {
+		FciPropItem item = fciPropService.get(id);
+		if (null == item) {
+			return true;
+		}
+
+		Integer status = item.getStatus();
+		if (TimeRelateStatusEnum.EXPIRED.is(status)) {
+			throw new ArgoServerException(ResponseCode.EXPIRED_FCI_PROP_CANNOT_BE_DELETED);
+		}
+		if (TimeRelateStatusEnum.IN_EFFECT.is(status)) {
+			throw new ArgoServerException(ResponseCode.EFFECTIVE_FCI_PROP_CANNOT_BE_DELETED);
+		}
+		return fciPropService.delete(id);
+	}
 }

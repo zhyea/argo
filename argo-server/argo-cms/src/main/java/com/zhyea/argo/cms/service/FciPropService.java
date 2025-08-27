@@ -76,18 +76,6 @@ public class FciPropService {
 
 
 	/**
-	 * 根据id删除组件属性
-	 *
-	 * @param id 组件属性id
-	 * @return 是否删除成功
-	 */
-	public boolean delete(Long id) {
-		int count = propMapper.deleteById(id);
-		return count == NumConstants.ONE;
-	}
-
-
-	/**
 	 * 根据组件实例id获取组件属性列表
 	 *
 	 * @param request 组件属性查询请求
@@ -137,12 +125,23 @@ public class FciPropService {
 	/**
 	 * 关闭停用组件属性
 	 *
-	 * @param propId   组件属性ID
+	 * @param propId  组件属性ID
 	 * @param propKey 属性key
 	 * @return 是否关闭成功
 	 */
 	public boolean switchProp(Long propId, Integer propKey) {
 		return propMapper.switchProp(propId, propKey);
+	}
+
+
+	/**
+	 * 删除组件属性
+	 *
+	 * @param id 组件属性ID
+	 * @return 是否删除成功
+	 */
+	public boolean delete(Long id) {
+		return propMapper.deleteById(id) == NumConstants.ONE;
 	}
 
 }
