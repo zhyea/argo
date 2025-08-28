@@ -24,12 +24,13 @@
 				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageName" label="页面名称"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
-						align="center" />
+				                 align="center"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="更新时间"
-						align="center" />
+				                 align="center"/>
 				<el-table-column label="操作" align="center" fixed="right" width=240>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+						<el-button type="warning" size="small" @click="handleAssemble(scope.row)">组件</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
@@ -47,10 +48,12 @@
 	</div>
 
 	<page-drawer ref="appPageAddDrawerRef" @after-page-add="loadAppPageListData"/>
+	<fci-assemble-drawer ref="pageFciAssembleDrawerRef"/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import PageDrawer from "@/view/page/AppPageEditDrawer.vue";
+import FciAssembleDrawer from "@/view/page/PageFciAssembleDrawer.vue";
 import {ref, onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {deletePage, findPages} from "@/api/page";
@@ -108,12 +111,12 @@ function handleAdd() {
 }
 
 // 编辑应用页面
-function handleEdit(row) {
+function handleEdit(row: any) {
 	appPageAddDrawerRef.value.openAppPageDrawer(row.appId, row.pageId)
 }
 
 // 处理页面删除
-function handleDelete(row) {
+function handleDelete(row: any) {
 	deletePage(row.pageId).then(response => {
 		if (response && response.data) {
 			ElMessage.success({
@@ -132,6 +135,13 @@ const handlePageChange = async (val) => {
 		.then(() => {
 			loadFcmListData()
 		})*/
+}
+
+
+const pageFciAssembleDrawerRef = ref()
+
+function handleAssemble(row: any) {
+	pageFciAssembleDrawerRef.value.openPageFciAssembleDrawer(row.appId, row.pageId)
 }
 
 
