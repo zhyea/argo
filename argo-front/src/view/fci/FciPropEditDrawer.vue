@@ -216,6 +216,7 @@ function openPrepare() {
 
 	if (fciPropFormRef.value) {
 		fciPropFormRef.value.resetFields();
+		fciPropFormRef.value = {};
 	}
 
 	isPropFormSubmitted.value = false;
