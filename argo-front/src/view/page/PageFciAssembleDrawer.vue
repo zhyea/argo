@@ -2,24 +2,24 @@
 	<el-drawer title="组装FCI" v-model="pageFciAssembleDrawer" :with-header=true size="50%">
 		<el-container>
 
-			<draggable v-model="fileList" class="drag_img" item-key="url">
-				<template #item="{ element }">
-					<div class="img_item">
-						<img :src="element.url" alt="" style="width: 100%;height: 100%;">
-						<!-- 图片的遮罩 预览 和 删除 -->
-						<div class="shade">
-							<div class="img_operate">
-<!--								<el-icon>-->
-<!--									<ZoomIn @click="handlePictureCardPreview(element)" style="cursor:pointer;"/>-->
-<!--								</el-icon>-->
-<!--								<el-icon style="margin: 0 10px;">-->
-<!--									<DeleteFilled @click="handleRemove(element)"-->
-<!--									              style="cursor: pointer;"/>-->
-<!--								</el-icon>-->
-							</div>
-						</div>
-					</div>
-				</template>
+			<draggable class="drag_img" item-key="url">
+				<!--				<template #item="{ element }">
+									<div class="img_item">
+										<img :src="element.url" alt="" style="width: 100%;height: 100%;">
+										&lt;!&ndash; 图片的遮罩 预览 和 删除 &ndash;&gt;
+										<div class="shade">
+											<div class="img_operate">
+												&lt;!&ndash;								<el-icon>&ndash;&gt;
+												&lt;!&ndash;									<ZoomIn @click="handlePictureCardPreview(element)" style="cursor:pointer;"/>&ndash;&gt;
+												&lt;!&ndash;								</el-icon>&ndash;&gt;
+												&lt;!&ndash;								<el-icon style="margin: 0 10px;">&ndash;&gt;
+												&lt;!&ndash;									<DeleteFilled @click="handleRemove(element)"&ndash;&gt;
+												&lt;!&ndash;									              style="cursor: pointer;"/>&ndash;&gt;
+												&lt;!&ndash;								</el-icon>&ndash;&gt;
+											</div>
+										</div>
+									</div>
+								</template>-->
 			</draggable>
 
 		</el-container>
@@ -35,10 +35,8 @@ const pageFciAssembleDrawer = ref(false)
 
 
 // 打开组件实例抽屉
-const openPageFciAssembleDrawer = (appId, pageId) => {
+const openPageFciAssembleDrawer = (appId: number, pageId: number) => {
 	pageFciAssembleDrawer.value = true
-
-
 }
 
 
