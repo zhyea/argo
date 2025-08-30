@@ -1,7 +1,12 @@
 import {defineStore} from "pinia"
 import {findAllApps} from "@/api/app";
-import {cacheAppList, cacheCurrentApp, clearCachedAppInfo, getCachedAppList, getCachedCurrentApp} from "@/utils/cache";
+import {
+	cacheAppList, cacheCurrentApp,
+	cachedCurrentAppSideMenu, clearCachedAppInfo, getCachedAppList, getCachedCurrentApp, getCachedCurrentAppSideMenu
+} from "@/utils/cache";
 import {setLastVisitedApp} from "@/api/preference";
+import {fixMenuRoutes} from "@/utils/helper";
+import menuItems from '@/view/home/menu'
 
 export const useAppStore = defineStore("app", {
 
@@ -58,6 +63,8 @@ export const useAppStore = defineStore("app", {
 				}
 				this.currentApp = appList.find(item => item.id === appId);
 				cacheCurrentApp(this.currentApp);
+				const menus = fixMenuRoutes(menuItems.app, appId);
+				cachedCurrentAppSideMenu(menus)
 			});
 		},
 
@@ -65,6 +72,12 @@ export const useAppStore = defineStore("app", {
 		// 获取当前app
 		getCurrent() {
 			return this.currentApp || getCachedCurrentApp();
+		},
+
+
+		// 获取当前app的sideMenu
+		getCurrentAppSideMenu() {
+			return getCachedCurrentAppSideMenu()
 		},
 
 

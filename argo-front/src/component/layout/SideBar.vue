@@ -55,7 +55,6 @@ const emit = defineEmits(['menu'])
 function sidebarSwitch() {
 	emit('menu', !props.collapsed)
 }
-
 </script>
 
 

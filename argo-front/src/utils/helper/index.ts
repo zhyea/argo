@@ -11,6 +11,7 @@ import {TagItem} from "@/model/tag";
 import i18n from "@/lang";
 import {useTagStore} from "@/store/tag";
 import {Router} from "vue-router";
+import {cloneDeep} from "lodash-es";
 
 
 /**
@@ -213,7 +214,8 @@ export function getEnumDesc(enumName: string, enumCode: number) {
  * @param menus 菜单信息
  * @param appId 项目ID
  */
-export function changeMenuRoutes(menus: any, appId: number) {
+export function fixMenuRoutes(menus: any, appId: number): any {
+	menus = cloneDeep(menus)
 
 	if (!appId || !menus || menus.length === 0) return;
 
@@ -230,6 +232,8 @@ export function changeMenuRoutes(menus: any, appId: number) {
 			}
 		})
 	})
+
+	return menus;
 }
 
 
@@ -243,5 +247,5 @@ export async function goToApp(appId: number, router: Router) {
 	const tagStore = useTagStore();
 	tagStore.clearTags();
 	await router.push({path: '/app/' + appId});
-	router.go(0);
+	//router.go(0);
 }

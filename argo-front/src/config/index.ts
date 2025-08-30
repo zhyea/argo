@@ -19,7 +19,6 @@ export const ROUTE_NAMES = {
 	loginRouteName: 'Login',
 	homeRouteName: 'Home',
 	// fci
-	appHomeRouteName: 'AppHome',
 	fcmEditRouteName: 'FcmEdit',
 	fcmListRouteName: 'FcmList',
 	fciEditRouteName: 'FciEdit',

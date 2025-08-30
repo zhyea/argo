@@ -1,10 +1,12 @@
 import config from "@/config";
+import {fixMenuRoutes} from "@/utils/helper";
 
 const TOKEN = 'token:'
 const PERMISSION = 'permissions:'
 const LOCALE = 'locale:'
 const APP_LIST = 'appList:'
 const CURRENT_APP = 'current_app:'
+const CURRENT_APP_MENU = 'current_app_menu:'
 const CACHE_KEY = 'cache:'
 
 
@@ -62,8 +64,22 @@ export function cacheCurrentApp(app: any) {
 }
 
 
+export function cachedCurrentAppSideMenu(menuItems: any[]) {
+	return sessionStorage.setItem(CURRENT_APP_MENU, JSON.stringify(menuItems))
+}
+
+
 export function getCachedCurrentApp() {
 	const json = sessionStorage.getItem(CURRENT_APP)
+	if (json) {
+		return JSON.parse(json);
+	}
+	return null;
+}
+
+
+export function getCachedCurrentAppSideMenu() {
+	const json = sessionStorage.getItem(CURRENT_APP_MENU)
 	if (json) {
 		return JSON.parse(json);
 	}

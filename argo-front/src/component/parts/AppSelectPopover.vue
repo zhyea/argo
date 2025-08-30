@@ -3,7 +3,7 @@
 	            @show="showPopover" @hide="hidePopover">
 		<template #reference>
 			<span>
-				{{ currentApp['appName'] }}
+				{{ currentAppName }}
 				<el-icon :class="{'rotate-180':isOpen, 'rotate-360':!isOpen, 'app-arrow': true}">
 					<ArrowDown/>
 				</el-icon>
@@ -43,8 +43,9 @@ function hidePopover() {
 	isOpen.value = false
 }
 
-const currentApp = computed(() => {
-	return appStore.getCurrent();
+const currentAppName = computed(() => {
+	const app = appStore.getCurrent();
+	return app ? app.appName : ''
 })
 
 const appData = computed(() => {
@@ -56,7 +57,6 @@ const popover = ref()
 function selectApp(row: any) {
 	appStore.changeCurrent(row.id);
 	popover.value.hide();
-	tagStore.clearTags();
 	goToAppPage(row.id).catch((e) => {
 		console.error(e)
 	});

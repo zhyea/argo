@@ -4,7 +4,8 @@
 		<head-bar :show-breadcrumb="true"/>
 
 		<el-container direction="horizontal">
-			<sidebar :collapsed="collapseFlag" :menu-items="sideMenuRef" :active-index="route.path" @menu="changeSideBarState"/>
+			<sidebar :collapsed="collapseFlag" :menu-items="sideMenuRef" :active-index="route.path"
+			         @menu="changeSideBarState"/>
 
 			<el-container direction="vertical">
 				<tag-view/>
@@ -20,8 +21,6 @@
 			</el-container>
 		</el-container>
 	</el-container>
-
-	<app-select-dialog ref="appSelectorRef"/>
 </template>
 
 <script lang="ts" setup>
@@ -36,7 +35,7 @@ import {useTagStore} from "@/store/tag";
 import TagView from "@/component/layout/TagView.vue";
 import {useAppStore} from "@/store/app";
 import {useRoute, useRouter} from "vue-router";
-import {changeMenuRoutes} from "@/utils/helper";
+import {fixMenuRoutes} from "@/utils/helper";
 
 
 const collapseFlag = ref(false)
@@ -52,33 +51,25 @@ const cachedTags = computed(() => {
 	return tagStore.cachedTags
 })
 
+const appStore = useAppStore()
 
 const route = useRoute()
-const sideMenuRef = ref()
-
-const appStore = useAppStore()
-const appSelectorRef = ref()
-onMounted(async () => {
-	const appId = route.params.appId || appStore.getCurrentAppId()
-	const path = route.path
-
-	console.log(path)
-
-	if (!appId) {
-		appSelectorRef.value.openAppSelectorDialog();
+const sideMenuRef = computed(() => {
+	const sideMenu = appStore.getCurrentAppSideMenu();
+	console.log('sideMenu', sideMenu);
+	if (sideMenu) {
+		return sideMenu;
 	}
-
-	console.log('-------------------', sideMenuRef.value)
-
-	const sideMenu = findMenu(appId, path);
-	if (sideMenuRef.value === sideMenu) {
-		return;
-	}
-	sideMenuRef.value = sideMenu;
+	const path = route.path;
+	const appId = (appStore.getCurrentAppId() || route.params.appId);
+	return findMenu(appId, path);
 })
 
 
 function findMenu(currentAppId: number, path: string): any[] {
+
+	console.log('menu', menuItems.app)
+
 	if (!currentAppId) return menuItems.system;
 	if (!path || path === '' || path === '/' || path === '/home') return menuItems.system;
 
@@ -94,9 +85,7 @@ function findMenu(currentAppId: number, path: string): any[] {
 		return menuItems.system;
 	}
 
-	changeMenuRoutes(menuItems.app, currentAppId)
-
-	return menuItems.app;
+	return fixMenuRoutes(menuItems.app, currentAppId)
 }
 
 
