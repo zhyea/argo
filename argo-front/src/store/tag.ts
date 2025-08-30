@@ -1,7 +1,7 @@
 import {defineStore} from "pinia"
 import {ROUTE_NAMES} from "@/config";
 import {routeByName, routeFormatTag} from "@/utils/helper";
-import router from "@/router";
+import ROUTER from "@/router";
 import {TagItem} from "@/model/tag";
 
 
@@ -57,10 +57,10 @@ export const useTagStore = defineStore("tag", {
 			const [closedTag] = this.tagList.splice(index, 1);
 
 			// 如果关闭的是当前路由页面，则跳转到前一个标签页或默认页面
-			if (router.currentRoute.value.fullPath === closedTag.fullPath) {
+			if (ROUTER.currentRoute.value.fullPath === closedTag.fullPath) {
 				const previousTag = this.tagList[index - 1];
 				if (previousTag) {
-					router.push({path: previousTag.fullPath});
+					ROUTER.push({path: previousTag.fullPath});
 				}
 			}
 		},
@@ -72,6 +72,12 @@ export const useTagStore = defineStore("tag", {
 			[...tagIndices].sort((a, b) => b - a).forEach(index => {
 				this.tagList.splice(index, 1);
 			});
+		},
+
+
+		clearTags() {
+			console.log('-----------------------------------------clearTags-----');
+			this.tagList = [];
 		},
 	}
 });

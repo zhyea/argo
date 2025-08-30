@@ -16,13 +16,18 @@
 	</el-popover>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 
 import {computed, ref} from 'vue'
 import {useAppStore} from "@/store/app";
 import {ArrowDown} from "@element-plus/icons-vue";
+import {useTagStore} from "@/store/tag";
+import {useRouter} from "vue-router";
+import {goToApp} from "@/utils/helper";
 
-const appStore = useAppStore()
+const appStore = useAppStore();
+const tagStore = useTagStore();
+const router = useRouter();
 
 
 const isOpen = ref(false)
@@ -48,9 +53,18 @@ const appData = computed(() => {
 
 const popover = ref()
 
-const selectApp = (row: any) => {
-	appStore.changeCurrent(row.id)
-	popover.value.hide()
+function selectApp(row: any) {
+	appStore.changeCurrent(row.id);
+	popover.value.hide();
+	tagStore.clearTags();
+	goToAppPage(row.id).catch((e) => {
+		console.error(e)
+	});
+}
+
+
+async function goToAppPage(appId: number) {
+	await goToApp(appId, router)
 }
 
 </script>

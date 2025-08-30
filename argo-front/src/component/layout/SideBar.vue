@@ -36,7 +36,7 @@
 	</el-aside>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import MenuItem from '@/component/layout/MenuItem.vue'
 import {Expand, Fold} from "@element-plus/icons-vue";

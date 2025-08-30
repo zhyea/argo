@@ -5,14 +5,16 @@ import {ROUTE_NAMES} from "@/config";
 import {useAuthStore} from "@/store/auth";
 
 //-创建路由对象
-const router = createRouter({
+const ROUTER = createRouter({
 	history: createWebHistory(`${import.meta.env.BASE_URL}`),
 	routes: routeConfig as RouteRecordRaw[],
 })
 
 
 //全局守卫  访问非Login界面时，验证是否已登录
-router.beforeEach((to, from, next) => {
+ROUTER.beforeEach((to, from, next) => {
+
+	console.log('-----------------------to', to);
 
 	const authStore = useAuthStore();
 	const token = authStore.getToken();
@@ -29,4 +31,4 @@ router.beforeEach((to, from, next) => {
 
 })
 
-export default router
+export default ROUTER

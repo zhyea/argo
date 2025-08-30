@@ -39,7 +39,7 @@
 	</div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {ref} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import config, {ROUTE_NAMES} from '@/config'

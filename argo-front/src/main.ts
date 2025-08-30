@@ -6,7 +6,7 @@ import i18n from '@/lang/index'
 
 
 import App from './App.vue'
-import router from '@/router'
+import ROUTER from '@/router'
 
 import './assets/style.css'
 
@@ -15,7 +15,7 @@ const app = createApp(App)
 const pinia = createPinia()
 
 
-app.use(router).use(pinia).use(i18n)
+app.use(ROUTER).use(pinia).use(i18n)
 
 
 for (const [iconName, iconComponent] of Object.entries(icons as Record<string, any>)) {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ElMessage} from "element-plus";
-import router from '@/router'
+import ROUTER from '@/router'
 import config, {ROUTE_NAMES} from "@/config";
 import {useAuthStore} from "@/store/auth";
 import {cacheToken, getCachedToken, removeCachedToken} from "@/utils/cache";
@@ -56,7 +56,7 @@ axiosInst.interceptors.response.use(
 			// 执行跳转到登录页
 			console.log("token was removed")
 			authStore.removeToken()
-			router.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
+			ROUTER.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
 				console.log('go back to login page')
 			})
 		} else {

@@ -38,7 +38,7 @@
 				<el-table-column label="操作" align="center" fixed="right" width=200>
 					<template #default="scope">
 						<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-						<el-button type="success" size="small" @click="goToApp(scope.row.id)">跳转</el-button>
+						<el-button type="success" size="small" @click="goToAppPage(scope.row.id)">跳转</el-button>
 						<el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
@@ -66,7 +66,10 @@ import {useRouter} from "vue-router";
 import {useRoute} from "vue-router";
 import AppDrawer from "@/view/app/AppEditDrawer.vue";
 import {ElMessage, ElMessageBox} from "element-plus";
-import {getEnumDesc} from "@/utils/helper";
+import {getEnumDesc, goToApp} from "@/utils/helper";
+import {useTagStore} from "@/store/tag";
+
+const tagStore = useTagStore();
 
 // 搜索数据
 const keywordForm = ref({
@@ -145,6 +148,7 @@ function handleDelete(row: any) {
 }
 
 const route = useRoute()
+const router = useRouter();
 
 // 处理页面切换
 function handlePageChange(val: any) {
@@ -157,9 +161,8 @@ function handlePageChange(val: any) {
 
 
 // 跳转到应用页面
-const router = useRouter();
-const goToApp = async (appId: number) => {
-	await router.push({path: '/app/' + appId})
+async function goToAppPage(appId: number) {
+	await goToApp(appId, router)
 }
 
 

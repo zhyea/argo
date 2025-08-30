@@ -9,6 +9,8 @@ import {MenuItem} from "@/model/route";
 import routers from "@/view/home/routes";
 import {TagItem} from "@/model/tag";
 import i18n from "@/lang";
+import {useTagStore} from "@/store/tag";
+import {Router} from "vue-router";
 
 
 /**
@@ -48,7 +50,7 @@ export function submitForm<T extends Record<string, any>>(
 				console.log("submit failed");
 				submitFlag.value = false;
 			}
-		}).catch( error=>{
+		}).catch(error => {
 			console.log("submit failed", error);
 			submitFlag.value = false;
 		})
@@ -228,4 +230,18 @@ export function changeMenuRoutes(menus: any, appId: number) {
 			}
 		})
 	})
+}
+
+
+/**
+ * 跳转到项目
+ *
+ * @param appId 项目ID
+ * @param router 路径
+ */
+export async function goToApp(appId: number, router: Router) {
+	const tagStore = useTagStore();
+	tagStore.clearTags();
+	await router.push({path: '/app/' + appId});
+	router.go(0);
 }

@@ -58,7 +58,7 @@
 </template>
 
 
-<script setup>
+<script lang="ts" setup>
 
 import {computed} from 'vue'
 import {useRouter} from 'vue-router'
@@ -67,6 +67,7 @@ import {useBreadcrumbStore} from "@/store/breadcrumb";
 import {ElMessageBox, ElMessage} from "element-plus";
 import {Avatar, Grid, Key, Setting, SwitchButton, User} from "@element-plus/icons-vue";
 import {useAppStore} from "@/store/app";
+import {useTagStore} from "@/store/tag";
 import AppSelector from "@/component/parts/AppSelectPopover.vue";
 
 
@@ -79,6 +80,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 const breadcrumbStore = useBreadcrumbStore()
 const appStore = useAppStore()
+const tagStore = useTagStore()
 
 const breadcrumb = computed(() => {
 	return breadcrumbStore.breadcrumb;
@@ -94,6 +96,7 @@ const currentAppId = computed(() => {
 
 
 async function goTo(menu) {
+	tagStore.clearTags();
 	await router.push({
 		name: menu.index
 	})
