@@ -1,7 +1,7 @@
 <template>
 	<el-container class="home_container" direction="vertical">
 
-		<head-bar :show-breadcrumb="true"/>
+		<head-bar :show-breadcrumb="true" @after-app-changed="replaceSideMenu"/>
 
 		<el-container direction="horizontal">
 			<sidebar :collapsed="collapseFlag" :menu-items="sideMenuRef" :active-index="route.path"
@@ -24,18 +24,17 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, computed, onMounted} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 
 import Sidebar from '@/component/layout/SideBar.vue'
 import HeadBar from '@/component/layout/HeadBar.vue'
-import AppSelectDialog from "@/component/parts/AppSelectDialog.vue";
 
 import menuItems from '@/view/home/menu'
 import {useTagStore} from "@/store/tag";
 import TagView from "@/component/layout/TagView.vue";
 import {useAppStore} from "@/store/app";
-import {useRoute, useRouter} from "vue-router";
-import {fixMenuRoutes} from "@/utils/helper";
+import {useRoute} from "vue-router";
+import {fixSideMenu} from "@/utils/helper";
 
 
 const collapseFlag = ref(false)
@@ -54,40 +53,48 @@ const cachedTags = computed(() => {
 const appStore = useAppStore()
 
 const route = useRoute()
-const sideMenuRef = computed(() => {
-	const sideMenu = appStore.getCurrentAppSideMenu();
-	console.log('sideMenu', sideMenu);
-	if (sideMenu) {
-		return sideMenu;
-	}
-	const path = route.path;
+const sideMenuRef = ref()
+
+
+onMounted(() => {
 	const appId = (appStore.getCurrentAppId() || route.params.appId);
-	return findMenu(appId, path);
+	sideMenuRef.value = findMenu(appId, route.path)
+	console.log("------------------------- sideMenuRef22222222", appId, sideMenuRef.value)
 })
+
+
+function replaceSideMenu(currentAppId: number) {
+	console.log("++++++++++++++++++++ replaceSideMenu", currentAppId)
+
+	const path = route.path;
+	const appId = (currentAppId || appStore.getCurrentAppId() || route.params.appId);
+	console.log("++++++++++++++++++++ replaceSideMenu2", appId)
+
+	sideMenuRef.value = findMenu(appId, path)
+	console.log("++++++++++++++++++++ sideMenuRef11111111", sideMenuRef.value)
+}
 
 
 function findMenu(currentAppId: number, path: string): any[] {
 
-	console.log('menu', menuItems.app)
-
 	if (!currentAppId) return menuItems.system;
 	if (!path || path === '' || path === '/' || path === '/home') return menuItems.system;
 
-	const systemMenu = menuItems.system.find(item => {
+	const systemMenu = menuItems.system.find((item: any) => {
 		const r = item.index === path;
 		if (r) {
 			return true;
 		}
-		return item.children && item.children.find(child => child.index === path)
-	})
+		return item.children && item.children.find((child: any) => child.index === path)
+	});
 
 	if (systemMenu) {
 		return menuItems.system;
 	}
+	console.log("======================= findMenu", currentAppId)
 
-	return fixMenuRoutes(menuItems.app, currentAppId)
+	return fixSideMenu(menuItems.app, currentAppId);
 }
-
 
 </script>
 

@@ -54,18 +54,21 @@ const appData = computed(() => {
 
 const popover = ref()
 
-function selectApp(row: any) {
-	appStore.changeCurrent(row.id);
+async function selectApp(row: any) {
+	const appId: number = row.id
+	await appStore.changeCurrent(appId);
 	popover.value.hide();
-	goToAppPage(row.id).catch((e) => {
-		console.error(e)
-	});
+	emit('afterSelect', appId);
+	await goToAppPage(appId);
 }
 
 
 async function goToAppPage(appId: number) {
 	await goToApp(appId, router)
 }
+
+
+const emit = defineEmits(['afterSelect'])
 
 </script>
 

@@ -14,8 +14,6 @@ const ROUTER = createRouter({
 //全局守卫  访问非Login界面时，验证是否已登录
 ROUTER.beforeEach((to, from, next) => {
 
-	console.log('-----------------------to', to);
-
 	const authStore = useAuthStore();
 	const token = authStore.getToken();
 
@@ -28,7 +26,6 @@ ROUTER.beforeEach((to, from, next) => {
 	} else {
 		next();
 	}
-
 })
 
 export default ROUTER

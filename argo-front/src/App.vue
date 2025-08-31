@@ -46,8 +46,6 @@ watch(route, () => {
 		return;
 	}
 
-	console.log('route', route)
-
 	//breadcrumbStore.set(route.matched)
 	const tag = routeFormatTag(route as MenuItem)
 	tagStore.openTagView(tag);

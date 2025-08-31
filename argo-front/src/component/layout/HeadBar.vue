@@ -7,7 +7,7 @@
 			</el-menu-item>
 
 			<el-menu-item class="logo" index="1">
-				<app-selector/>
+				<app-selector @after-select="processAppChanged"/>
 			</el-menu-item>
 
 			<el-sub-menu index="2">
@@ -69,6 +69,7 @@ import {Avatar, Grid, Key, Setting, SwitchButton, User} from "@element-plus/icon
 import {useAppStore} from "@/store/app";
 import {useTagStore} from "@/store/tag";
 import AppSelector from "@/component/parts/AppSelectPopover.vue";
+import {fixSideMenu} from "@/utils/helper";
 
 
 defineProps({
@@ -89,13 +90,21 @@ const breadcrumb = computed(() => {
 
 const currentAppId = computed(() => {
 	if (appStore.currentApp) {
-		return appStore.currentApp.id;
+		return appStore.currentApp['id'];
 	}
 	return 0;
 });
 
 
-async function goTo(menu) {
+function processAppChanged(appId: number) {
+	if (0 == appId) {
+		return;
+	}
+	emit('afterAppChanged', appId)
+}
+
+
+async function goTo(menu: any) {
 	tagStore.clearTags();
 	await router.push({
 		name: menu.index
@@ -139,6 +148,9 @@ function logout() {
 		})
 	})
 }
+
+
+const emit = defineEmits(['afterAppChanged'])
 
 </script>
 

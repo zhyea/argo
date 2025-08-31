@@ -12,6 +12,7 @@ import i18n from "@/lang";
 import {useTagStore} from "@/store/tag";
 import {Router} from "vue-router";
 import {cloneDeep} from "lodash-es";
+import menuItems from "@/view/home/menu";
 
 
 /**
@@ -214,7 +215,7 @@ export function getEnumDesc(enumName: string, enumCode: number) {
  * @param menus 菜单信息
  * @param appId 项目ID
  */
-export function fixMenuRoutes(menus: any, appId: number): any {
+export function fixSideMenu(menus: any, appId: number): any {
 	menus = cloneDeep(menus)
 
 	if (!appId || !menus || menus.length === 0) return;

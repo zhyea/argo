@@ -1,5 +1,5 @@
 import config from "@/config";
-import {fixMenuRoutes} from "@/utils/helper";
+import {fixSideMenu} from "@/utils/helper";
 
 const TOKEN = 'token:'
 const PERMISSION = 'permissions:'
@@ -64,22 +64,8 @@ export function cacheCurrentApp(app: any) {
 }
 
 
-export function cachedCurrentAppSideMenu(menuItems: any[]) {
-	return sessionStorage.setItem(CURRENT_APP_MENU, JSON.stringify(menuItems))
-}
-
-
 export function getCachedCurrentApp() {
 	const json = sessionStorage.getItem(CURRENT_APP)
-	if (json) {
-		return JSON.parse(json);
-	}
-	return null;
-}
-
-
-export function getCachedCurrentAppSideMenu() {
-	const json = sessionStorage.getItem(CURRENT_APP_MENU)
 	if (json) {
 		return JSON.parse(json);
 	}

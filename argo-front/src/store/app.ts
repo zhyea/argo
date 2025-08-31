@@ -1,11 +1,10 @@
 import {defineStore} from "pinia"
 import {findAllApps} from "@/api/app";
 import {
-	cacheAppList, cacheCurrentApp,
-	cachedCurrentAppSideMenu, clearCachedAppInfo, getCachedAppList, getCachedCurrentApp, getCachedCurrentAppSideMenu
+	cacheAppList, cacheCurrentApp, clearCachedAppInfo, getCachedAppList, getCachedCurrentApp
 } from "@/utils/cache";
 import {setLastVisitedApp} from "@/api/preference";
-import {fixMenuRoutes} from "@/utils/helper";
+import {fixSideMenu} from "@/utils/helper";
 import menuItems from '@/view/home/menu'
 
 export const useAppStore = defineStore("app", {
@@ -19,7 +18,7 @@ export const useAppStore = defineStore("app", {
 		// 获取全部的app
 		async fetchAllApps(): Promise<Array<any>> {
 			const response = await findAllApps()
-			if (response.data) {
+			if (response && response.data) {
 				this.appList = response.data
 				cacheAppList(this.appList)
 			}
@@ -55,29 +54,21 @@ export const useAppStore = defineStore("app", {
 
 
 		// 设置当前app
-		changeCurrent(appId: number) {
-			setLastVisitedApp(appId).then(() => {
-				const appList = this.getAppList();
-				if (!appList || appList.length === 0) {
-					console.error("appList is empty");
-				}
-				this.currentApp = appList.find(item => item.id === appId);
-				cacheCurrentApp(this.currentApp);
-				const menus = fixMenuRoutes(menuItems.app, appId);
-				cachedCurrentAppSideMenu(menus)
-			});
+		async changeCurrent(appId: number) {
+			await setLastVisitedApp(appId);
+
+			const appList = this.getAppList();
+			if (!appList || appList.length === 0) {
+				console.error("appList is empty");
+			}
+			this.currentApp = appList.find(item => item.id === appId);
+			cacheCurrentApp(this.currentApp);
 		},
 
 
 		// 获取当前app
 		getCurrent() {
 			return this.currentApp || getCachedCurrentApp();
-		},
-
-
-		// 获取当前app的sideMenu
-		getCurrentAppSideMenu() {
-			return getCachedCurrentAppSideMenu()
 		},
 
 
