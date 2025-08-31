@@ -29,7 +29,8 @@ public class CommonAction {
 				.add(FcmPropTypeEnum.class)
 				.add(EffectivePeriodTypeEnum.class)
 				.add(TimeRelateStatusEnum.class)
-				.add(AppTypeEnum.class);
+				.add(AppTypeEnum.class)
+				.add(FciUsageScopeEnum.class, FciUsageScopeEnum.GLOBAL.code);
 
 		return builder.build();
 	}

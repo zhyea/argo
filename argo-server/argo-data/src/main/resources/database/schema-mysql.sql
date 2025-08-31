@@ -89,6 +89,7 @@ create table if not exists ag_cms_fci
 
     name                  varchar(64)  not null default '' comment '名称',
     fci_code              varchar(16)  not null default '' comment '组件实例编码',
+    usage_scope           tinyint      not null default 2 comment '组件实例类型',
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
     effective_end_time    datetime     not null default '1970-01-01 08:00:00.000' comment '生效结束时间',

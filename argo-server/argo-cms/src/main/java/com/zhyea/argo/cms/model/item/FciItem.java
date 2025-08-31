@@ -29,6 +29,12 @@ public class FciItem {
 
 
 	/**
+	 * 组件使用范围
+	 */
+	private Integer usageScope;
+
+
+	/**
 	 * 组件代码
 	 */
 	private String fciCode;

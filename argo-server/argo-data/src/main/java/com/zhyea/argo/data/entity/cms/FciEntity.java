@@ -31,6 +31,11 @@ public class FciEntity extends BaseEntity {
 	private String fciCode;
 
 	/**
+	 * 组件使用范围
+	 */
+	private Integer usageScope;
+
+	/**
 	 * 组件名称
 	 */
 	private String name;

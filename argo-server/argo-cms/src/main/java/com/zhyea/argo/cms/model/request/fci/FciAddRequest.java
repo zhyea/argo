@@ -3,6 +3,7 @@ package com.zhyea.argo.cms.model.request.fci;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
+import com.zhyea.argo.constants.enums.FciUsageScopeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.except.ArgoServerException;
 import jakarta.validation.constraints.NotBlank;
@@ -47,6 +48,14 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	 */
 	@NotBlank(message = "name不能为空")
 	private String name;
+
+
+	/**
+	 * 组件开关标志
+	 */
+	@EnumVal(enumClass = FciUsageScopeEnum.class, message = "使用范围取值错误")
+	@NotNull(message = "使用范围不能为空")
+	private Integer usageScope;
 
 
 	/**

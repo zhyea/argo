@@ -16,4 +16,28 @@
     </insert>
 
 
+    <!-- 查询组件实例的适用范围 -->
+    <select id="findFciUsage" resultType="com.zhyea.argo.data.entity.cms.PageEntity">
+        select * from ag_cms_app_page page where exists(select 1 from ag_cms_page_fci pf
+        where pf.page_id = page.id
+        and pf.fci_id = #{fciId})
+    </select>
+
+
+    <!-- 查询可用的组件实例,结果需要去重 -->
+    <select id="findAvailableFci" resultType="com.zhyea.argo.data.entity.cms.FciEntity">
+        select f.* from ag_cms_fci f left join ag_cms_page_fci pf on f.id = pf.fci_id
+        where f.deleted = 0
+        and f.app_id = #{appId}
+        and (pf.page_id is null or ((f.usage_scope = 2 or f.usage_scope = 1) and pf.page_id != #{pageId}))
+    </select>
+
+
+    <!-- 根据页面id查询页面使用的组件实例 -->
+    <select id="findByPageId" resultType="com.zhyea.argo.data.entity.cms.FciEntity">
+        select * from ag_cms_fci f where exists(select 1 from ag_cms_page_fci pf
+        where pf.fci_id = f.id
+        and pf.page_id = #{pageId})
+    </select>
+
 </mapper>

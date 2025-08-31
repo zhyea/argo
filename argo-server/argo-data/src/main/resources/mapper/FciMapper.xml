@@ -13,6 +13,7 @@
         fcm_id,
         fci_code,
         name,
+        usage_scope,
         switch_flag,
         effective_period_type,
         <if test="null != e.effectiveStartTime">
@@ -28,6 +29,7 @@
         #{e.fcmId},
         #{e.fciCode},
         #{e.name},
+        #{e.usageScope},
         #{e.switchFlag},
         #{e.effectivePeriodType},
         <if test="null != e.effectiveStartTime">
@@ -45,6 +47,7 @@
     <update id="modify" parameterType="com.zhyea.argo.data.entity.cms.FciEntity">
         update ag_cms_fci
         set `name`=#{e.name},
+        usage_scope=#{e.usageScope},
         switch_flag=#{e.switchFlag},
         effective_period_type=#{e.effectivePeriodType},
         <if test="null != e.effectiveStartTime">

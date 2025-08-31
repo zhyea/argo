@@ -55,6 +55,15 @@ public interface FciConverter {
 
 
 	/**
+	 * 实体对象列表转换为Item对象列表
+	 *
+	 * @param entityList 数据传输对象列表
+	 * @return Item对象列表
+	 */
+	List<FciItem> entityList2ItemList(List<FciEntity> entityList);
+
+
+	/**
 	 * 实体对象转换为Item对象
 	 *
 	 * @param dto 实体对象
