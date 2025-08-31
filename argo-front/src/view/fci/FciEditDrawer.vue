@@ -19,6 +19,15 @@
 						<el-input id="name" v-model="fciForm.name"/>
 					</el-form-item>
 
+					<el-form-item label="使用范围" prop="usageScope">
+						<el-radio-group id="usageScope" v-model="fciForm.usageScope">
+							<el-radio v-for="e in usageScopeEnum"
+							          :value="e[0]">
+								{{ e[1] }}
+							</el-radio>
+						</el-radio-group>
+					</el-form-item>
+
 					<el-form-item label="是否启用" prop="switchFlag">
 						<el-switch id="switchFlag" v-model="fciForm.switchFlag"
 						           inline-prompt size="large"
@@ -76,6 +85,7 @@ const fciForm = ref({
 	fcmId: 0,
 	appId: 0,
 	name: '',
+	usageScope: 2,
 	switchFlag: 1,
 	effectivePeriodType: 1,
 	effectiveTimeRange: ['', ''],
@@ -116,6 +126,9 @@ const isFciFormSubmitted = ref(false)
 // 枚举相关信息
 const effectivePeriodTypeEnum = computed(() => {
 	return enumStore.getEnumMap('EffectivePeriodTypeEnum');
+})
+const usageScopeEnum = computed(() => {
+	return enumStore.getEnumMap('FciUsageScopeEnum');
 })
 
 

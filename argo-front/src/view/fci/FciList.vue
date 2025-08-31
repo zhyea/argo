@@ -20,6 +20,7 @@
 				                 class-name="table-user-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
 				<el-table-column min-width=60 prop="type" label="类型" :formatter="mapTypeEnum"/>
+				<el-table-column min-width=100 prop="usageScope" label="使用范围" :formatter="mapUsageScopeEnum"/>
 				<el-table-column show-overflow-tooltip min-width=220 prop="type" label="生效周期" align="center"
 				                 :formatter="formatEffectivePeriod"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
@@ -163,6 +164,12 @@ onMounted(() => {
 function mapTypeEnum(row: any, column: any, cellValue: any, index: number) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
+function mapUsageScopeEnum(row: any, column: any, cellValue: any, index: number) {
+	return enumStore.getEnumDesc('FciUsageScopeEnum', row.type)
+}
+
+
+
 </script>
 
 <style scoped lang="less">
