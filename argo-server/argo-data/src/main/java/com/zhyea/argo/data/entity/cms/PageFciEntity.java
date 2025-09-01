@@ -24,4 +24,10 @@ public class PageFciEntity extends BaseEntity {
 	private Long fciId;
 
 
+	/**
+	 * 排序号
+	 */
+	private Integer seqNo;
+
+
 }

@@ -145,6 +145,7 @@ create table if not exists ag_cms_page_fci
 
     page_id       bigint      not null default 0 comment '页面ID',
     fci_id        bigint      not null default 0 comment '组件实例ID',
+    seq_no        int         not null default 0 comment '排序号',
 
     operator_code varchar(32) not null default 0 comment '操作人ID',
     deleted       tinyint     not null default 0 comment '删除标记',
