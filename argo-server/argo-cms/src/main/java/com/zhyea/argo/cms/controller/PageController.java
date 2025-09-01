@@ -1,5 +1,7 @@
 package com.zhyea.argo.cms.controller;
 
+import com.zhyea.argo.cms.action.PageFciAssembleAction;
+import com.zhyea.argo.cms.model.item.PageFciAssembleItem;
 import com.zhyea.argo.cms.model.item.PageItem;
 import com.zhyea.argo.cms.model.request.page.*;
 import com.zhyea.argo.cms.service.PageService;
@@ -23,11 +25,13 @@ public class PageController {
 
 
 	private final PageService pageService;
+	private final PageFciAssembleAction pageFciAssembleAction;
 
 
 	@Autowired
-	public PageController(PageService pageService) {
+	public PageController(PageService pageService, PageFciAssembleAction pageFciAssembleAction) {
 		this.pageService = pageService;
+		this.pageFciAssembleAction = pageFciAssembleAction;
 	}
 
 
@@ -123,5 +127,17 @@ public class PageController {
 	@PostMapping("/map-fci")
 	public boolean mapFci(@RequestBody @Validated PageFciMapRequest request) {
 		return pageService.mapFci(request);
+	}
+
+
+	/**
+	 * 获取页面组件实例列表
+	 *
+	 * @param request 页面id相关请求
+	 * @return 页面相关组件实例列表
+	 */
+	@PostMapping("/relate-fci-list")
+	public PageFciAssembleItem pageFciList(@RequestBody @Validated PageIdRelateRequest request) {
+		return pageFciAssembleAction.pageFciList(request.getPageId());
 	}
 }

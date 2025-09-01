@@ -20,5 +20,5 @@ public class PageFciAssembleItem {
 	private List<FciItem> availableFciList;
 
 
-	private List<FciItem> usedFciList;
+	private List<FciItem> embeddedFciList;
 }

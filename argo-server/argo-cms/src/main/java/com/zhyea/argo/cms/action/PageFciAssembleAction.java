@@ -2,7 +2,10 @@ package com.zhyea.argo.cms.action;
 
 import com.zhyea.argo.cms.model.item.FciItem;
 import com.zhyea.argo.cms.model.item.PageFciAssembleItem;
+import com.zhyea.argo.cms.model.item.PageItem;
 import com.zhyea.argo.cms.service.PageService;
+import com.zhyea.argo.constants.ResponseCode;
+import com.zhyea.argo.except.ArgoServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,13 +30,18 @@ public class PageFciAssembleAction {
 	}
 
 
-	public PageFciAssembleItem pageFciList(Long appId, Long pageId) {
+	public PageFciAssembleItem pageFciList(Long pageId) {
+		PageItem page = pageService.get(pageId);
+		if (null == page) {
+			throw new ArgoServerException(ResponseCode.PAGE_NOT_EXISTS_ERROR);
+		}
+
 		PageFciAssembleItem result = new PageFciAssembleItem();
-		List<FciItem> availableFciList = pageService.findAvailableFci(appId, pageId);
+		List<FciItem> availableFciList = pageService.findAvailableFci(page.getAppId(), pageId);
 		List<FciItem> usedFciList = pageService.findByPageId(pageId);
 
 		result.setAvailableFciList(availableFciList);
-		result.setUsedFciList(usedFciList);
+		result.setEmbeddedFciList(usedFciList);
 
 		return result;
 	}

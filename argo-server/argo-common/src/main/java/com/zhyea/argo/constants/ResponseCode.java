@@ -118,6 +118,7 @@ public enum ResponseCode implements CodeDescEnum {
 	 * CMS appPage相关问题
 	 */
 	APP_PAGE_ALREADY_EXISTS_ERROR(40400, "相同ID页面已存在"),
+	PAGE_NOT_EXISTS_ERROR(40401, "页面不存在"),
 
 	;
 
