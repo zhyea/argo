@@ -117,9 +117,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
+import {ref, reactive} from 'vue'
+import {ElMessage} from 'element-plus'
 import draggable from 'vuedraggable'
+import {relateFciList} from "@/api/page";
 
 // 状态管理
 const isSaving = ref(false)
@@ -127,11 +128,11 @@ const isDragging = ref(false)
 
 // 原始数据备份（用于重置）
 const originalList = [
-	{ id: 1, name: '项目 1' },
-	{ id: 2, name: '项目 2' },
-	{ id: 3, name: '项目 3' },
-	{ id: 4, name: '项目 4' },
-	{ id: 5, name: '项目 5' },
+	{id: 1, name: '项目 1'},
+	{id: 2, name: '项目 2'},
+	{id: 3, name: '项目 3'},
+	{id: 4, name: '项目 4'},
+	{id: 5, name: '项目 5'},
 ]
 
 // 响应式数据
@@ -140,11 +141,11 @@ const list = ref([...originalList])
 
 // 原始数据备份（用于重置）
 const originalList2 = [
-	{ id: 7, name: '项目 7' },
-	{ id: 8, name: '项目 8' },
-	{ id: 9, name: '项目 9' },
-	{ id: 10, name: '项目 10' },
-	{ id: 11, name: '项目 11' },
+	{id: 7, name: '项目 7'},
+	{id: 8, name: '项目 8'},
+	{id: 9, name: '项目 9'},
+	{id: 10, name: '项目 10'},
+	{id: 11, name: '项目 11'},
 ]
 
 // 响应式数据
@@ -198,7 +199,17 @@ const resetOrder = () => {
 }
 
 
+const availableFciList = ref([])
+const embeddedFciList = ref([])
 
+async function loadRelatedFciList(pageId: number) {
+	const response = await relateFciList(pageId)
+	if (response && response.data) {
+		const fciData = response.data;
+		embeddedFciList.value = fciData.embeddedFciList;
+		availableFciList.value = fciData.availableFciList;
+	}
+}
 
 
 const pageFciAssembleDrawer = ref(false)

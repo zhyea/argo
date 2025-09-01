@@ -55,6 +55,15 @@ export function generatePageCode() {
 }
 
 
+
+// 获取页面关联的FCI列表
+export function relateFciList(pageId: number) {
+	return request.post('/cms/app/page/relate-fci-list', {
+		pageId: pageId,
+	})
+}
+
+
 // 关联FCI实例
 export function mapFciList(pageId: number, fciIdList: Array<number>) {
 	return request.post('/cms/app/page/map-fci', {
