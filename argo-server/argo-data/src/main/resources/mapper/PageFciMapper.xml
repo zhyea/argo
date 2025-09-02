@@ -6,12 +6,11 @@
 
 
     <!-- 批量创建页面和组件实例的关联 -->
-    <insert id="batchAdd" keyProperty="id" useGeneratedKeys="true" keyColumn="id">
-        insert into ag_cms_page_fci(page_id, fci_id)
+    <insert id="batchAdd" useGeneratedKeys="true">
+        replace into ag_cms_page_fci(page_id, fci_id, seq_no, operator_code)
         values
-        <foreach collection="fciIdList" item="e" separator=",">
-            (#{pageId},
-            #{e},)
+        <foreach collection="fciIdList" item="e" index="idx" separator=",">
+            (#{pageId}, #{e}, #{idx}, #{operatorCode})
         </foreach>
     </insert>
 
@@ -41,5 +40,13 @@
         and pf.page_id = #{pageId}
         order by pf.seq_no asc
     </select>
+
+
+    <delete id="deleteByIds">
+        delete from ag_cms_page_fci where page_id=#{pageId} and fci_id in
+        <foreach item="item" index="index" collection="fciIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
 </mapper>

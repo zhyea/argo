@@ -152,7 +152,8 @@ create table if not exists ag_cms_page_fci
     create_time   datetime    not null default now() comment '创建时间',
     update_time   timestamp   not null default current_timestamp on update current_timestamp comment '更新时间',
 
-    primary key (id)
+    primary key (id),
+    unique index idx_page_fci(page_id, fci_id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

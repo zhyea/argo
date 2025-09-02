@@ -13,16 +13,16 @@ import com.zhyea.argo.data.entity.cms.PageEntity;
 import com.zhyea.argo.data.mapper.cms.PageFciMapper;
 import com.zhyea.argo.data.mapper.cms.PageMapper;
 import com.zhyea.argo.except.ArgoServerException;
+import com.zhyea.argo.tools.auth.AuthContext;
+import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.group.E;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.commons.tools.ShortCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.zhyea.argo.constants.ResponseCode.APP_PAGE_ALREADY_EXISTS_ERROR;
 
@@ -31,6 +31,7 @@ import static com.zhyea.argo.constants.ResponseCode.APP_PAGE_ALREADY_EXISTS_ERRO
  *
  * @author robin
  */
+@Slf4j
 @Service
 public class PageService {
 
@@ -160,9 +161,24 @@ public class PageService {
 	 * @param request 页面组件实例映射请求
 	 * @return 是否映射成功
 	 */
+	@Transactional
 	public boolean mapFci(PageFciMapRequest request) {
-		Integer count = pageFciMapper.batchAdd(request.getPageId(), request.getFciIdList());
-		return request.getFciIdList().size() == count;
+		String operatorCode = AuthContext.getUsername();
+		List<FciEntity> history = pageFciMapper.findByPageId(request.getPageId());
+
+		List<Long> toDeleteIdList = new LinkedList<>();
+		for (FciEntity his : history) {
+			if (!request.getFciIdList().contains(his.getId())) {
+				toDeleteIdList.add(his.getId());
+			}
+		}
+		pageFciMapper.deleteByIds(request.getPageId(), toDeleteIdList);
+
+		Integer count = pageFciMapper.batchAdd(request.getPageId(), request.getFciIdList(), operatorCode);
+
+		logger.info("PageService-mapFci，total:{}", count);
+
+		return true;
 	}
 
 
