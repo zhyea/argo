@@ -3,9 +3,9 @@
 		<el-container>
 			<el-row :gutter="24" style="width: 100%">
 				<el-col :span="8">
-					<el-card>
+					<el-card body-style="background-color: #fdfefe; min-height:160px;">
 						<template #header>
-							<div class="card-header">组件实例</div>
+							<div class="card-header">可用组件</div>
 						</template>
 
 						<!-- 拖拽列表组件 -->
@@ -14,10 +14,7 @@
 							item-key="id"
 							:animation="300"
 							:disabled="isSaving"
-							class="list-group"
-							ghost-class="ghost-class"
-							chosen-class="chosen-class"
-							drag-class="drag-class"
+							ghost-class="ghost-drag-item"
 							@start="onDragStart"
 							@end="onDragEnd"
 							@change="onChange"
@@ -31,10 +28,9 @@
 				</el-col>
 
 				<el-col :span="16">
-
-					<el-card class="mb-4">
+					<el-card body-style="background-color: #f0f3f4; min-height:160px;">
 						<template #header>
-							<div class="card-header">页面信息</div>
+							<div class="card-header">页面组件</div>
 						</template>
 
 						<!-- 拖拽列表组件 -->
@@ -43,10 +39,7 @@
 							item-key="id"
 							:animation="300"
 							:disabled="isSaving"
-							class="list-group"
-							ghost-class="ghost-class"
-							chosen-class="chosen-class"
-							drag-class="drag-class"
+							ghost-class="ghost-drag-item"
 							@start="onDragStart"
 							@end="onDragEnd"
 							@change="onChange"
@@ -56,8 +49,8 @@
 								<el-card shadow="always">{{ element.name }}</el-card>
 							</template>
 						</draggable>
-						<template #footer>
-							<el-button type="primary" :loading="isSaving" @click="handleSave"> 保存排序</el-button>
+						<template #footer style="text-align: right">
+							<el-button type="primary" @click="handleSave">保存</el-button>
 						</template>
 					</el-card>
 				</el-col>
@@ -93,8 +86,8 @@ function onChange(evt: any) {
 	console.log('排序发生变化：', evt)
 }
 
-// 保存排序
-const handleSave = async () => {
+// 保存
+async function handleSave() {
 
 }
 
@@ -121,3 +114,13 @@ async function openPageFciAssembleDrawer(appId: number, pageId: number) {
 
 defineExpose({openPageFciAssembleDrawer})
 </script>
+<style scoped lang="less">
+.ghost-drag-item {
+	background-color: #EAF2F8;
+}
+
+.fci-drag-container {
+	min-height: 90px;
+	background-color: #0e41c9 !important;
+}
+</style>
