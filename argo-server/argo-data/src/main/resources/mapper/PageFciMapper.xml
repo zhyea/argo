@@ -30,14 +30,16 @@
         where f.deleted = 0
         and f.app_id = #{appId}
         and (pf.page_id is null or ((f.usage_scope = 2 or f.usage_scope = 1) and pf.page_id != #{pageId}))
+        order by id desc
     </select>
 
 
     <!-- 根据页面id查询页面使用的组件实例 -->
     <select id="findByPageId" resultType="com.zhyea.argo.data.entity.cms.FciEntity">
-        select * from ag_cms_fci f where exists(select 1 from ag_cms_page_fci pf
+        select f.* from ag_cms_fci f inner join ag_cms_page_fci pf on f.id = pf.fci_id
         where pf.fci_id = f.id
-        and pf.page_id = #{pageId})
+        and pf.page_id = #{pageId}
+        order by pf.seq_no asc
     </select>
 
 </mapper>
