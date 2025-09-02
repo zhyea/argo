@@ -20,8 +20,8 @@
 							@change="onChange"
 							group="pageFciList"
 						>
-							<template #item="{ element, index }">
-								<el-card shadow="always">{{ element.name }}</el-card>
+							<template #item="{ element : ele, index }">
+								<el-card shadow="always">{{ ele.fciCode }}({{ ele.name }})</el-card>
 							</template>
 						</draggable>
 					</el-card>
@@ -45,8 +45,8 @@
 							@change="onChange"
 							group="pageFciList"
 						>
-							<template #item="{ element, index }">
-								<el-card shadow="always">{{ element.name }}</el-card>
+							<template #item="{ element : ele, index }">
+								<el-card shadow="always">{{ ele.fciCode }}({{ ele.name }})</el-card>
 							</template>
 						</draggable>
 						<template #footer style="text-align: right">
@@ -62,7 +62,8 @@
 <script lang="ts" setup>
 import {ref, reactive} from 'vue'
 import draggable from 'vuedraggable'
-import {relateFciList} from "@/api/page";
+import {mapFciList, relateFciList} from "@/api/page";
+import {ElMessage} from "element-plus";
 
 // 状态管理
 const isSaving = ref(false)
@@ -72,29 +73,38 @@ const isDragging = ref(false)
 // 拖拽开始事件
 function onDragStart() {
 	isDragging.value = true
-	console.log('开始拖拽')
 }
 
 // 拖拽结束事件
 function onDragEnd() {
 	isDragging.value = false
-	console.log('拖拽结束，新顺序：', embeddedFciList.value)
 }
 
 // 排序变化事件
 function onChange(evt: any) {
-	console.log('排序发生变化：', evt)
 }
 
 // 保存
 async function handleSave() {
-
+	const pageId = pageIdRef.value
+	const fciIdList = embeddedFciList.value.map(item => item.id)
+	mapFciList(pageId, fciIdList).then(res => {
+		if (res && res.data) {
+			ElMessage.success('保存成功');
+		} else {
+			ElMessage.error('保存失败');
+		}
+	}).catch(err => {
+		console.log(err)
+	})
 }
 
-const candidateFciList = ref([])
-const embeddedFciList = ref([])
+const pageIdRef = ref<number>(0)
+const candidateFciList = ref<any[]>([])
+const embeddedFciList = ref<any[]>([])
 
 async function loadRelatedFciList(pageId: number) {
+	pageIdRef.value = pageId
 	const response = await relateFciList(pageId)
 	if (response && response.data) {
 		const fciData = response.data;

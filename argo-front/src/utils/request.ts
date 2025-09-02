@@ -4,6 +4,7 @@ import ROUTER from '@/router'
 import config, {ROUTE_NAMES} from "@/config";
 import {useAuthStore} from "@/store/auth";
 import {cacheToken, getCachedToken, removeCachedToken} from "@/utils/cache";
+import {useRouter} from "vue-router";
 
 // axios.defaults.withCredentials = true
 // axios.defaults.crossDomain = true
@@ -42,7 +43,7 @@ axiosInst.interceptors.response.use(
 	resp => {
 		const authStore = useAuthStore()
 
-		const result = resp.data
+		const result = resp.data;
 
 		//判断code码
 		const code = result.code;
