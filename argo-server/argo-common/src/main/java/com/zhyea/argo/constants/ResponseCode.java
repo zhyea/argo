@@ -119,6 +119,7 @@ public enum ResponseCode implements CodeDescEnum {
 	 */
 	APP_PAGE_ALREADY_EXISTS_ERROR(40400, "相同ID页面已存在"),
 	PAGE_NOT_EXISTS_ERROR(40401, "页面不存在"),
+	PAGE_CANNOT_BE_DELETED_WITH_FCI(40402, "页面已关联组件，请先解除关联关系"),
 
 	;
 

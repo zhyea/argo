@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 import static com.zhyea.argo.constants.ResponseCode.APP_PAGE_ALREADY_EXISTS_ERROR;
+import static com.zhyea.argo.constants.ResponseCode.PAGE_CANNOT_BE_DELETED_WITH_FCI;
 
 /**
  * 应用页面相关业务处理类
@@ -95,13 +96,28 @@ public class PageService {
 
 
 	/**
+	 * 根据页面编码获取应用页面
+	 *
+	 * @param pageCode 页面编码
+	 * @return 应用页面
+	 */
+	public PageItem getByPageCode(String pageCode) {
+		PageEntity entity = pageMapper.getByPageCode(pageCode);
+		return pageConverter.entity2Item(entity);
+	}
+
+
+	/**
 	 * 根据id删除应用页面
 	 *
 	 * @param pageId 应用页面id
 	 * @return 是否删除成功
 	 */
 	public boolean delete(Long pageId) {
-		// TODO 删除之前检查该应用页面是否被关联到其他组件实例中
+		List<FciEntity> fciList = pageFciMapper.findByPageId(pageId);
+		if (Collections2.isNotEmpty(fciList)) {
+			throw new ArgoServerException(PAGE_CANNOT_BE_DELETED_WITH_FCI);
+		}
 		int count = pageMapper.deleteById(pageId);
 		return count == NumConstants.ONE;
 	}

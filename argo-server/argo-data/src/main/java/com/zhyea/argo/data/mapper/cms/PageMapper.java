@@ -82,4 +82,14 @@ public interface PageMapper {
 	@Select("select count(id) from ag_cms_app_page where page_code=#{pageCode} and deleted=0")
 	long countByPageCode(@Param("pageCode") String pageCode);
 
+
+	/**
+	 * 根据页面code获取应用页面记录
+	 *
+	 * @param pageCode 页面code
+	 * @return 应用页面记录
+	 */
+	@Select("select * from ag_cms_app_page where page_code= #{pageCode} and deleted=0")
+	PageEntity getByPageCode(@Param("pageCode") String pageCode);
+
 }
