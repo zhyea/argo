@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.group.E;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.commons.tools.ShortCode;
+import org.chobit.commons.utils.Collections2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -162,21 +163,21 @@ public class PageService {
 	 * @return 是否映射成功
 	 */
 	@Transactional
-	public boolean mapFci(PageFciMapRequest request) {
+	public boolean maintainFci(PageFciMapRequest request) {
 		String operatorCode = AuthContext.getUsername();
 		List<FciEntity> history = pageFciMapper.findByPageId(request.getPageId());
 
-		List<Long> toDeleteIdList = new LinkedList<>();
-		for (FciEntity his : history) {
-			if (!request.getFciIdList().contains(his.getId())) {
-				toDeleteIdList.add(his.getId());
-			}
+		List<Long> toDeleteIdList = history.stream().map(FciEntity::getId)
+				.filter(id -> !request.getFciIdList().contains(id)).toList();
+
+		if (Collections2.isNotEmpty(toDeleteIdList)) {
+			pageFciMapper.deleteByIds(request.getPageId(), toDeleteIdList);
 		}
-		pageFciMapper.deleteByIds(request.getPageId(), toDeleteIdList);
 
-		Integer count = pageFciMapper.batchAdd(request.getPageId(), request.getFciIdList(), operatorCode);
-
-		logger.info("PageService-mapFci，total:{}", count);
+		if (Collections2.isNotEmpty(request.getFciIdList())) {
+			Integer count = pageFciMapper.batchAdd(request.getPageId(), request.getFciIdList(), operatorCode);
+			logger.info("PageService-mapFci 批量新增组件页面 受影响记录总数:{}", count);
+		}
 
 		return true;
 	}

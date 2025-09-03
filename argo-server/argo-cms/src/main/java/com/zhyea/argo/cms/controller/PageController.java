@@ -3,6 +3,7 @@ package com.zhyea.argo.cms.controller;
 import com.zhyea.argo.cms.action.PageFciAssembleAction;
 import com.zhyea.argo.cms.model.item.PageFciAssembleItem;
 import com.zhyea.argo.cms.model.item.PageItem;
+import com.zhyea.argo.cms.model.request.fci.FciIdRelateRequest;
 import com.zhyea.argo.cms.model.request.page.*;
 import com.zhyea.argo.cms.service.PageService;
 import org.chobit.commons.model.response.PageResult;
@@ -126,7 +127,7 @@ public class PageController {
 	 */
 	@PostMapping("/map-fci")
 	public boolean mapFci(@RequestBody @Validated PageFciMapRequest request) {
-		return pageService.mapFci(request);
+		return pageService.maintainFci(request);
 	}
 
 
@@ -139,5 +140,17 @@ public class PageController {
 	@PostMapping("/relate-fci-list")
 	public PageFciAssembleItem pageFciList(@RequestBody @Validated PageIdRelateRequest request) {
 		return pageFciAssembleAction.pageFciList(request.getPageId());
+	}
+
+
+	/**
+	 * 获取使用组件实例的页面列表
+	 *
+	 * @param request 组件id相关请求
+	 * @return 使用组件的页面列表
+	 */
+	@PostMapping("/fci-usage")
+	public List<PageItem> findFciUsage(@RequestBody @Validated FciIdRelateRequest request) {
+		return pageService.findFciUsage(request.getFciId());
 	}
 }

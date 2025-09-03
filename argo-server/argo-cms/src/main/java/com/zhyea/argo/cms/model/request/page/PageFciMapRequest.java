@@ -1,10 +1,8 @@
 package com.zhyea.argo.cms.model.request.page;
 
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
-import lombok.Data;
-
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.util.List;
 
@@ -28,6 +26,6 @@ public class PageFciMapRequest extends BaseOperateRequest {
 	/**
 	 * 组件ID集合
 	 */
-	@NotEmpty(message = "组件ID不能为空")
+	@NotNull(message = "组件ID不能为空")
 	private List<Long> fciIdList;
 }
