@@ -71,3 +71,11 @@ export function mapFciList(pageId: number, fciIdList: Array<number>) {
 		fciIdList: fciIdList,
 	})
 }
+
+
+// 使用FCI的页面列表
+export function fciUsageList(fciId: number) {
+	return request.post('/cms/app/page/fci-usage', {
+		fciId: fciId,
+	})
+}

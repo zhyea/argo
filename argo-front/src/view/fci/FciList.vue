@@ -17,7 +17,7 @@
 			<el-table :data="fciListData" border stripe style="width: 100%">
 				<el-table-column show-overflow-tooltip min-width=120 prop="fcmName" label="模型名称"/>
 				<el-table-column show-overflow-tooltip min-width=90 prop="fciCode" label="组件Code"
-				                 class-name="table-user-code" align="center"/>
+				                 class-name="mono-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="name" label="组件名称"/>
 				<el-table-column min-width=60 prop="type" label="类型" :formatter="mapTypeEnum"/>
 				<el-table-column min-width=100 prop="usageScope" label="使用范围" :formatter="mapUsageScopeEnum"/>
@@ -164,10 +164,10 @@ onMounted(() => {
 function mapTypeEnum(row: any, column: any, cellValue: any, index: number) {
 	return enumStore.getEnumDesc('FcmTypeEnum', row.type)
 }
-function mapUsageScopeEnum(row: any, column: any, cellValue: any, index: number) {
-	return enumStore.getEnumDesc('FciUsageScopeEnum', row.type)
-}
 
+function mapUsageScopeEnum(row: any, column: any, cellValue: any, index: number) {
+	return enumStore.getEnumDesc('FciUsageScopeEnum', row.usageScope)
+}
 
 
 </script>

@@ -26,7 +26,7 @@
 				</el-table-column>
 
 				<el-table-column show-overflow-tooltip min-width=90 prop="appCode" label="应用Code"
-				                 class-name="table-user-code" align="center"/>
+				                 class-name="mono-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=150 prop="appName" label="应用名称"/>
 				<el-table-column show-overflow-tooltip min-width=50 prop="appType" label="类型"
 				                 :formatter="mapAppTypeEnum" align="center"/>

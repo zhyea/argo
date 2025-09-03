@@ -64,6 +64,21 @@
 				<el-card class="fcm-region">
 					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
 				</el-card>
+
+				<el-card class="fcm-region" v-if="fciUsage && fciUsage.length > 0">
+					<template #header>
+						<div class="card-header">
+							<span>使用范围</span>
+						</div>
+					</template>
+
+					<div v-for="page in fciUsage" :key="page">
+						<el-row>
+							<el-text truncated><span class="mono-code">{{ page.pageCode }}</span> - {{ page.pageName }}
+							</el-text>
+						</el-row>
+					</div>
+				</el-card>
 			</el-form>
 		</el-container>
 	</el-drawer>
@@ -75,6 +90,7 @@ import {ref, computed} from "vue";
 import {submitForm} from "@/utils/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
+import {fciUsageList} from "@/api/page";
 
 const enumStore = useEnumStore()
 
@@ -93,6 +109,8 @@ const fciForm = ref({
 	remark: '',
 })
 
+const fciUsage = ref<any[]>()
+
 const fciFormRef = ref()
 
 const fciFormRules = {
@@ -110,13 +128,19 @@ const loadFciData = async (fciId: number) => {
 		return
 	}
 
-	getFci(fciId).then(response => {
-		if (response && response.data) {
-			const fciData = response.data;
-			fciForm.value = fciData;
-			fciForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
-		}
-	})
+	const response = await Promise.all([getFci(fciId), fciUsageList(fciId)])
+
+	const [fciResponse, fciUsageResponse] = response;
+
+	if (fciResponse && fciResponse.data) {
+		const fciData = fciResponse.data;
+		fciForm.value = fciData;
+		fciForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
+	}
+
+	if (fciUsageResponse && fciUsageResponse.data) {
+		fciUsage.value = fciUsageResponse.data;
+	}
 }
 
 

@@ -21,7 +21,7 @@
 			<el-table :data="appPageListData" border style="width: 100%">
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageId" label="ID"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageCode" label="页面代码"
-				                 class-name="table-user-code" align="center"/>
+				                 class-name="mono-code" align="center"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageName" label="页面名称"/>
 				<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
 				                 align="center"/>

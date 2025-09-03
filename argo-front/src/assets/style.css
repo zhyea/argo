@@ -155,7 +155,7 @@ button:focus-visible {
 	box-shadow: none;
 }
 
-.table-user-code {
+.mono-code {
 	font-family: 'Monospaced', 'Monaco', 'serif', 'Consolas', monospace !important;
 }
 

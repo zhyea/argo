@@ -21,7 +21,10 @@
 							group="pageFciList"
 						>
 							<template #item="{ element : ele, index }">
-								<el-card shadow="always">{{ ele.fciCode }}({{ ele.name }})</el-card>
+								<el-card shadow="always"><span class="mono-code">{{ ele.fciCode }}</span> ({{
+										ele.name
+									}})
+								</el-card>
 							</template>
 						</draggable>
 					</el-card>
@@ -46,7 +49,10 @@
 							group="pageFciList"
 						>
 							<template #item="{ element : ele, index }">
-								<el-card shadow="always">{{ ele.fciCode }}({{ ele.name }})</el-card>
+								<el-card shadow="always"><span class="mono-code">{{ ele.fciCode }}</span> ({{
+										ele.name
+									}})
+								</el-card>
 							</template>
 						</draggable>
 						<template #footer style="text-align: right">
