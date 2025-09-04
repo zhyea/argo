@@ -46,6 +46,28 @@
 						/>
 					</el-form-item>
 
+					<el-form-item label="请求method" v-if="1===propForm.dataBindFlag" prop="effectivePeriodType">
+						<el-radio-group id="dataRequestMethod" v-model="propForm.dataRequestMethod"
+						                :disabled="expiredStatusFlag || effectiveStatusFlag">
+							<el-radio v-for="e in dataRequestMethodEnum"
+							          :value="e[0]">
+								{{ e[1] }}
+							</el-radio>
+						</el-radio-group>
+					</el-form-item>
+
+					<el-form-item label="请求参数" v-if="1===propForm.dataBindFlag" prop="dataRequestParams">
+						<el-input id="name" type="textarea" v-model="propForm.dataRequestParams"
+						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+						/>
+					</el-form-item>
+
+					<el-form-item label="请求headers" v-if="1===propForm.dataBindFlag" prop="dataRequestHeaders">
+						<el-input id="name" v-model="propForm.dataRequestHeaders"
+						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+						/>
+					</el-form-item>
+
 					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
 						<el-input id="propValue" v-model="propForm.propValueSelector"
 						          :readonly="expiredStatusFlag || effectiveStatusFlag"
@@ -119,6 +141,9 @@ const propForm = ref({
 	propValue: '',
 	dataBindFlag: 0,
 	dataUrl: '',
+	dataRequestMethod: 0,
+	dataRequestParams: '',
+	dataRequestHeaders: '',
 	propValueSelector: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
@@ -139,6 +164,9 @@ const fciPropRules = {
 	],
 	dataUrl: [
 		{required: true, message: '数据连接不可为空', trigger: 'blur'},
+	],
+	dataRequestMethod: [
+		{required: true, message: '数据请求method不可为空', trigger: 'blur'},
 	],
 	propValueSelector: [
 		{required: true, message: '属性值选择器不可为空', trigger: 'blur'},
@@ -207,6 +235,10 @@ const isPropFormSubmitted = ref(false)
 // 枚举相关信息
 const effectivePeriodTypeEnum = computed(() => {
 	return enumStore.getEnumMap('EffectivePeriodTypeEnum');
+})
+
+const dataRequestMethodEnum = computed(()=>{
+	return enumStore.getEnumMap('HttpQueryMethodEnum');
 })
 
 
