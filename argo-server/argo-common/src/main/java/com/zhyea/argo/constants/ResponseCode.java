@@ -51,16 +51,13 @@ public enum ResponseCode implements CodeDescEnum {
 	 * 常见错误
 	 */
 	RECORD_NOT_EXISTS_ERROR(10009, "记录不存在"),
-
 	MODIFY_FIXED_INFO_ERROR(10010, "固定属性不允许修改"),
-
 	EDIT_EXPIRED_RECORD_ERROR(10011, "已过期记录不允许修改"),
 
 	/**
 	 * 用户名或密码错误
 	 */
 	USER_LOGIN_INFO_ERROR(30000, "用户名或密码错误"),
-
 	CONFIRM_PASSWORD_NOT_MATCH(30001, "确认密码与密码不一致"),
 
 
@@ -68,7 +65,6 @@ public enum ResponseCode implements CodeDescEnum {
 	 * CMS app相关问题
 	 */
 	APP_DUPLICATE_ERROR(40100, "应用已存在"),
-
 	APP_ABSENT_ERROR(40101, "应用不存在"),
 
 
@@ -76,9 +72,7 @@ public enum ResponseCode implements CodeDescEnum {
 	 * CMS fcm相关问题
 	 */
 	FCM_DUPLICATE_ERROR(40200, "相同组件模型已存在"),
-
 	DELETE_WITH_FCI_ERROR(40201, "该组件模型已被使用，无法删除"),
-
 	FCM_NOT_EXISTS_ERROR(40202, "对应组件模型不存在"),
 
 
@@ -86,33 +80,27 @@ public enum ResponseCode implements CodeDescEnum {
 	 * CMS fci相关问题
 	 */
 	FCI_PROP_KEY_NOT_ALLOWED_EDIT(40300, "属性key不允许修改"),
-
 	FCI_PROP_EFFECTIVE_TIME_OVERLAP(40301, "组件属性生效时间存在重叠"),
-
 	FCI_PROP_EFFECTIVE_START_TIME_NOT_ALLOW_EDIT(40302, "组件属性生效时间开始时间不允许修改"),
-
 	FCI_PROP_EFFECTIVE_TIME_IS_EMPTY(40303, "组件属性生效时间错误"),
-
 	FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW(40304, "组件属性生效开始时间不能小于当前时间"),
-
 	FCI_PROP_EFFECTIVE_END_TIME_AFTER_START(40305, "组件属性生效结束时间需要大于开始时间"),
 
-	DATA_BIND_URL_IS_EMPTY(40306, "数据链接或者值选择器不能为空"),
+	//DATA_BIND_URL_IS_EMPTY(40306, "数据链接或者值选择器不能为空"),
 
 	FCI_PROP_EFFECTIVE_DATA_NOT_ALLOW_EDIT(40307, "生效中的配置项不允许修改"),
-
 	EXPIRED_FCI_PROP_CANNOT_BE_DELETED(40308, "已过期的配置项不允许删除"),
-
 	EFFECTIVE_FCI_PROP_CANNOT_BE_DELETED(40309, "生效中的配置项不允许删除"),
-
 	FCI_NOT_EXISTS_ERROR(40310, "组件实例不存在"),
+	FCI_EFFECTIVE_TIME_IS_EMPTY(40311, "组件实例生效时间错误"),
+	FCI_EFFECTIVE_START_TIME_AFTER_NOW(40312, "组件实例生效开始时间不能小于当前时间"),
+	FCI_EFFECTIVE_END_TIME_AFTER_START(40313, "组件实例生效结束时间需要大于开始时间"),
 
-	FCI_EFFECTIVE_TIME_IS_EMPTY(40331, "组件实例生效时间错误"),
-
-	FCI_EFFECTIVE_START_TIME_AFTER_NOW(40332, "组件实例生效开始时间不能小于当前时间"),
-
-	FCI_EFFECTIVE_END_TIME_AFTER_START(40333, "组件实例生效结束时间需要大于开始时间"),
-
+	PROP_DATA_BIND_URL_IS_BLANK(40360, "数据链接或者值选择器不能为空"),
+	PROP_DATA_REQUEST_METHOD_IS_NULL(40361, "数据请求方式不能为空"),
+	PROP_DATA_REQUEST_PARAMS_IS_BLANK(40362, "数据请求参数不能为空"),
+	PROP_DATA_REQUEST_HEADERS_IS_BLANK(40363, "数据请求header不能为空"),
+	PROP_DATA_VALUE_SELECTOR_IS_BLANK(40364, "数据值选择器不能为空"),
 
 	/**
 	 * CMS appPage相关问题

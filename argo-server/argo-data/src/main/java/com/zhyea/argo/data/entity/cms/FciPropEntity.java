@@ -48,6 +48,24 @@ public class FciPropEntity extends BaseEntity {
 
 
 	/**
+	 * 数据请求方式
+	 */
+	private Integer dataRequestMethod;
+
+
+	/**
+	 * 数据请求参数
+	 */
+	private String dataRequestParams;
+
+
+	/**
+	 * 数据请求头
+	 */
+	private String dataRequestHeaders;
+
+
+	/**
 	 * 属性值选择器
 	 */
 	private String propValueSelector;

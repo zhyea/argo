@@ -3,22 +3,20 @@ package com.zhyea.argo.cms.model.request.fci;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.cms.model.request.BaseOperateRequest;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
+import com.zhyea.argo.constants.enums.HttpQueryMethodEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
-import com.zhyea.argo.except.ArgoServerException;
+import com.zhyea.argo.tools.Args;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.chobit.commons.contract.Checkable;
 import org.chobit.commons.exception.ParamException;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDateTime;
 
 import static com.zhyea.argo.constants.ResponseCode.*;
-import static com.zhyea.argo.constants.ResponseCode.FCI_PROP_EFFECTIVE_END_TIME_AFTER_START;
-import static org.chobit.commons.utils.StrKit.isBlank;
 
 
 /**
@@ -66,6 +64,25 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 
 
 	/**
+	 * 数据请求方式
+	 */
+	@EnumVal(enumClass = HttpQueryMethodEnum.class, message = "数据请求header错误")
+	private Integer dataRequestMethod;
+
+
+	/**
+	 * 数据请求参数
+	 */
+	private String dataRequestParams;
+
+
+	/**
+	 * 数据请求头
+	 */
+	private String dataRequestHeaders;
+
+
+	/**
 	 * 数据值选择器
 	 */
 	private String propValueSelector;
@@ -102,24 +119,22 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 	@Override
 	public boolean check() throws ParamException {
 		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
-			if (null == effectiveStartTime || null == effectiveEndTime) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_TIME_IS_EMPTY);
-			}
+			Args.check(effectiveStartTime != null && effectiveEndTime != null, FCI_PROP_EFFECTIVE_TIME_IS_EMPTY);
 
 			// 新增时，开始时间不能<=当前时间
-			if (effectiveStartTime.isBefore(LocalDateTime.now())
-					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW);
-			}
-
+			Args.check(!(effectiveStartTime.isBefore(LocalDateTime.now()) || effectiveStartTime.isEqual(LocalDateTime.now())),
+					FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW);
 			// 结束时间需要大于开始时间
-			if (!effectiveEndTime.isAfter(effectiveStartTime)) {
-				throw new ArgoServerException(FCI_PROP_EFFECTIVE_END_TIME_AFTER_START);
-			}
+			Args.check(effectiveEndTime.isAfter(effectiveStartTime), FCI_PROP_EFFECTIVE_END_TIME_AFTER_START);
 		}
 
-		if (YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))) {
-			throw new ArgoServerException(DATA_BIND_URL_IS_EMPTY);
+		if (YesOrNo.YES.is(getDataBindFlag())) {
+			Args.checkNotBlank(dataUrl, PROP_DATA_BIND_URL_IS_BLANK);
+			Args.checkNotNull(dataRequestMethod, PROP_DATA_REQUEST_METHOD_IS_NULL);
+
+			//Args.checkNotBlank(dataRequestParams, PROP_DATA_REQUEST_PARAMS_IS_BLANK);
+			Args.checkNotBlank(dataRequestHeaders, PROP_DATA_REQUEST_HEADERS_IS_BLANK);
+			Args.checkNotBlank(propValueSelector, PROP_DATA_VALUE_SELECTOR_IS_BLANK);
 		}
 
 		return true;

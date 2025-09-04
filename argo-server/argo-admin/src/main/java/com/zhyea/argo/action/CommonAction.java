@@ -30,7 +30,8 @@ public class CommonAction {
 				.add(EffectivePeriodTypeEnum.class)
 				.add(TimeRelateStatusEnum.class)
 				.add(AppTypeEnum.class)
-				.add(FciUsageScopeEnum.class, FciUsageScopeEnum.GLOBAL.code);
+				.add(FciUsageScopeEnum.class, FciUsageScopeEnum.GLOBAL.code)
+				.add(HttpQueryMethodEnum.class);
 
 		return builder.build();
 	}

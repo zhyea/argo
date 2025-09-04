@@ -14,10 +14,12 @@
 
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, data_bind_flag, data_url, prop_value_selector,
+        insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, data_bind_flag,
+        data_url, data_request_method, data_request_params, data_request_headers, prop_value_selector,
         effective_period_type, effective_start_time, effective_end_time, remark)
         values
-        (#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.dataBindFlag}, #{e.dataUrl}, #{e.propValueSelector},
+        (#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.dataBindFlag},
+        #{e.dataUrl}, #{e.dataRequestMethod}, #{e.dataRequestParams}, #{e.dataRequestHeaders}, #{e.propValueSelector},
         #{e.effectivePeriodType},
         #{e.effectiveStartTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
         #{e.effectiveEndTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
@@ -28,7 +30,12 @@
     <update id="edit">
         update ag_cms_fci_prop set
         fci_id=#{e.fciId}, prop_key=#{e.propKey}, prop_value=#{e.propValue},
-        data_bind_flag=#{e.dataBindFlag}, data_url=#{e.dataUrl}, prop_value_selector=#{e.propValueSelector},
+        data_bind_flag=#{e.dataBindFlag},
+        data_url=#{e.dataUrl},
+        data_request_method=#{e.dataRequestMethod},
+        data_request_params=#{e.dataRequestParams},
+        data_request_headers=#{e.dataRequestHeaders},
+        prop_value_selector=#{e.propValueSelector},
         effective_period_type=#{e.effectivePeriodType},
         effective_start_time=#{e.effectiveStartTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
         effective_end_time=#{e.effectiveEndTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
