@@ -1,7 +1,6 @@
 package com.zhyea.argo.model.item;
 
 import com.zhyea.argo.cms.model.item.FciItem;
-import com.zhyea.argo.cms.model.item.FciPropItem;
 import lombok.Data;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class FciDetailItem {
 	/**
 	 * 组件属性信息
 	 */
-	private List<FciPropItem> fciPropList;
+	private List<FciPropSimpleItem> fciPropList;
 
 
 }
