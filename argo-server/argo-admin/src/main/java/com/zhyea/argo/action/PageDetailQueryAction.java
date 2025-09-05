@@ -17,10 +17,7 @@ import org.chobit.commons.utils.UrlKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.zhyea.argo.constants.ResponseCode.ILLEGAL_HTTP_METHOD_ERROR;
 
@@ -88,7 +85,7 @@ public class PageDetailQueryAction {
 			}
 
 			UrlKit.GetReq req = UrlKit.parse(e.getDataUrl());
-			HttpReqInfo reqInfo = new HttpReqInfo(req.getUrl(), method);
+			HttpReqInfo reqInfo = new HttpReqInfo(req.getUrl(), method, req.getParams());
 
 			List<FciPropItem> list = map.computeIfAbsent(reqInfo, k -> new LinkedList<>());
 			list.add(e);
@@ -97,13 +94,24 @@ public class PageDetailQueryAction {
 		// 查询接口，获取数据
 
 
-
 		return result;
 	}
 
 
-	private record HttpReqInfo(String url, HttpQueryMethodEnum method) {
+	private List<FciPropSimpleItem> queryForProps(HttpReqInfo reqInfo, List<FciPropItem> propInfoList, Map<String, Object> srcHeaders) {
+
+		Map<String, Object> newHeaders = new HashMap<>(8);
+		Map<String, Object> newParams = new HashMap<>(8);
+
+		for(FciPropItem p : propInfoList){
+
+		}
+
 	}
 
 
+}
+
+
+record HttpReqInfo(String url, HttpQueryMethodEnum method, Map<String, String> params) {
 }

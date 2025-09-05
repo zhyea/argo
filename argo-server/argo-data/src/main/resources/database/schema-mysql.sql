@@ -118,10 +118,7 @@ create table if not exists ag_cms_fci_prop
     prop_key              varchar(64)  not null default 0 comment '属性key',
     prop_value            varchar(256) not null default '' comment '属性值',
     data_bind_flag        tinyint      not null default 0 comment '是否绑定数据',
-    data_url              varchar(128) not null default '' comment '数据URL',
-    data_request_method   tinyint      not null default 0 comment '数据请求方式',
-    data_request_params    varchar(128) not null default '' comment '数据请求参数',
-    data_request_headers   varchar(128) not null default '' comment '数据请求头',
+
     prop_value_selector   varchar(64)  not null default '' comment '属性值选择器',
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
@@ -136,6 +133,31 @@ create table if not exists ag_cms_fci_prop
     primary key (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
+
+--
+-- 组件实例属性
+--
+create table if not exists ag_cms_fci_request
+(
+    id                    bigint       not null auto_increment comment 'id',
+
+    req_type             tinyint      not null default 0 comment '请求类型: 1.组件实例，2.组件属性',
+
+        data_url              varchar(128) not null default '' comment '数据URL',
+        data_request_method   tinyint      not null default 0 comment '数据请求方式',
+        data_request_params    varchar(128) not null default '' comment '数据请求参数',
+        data_request_headers   varchar(128) not null default '' comment '数据请求头',
+
+    operator_code         varchar(32)  not null default 0 comment '操作人ID',
+    deleted               tinyint      not null default 0 comment '删除标记',
+    create_time           datetime     not null default now() comment '创建时间',
+    update_time           timestamp    not null default current_timestamp on update current_timestamp comment '更新时间',
+
+    primary key (id)
+) ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4;
+
 
 
 
