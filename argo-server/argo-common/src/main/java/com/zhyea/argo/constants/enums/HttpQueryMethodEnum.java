@@ -43,4 +43,14 @@ public enum HttpQueryMethodEnum implements CodeDescEnum {
 	public int getCode() {
 		return code;
 	}
+
+
+	public static HttpQueryMethodEnum codeOf(int code) {
+		for (HttpQueryMethodEnum value : values()) {
+			if (value.code == code) {
+				return value;
+			}
+		}
+		return null;
+	}
 }

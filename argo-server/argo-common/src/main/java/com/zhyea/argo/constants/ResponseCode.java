@@ -54,6 +54,13 @@ public enum ResponseCode implements CodeDescEnum {
 	MODIFY_FIXED_INFO_ERROR(10010, "固定属性不允许修改"),
 	EDIT_EXPIRED_RECORD_ERROR(10011, "已过期记录不允许修改"),
 
+
+	/**
+	 * 不需要明确分类的错误
+	 */
+	ILLEGAL_HTTP_METHOD_ERROR(20021, "非法的数据请求method"),
+
+
 	/**
 	 * 用户名或密码错误
 	 */
@@ -102,12 +109,15 @@ public enum ResponseCode implements CodeDescEnum {
 	PROP_DATA_REQUEST_HEADERS_IS_BLANK(40363, "数据请求header不能为空"),
 	PROP_DATA_VALUE_SELECTOR_IS_BLANK(40364, "数据值选择器不能为空"),
 
+
 	/**
 	 * CMS appPage相关问题
 	 */
 	APP_PAGE_ALREADY_EXISTS_ERROR(40400, "相同ID页面已存在"),
 	PAGE_NOT_EXISTS_ERROR(40401, "页面不存在"),
 	PAGE_CANNOT_BE_DELETED_WITH_FCI(40402, "页面已关联组件，请先解除关联关系"),
+
+
 
 	;
 
