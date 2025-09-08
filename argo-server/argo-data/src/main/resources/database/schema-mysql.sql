@@ -142,7 +142,8 @@ create table if not exists ag_cms_fci_request
 (
     id                    bigint       not null auto_increment comment 'id',
 
-    req_type             tinyint      not null default 0 comment '请求类型: 1.组件实例，2.组件属性',
+    belong_id                bigint       not null default 0 comment '组件实例ID',
+    bind_type             tinyint      not null default 0 comment '绑定类型: 1.组件实例，2.组件属性',
 
         data_url              varchar(128) not null default '' comment '数据URL',
         data_request_method   tinyint      not null default 0 comment '数据请求方式',

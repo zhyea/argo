@@ -41,28 +41,6 @@ public class FciPropEntity extends BaseEntity {
 	private Integer dataBindFlag;
 
 
-	/**
-	 * 数据绑定URL
-	 */
-	private String dataUrl;
-
-
-	/**
-	 * 数据请求方式
-	 */
-	private Integer dataRequestMethod;
-
-
-	/**
-	 * 数据请求参数
-	 */
-	private String dataRequestParams;
-
-
-	/**
-	 * 数据请求头
-	 */
-	private String dataRequestHeaders;
 
 
 	/**

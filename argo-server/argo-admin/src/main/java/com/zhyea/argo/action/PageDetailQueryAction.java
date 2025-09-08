@@ -103,10 +103,12 @@ public class PageDetailQueryAction {
 		Map<String, Object> newHeaders = new HashMap<>(8);
 		Map<String, Object> newParams = new HashMap<>(8);
 
-		for(FciPropItem p : propInfoList){
+		for (FciPropItem p : propInfoList) {
 
 		}
 
+
+		return null;
 	}
 
 

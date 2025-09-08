@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.zhyea.argo.data.mapper.cms.FciRequestMapper">
+
+
+    <!-- 根据应用ID和关键字查询页面信息 -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into ag_cms_fci_request (belong_id, data_bind_flag,
+        data_url, data_request_method, data_request_params, data_request_headers)
+        values
+        (#{e.belongId}, #{e.dataBindFlag},
+        #{e.dataUrl}, #{e.dataRequestMethod}, #{e.dataRequestParams}, #{e.dataRequestHeaders})
+    </insert>
+
+
+    <update id="modify">
+        update ag_cms_fci_request set
+        data_bind_flag= #{e.dataBindFlag},
+        data_url= #{e.dataUrl},
+        data_request_method= #{e.dataRequestMethod},
+        data_request_params= #{e.dataRequestParams},
+        data_request_headers= #{e.dataRequestHeaders}
+        where id= #{e.id}
+    </update>
+
+
+</mapper>
