@@ -3,7 +3,6 @@ package com.zhyea.argo.cms.model.request.fci;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.constants.enums.DataBindFlagEnum;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.tools.Args;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -102,7 +101,7 @@ public class FciPropAddRequest extends BaseFciRequest implements Checkable {
 			Args.check(effectiveEndTime.isAfter(effectiveStartTime), FCI_PROP_EFFECTIVE_END_TIME_AFTER_START);
 		}
 
-		if (YesOrNo.YES.is(getDataBindFlag())) {
+		if (DataBindFlagEnum.BIND_DATA.is(getDataBindFlag())) {
 			Args.checkNotBlank(this.getDataUrl(), PROP_DATA_BIND_URL_IS_BLANK);
 			Args.checkNotNull(this.getDataRequestMethod(), PROP_DATA_REQUEST_METHOD_IS_NULL);
 

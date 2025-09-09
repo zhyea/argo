@@ -1,11 +1,11 @@
 package com.zhyea.argo.cms.model.request.fci;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zhyea.argo.cms.model.request.BaseOperateRequest;
+import com.zhyea.argo.constants.enums.DataBindFlagEnum;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.FciUsageScopeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
-import com.zhyea.argo.except.ArgoServerException;
+import com.zhyea.argo.tools.Args;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -27,7 +27,7 @@ import static com.zhyea.argo.constants.ResponseCode.*;
  */
 @WholeCheck(message = "组件实例信息有误")
 @Data
-public class FciAddRequest extends BaseOperateRequest implements Checkable {
+public class FciAddRequest extends BaseFciRequest implements Checkable {
 
 	/**
 	 * 应用ID
@@ -66,6 +66,20 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 
 
 	/**
+	 * 数据绑定标识
+	 */
+	@EnumVal(enumClass = DataBindFlagEnum.class, message = "数据绑定标识错误")
+	@NotNull(message = "数据绑定标识不能为空")
+	private Integer dataBindFlag;
+
+
+	/**
+	 * 数据值选择器
+	 */
+	private String propValueSelector;
+
+
+	/**
 	 * 组件生效周期类型
 	 */
 	@EnumVal(enumClass = EffectivePeriodTypeEnum.class, message = "生效周期类型错误")
@@ -89,23 +103,25 @@ public class FciAddRequest extends BaseOperateRequest implements Checkable {
 	@Override
 	public boolean check() throws ParamException {
 		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
-			if (Collections2.isEmpty(effectiveTimeRange) || effectiveTimeRange.size() < 2) {
-				throw new ArgoServerException(FCI_EFFECTIVE_TIME_IS_EMPTY);
-			}
+			Args.check(Collections2.isNotEmpty(effectiveTimeRange) && effectiveTimeRange.size() >= 2, FCI_EFFECTIVE_TIME_IS_EMPTY);
 
 			LocalDateTime effectiveStartTime = effectiveTimeRange.get(0);
 			LocalDateTime effectiveEndTime = effectiveTimeRange.get(1);
 
+			Args.check(null != effectiveStartTime && null != effectiveEndTime, FCI_EFFECTIVE_TIME_IS_EMPTY);
 			// 新增时，开始时间不能<=当前时间
-			if (effectiveStartTime.isBefore(LocalDateTime.now())
-					|| effectiveStartTime.isEqual(LocalDateTime.now())) {
-				throw new ArgoServerException(FCI_EFFECTIVE_START_TIME_AFTER_NOW);
-			}
-
+			Args.check(effectiveStartTime.isAfter(LocalDateTime.now()), FCI_EFFECTIVE_START_TIME_AFTER_NOW);
 			// 结束时间需要大于开始时间
-			if (!effectiveEndTime.isAfter(effectiveStartTime)) {
-				throw new ArgoServerException(FCI_EFFECTIVE_END_TIME_AFTER_START);
-			}
+			Args.check(effectiveEndTime.isAfter(effectiveStartTime), FCI_EFFECTIVE_END_TIME_AFTER_START);
+		}
+
+
+
+		if (DataBindFlagEnum.BIND_DATA.is(getDataBindFlag())) {
+			Args.checkNotBlank(this.getDataUrl(), PROP_DATA_BIND_URL_IS_BLANK);
+			Args.checkNotNull(this.getDataRequestMethod(), PROP_DATA_REQUEST_METHOD_IS_NULL);
+
+			Args.checkNotBlank(propValueSelector, PROP_DATA_VALUE_SELECTOR_IS_BLANK);
 		}
 
 		return true;

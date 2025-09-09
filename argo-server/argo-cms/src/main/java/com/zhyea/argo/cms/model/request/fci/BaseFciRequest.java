@@ -12,7 +12,7 @@ import org.chobit.commons.validation.EnumVal;
  * @since 2025/9/9 8:16
  */
 @Data
-public class BaseFciRequest extends BaseOperateRequest {
+public abstract class BaseFciRequest extends BaseOperateRequest {
 
 
 	/**
