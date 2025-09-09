@@ -16,6 +16,7 @@
     </insert>
 
 
+    <!-- 调整请求信息 -->
     <update id="modify">
         update ag_cms_fci_request set
         data_bind_flag= #{e.dataBindFlag},
@@ -23,8 +24,21 @@
         data_request_method= #{e.dataRequestMethod},
         data_request_params= #{e.dataRequestParams},
         data_request_headers= #{e.dataRequestHeaders}
-        where id= #{e.id}
+        where bind_type=#{bindType} and belong_id=#{belongId}
     </update>
 
+
+    <!-- 根据绑定类型和所属ID查询请求信息 -->
+    <select id="getByBelongId" resultType="com.zhyea.argo.data.entity.cms.FciRequestEntity">
+        select * from ag_cms_fci_request
+        where bind_type=#{bindType} and belong_id=#{belongId}
+    </select>
+
+
+    <!-- 根据绑定类型和所属ID删除请求信息 -->
+    <delete id="deleteByBelongId">
+        delete from ag_cms_fci_request
+        where bind_type=#{bindType} and belong_id=#{belongId}
+    </delete>
 
 </mapper>

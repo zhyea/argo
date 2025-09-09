@@ -30,7 +30,6 @@ public class AppService {
 
 
 	private final AppMapper appMapper;
-
 	private final AppConverter appConverter;
 
 

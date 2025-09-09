@@ -1,9 +1,8 @@
 package com.zhyea.argo.cms.model.request.fci;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zhyea.argo.cms.model.request.BaseOperateRequest;
+import com.zhyea.argo.constants.enums.DataBindFlagEnum;
 import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
-import com.zhyea.argo.constants.enums.HttpQueryMethodEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.tools.Args;
 import jakarta.validation.constraints.NotBlank;
@@ -26,7 +25,7 @@ import static com.zhyea.argo.constants.ResponseCode.*;
  */
 @WholeCheck(message = "组件实例属性信息有误")
 @Data
-public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
+public class FciPropAddRequest extends BaseFciRequest implements Checkable {
 
 
 	/**
@@ -52,34 +51,9 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 	/**
 	 * 数据绑定标识
 	 */
-	@EnumVal(enumClass = YesOrNo.class, message = "数据绑定标识错误")
+	@EnumVal(enumClass = DataBindFlagEnum.class, message = "数据绑定标识错误")
 	@NotNull(message = "数据绑定标识不能为空")
 	private Integer dataBindFlag;
-
-
-	/**
-	 * 数据相关URL
-	 */
-	private String dataUrl;
-
-
-	/**
-	 * 数据请求方式
-	 */
-	@EnumVal(enumClass = HttpQueryMethodEnum.class, message = "数据请求header错误")
-	private Integer dataRequestMethod;
-
-
-	/**
-	 * 数据请求参数
-	 */
-	private String dataRequestParams;
-
-
-	/**
-	 * 数据请求头
-	 */
-	private String dataRequestHeaders;
 
 
 	/**
@@ -129,11 +103,11 @@ public class FciPropAddRequest extends BaseOperateRequest implements Checkable {
 		}
 
 		if (YesOrNo.YES.is(getDataBindFlag())) {
-			Args.checkNotBlank(dataUrl, PROP_DATA_BIND_URL_IS_BLANK);
-			Args.checkNotNull(dataRequestMethod, PROP_DATA_REQUEST_METHOD_IS_NULL);
+			Args.checkNotBlank(this.getDataUrl(), PROP_DATA_BIND_URL_IS_BLANK);
+			Args.checkNotNull(this.getDataRequestMethod(), PROP_DATA_REQUEST_METHOD_IS_NULL);
 
 			//Args.checkNotBlank(dataRequestParams, PROP_DATA_REQUEST_PARAMS_IS_BLANK);
-			Args.checkNotBlank(dataRequestHeaders, PROP_DATA_REQUEST_HEADERS_IS_BLANK);
+			//Args.checkNotBlank(this.getDataRequestHeaders(), PROP_DATA_REQUEST_HEADERS_IS_BLANK);
 			Args.checkNotBlank(propValueSelector, PROP_DATA_VALUE_SELECTOR_IS_BLANK);
 		}
 
