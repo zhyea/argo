@@ -73,6 +73,36 @@ public class FciDto {
 
 
 	/**
+	 * 数据链接
+	 */
+	private String dataUrl;
+
+
+	/**
+	 * 数据请求方式
+	 */
+	private Integer dataRequestMethod;
+
+
+	/**
+	 * 数据请求参数
+	 */
+	private String dataRequestParams;
+
+
+	/**
+	 * 数据请求头
+	 */
+	private String dataRequestHeaders;
+
+
+	/**
+	 * 组件属性值选择器
+	 */
+	private String propValueSelector;
+
+
+	/**
 	 * 组件生效周期类型
 	 * <p>
 	 * see also {@link EffectivePeriodTypeEnum}

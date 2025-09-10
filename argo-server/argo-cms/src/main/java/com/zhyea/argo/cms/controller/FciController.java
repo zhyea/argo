@@ -55,7 +55,7 @@ public class FciController {
 	 */
 	@PostMapping("/edit")
 	public boolean edit(@RequestBody @Validated FciEditRequest request) {
-		return fciService.edit(request);
+		return fciService.modify(request);
 	}
 
 

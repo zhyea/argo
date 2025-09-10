@@ -42,6 +42,15 @@ public interface FciMapper {
 
 
 	/**
+	 * 根据code获取组件实例
+	 *
+	 * @param code 组件实例code
+	 * @return 组件实例
+	 */
+	FciDto getByCode(@Param("fciCode") String code);
+
+
+	/**
 	 * 根据id删除组件实例
 	 *
 	 * @param id 组件实例id

@@ -116,7 +116,6 @@ public class FciAddRequest extends BaseFciRequest implements Checkable {
 		}
 
 
-
 		if (DataBindFlagEnum.BIND_DATA.is(getDataBindFlag())) {
 			Args.checkNotBlank(this.getDataUrl(), PROP_DATA_BIND_URL_IS_BLANK);
 			Args.checkNotNull(this.getDataRequestMethod(), PROP_DATA_REQUEST_METHOD_IS_NULL);

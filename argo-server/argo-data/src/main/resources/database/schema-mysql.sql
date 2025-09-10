@@ -94,6 +94,10 @@ create table if not exists ag_cms_fci
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
     effective_end_time    datetime     not null default '1970-01-01 08:00:00.000' comment '生效结束时间',
     switch_flag           tinyint      not null default 0 comment '开关标记',
+
+    data_bind_flag        tinyint      not null default 0 comment '是否绑定数据',
+    prop_value_selector   varchar(64)  not null default '' comment '属性值选择器',
+
     remark                varchar(128) not null default '' comment '备注',
 
     operator_code         varchar(32)  not null default 0 comment '操作人ID',
@@ -142,7 +146,7 @@ create table if not exists ag_cms_fci_request
 (
     id                    bigint       not null auto_increment comment 'id',
 
-    belong_id                bigint       not null default 0 comment '组件实例ID',
+    bind_id                bigint       not null default 0 comment '绑定的ID',
     bind_type             tinyint      not null default 0 comment '绑定类型: 1.组件实例，2.组件属性',
 
         data_url              varchar(128) not null default '' comment '数据URL',
