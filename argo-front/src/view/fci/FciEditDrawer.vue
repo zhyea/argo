@@ -57,11 +57,11 @@
 
 
 					<el-form-item label="数据绑定" prop="dataBindFlag">
-						<el-radio-group id="dataBindFlag" v-model="fciForm.dataBindFlag">
-							<el-radio :value="0"> 不绑定 </el-radio>
-							<el-radio :value="1"> 绑定 </el-radio>
-							<el-radio :value="2"> 继承实例 </el-radio>
-						</el-radio-group>
+						<el-switch id="dataBindFlag" v-model="fciForm.dataBindFlag"
+						           inline-prompt size="large"
+						           active-text="是" :active-value="1"
+						           inactive-text="否" :inactive-value="0"
+						/>
 					</el-form-item>
 
 					<el-form-item label="数据链接" v-if="1===fciForm.dataBindFlag" prop="dataUrl">

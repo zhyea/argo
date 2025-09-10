@@ -26,12 +26,11 @@
 					</el-form-item>
 
 					<el-form-item label="数据绑定" prop="dataBindFlag">
-						<el-switch id="dataBindFlag" v-model="propForm.dataBindFlag"
-						           inline-prompt size="large"
-						           active-text="是" :active-value="1"
-						           inactive-text="否" :inactive-value="0"
-						           :disabled="expiredStatusFlag || effectiveStatusFlag"
-						/>
+						<el-radio-group id="dataBindFlag" v-model="propForm.dataBindFlag">
+							<el-radio :value="0"> 不绑定 </el-radio>
+							<el-radio :value="1"> 绑定 </el-radio>
+							<el-radio :value="2"> 继承实例 </el-radio>
+						</el-radio-group>
 					</el-form-item>
 
 					<el-form-item label="属性Value" v-if="0===propForm.dataBindFlag" prop="propValue">
@@ -68,7 +67,7 @@
 						/>
 					</el-form-item>
 
-					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag" prop="propValueSelector">
+					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag || 2===propForm.dataBindFlag" prop="propValueSelector">
 						<el-input id="propValue" v-model="propForm.propValueSelector"
 						          :readonly="expiredStatusFlag || effectiveStatusFlag"
 						/>
