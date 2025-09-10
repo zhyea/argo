@@ -55,6 +55,45 @@
 							value-format="YYYY-MM-DD HH:mm:ss"/>
 					</el-form-item>
 
+
+					<el-form-item label="数据绑定" prop="dataBindFlag">
+						<el-radio-group id="dataBindFlag" v-model="fciForm.dataBindFlag">
+							<el-radio :value="0"> 不绑定 </el-radio>
+							<el-radio :value="1"> 绑定 </el-radio>
+							<el-radio :value="2"> 继承实例 </el-radio>
+						</el-radio-group>
+					</el-form-item>
+
+					<el-form-item label="数据链接" v-if="1===fciForm.dataBindFlag" prop="dataUrl">
+						<el-input id="name" v-model="fciForm.dataUrl"
+						/>
+					</el-form-item>
+
+					<el-form-item label="请求method" v-if="1===fciForm.dataBindFlag" prop="effectivePeriodType">
+						<el-radio-group id="dataRequestMethod" v-model="fciForm.dataRequestMethod">
+							<el-radio v-for="e in dataRequestMethodEnum"
+							          :value="e[0]">
+								{{ e[1] }}
+							</el-radio>
+						</el-radio-group>
+					</el-form-item>
+
+					<el-form-item label="请求参数" v-if="1===fciForm.dataBindFlag" prop="dataRequestParams">
+						<el-input id="name" type="textarea" v-model="fciForm.dataRequestParams"
+						/>
+					</el-form-item>
+
+					<el-form-item label="请求headers" v-if="1===fciForm.dataBindFlag" prop="dataRequestHeaders">
+						<el-input id="name" v-model="fciForm.dataRequestHeaders"
+						/>
+					</el-form-item>
+
+					<el-form-item label="值选择器" v-if="1===fciForm.dataBindFlag" prop="propValueSelector">
+						<el-input id="propValue" v-model="fciForm.propValueSelector"
+						/>
+					</el-form-item>
+
+
 					<el-form-item label="备注" prop="remark">
 						<el-input id="remark" type="textarea" v-model="fciForm.remark" :autosize="{ minRows: 4,}"/>
 					</el-form-item>
@@ -103,6 +142,12 @@ const fciForm = ref({
 	name: '',
 	usageScope: 2,
 	switchFlag: 1,
+	dataBindFlag: 0,
+	dataUrl: '',
+	dataRequestMethod: 0,
+	dataRequestParams: '',
+	dataRequestHeaders: '',
+	propValueSelector: '',
 	effectivePeriodType: 1,
 	effectiveTimeRange: ['', ''],
 
@@ -119,6 +164,18 @@ const fciFormRules = {
 	],
 	response: [
 		{required: true, message: '请输入返回值', trigger: 'blur'},
+	],
+	propValue: [
+		{required: true, message: '属性值不可为空', trigger: 'blur'},
+	],
+	dataUrl: [
+		{required: true, message: '数据连接不可为空', trigger: 'blur'},
+	],
+	dataRequestMethod: [
+		{required: true, message: '数据请求method不可为空', trigger: 'blur'},
+	],
+	propValueSelector: [
+		{required: true, message: '属性值选择器不可为空', trigger: 'blur'},
 	],
 };
 
@@ -154,7 +211,9 @@ const effectivePeriodTypeEnum = computed(() => {
 const usageScopeEnum = computed(() => {
 	return enumStore.getEnumMap('FciUsageScopeEnum');
 })
-
+const dataRequestMethodEnum = computed(() => {
+	return enumStore.getEnumMap('HttpQueryMethodEnum');
+})
 
 // 打开组件实例抽屉前的准备
 const openPrepare = () => {
