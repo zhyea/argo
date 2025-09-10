@@ -52,7 +52,8 @@
 
     <!-- 根据组件ID获取当前有效的组件属性集合 -->
     <select id="findValidByFciId" resultMap="QueryResultMap">
-        select * from (
+        select tmp.*, req.data_url, req.data_request_method, req.data_request_params, req.data_request_headers
+        from (
 
         select * from ag_cms_fci_prop
         where deleted=0 and fci_id=#{fciId} and switch_flag=1 and effective_period_type=1
@@ -63,7 +64,10 @@
         where deleted=0 and fci_id=#{fciId} and switch_flag=1 and effective_period_type=2
         and (effective_start_time &lt; now() and effective_end_time &gt;= now())
 
-        )tmp order by create_time desc
+        )tmp
+
+        left join ag_cms_fci_request req on tmp.id = req.bind_id and req.bind_type=2
+        order by create_time desc
     </select>
 
 

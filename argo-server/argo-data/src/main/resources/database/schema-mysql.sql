@@ -121,9 +121,10 @@ create table if not exists ag_cms_fci_prop
 
     prop_key              varchar(64)  not null default 0 comment '属性key',
     prop_value            varchar(256) not null default '' comment '属性值',
-    data_bind_flag        tinyint      not null default 0 comment '是否绑定数据',
 
+    data_bind_flag        tinyint      not null default 0 comment '是否绑定数据',
     prop_value_selector   varchar(64)  not null default '' comment '属性值选择器',
+
     effective_period_type tinyint      not null default 0 comment '生效周期类型',
     effective_start_time  datetime     not null default '1970-01-01 08:00:00.000' comment '生效开始时间',
     effective_end_time    datetime     not null default '1970-01-01 08:00:00.000' comment '生效结束时间',

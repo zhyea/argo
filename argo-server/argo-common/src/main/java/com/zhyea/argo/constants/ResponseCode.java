@@ -109,6 +109,8 @@ public enum ResponseCode implements CodeDescEnum {
 	PROP_DATA_REQUEST_HEADERS_IS_BLANK(40363, "数据请求header不能为空"),
 	PROP_DATA_VALUE_SELECTOR_IS_BLANK(40364, "数据值选择器不能为空"),
 
+	EXISTS_INHERITED_FCI_PROPS(40365, "存在继承组件实例数据绑定关系的属性"),
+
 
 	/**
 	 * CMS appPage相关问题

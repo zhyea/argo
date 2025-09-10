@@ -1,6 +1,7 @@
 package com.zhyea.argo.cms.controller;
 
 
+import com.zhyea.argo.cms.action.FciMaintainAction;
 import com.zhyea.argo.cms.model.item.FciItem;
 import com.zhyea.argo.cms.model.request.fci.*;
 import com.zhyea.argo.cms.service.FciService;
@@ -28,10 +29,12 @@ public class FciController {
 
 
 	private final FciService fciService;
+	private final FciMaintainAction maintainAction;
 
 	@Autowired
-	public FciController(FciService fciService) {
+	public FciController(FciService fciService, FciMaintainAction maintainAction) {
 		this.fciService = fciService;
+		this.maintainAction = maintainAction;
 	}
 
 
@@ -43,7 +46,7 @@ public class FciController {
 	 */
 	@RequestMapping("/add")
 	public Long add(@RequestBody @Validated FciAddRequest request) {
-		return fciService.add(request);
+		return maintainAction.add(request);
 	}
 
 
@@ -55,7 +58,7 @@ public class FciController {
 	 */
 	@PostMapping("/edit")
 	public boolean edit(@RequestBody @Validated FciEditRequest request) {
-		return fciService.modify(request);
+		return maintainAction.modify(request);
 	}
 
 
