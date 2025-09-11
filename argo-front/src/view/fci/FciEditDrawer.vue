@@ -1,7 +1,7 @@
 <template>
 	<el-drawer :title="`${fciForm.id ? '编辑' : '新增'}组件实例 - ${fciForm.name}`"
 	           v-model="fciItemDrawer" :with-header=true size="40%">
-		<el-container>
+		<el-container v-loading="loadingRef">
 			<!--表单信息-->
 			<el-form status-icon
 			         label-position="right"
@@ -134,6 +134,7 @@ import {fciUsageList} from "@/api/page";
 const enumStore = useEnumStore()
 
 const fciItemDrawer = ref(false)
+const loadingRef = ref(true)
 
 const fciForm = ref({
 	id: 0,
@@ -144,7 +145,7 @@ const fciForm = ref({
 	switchFlag: 1,
 	dataBindFlag: 0,
 	dataUrl: '',
-	dataRequestMethod: 0,
+	dataRequestMethod: 1,
 	dataRequestParams: '',
 	dataRequestHeaders: '',
 	propValueSelector: '',
@@ -198,6 +199,7 @@ const loadFciData = async (fciId: number) => {
 	if (fciUsageResponse && fciUsageResponse.data) {
 		fciUsage.value = fciUsageResponse.data;
 	}
+
 }
 
 
@@ -216,7 +218,9 @@ const dataRequestMethodEnum = computed(() => {
 })
 
 // 打开组件实例抽屉前的准备
-const openPrepare = () => {
+function openPrepare() {
+	loadingRef.value = true
+
 	fciItemDrawer.value = true
 
 	if (fciFormRef.value) {
@@ -231,6 +235,8 @@ const openPrepare = () => {
 const openDrawerForEdit = (fciId: number, appId: number) => {
 	openPrepare()
 	loadFciData(fciId)
+
+	loadingRef.value = false
 }
 
 
@@ -239,6 +245,8 @@ const openDrawerForAdd = (fcmRow: any) => {
 	openPrepare()
 	fciForm.value.fcmId = fcmRow.fcmId
 	fciForm.value.appId = fcmRow.appId
+
+	loadingRef.value = false
 }
 
 

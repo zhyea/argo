@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="table-body">
-			<el-table :data="fciListData" border stripe style="width: 100%">
+			<el-table :data="fciListData" v-loading="loadingRef" border stripe style="width: 100%">
 				<el-table-column show-overflow-tooltip min-width=120 prop="fcmName" label="模型名称"/>
 				<el-table-column show-overflow-tooltip min-width=90 prop="fciCode" label="组件Code"
 				                 class-name="mono-code" align="center"/>
@@ -87,6 +87,7 @@ const keywordForm = ref({
 
 // FCI列表数据
 const fciListData = ref([])
+const loadingRef = ref(true)
 
 // 加载方法列表数据
 function loadFciListData() {
@@ -103,6 +104,7 @@ function loadFciListData() {
 			fciListData.value = response.data.data
 			pageInfo.total = response.data.total
 		}
+		loadingRef.value = false
 	})
 }
 
@@ -129,6 +131,9 @@ function handleEdit(row: any) {
 
 // 处理FCM删除
 function handleDelete(row: any) {
+
+	loadingRef.value = true
+
 	delFci(row.id).then(response => {
 		if (response && response.data) {
 			ElMessage.success({

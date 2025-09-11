@@ -1,7 +1,7 @@
 <template>
 	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}实例属性${propForm.id? '-'+ propForm.propKey : '' }`"
 	           v-model="fciPropEditDrawer" :with-header=true size="40%">
-		<el-container>
+		<el-container v-loading="loadingRef">
 			<!--表单信息-->
 			<el-form status-icon
 			         label-position="right"
@@ -27,9 +27,9 @@
 
 					<el-form-item label="数据绑定" prop="dataBindFlag">
 						<el-radio-group id="dataBindFlag" v-model="propForm.dataBindFlag">
-							<el-radio :value="0"> 不绑定 </el-radio>
-							<el-radio :value="1"> 绑定 </el-radio>
-							<el-radio :value="2"> 继承实例 </el-radio>
+							<el-radio :value="0"> 不绑定</el-radio>
+							<el-radio :value="1"> 绑定</el-radio>
+							<el-radio :value="2"> 继承实例</el-radio>
 						</el-radio-group>
 					</el-form-item>
 
@@ -45,7 +45,7 @@
 						/>
 					</el-form-item>
 
-					<el-form-item label="请求method" v-if="1===propForm.dataBindFlag" prop="effectivePeriodType">
+					<el-form-item label="method" v-if="1===propForm.dataBindFlag" prop="effectivePeriodType">
 						<el-radio-group id="dataRequestMethod" v-model="propForm.dataRequestMethod"
 						                :disabled="expiredStatusFlag || effectiveStatusFlag">
 							<el-radio v-for="e in dataRequestMethodEnum"
@@ -67,7 +67,8 @@
 						/>
 					</el-form-item>
 
-					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag || 2===propForm.dataBindFlag" prop="propValueSelector">
+					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag || 2===propForm.dataBindFlag"
+					              prop="propValueSelector">
 						<el-input id="propValue" v-model="propForm.propValueSelector"
 						          :readonly="expiredStatusFlag || effectiveStatusFlag"
 						/>
@@ -131,6 +132,7 @@ import {Ref} from "@vue/reactivity";
 
 const enumStore = useEnumStore()
 
+const loadingRef = ref(true)
 const fciPropEditDrawer = ref(false)
 
 const propForm = ref({
@@ -140,7 +142,7 @@ const propForm = ref({
 	propValue: '',
 	dataBindFlag: 0,
 	dataUrl: '',
-	dataRequestMethod: 0,
+	dataRequestMethod: 1,
 	dataRequestParams: '',
 	dataRequestHeaders: '',
 	propValueSelector: '',
@@ -236,13 +238,14 @@ const effectivePeriodTypeEnum = computed(() => {
 	return enumStore.getEnumMap('EffectivePeriodTypeEnum');
 })
 
-const dataRequestMethodEnum = computed(()=>{
+const dataRequestMethodEnum = computed(() => {
 	return enumStore.getEnumMap('HttpQueryMethodEnum');
 })
 
 
 // 打开组件实例抽屉前的准备
 function openPrepare() {
+	loadingRef.value = true
 	fciPropEditDrawer.value = true
 
 	if (fciPropFormRef.value) {
@@ -267,6 +270,8 @@ async function openDrawerForEdit(fciId: number) {
 	if (propForm.value.propKey) {
 		fixedPropDisabledFlag.value = true
 	}
+
+	loadingRef.value = false
 }
 
 
@@ -275,6 +280,7 @@ function openDrawerForAdd(fci: any) {
 	openPrepare()
 	loadFcmProps(fci.fcmId)
 	propForm.value.fciId = fci.id
+	loadingRef.value = false
 }
 
 

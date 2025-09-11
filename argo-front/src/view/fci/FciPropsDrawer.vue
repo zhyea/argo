@@ -1,7 +1,7 @@
 <template>
 	<el-drawer :title="`${fci.name}-属性`"
 	           v-model="fciPropsDrawer" :with-header=true size="60%">
-		<div class="table-container">
+		<div class="table-container" v-loading="loadingRef">
 			<div class="table-header">
 				<el-form :model="propsSearchForm" label-width="60px" label-suffix=":" :inline="true"
 				         @submit.native.prevent>
@@ -69,6 +69,7 @@ import {formatEffectivePeriod} from "@/utils/helper";
 import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue";
 import {ElMessage} from "element-plus";
 
+const loadingRef = ref(true)
 const fciPropsDrawer = ref(false)
 
 const fci = ref({
@@ -97,7 +98,8 @@ const effectivePeriodTypeEnum = ref()
 
 
 // 打开组件实例抽屉前的准备
-const openPrepare = () => {
+function openPrepare() {
+	loadingRef.value = true
 	fciPropsDrawer.value = true
 	// 加载枚举数据
 	loadEnums(allEnumMap, () => {
@@ -107,7 +109,7 @@ const openPrepare = () => {
 
 
 // 打开组件属性抽屉
-const openFciPropsDrawer = (fciRecord: any) => {
+function openFciPropsDrawer(fciRecord: any) {
 	fci.value = fciRecord
 	openPrepare()
 	loadFciPropsData()
@@ -175,6 +177,7 @@ function loadFciPropsData() {
 			fciPropsData.value = response.data.data
 			pageInfo.total = response.data.total
 		}
+		loadingRef.value = false
 	})
 }
 
@@ -195,6 +198,7 @@ function handleEdit(row: any) {
 
 
 function handleDelete(row: any) {
+	loadingRef.value = true
 	delFciProp(row.id).then(response => {
 		if (response && response.data) {
 			ElMessage.success({

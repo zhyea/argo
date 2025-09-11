@@ -260,6 +260,8 @@ function fetchApps(keyword: string) {
 
 // 打开组件模型编辑抽屉
 function openFcmEditDrawer(fcmId: number, appId: number) {
+	loadingRef.value = true
+
 	if (fcmFormRef.value) {
 		fcmFormRef.value.resetFields()
 	}
@@ -333,7 +335,7 @@ const submitFcmForm = async () => {
 
 .fcm-form {
 	width: 100%;
-	padding: 10px;
+	padding: 10px 0;
 }
 
 .fcm-prop-table {
