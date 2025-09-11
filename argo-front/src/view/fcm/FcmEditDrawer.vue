@@ -4,10 +4,10 @@
 
 		<el-scrollbar height="100%" width="100%">
 			<!--表单信息-->
-			<el-form
-				:model="fcmForm" ref="fcmFormRef" :rules="fcmFormRules"
-				label-suffix=":" label-width="90px"
-				class="fcm-form" status-icon>
+			<el-form v-loading="loadingRef"
+			         :model="fcmForm" ref="fcmFormRef" :rules="fcmFormRules"
+			         label-suffix=":" label-width="90px"
+			         class="fcm-form" status-icon>
 
 				<el-card header="组件模型基础信息">
 
@@ -139,6 +139,7 @@ import {useEnumStore} from "@/store/enum";
 const enumStore = useEnumStore()
 
 const fcmEditDrawer = ref(false)
+const loadingRef = ref(false)
 
 
 // fcm 表单数据
@@ -241,6 +242,7 @@ function loadFcmData(fcmId: number) {
 				appName: response.data.appName,
 			}]
 		}
+		loadingRef.value = false;
 	})
 }
 

@@ -18,7 +18,7 @@
 				<el-button type="primary" @click="handleAddFcm">新增模型</el-button>
 			</div>
 
-			<el-table :data="fcmListData" border style="width: 100%">
+			<el-table :data="fcmListData" v-loading="loadingRef" border style="width: 100%">
 				<el-table-column show-overflow-tooltip min-width=160 prop="name" label="名称"/>
 				<el-table-column show-overflow-tooltip min-width=90 prop="type" label="类型"
 				                 :formatter="mapTypeEnum"/>
@@ -88,6 +88,7 @@ const keywordForm = ref({
 
 
 // FCM列表数据
+const loadingRef = ref(true)
 const fcmListData = ref([])
 
 // 加载方法列表数据
@@ -104,6 +105,7 @@ function loadFcmListData() {
 		if (response && response.data && response.data.data) {
 			fcmListData.value = response.data.data
 			pageInfo.total = response.data.total
+			loadingRef.value = false
 		}
 	})
 }
