@@ -103,7 +103,7 @@ public enum ResponseCode implements CodeDescEnum {
 	FCI_EFFECTIVE_START_TIME_AFTER_NOW(40312, "组件实例生效开始时间不能小于当前时间"),
 	FCI_EFFECTIVE_END_TIME_AFTER_START(40313, "组件实例生效结束时间需要大于开始时间"),
 
-	PROP_DATA_BIND_URL_IS_BLANK(40360, "数据链接或者值选择器不能为空"),
+	DATA_BIND_URL_IS_BLANK(40360, "数据链接或者值选择器不能为空"),
 	PROP_DATA_REQUEST_METHOD_IS_NULL(40361, "数据请求方式不能为空"),
 	PROP_DATA_REQUEST_PARAMS_IS_BLANK(40362, "数据请求参数不能为空"),
 	PROP_DATA_REQUEST_HEADERS_IS_BLANK(40363, "数据请求header不能为空"),

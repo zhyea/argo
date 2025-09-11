@@ -33,7 +33,7 @@ public class FciPropEditRequest extends FciPropAddRequest {
 	public boolean check() throws ParamException {
 
 		if (YesOrNo.YES.is(getDataBindFlag()) && (isBlank(getPropValueSelector()) || isBlank(getDataUrl()))) {
-			throw new ArgoServerException(DATA_BIND_URL_IS_EMPTY);
+			throw new ArgoServerException(DATA_BIND_URL_IS_BLANK);
 		}
 
 		if (EffectivePeriodTypeEnum.FIXED_TERM.is(getEffectivePeriodType())) {
