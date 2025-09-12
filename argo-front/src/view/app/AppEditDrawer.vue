@@ -1,7 +1,7 @@
 <template>
 	<el-drawer :title="`${appForm.id && appForm.id > 0 ? '编辑 ' + appForm.appName : '新增应用'}`"
 	           v-model="appEditDrawer" :with-header=true size="40%">
-		<el-container>
+		<el-container v-loading="loadingRef">
 			<!--表单信息-->
 			<el-form :model="appForm" ref="appFormRef" :rules="appFormRules"
 			         label-suffix=":" label-width="90px"
@@ -61,6 +61,7 @@ const appForm = ref({
 
 // app 表单引用
 const appFormRef = ref()
+const loadingRef = ref(true)
 
 // app 表单验证规则
 const appFormRules = {
@@ -104,6 +105,7 @@ function openPrepare(appId: number) {
 	if (!appId) {
 		generateAppCode().then(response => {
 			appForm.value.appCode = response.data;
+			loadingRef.value = false
 		})
 	}
 
@@ -118,6 +120,7 @@ function loadAppData(appId: number) {
 		if (response && response.data) {
 			appForm.value = response.data;
 		}
+		loadingRef.value = false
 	})
 }
 

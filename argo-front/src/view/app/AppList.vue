@@ -18,7 +18,7 @@
 				<el-button type="primary" @click="handleAdd">新增应用</el-button>
 			</div>
 
-			<el-table :data="appList" border stripe style="width: 100%">
+			<el-table :data="appList" v-loading="loadingRef" border stripe style="width: 100%">
 				<el-table-column width="80px" prop="icon" label="图标" align="center">
 					<template #default="scope">
 						<img :src="scope.row.icon" :alt="scope.row.appName" style="width: 40px; height: 40px;">
@@ -70,6 +70,7 @@ import {getEnumDesc, goToApp} from "@/utils/helper";
 import {useTagStore} from "@/store/tag";
 
 const tagStore = useTagStore();
+const loadingRef = ref(true)
 
 // 搜索数据
 const keywordForm = ref({
@@ -92,6 +93,8 @@ const appList = ref([])
 
 // 加载应用列表
 function loadAppList() {
+	loadingRef.value = true
+
 	const keyword = keywordForm.value.keyword;
 	const pageNo = pageData.value.pageNo;
 	const pageSize = pageData.value.pageSize;
@@ -101,6 +104,8 @@ function loadAppList() {
 			appList.value = res.data.data
 			pageData.value.total = res.data.total
 		}
+
+		loadingRef.value = false
 	})
 }
 
