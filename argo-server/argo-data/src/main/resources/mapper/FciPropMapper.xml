@@ -14,12 +14,10 @@
 
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, data_bind_flag,
-        data_url, data_request_method, data_request_params, data_request_headers, prop_value_selector,
+        insert into ag_cms_fci_prop (fci_id, prop_key, prop_value, data_bind_flag, prop_value_selector,
         effective_period_type, effective_start_time, effective_end_time, remark)
         values
-        (#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.dataBindFlag},
-        #{e.dataUrl}, #{e.dataRequestMethod}, #{e.dataRequestParams}, #{e.dataRequestHeaders}, #{e.propValueSelector},
+        (#{e.fciId}, #{e.propKey}, #{e.propValue}, #{e.dataBindFlag}, #{e.propValueSelector},
         #{e.effectivePeriodType},
         #{e.effectiveStartTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
         #{e.effectiveEndTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
@@ -31,10 +29,6 @@
         update ag_cms_fci_prop set
         fci_id=#{e.fciId}, prop_key=#{e.propKey}, prop_value=#{e.propValue},
         data_bind_flag=#{e.dataBindFlag},
-        data_url=#{e.dataUrl},
-        data_request_method=#{e.dataRequestMethod},
-        data_request_params=#{e.dataRequestParams},
-        data_request_headers=#{e.dataRequestHeaders},
         prop_value_selector=#{e.propValueSelector},
         effective_period_type=#{e.effectivePeriodType},
         effective_start_time=#{e.effectiveStartTime, typeHandler=com.zhyea.argo.data.type.NullTimeHandler},
@@ -46,7 +40,9 @@
 
     <!-- getById -->
     <select id="getById" resultMap="QueryResultMap">
-        select * from ag_cms_fci_prop where id=#{id}
+        select prop.*, req.data_url, req.data_request_method, req.data_request_params, req.data_request_headers
+        from ag_cms_fci_prop prop left join ag_cms_fci_request req on prop.id = req.bind_id and req.bind_type=2
+        where id=#{id}
     </select>
 
 
@@ -73,12 +69,16 @@
 
     <!-- 根据组件ID获取当前某个属性 -->
     <select id="findByPropKey" resultMap="QueryResultMap">
-        select * from ag_cms_fci_prop where deleted=0 and fci_id=#{fciId} and prop_key=#{propKey}
+        select prop.*, req.data_url, req.data_request_method, req.data_request_params, req.data_request_headers
+        from ag_cms_fci_prop prop left join ag_cms_fci_request req on prop.id = req.bind_id and req.bind_type=2
+        where deleted=0 and fci_id=#{fciId} and prop_key=#{propKey}
     </select>
 
 
     <select id="findInPage" resultMap="QueryResultMap">
-        select * from ag_cms_fci_prop where fci_id=#{fciId} and deleted=0
+        select prop.*, req.data_url, req.data_request_method, req.data_request_params, req.data_request_headers
+        from ag_cms_fci_prop prop left join ag_cms_fci_request req on prop.id = req.bind_id and req.bind_type=2
+        where fci_id=#{fciId} and deleted=0
         <if test="null != keyword and keyword != ''">
             and (remark like concat('%', #{keyword}, '%') or prop_key like concat('%', #{keyword}, '%') or prop_value
             like concat('%', #{keyword}, '%'))

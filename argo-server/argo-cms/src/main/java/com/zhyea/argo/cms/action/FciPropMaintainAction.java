@@ -6,11 +6,10 @@ import com.zhyea.argo.cms.model.item.FciPropItem;
 import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
 import com.zhyea.argo.cms.service.FciPropService;
+import com.zhyea.argo.cms.service.FciReqService;
 import com.zhyea.argo.cms.service.FciService;
 import com.zhyea.argo.constants.ResponseCode;
-import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
-import com.zhyea.argo.constants.enums.TimeRelateStatusEnum;
-import com.zhyea.argo.constants.enums.YesOrNo;
+import com.zhyea.argo.constants.enums.*;
 import com.zhyea.argo.except.ArgoServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.chobit.commons.utils.Collections2;
@@ -18,6 +17,7 @@ import org.chobit.commons.utils.JsonKit;
 import org.chobit.commons.utils.ObjKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -38,18 +38,19 @@ public class FciPropMaintainAction {
 
 
 	private final FciPropService fciPropService;
-
 	private final FciPropConverter fciPropConverter;
-
+	private final FciReqService fciReqService;
 	private final FciService fciService;
 
 	@Autowired
 	public FciPropMaintainAction(FciPropService fciPropService,
 	                             FciPropConverter fciPropConverter,
-	                             FciService fciService) {
+	                             FciService fciService,
+	                             FciReqService fciReqService) {
 		this.fciPropService = fciPropService;
 		this.fciPropConverter = fciPropConverter;
 		this.fciService = fciService;
+		this.fciReqService = fciReqService;
 	}
 
 
@@ -59,9 +60,14 @@ public class FciPropMaintainAction {
 	 * @param request 新增组件属性请求
 	 * @return 新增的组件属性id
 	 */
+	@Transactional
 	public Long add(FciPropAddRequest request) {
 		checkForAdd(request);
-		return fciPropService.add(request);
+		Long propId = fciPropService.add(request);
+		if (DataBindFlagEnum.BIND_DATA.is(request.getDataBindFlag())) {
+			fciReqService.add(request, FciReqBindTypeEnum.FCI_PROP, propId);
+		}
+		return propId;
 	}
 
 
@@ -71,9 +77,23 @@ public class FciPropMaintainAction {
 	 * @param request 修改组件属性请求
 	 * @return 是否修改成功
 	 */
-	public boolean edit(FciPropEditRequest request) {
+	@Transactional
+	public boolean modify(FciPropEditRequest request) {
 		checkForEdit(request);
-		return fciPropService.edit(request);
+		FciPropItem his = fciPropService.get(request.getId());
+		if (DataBindFlagEnum.BIND_DATA.is(his.getDataBindFlag()) && DataBindFlagEnum.BIND_DATA.isNot(request.getDataBindFlag())) {
+			// 删除数据绑定请求
+			fciReqService.deleteByBelongId(FciReqBindTypeEnum.FCI_PROP, request.getId());
+		}
+		if (DataBindFlagEnum.BIND_DATA.isNot(his.getDataBindFlag()) && DataBindFlagEnum.BIND_DATA.is(request.getDataBindFlag())) {
+			// 新增数据绑定请求
+			fciReqService.add(request, FciReqBindTypeEnum.FCI_PROP, request.getId());
+		}
+		if (DataBindFlagEnum.BIND_DATA.is(his.getDataBindFlag()) && DataBindFlagEnum.BIND_DATA.is(request.getDataBindFlag())) {
+			// 修改数据绑定请求
+			fciReqService.modify(request, FciReqBindTypeEnum.FCI_PROP, request.getId());
+		}
+		return fciPropService.modify(request);
 	}
 
 

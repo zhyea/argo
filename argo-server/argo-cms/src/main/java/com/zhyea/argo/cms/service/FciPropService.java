@@ -56,7 +56,7 @@ public class FciPropService {
 	 * @param request 修改组件属性请求
 	 * @return 是否修改成功
 	 */
-	public boolean edit(FciPropEditRequest request) {
+	public boolean modify(FciPropEditRequest request) {
 		FciPropEntity entity = propConverter.editRequest2Entity(request);
 		int count = propMapper.edit(entity);
 		return count == NumConstants.ONE;

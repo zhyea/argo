@@ -31,15 +31,13 @@ public class FciService {
 
 	private final FciMapper fciMapper;
 	private final FciConverter fciConverter;
-	private final FcmService fcmService;
 	private final FciReqService fciReqService;
 
 
 	@Autowired
-	public FciService(FciMapper fciMapper, FciConverter fciConverter, FcmService fcmService, FciReqService fciReqService) {
+	public FciService(FciMapper fciMapper, FciConverter fciConverter,  FciReqService fciReqService) {
 		this.fciMapper = fciMapper;
 		this.fciConverter = fciConverter;
-		this.fcmService = fcmService;
 		this.fciReqService = fciReqService;
 	}
 

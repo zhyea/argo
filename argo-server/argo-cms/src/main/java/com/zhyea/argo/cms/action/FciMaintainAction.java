@@ -18,6 +18,7 @@ import com.zhyea.argo.except.ArgoServerException;
 import org.chobit.commons.utils.Collections2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class FciMaintainAction {
 	 * @param request 新增组件实例请求
 	 * @return 新增的组件实例id
 	 */
+	@Transactional
 	public Long add(FciAddRequest request) {
 		FcmItem fcmItem = fcmService.getById(request.getFcmId());
 		if (null == fcmItem) {
@@ -65,10 +67,10 @@ public class FciMaintainAction {
 		}
 
 		FciEntity entity = fciConverter.addRequest2Entity(request);
-		fciService.add(entity);
+		Long fciId = fciService.add(entity);
 
 		if (DataBindFlagEnum.BIND_DATA.is(request.getDataBindFlag())) {
-			fciReqService.add(request, FciReqBindTypeEnum.FCI, entity.getId());
+			fciReqService.add(request, FciReqBindTypeEnum.FCI, fciId);
 		}
 
 		return entity.getId();
@@ -81,6 +83,7 @@ public class FciMaintainAction {
 	 * @param request 修改组件实例请求
 	 * @return 修改成功
 	 */
+	@Transactional
 	public boolean modify(FciEditRequest request) {
 		FciItem his = fciService.getById(request.getId());
 		if (null == his) {
