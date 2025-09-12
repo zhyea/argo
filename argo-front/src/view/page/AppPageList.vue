@@ -18,7 +18,7 @@
 				<el-button type="primary" @click="handleAdd">新增页面</el-button>
 			</div>
 
-			<el-table :data="appPageListData" border style="width: 100%">
+			<el-table :data="appPageListData" border style="width: 100%" v-loading="loadingRef">
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageId" label="ID"/>
 				<el-table-column show-overflow-tooltip min-width=120 prop="pageCode" label="页面代码"
 				                 class-name="mono-code" align="center"/>
@@ -63,6 +63,8 @@ import {ElMessage} from "element-plus";
 const route = useRoute();
 const router = useRouter();
 
+const loadingRef = ref(true)
+
 // 应用页面新增抽屉
 const appPageAddDrawerRef = ref()
 
@@ -87,8 +89,10 @@ const appPageListData = ref([])
 
 // 加载方法列表数据
 function loadAppPageListData() {
+	loadingRef.value = true
+
 	let keyword = keywordForm.value.keyword
-	let appId = route.params.appId
+	let appId = Number(route.params.appId)
 	let pageInfo = pageData.value
 
 	if (route.query.page) {
@@ -100,6 +104,7 @@ function loadAppPageListData() {
 			appPageListData.value = response.data.data
 			pageInfo.total = response.data.total
 		}
+		loadingRef.value = false
 	})
 }
 

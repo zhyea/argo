@@ -1,6 +1,6 @@
 <template>
 	<el-drawer title="组装FCI" v-model="pageFciAssembleDrawer" :with-header=true size="50%">
-		<el-container>
+		<el-container v-loading="loadingRef">
 			<el-row :gutter="24" style="width: 100%">
 				<el-col :span="8">
 					<el-card body-style="background-color: #fdfefe; min-height:160px;">
@@ -74,6 +74,7 @@ import {ElMessage} from "element-plus";
 // 状态管理
 const isSaving = ref(false)
 const isDragging = ref(false)
+const loadingRef = ref(true)
 
 
 // 拖拽开始事件
@@ -110,6 +111,8 @@ const candidateFciList = ref<any[]>([])
 const embeddedFciList = ref<any[]>([])
 
 async function loadRelatedFciList(pageId: number) {
+	loadingRef.value = true
+
 	pageIdRef.value = pageId
 	const response = await relateFciList(pageId)
 	if (response && response.data) {
@@ -117,6 +120,8 @@ async function loadRelatedFciList(pageId: number) {
 		embeddedFciList.value = fciData.embeddedFciList;
 		candidateFciList.value = fciData.availableFciList;
 	}
+
+	loadingRef.value = false
 }
 
 

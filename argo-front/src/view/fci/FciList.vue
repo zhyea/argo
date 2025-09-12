@@ -91,6 +91,9 @@ const loadingRef = ref(true)
 
 // 加载方法列表数据
 function loadFciListData() {
+
+	loadingRef.value = true
+
 	let keyword = keywordForm.value.keyword
 	let appId = route.params.appId
 	let pageInfo = pageData.value

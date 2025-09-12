@@ -1,7 +1,7 @@
 <template>
 	<el-drawer :title="`${appPageForm.pageId ? '编辑' : '新增'}应用页面`"
 	           v-model="appPageItemDrawer" :with-header=true size="40%">
-		<el-container>
+		<el-container v-loading="loadingRef">
 			<!--表单信息-->
 			<el-form status-icon
 			         label-position="right"
@@ -42,9 +42,10 @@
 
 import {ref} from "vue";
 import {addPage, editPage, generatePageCode, getPage} from "@/api/page";
-import {submitForm} from "@/utils/helper/index.ts";
+import {submitForm} from "@/utils/helper";
 
 const appPageItemDrawer = ref(false)
+const loadingRef = ref(true)
 
 const appPageForm = ref({
 	pageId: 0,
@@ -69,7 +70,7 @@ const isAppPageFormSubmitted = ref(false)
 
 
 // 打开组件实例抽屉
-const openAppPageDrawer = (appId, pageId) => {
+function openAppPageDrawer(appId: number, pageId: number) {
 	appPageItemDrawer.value = true
 
 	if (appPageFormRef.value) {
@@ -82,6 +83,7 @@ const openAppPageDrawer = (appId, pageId) => {
 		appPageForm.value.appId = appId;
 		generatePageCode().then(res => {
 			appPageForm.value.pageCode = res.data;
+			loadingRef.value = false
 		});
 	}
 
@@ -89,19 +91,20 @@ const openAppPageDrawer = (appId, pageId) => {
 }
 
 // 加载页面信息
-const loadPageInfo = (appId, pageId) => {
+function loadPageInfo(appId: number, pageId: number) {
 	getPage(pageId).then(res => {
 		if (res.data.appId !== appId) {
 			throw new Error('页面信息错误')
 		}
 		appPageForm.value = res.data;
+		loadingRef.value = false
 	})
 }
 
 
 const emit = defineEmits(['afterPageAdd'])
 
-const submitAppPageForm = async () => {
+async function submitAppPageForm() {
 	if (!appPageFormRef.value.validate()) {
 		return;
 	}

@@ -93,6 +93,8 @@ const fcmListData = ref([])
 
 // 加载方法列表数据
 function loadFcmListData() {
+	loadingRef.value = true
+
 	let keyword = keywordForm.value.keyword
 	let appId = parseInt(route.params.appId as string)
 	let pageInfo = pageData.value

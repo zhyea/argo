@@ -168,9 +168,10 @@ const fciPropsData = ref([])
 
 // 加载方法列表数据
 function loadFciPropsData() {
+	loadingRef.value = true
+
 	let keyword = propsSearchForm.value.keyword
 	let pageInfo = pageData.value
-
 
 	findFciProps(fci.value.id, keyword, pageInfo).then(response => {
 		if (response && response.data && response.data.data) {
