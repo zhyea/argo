@@ -65,6 +65,16 @@ public class FciEntity extends BaseEntity {
 	private LocalDateTime effectiveEndTime;
 
 	/**
+	 * 数据绑定标识
+	 */
+	private Integer dataBindFlag;
+
+	/**
+	 * 数据请求URL
+	 */
+	private String propValueSelector;
+
+	/**
 	 * 备注
 	 */
 	private String remark;

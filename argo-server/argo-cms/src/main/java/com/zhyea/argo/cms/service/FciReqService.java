@@ -40,11 +40,11 @@ public class FciReqService {
 
 
 	public FciRequestEntity getByBelongId(FciReqBindTypeEnum belongType, Long id) {
-		return fciRequestMapper.getByBelongId(belongType.getCode(), id);
+		return fciRequestMapper.getByBindId(belongType.getCode(), id);
 	}
 
 
 	public boolean deleteByBelongId(FciReqBindTypeEnum belongType, Long id) {
-		return fciRequestMapper.deleteByBelongId(belongType.getCode(), id);
+		return fciRequestMapper.deleteByBindId(belongType.getCode(), id);
 	}
 }

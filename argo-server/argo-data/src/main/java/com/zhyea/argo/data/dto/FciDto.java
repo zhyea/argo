@@ -73,6 +73,12 @@ public class FciDto {
 
 
 	/**
+	 * 数据绑定标识
+	 */
+	private Integer dataBindFlag;
+
+
+	/**
 	 * 数据链接
 	 */
 	private String dataUrl;

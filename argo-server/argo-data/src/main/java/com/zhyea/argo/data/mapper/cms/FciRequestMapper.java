@@ -20,9 +20,9 @@ public interface FciRequestMapper {
 	boolean modify(@Param("e") FciRequestEntity entity);
 
 
-	FciRequestEntity getByBelongId(@Param("bindType") int bindType, @Param("belongId") Long belongId);
+	FciRequestEntity getByBindId(@Param("bindType") int bindType, @Param("belongId") Long belongId);
 
 
-	boolean deleteByBelongId(@Param("bindType") int bindType, @Param("belongId") Long belongId);
+	boolean deleteByBindId(@Param("bindType") int bindType, @Param("belongId") Long belongId);
 
 }

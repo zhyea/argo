@@ -15,6 +15,7 @@ import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
 
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -116,7 +117,14 @@ public class FciAddRequest extends BaseFciRequest implements Checkable {
 		}
 
 
+		//Args.checkNotBlank("", ResponseCode.ARGUMENT_ERROR);
+		Method[] methods = Args.class.getDeclaredMethods();
+		for (Method method : methods) {
+			System.out.println(method.getName());
+		}
+
 		if (DataBindFlagEnum.BIND_DATA.is(getDataBindFlag())) {
+			System.out.println(Args.class);
 			Args.checkNotBlank(this.getDataUrl(), DATA_BIND_URL_IS_BLANK);
 			Args.checkNotNull(this.getDataRequestMethod(), PROP_DATA_REQUEST_METHOD_IS_NULL);
 

@@ -8,10 +8,10 @@
 
     <!-- 根据应用ID和关键字查询页面信息 -->
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into ag_cms_fci_request (belong_id, data_bind_flag,
+        insert into ag_cms_fci_request (bind_id, bind_type,
         data_url, data_request_method, data_request_params, data_request_headers)
         values
-        (#{e.belongId}, #{e.dataBindFlag},
+        (#{e.bindId}, #{e.bindType},
         #{e.dataUrl}, #{e.dataRequestMethod}, #{e.dataRequestParams}, #{e.dataRequestHeaders})
     </insert>
 
@@ -19,26 +19,25 @@
     <!-- 调整请求信息 -->
     <update id="modify">
         update ag_cms_fci_request set
-        data_bind_flag= #{e.dataBindFlag},
         data_url= #{e.dataUrl},
         data_request_method= #{e.dataRequestMethod},
         data_request_params= #{e.dataRequestParams},
         data_request_headers= #{e.dataRequestHeaders}
-        where bind_type=#{bindType} and belong_id=#{belongId}
+        where bind_type=#{bindType} and bind_id=#{bindId}
     </update>
 
 
     <!-- 根据绑定类型和所属ID查询请求信息 -->
-    <select id="getByBelongId" resultType="com.zhyea.argo.data.entity.cms.FciRequestEntity">
+    <select id="getByBindId" resultType="com.zhyea.argo.data.entity.cms.FciRequestEntity">
         select * from ag_cms_fci_request
-        where bind_type=#{bindType} and belong_id=#{belongId}
+        where bind_type=#{bindType} and bind_id=#{bindId}
     </select>
 
 
     <!-- 根据绑定类型和所属ID删除请求信息 -->
-    <delete id="deleteByBelongId">
+    <delete id="deleteByBindId">
         delete from ag_cms_fci_request
-        where bind_type=#{bindType} and belong_id=#{belongId}
+        where bind_type=#{bindType} and bind_id=#{bindId}
     </delete>
 
 </mapper>

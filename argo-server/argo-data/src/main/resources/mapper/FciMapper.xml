@@ -22,6 +22,10 @@
         <if test="null != e.effectiveEndTime">
             effective_end_time,
         </if>
+        data_bind_flag,
+        <if test="1 == e.dataBindFlag">
+            prop_value_selector,
+        </if>
         operator_code,
         remark
         )values (
@@ -37,6 +41,10 @@
         </if>
         <if test="null != e.effectiveEndTime">
             #{e.effectiveEndTime},
+        </if>
+        #{e.dataBindFlag},
+        <if test="1 == e.dataBindFlag">
+            #{e.propValueSelector},
         </if>
         #{e.operatorCode},
         #{e.remark})

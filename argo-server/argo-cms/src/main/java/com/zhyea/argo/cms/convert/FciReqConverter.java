@@ -20,7 +20,7 @@ public interface FciReqConverter {
 		FciRequestEntity entity = new FciRequestEntity();
 
 		entity.setBindType(bindType.code);
-		entity.setBelongId(id);
+		entity.setBindId(id);
 		entity.setDataUrl(request.getDataUrl());
 		entity.setDataRequestMethod(request.getDataRequestMethod());
 		entity.setDataRequestHeaders(request.getDataRequestHeaders());

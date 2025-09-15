@@ -22,6 +22,19 @@
     </insert>
 
 
+    <update id="modify">
+        update ag_cms_fcm set
+        scope=#{e.scope},
+        app_id=#{e.appId, typeHandler=com.zhyea.argo.data.type.NullBigIntHandler},
+        name=#{e.name},
+        icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler},
+        type=#{e.type},
+        props=#{e.props, typeHandler=com.zhyea.argo.data.type.NullStringHandler},
+        remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}
+        where id=#{e.id}
+    </update>
+
+
     <!-- 根据应用ID和关键字查询组件模板信息 -->
     <select id="query" resultType="com.zhyea.argo.data.dto.FcmDto">
         select f.id, f.name, f.type, f.scope, f.remark, f.create_time, f.update_time,

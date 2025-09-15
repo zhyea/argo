@@ -78,7 +78,7 @@ public class FcmService {
 	 * @param request 修改组件模型请求
 	 * @return 是否修改成功
 	 */
-	public boolean edit(FcmEditRequest request) {
+	public boolean modify(FcmEditRequest request) {
 		String uniqCode = this.computeUniqCode(request);
 		this.checkFcmExists(uniqCode, request.getFcmId());
 		this.checkAppExists(request.getAppId());
@@ -177,7 +177,7 @@ public class FcmService {
 	 * @param appId 应用id
 	 */
 	private void checkAppExists(Long appId) {
-		if (null == appId) {
+		if (null == appId || 0 <= appId) {
 			return;
 		}
 		AppEntity appEntity = appMapper.getById(appId);

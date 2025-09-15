@@ -42,7 +42,7 @@
     <select id="getById" resultMap="QueryResultMap">
         select prop.*, req.data_url, req.data_request_method, req.data_request_params, req.data_request_headers
         from ag_cms_fci_prop prop left join ag_cms_fci_request req on prop.id = req.bind_id and req.bind_type=2
-        where id=#{id}
+        where prop.id=#{id}
     </select>
 
 
@@ -78,7 +78,7 @@
     <select id="findInPage" resultMap="QueryResultMap">
         select prop.*, req.data_url, req.data_request_method, req.data_request_params, req.data_request_headers
         from ag_cms_fci_prop prop left join ag_cms_fci_request req on prop.id = req.bind_id and req.bind_type=2
-        where fci_id=#{fciId} and deleted=0
+        where fci_id=#{fciId} and prop.deleted=0
         <if test="null != keyword and keyword != ''">
             and (remark like concat('%', #{keyword}, '%') or prop_key like concat('%', #{keyword}, '%') or prop_value
             like concat('%', #{keyword}, '%'))

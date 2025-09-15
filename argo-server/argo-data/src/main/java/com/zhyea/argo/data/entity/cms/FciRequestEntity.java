@@ -22,7 +22,7 @@ public class FciRequestEntity extends BaseEntity {
 	/**
 	 * 组件实例ID或组件实例属性ID
 	 */
-	private Long belongId;
+	private Long bindId;
 
 
 	/**

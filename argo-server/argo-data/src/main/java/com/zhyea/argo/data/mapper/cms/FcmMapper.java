@@ -29,17 +29,6 @@ public interface FcmMapper {
 	 * @param entity 组件模型数据
 	 * @return 影响行数
 	 */
-	@Update({
-			"update ag_cms_fcm set",
-			"scope=#{e.scope}, ",
-			"app_id=#{e.appId, typeHandler=com.zhyea.argo.data.type.NullBigIntHandler}, ",
-			"name=#{e.name}, ",
-			"icon=#{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
-			"type=#{e.type}, ",
-			"props=#{e.props, typeHandler=com.zhyea.argo.data.type.NullStringHandler}, ",
-			"remark=#{e.remark, typeHandler=com.zhyea.argo.data.type.NullStringHandler}",
-			"where id=#{e.id}"
-	})
 	int modify(@Param("e") FcmEntity entity);
 
 
