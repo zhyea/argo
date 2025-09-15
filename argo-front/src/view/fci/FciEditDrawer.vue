@@ -182,6 +182,9 @@ const fciFormRules = {
 
 // 加载组件实例数据
 const loadFciData = async (fciId: number) => {
+
+	loadingRef.value = true
+
 	if (!fciId) {
 		return
 	}
@@ -200,6 +203,7 @@ const loadFciData = async (fciId: number) => {
 		fciUsage.value = fciUsageResponse.data;
 	}
 
+	loadingRef.value = false
 }
 
 
@@ -235,8 +239,6 @@ function openPrepare() {
 const openDrawerForEdit = (fciId: number, appId: number) => {
 	openPrepare()
 	loadFciData(fciId)
-
-	loadingRef.value = false
 }
 
 
