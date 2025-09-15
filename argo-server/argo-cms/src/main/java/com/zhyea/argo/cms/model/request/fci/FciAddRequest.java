@@ -15,7 +15,6 @@ import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
 
-import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -114,13 +113,6 @@ public class FciAddRequest extends BaseFciRequest implements Checkable {
 			Args.check(effectiveStartTime.isAfter(LocalDateTime.now()), FCI_EFFECTIVE_START_TIME_AFTER_NOW);
 			// 结束时间需要大于开始时间
 			Args.check(effectiveEndTime.isAfter(effectiveStartTime), FCI_EFFECTIVE_END_TIME_AFTER_START);
-		}
-
-
-		//Args.checkNotBlank("", ResponseCode.ARGUMENT_ERROR);
-		Method[] methods = Args.class.getDeclaredMethods();
-		for (Method method : methods) {
-			System.out.println(method.getName());
 		}
 
 		if (DataBindFlagEnum.BIND_DATA.is(getDataBindFlag())) {
