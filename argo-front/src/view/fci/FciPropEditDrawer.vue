@@ -26,7 +26,8 @@
 					</el-form-item>
 
 					<el-form-item label="数据绑定" prop="dataBindFlag">
-						<el-radio-group id="dataBindFlag" v-model="propForm.dataBindFlag">
+						<el-radio-group id="dataBindFlag" v-model="propForm.dataBindFlag"
+						                :disabled="expiredStatusFlag || effectiveStatusFlag">
 							<el-radio :value="0"> 不绑定</el-radio>
 							<el-radio :value="1"> 绑定</el-radio>
 							<el-radio :value="2"> 继承实例</el-radio>
@@ -40,7 +41,7 @@
 					</el-form-item>
 
 					<el-form-item label="数据链接" v-if="1===propForm.dataBindFlag" prop="dataUrl">
-						<el-input id="name" v-model="propForm.dataUrl"
+						<el-input id="dataUrl" v-model="propForm.dataUrl"
 						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
@@ -56,20 +57,20 @@
 					</el-form-item>
 
 					<el-form-item label="请求参数" v-if="1===propForm.dataBindFlag" prop="dataRequestParams">
-						<el-input id="name" type="textarea" v-model="propForm.dataRequestParams"
+						<el-input id="dataRequestParams" type="textarea" v-model="propForm.dataRequestParams"
 						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
 					<el-form-item label="请求headers" v-if="1===propForm.dataBindFlag" prop="dataRequestHeaders">
-						<el-input id="name" v-model="propForm.dataRequestHeaders"
+						<el-input id="dataRequestHeaders" v-model="propForm.dataRequestHeaders"
 						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
 					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag || 2===propForm.dataBindFlag"
 					              prop="propValueSelector">
-						<el-input id="propValue" v-model="propForm.propValueSelector"
+						<el-input id="propValueSelector" v-model="propForm.propValueSelector"
 						          :readonly="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
@@ -91,7 +92,7 @@
 							type="datetime"
 							placeholder="请选择生效开始时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
-							:readonly="expiredStatusFlag || effectiveStatusFlag"
+							:disabled="expiredStatusFlag || effectiveStatusFlag"
 							:disabled-date="timeRangeOpt.disabledStartTime"
 						/>
 						　到　
@@ -100,6 +101,7 @@
 							type="datetime"
 							placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
+							default-time="23:59:59"
 							:readonly="expiredStatusFlag"
 							:disabled-date="timeRangeOpt.disabledEndTime"
 						/>
@@ -135,7 +137,7 @@ const enumStore = useEnumStore()
 const loadingRef = ref(true)
 const fciPropEditDrawer = ref(false)
 
-const propForm = ref({
+const initData = {
 	id: 0,
 	fciId: 0,
 	propKey: '',
@@ -152,7 +154,9 @@ const propForm = ref({
 	effectiveEndTime: '',
 	status: 0,
 	remark: '',
-})
+}
+
+const propForm = ref(initData)
 
 const fciPropFormRef = ref()
 
@@ -222,10 +226,11 @@ async function loadFciPropData(propId: number) {
 	if (response && response.data) {
 		const propData = response.data;
 		propForm.value = propData;
+		const status = propData.status;
 
-		expiredStatusFlag.value = propData.status === 1
-		effectiveStatusFlag.value = propData.status === 2
-		pendingStatusFlag.value = propData.status === 3
+		expiredStatusFlag.value = (status === 1)
+		effectiveStatusFlag.value = (status === 2)
+		pendingStatusFlag.value = (status === 3)
 	}
 }
 
@@ -247,6 +252,8 @@ const dataRequestMethodEnum = computed(() => {
 function openPrepare() {
 	loadingRef.value = true
 	fciPropEditDrawer.value = true
+
+	propForm.value = initData
 
 	if (fciPropFormRef.value) {
 		fciPropFormRef.value.resetFields();

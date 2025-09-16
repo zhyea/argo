@@ -136,7 +136,7 @@ const enumStore = useEnumStore()
 const fciItemDrawer = ref(false)
 const loadingRef = ref(true)
 
-const fciForm = ref({
+const initData = {
 	id: 0,
 	fcmId: 0,
 	appId: 0,
@@ -153,10 +153,11 @@ const fciForm = ref({
 	effectiveTimeRange: ['', ''],
 
 	remark: '',
-})
+}
+
+const fciForm = ref(initData)
 
 const fciUsage = ref<any[]>()
-
 const fciFormRef = ref()
 
 const fciFormRules = {
@@ -230,6 +231,7 @@ function openPrepare() {
 	if (fciFormRef.value) {
 		fciFormRef.value.resetFields();
 	}
+	fciForm.value = initData;
 
 	isFciFormSubmitted.value = false
 }

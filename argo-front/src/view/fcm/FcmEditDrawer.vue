@@ -141,9 +141,7 @@ const enumStore = useEnumStore()
 const fcmEditDrawer = ref(false)
 const loadingRef = ref(false)
 
-
-// fcm 表单数据
-const fcmForm = ref({
+const initData = {
 	fcmId: null,
 	name: '',
 	icon: '',
@@ -152,7 +150,10 @@ const fcmForm = ref({
 	appId: 0,
 	remark: '',
 	props: [{}],
-})
+}
+
+// fcm 表单数据
+const fcmForm = ref(initData)
 
 
 // fcm 属性表单数据
@@ -268,6 +269,9 @@ function openFcmEditDrawer(fcmId: number, appId: number) {
 	if (fcmPropFormRef.value) {
 		fcmPropFormRef.value.resetFields()
 	}
+
+	fcmForm.value = initData
+	fcmPropForm.value.props = []
 
 	fcmEditDrawer.value = true
 	fcmForm.value.appId = appId
