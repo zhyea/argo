@@ -83,6 +83,7 @@
             and (remark like concat('%', #{keyword}, '%') or prop_key like concat('%', #{keyword}, '%') or prop_value
             like concat('%', #{keyword}, '%'))
         </if>
+        order by prop.effective_start_time desc, prop.create_time desc
     </select>
 
 

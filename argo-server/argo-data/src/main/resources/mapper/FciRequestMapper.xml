@@ -23,7 +23,7 @@
         data_request_method= #{e.dataRequestMethod},
         data_request_params= #{e.dataRequestParams},
         data_request_headers= #{e.dataRequestHeaders}
-        where bind_type=#{bindType} and bind_id=#{bindId}
+        where bind_type=#{e.bindType} and bind_id=#{e.bindId}
     </update>
 
 

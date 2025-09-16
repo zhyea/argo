@@ -31,6 +31,7 @@ public class CommonAction {
 				.add(TimeRelateStatusEnum.class)
 				.add(AppTypeEnum.class)
 				.add(FciUsageScopeEnum.class, FciUsageScopeEnum.GLOBAL.code)
+				.add(DataBindFlagEnum.class)
 				.add(HttpQueryMethodEnum.class);
 
 		return builder.build();
