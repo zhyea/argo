@@ -75,6 +75,15 @@
 						/>
 					</el-form-item>
 
+					<el-form-item label="是否启用" prop="switchFlag">
+						<el-switch id="switchFlag" v-model="propForm.switchFlag"
+						           inline-prompt size="large"
+						           active-text="是" :active-value="1"
+						           inactive-text="否" :inactive-value="0"
+						           :disabled="expiredStatusFlag || effectiveStatusFlag"
+						/>
+					</el-form-item>
+
 					<el-form-item label="生效周期" prop="effectivePeriodType">
 						<el-radio-group id="effectivePeriodType" v-model="propForm.effectivePeriodType"
 						                :disabled="expiredStatusFlag || effectiveStatusFlag">
@@ -101,8 +110,8 @@
 							type="datetime"
 							placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
-							default-time="23:59:59"
-							:readonly="expiredStatusFlag"
+							:default-time="defaultTime"
+							:disabled="expiredStatusFlag"
 							:disabled-date="timeRangeOpt.disabledEndTime"
 						/>
 					</el-form-item>
@@ -132,6 +141,7 @@ import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
 import {Ref} from "@vue/reactivity";
 
+const defaultTime = new Date(2000, 1, 1, 23, 59, 59)
 const enumStore = useEnumStore()
 
 const loadingRef = ref(true)

@@ -29,13 +29,10 @@
 							           @change="handleSwitch(row)"/>
 						</template>
 					</el-table-column>
+					<el-table-column min-width=70 prop="dataBindFlag" label="数据" :formatter="mapDataBindFlag"/>
 					<el-table-column show-overflow-tooltip min-width=350 prop="type" label="生效周期" align="center"
 					                 :formatter="formatEffectivePeriod"/>
 					<el-table-column width=80 prop="statusDesc" label="状态" align="center"/>
-					<el-table-column show-overflow-tooltip min-width=166 prop="createTime" label="创建时间"
-					                 align="center"/>
-					<el-table-column show-overflow-tooltip min-width=166 prop="updateTime" label="修改时间"
-					                 align="center"/>
 					<el-table-column label="操作" align="center" fixed="right" width=150>
 						<template #default="scope">
 							<el-button type="success" size="small" @click="handleEdit(scope.row)">编辑</el-button>
@@ -56,7 +53,7 @@
 
 		</div>
 
-		<props-edit-drawer ref="fciPropEditDrawerRef"/>
+		<props-edit-drawer ref="fciPropEditDrawerRef" @after-prop-edit="loadFciPropsData"/>
 	</el-drawer>
 </template>
 
@@ -65,7 +62,7 @@
 import {ref} from "vue";
 import {loadEnums} from "@/api/common";
 import {delFciProp, findFciProps, switchProp} from "@/api/fci";
-import {formatEffectivePeriod} from "@/utils/helper";
+import {formatEffectivePeriod, mapDataBindFlag} from "@/utils/helper";
 import PropsEditDrawer from "@/view/fci/FciPropEditDrawer.vue";
 import {ElMessage} from "element-plus";
 

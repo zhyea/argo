@@ -196,7 +196,7 @@ export function formatEffectivePeriod(row: any) {
  * @param row
  */
 export function mapDataBindFlag(row: any) {
-	return useEnumStore().getEnumDesc('YesOrNo', row.dataBindFlag)
+	return useEnumStore().getEnumDesc('DataBindFlagEnum', row.dataBindFlag)
 }
 
 

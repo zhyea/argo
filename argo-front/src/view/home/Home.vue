@@ -59,19 +59,15 @@ const sideMenuRef = ref()
 onMounted(() => {
 	const appId = (appStore.getCurrentAppId() || route.params.appId);
 	sideMenuRef.value = findMenu(appId, route.path)
-	console.log("------------------------- sideMenuRef22222222", appId, sideMenuRef.value)
 })
 
 
 function replaceSideMenu(currentAppId: number) {
-	console.log("++++++++++++++++++++ replaceSideMenu", currentAppId)
 
 	const path = route.path;
 	const appId = (currentAppId || appStore.getCurrentAppId() || route.params.appId);
-	console.log("++++++++++++++++++++ replaceSideMenu2", appId)
 
 	sideMenuRef.value = findMenu(appId, path)
-	console.log("++++++++++++++++++++ sideMenuRef11111111", sideMenuRef.value)
 }
 
 
@@ -91,7 +87,6 @@ function findMenu(currentAppId: number, path: string): any[] {
 	if (systemMenu) {
 		return menuItems.system;
 	}
-	console.log("======================= findMenu", currentAppId)
 
 	return fixSideMenu(menuItems.app, currentAppId);
 }
