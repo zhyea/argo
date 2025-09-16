@@ -1,5 +1,6 @@
 package com.zhyea.argo.data.mapper.cms;
 
+import com.zhyea.argo.data.dto.FciPropDto;
 import com.zhyea.argo.data.entity.cms.FciPropEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -37,7 +38,7 @@ public interface FciPropMapper {
 	 * @param id 组件属性id
 	 * @return 组件属性记录
 	 */
-	FciPropEntity getById(@Param("id") Long id);
+	FciPropDto getById(@Param("id") Long id);
 
 
 	/**

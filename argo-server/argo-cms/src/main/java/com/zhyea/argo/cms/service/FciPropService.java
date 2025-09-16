@@ -8,6 +8,7 @@ import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
 import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
 import com.zhyea.argo.cms.model.request.fci.FciPropQueryRequest;
 import com.zhyea.argo.constants.NumConstants;
+import com.zhyea.argo.data.dto.FciPropDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
 import com.zhyea.argo.data.entity.cms.FciPropEntity;
 import com.zhyea.argo.data.mapper.cms.FciPropMapper;
@@ -70,8 +71,8 @@ public class FciPropService {
 	 * @return 组件属性
 	 */
 	public FciPropItem get(Long id) {
-		FciPropEntity entity = propMapper.getById(id);
-		return propConverter.entity2Item(entity);
+		FciPropDto entity = propMapper.getById(id);
+		return propConverter.dto2Item(entity);
 	}
 
 
