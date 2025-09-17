@@ -56,7 +56,7 @@ public class PageDetailQueryAction {
 
 	private FciDetailItem queryFciDetail(Long fciId) {
 		FciItem fciItem = fciService.getById(fciId);
-		List<FciPropItem> fciProps = fciPropService.findValidByFciId(fciId);
+		List<FciPropItem> fciProps = fciPropService.findEffectivePropsByFciId(fciId);
 
 
 		FciDetailItem fciDetailItem = new FciDetailItem();

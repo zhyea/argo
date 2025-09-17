@@ -86,7 +86,6 @@ public class FciService {
 	 */
 	public FciItem getById(Long id) {
 		FciDto dto = fciMapper.getById(id);
-		CompletableFuture.runAsync(() -> fciReqService.deleteByBelongId(FciReqBindTypeEnum.FCI, id));
 		return fciConverter.dto2Item(dto);
 	}
 

@@ -61,13 +61,22 @@ public interface FciPropMapper {
 	List<FciPropEntity> findInPage(@Param("fciId") Long fciId, @Param("keyword") String keyword);
 
 
-	/**
-	 * 根据组件id获取当前有效的组件属性记录
-	 *
-	 * @param fciId 组件id
-	 * @return 组件属性记录
-	 */
-	List<FciPropEntity> findValidByFciId(@Param("fciId") Long fciId);
+    /**
+     * 根据组件id获取当前生效中的组件属性记录
+     *
+     * @param fciId 组件id
+     * @return 组件属性记录
+     */
+    List<FciPropEntity> findEffectiveByFciId(@Param("fciId") Long fciId);
+
+
+    /**
+     * 根据组件id获取当前有效的组件属性记录
+     *
+     * @param fciId 组件id
+     * @return 组件属性记录
+     */
+    List<FciPropEntity> findInEffectAndPendingByFciId(@Param("fciId") Long fciId);
 
 
 	/**

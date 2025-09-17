@@ -1,69 +1,148 @@
 package com.zhyea.argo.tools;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.util.Objects;
+import java.util.concurrent.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
  * 并行处理工具包
+ * 提供高性能、线程安全的并行执行能力
  *
  * @author robin
  * @since 2025/9/16 22:56
  */
+@Slf4j
 public final class ParallelKit {
 
 
-	public static void main(String[] args) {
-		// 创建任务列表
-		List<CompletableFuture<Integer>> taskList = new ArrayList<>();
+    /**
+     * 默认线程池大小
+     */
+    private static final int DEFAULT_POOL_SIZE = Math.max(4, Runtime.getRuntime().availableProcessors());
 
-		// 添加5个并发任务
-		for (int i = 0; i < 5; i++) {
-			final int taskNumber = i + 1;
-			CompletableFuture<Integer> task = CompletableFuture.supplyAsync(() -> {
-				return executeTask(taskNumber);
-			});
-			taskList.add(task);
-		}
+    /**
+     * 默认超时时间（秒）
+     */
+    private static final long DEFAULT_TIMEOUT_SECONDS = 3;
 
-		// 等待所有任务完成并获取结果
-		CompletableFuture<Void> allTasks = CompletableFuture.allOf(
-				taskList.toArray(new CompletableFuture[0])
-		);
+    /**
+     * 线程池执行器
+     */
+    private static final ExecutorService executor = new ThreadPoolExecutor(
+            DEFAULT_POOL_SIZE, DEFAULT_POOL_SIZE * 2, 60L, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<>(1000),
+            r -> {
+                Thread t = new Thread(r, "ParallelKit-" + System.currentTimeMillis());
+                t.setDaemon(true);
+                return t;
+            },
+            new ThreadPoolExecutor.CallerRunsPolicy()
+    );
 
-		// 当所有任务完成后处理结果
-		CompletableFuture<List<Integer>> allResults = allTasks.thenApply(v -> {
-			return taskList.stream()
-					.map(CompletableFuture::join)
-					.collect(Collectors.toList());
-		});
 
-		try {
-			// 获取所有任务的结果
-			List<Integer> results = allResults.get();
-			System.out.println("所有任务执行完成，结果如下：");
-			for (int i = 0; i < results.size(); i++) {
-				System.out.println("任务 " + (i + 1) + " 结果: " + results.get(i));
-			}
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * 执行多个并行任务，忽略异常，返回成功的结果
+     *
+     * @param functions 并行执行的任务列表
+     * @param <T>       返回结果类型
+     * @return 成功执行的任务结果列表
+     */
+    @SafeVarargs
+    public static <T> List<T> executeIgnoreErrors(Supplier<T>... functions) {
+        if (functions == null || functions.length == 0) {
+            return new ArrayList<>();
+        }
 
-	// 模拟任务执行
-	private static Integer executeTask(int taskNumber) {
-		try {
-			// 随机休眠一段时间，模拟任务执行耗时
-			int sleepTime = new Random().nextInt(1000) + 500; // 500-1500毫秒
-			Thread.sleep(sleepTime);
-			System.out.println("任务 " + taskNumber + " 执行完成，耗时 " + sleepTime + "ms");
-			return taskNumber * 10; // 返回任务结果
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-			return -1; // 任务被中断
-		}
-	}
+        List<CompletableFuture<T>> futures = new ArrayList<>(functions.length);
+
+        // 创建并行任务
+        for (Supplier<T> function : functions) {
+            CompletableFuture<T> future = CompletableFuture.supplyAsync(() -> {
+                try {
+                    return function.get();
+                } catch (Exception e) {
+                    logger.warn("ParallelKit task execution failed, ignoring error", e);
+                    return null;
+                }
+            }, executor);
+            futures.add(future);
+        }
+
+        // 等待所有任务完成
+        CompletableFuture<Void> allTasks = CompletableFuture.allOf(
+                futures.toArray(new CompletableFuture[0])
+        );
+
+        try {
+            allTasks.get(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+            // 收集非空结果
+            return futures.stream()
+                    .map(CompletableFuture::join)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            logger.error("ParallelKit execution failed", e);
+            return new ArrayList<>(0);
+        }
+    }
+
+    /**
+     * 执行单个异步任务
+     *
+     * @param function 要执行的任务
+     * @param <T>      返回结果类型
+     * @return CompletableFuture包装的结果
+     */
+    public static <T> CompletableFuture<T> executeAsync(Supplier<T> function) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return function.get();
+            } catch (Exception e) {
+                logger.error("ParallelKit async task execution failed", e);
+                throw new RuntimeException("Async task execution failed", e);
+            }
+        }, executor);
+    }
+
+    /**
+     * 关闭线程池（应用关闭时调用）
+     */
+    public static void shutdown() {
+        if (!executor.isShutdown()) {
+            executor.shutdown();
+            try {
+                if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
+                    executor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executor.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    /**
+     * 获取线程池状态信息
+     *
+     * @return 线程池状态描述
+     */
+    public static String getPoolStatus() {
+        if (executor instanceof ThreadPoolExecutor) {
+            ThreadPoolExecutor tpe = (ThreadPoolExecutor) executor;
+            return String.format("Pool[active=%d, completed=%d, total=%d, queue=%d]",
+                    tpe.getActiveCount(),
+                    tpe.getCompletedTaskCount(),
+                    tpe.getTaskCount(),
+                    tpe.getQueue().size());
+        }
+        return "Pool status unavailable";
+    }
 
 }

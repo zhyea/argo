@@ -90,7 +90,7 @@ public class FciMaintainAction {
 			throw new ArgoServerException(ResponseCode.FCI_NOT_EXISTS_ERROR);
 		}
 
-		List<FciPropItem> props = fciPropService.findValidByFciId(request.getId());
+		List<FciPropItem> props = fciPropService.findEffectivePropsByFciId(request.getId());
 		List<FciPropItem> inheritedProps = props.stream().filter(prop -> DataBindFlagEnum.INHERIT.is(prop.getDataBindFlag())).toList();
 
 		if (DataBindFlagEnum.BIND_DATA.is(his.getDataBindFlag()) && DataBindFlagEnum.BIND_DATA.isNot(request.getDataBindFlag())) {
