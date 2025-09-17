@@ -190,21 +190,17 @@ const loadFciData = async (fciId: number) => {
 		return
 	}
 
-	const response = await Promise.all([getFci(fciId), fciUsageList(fciId)])
+	getFci(fciId).then(response => {
+		if (response && response.data) {
+			const fciData = response.data;
+			fciForm.value = fciData;
+			fciForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
 
-	const [fciResponse, fciUsageResponse] = response;
+			fciUsage.value = fciData.pageList;
 
-	if (fciResponse && fciResponse.data) {
-		const fciData = fciResponse.data;
-		fciForm.value = fciData;
-		fciForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
-	}
-
-	if (fciUsageResponse && fciUsageResponse.data) {
-		fciUsage.value = fciUsageResponse.data;
-	}
-
-	loadingRef.value = false
+			loadingRef.value = false
+		}
+	})
 }
 
 
