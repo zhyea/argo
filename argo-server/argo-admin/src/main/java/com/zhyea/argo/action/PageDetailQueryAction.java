@@ -13,11 +13,15 @@ import com.zhyea.argo.model.item.FciDetailItem;
 import com.zhyea.argo.model.item.FciPropSimpleItem;
 import com.zhyea.argo.model.item.PageDetailItem;
 import com.zhyea.argo.model.request.PageDetailRequest;
+import com.zhyea.argo.tools.ParallelKit;
 import org.chobit.commons.utils.UrlKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import static com.zhyea.argo.constants.ResponseCode.ILLEGAL_HTTP_METHOD_ERROR;
 
@@ -55,9 +59,24 @@ public class PageDetailQueryAction {
 
 
 	private FciDetailItem queryFciDetail(Long fciId) {
-		FciItem fciItem = fciService.getById(fciId);
-		List<FciPropItem> fciProps = fciPropService.findEffectivePropsByFciId(fciId);
 
+		List<Object> result = ParallelKit.executeIgnoreErrors(() -> fciService.getById(fciId),
+				() -> fciPropService.findEffectivePropsByFciId(fciId),
+				() -> pageService.findFciUsage(fciId));
+
+		FciItem fciItem = null;
+		List<FciPropItem> fciProps = null;
+		List<PageItem> pageItems = null;
+
+		if (null != result.get(0)) {
+			fciItem = (FciItem) result.get(0);
+		}
+		if (null != result.get(1)) {
+			fciProps = (List<FciPropItem>) result.get(1);
+		}
+		if (null != result.get(2)) {
+			pageItems = (List<PageItem>) result.get(2);
+		}
 
 		FciDetailItem fciDetailItem = new FciDetailItem();
 		return fciDetailItem;

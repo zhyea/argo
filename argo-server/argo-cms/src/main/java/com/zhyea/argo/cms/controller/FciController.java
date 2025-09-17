@@ -1,6 +1,7 @@
 package com.zhyea.argo.cms.controller;
 
 
+import com.zhyea.argo.cms.action.FciGetAction;
 import com.zhyea.argo.cms.action.FciMaintainAction;
 import com.zhyea.argo.cms.model.item.FciItem;
 import com.zhyea.argo.cms.model.request.fci.*;
@@ -30,11 +31,13 @@ public class FciController {
 
 	private final FciService fciService;
 	private final FciMaintainAction maintainAction;
+	private final FciGetAction fciGetAction;
 
 	@Autowired
-	public FciController(FciService fciService, FciMaintainAction maintainAction) {
+	public FciController(FciService fciService, FciMaintainAction maintainAction, FciGetAction fciGetAction) {
 		this.fciService = fciService;
 		this.maintainAction = maintainAction;
+		this.fciGetAction = fciGetAction;
 	}
 
 
@@ -70,7 +73,7 @@ public class FciController {
 	 */
 	@PostMapping("/get")
 	public FciItem get(@RequestBody @Validated FciIdRelateRequest request) {
-		return fciService.getById(request.getFciId());
+		return fciGetAction.getByFciId(request.getFciId());
 	}
 
 
