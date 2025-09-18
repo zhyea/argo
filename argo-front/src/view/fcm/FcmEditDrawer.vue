@@ -134,6 +134,7 @@ import {addFcm, editFcm, getFcm} from "@/api/fcm";
 import {submitForm} from "@/utils/helper";
 import {CirclePlus, Remove} from "@element-plus/icons-vue";
 import {useEnumStore} from "@/store/enum";
+import {cloneDeep} from "lodash-es";
 
 
 const enumStore = useEnumStore()
@@ -153,7 +154,7 @@ const initData = {
 }
 
 // fcm 表单数据
-const fcmForm = ref(initData)
+const fcmForm = ref(cloneDeep(initData))
 
 
 // fcm 属性表单数据
@@ -270,7 +271,7 @@ function openFcmEditDrawer(fcmId: number, appId: number) {
 		fcmPropFormRef.value.resetFields()
 	}
 
-	fcmForm.value = initData
+	fcmForm.value = cloneDeep(initData)
 	fcmPropForm.value.props = []
 
 	fcmEditDrawer.value = true

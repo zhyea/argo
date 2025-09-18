@@ -130,6 +130,7 @@ import {submitForm} from "@/utils/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {fciUsageList} from "@/api/page";
+import {cloneDeep} from "lodash-es";
 
 const enumStore = useEnumStore()
 
@@ -155,7 +156,7 @@ const initData = {
 	remark: '',
 }
 
-const fciForm = ref(initData)
+const fciForm = ref(cloneDeep(initData))
 
 const fciUsage = ref<any[]>()
 const fciFormRef = ref()
@@ -227,7 +228,7 @@ function openPrepare() {
 	if (fciFormRef.value) {
 		fciFormRef.value.resetFields();
 	}
-	fciForm.value = initData;
+	fciForm.value = cloneDeep(initData);
 
 	isFciFormSubmitted.value = false
 }

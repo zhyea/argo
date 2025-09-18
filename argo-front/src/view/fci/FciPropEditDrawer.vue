@@ -140,6 +140,7 @@ import {addFciProp, editFciProp, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
 import {Ref} from "@vue/reactivity";
+import {cloneDeep} from "lodash-es";
 
 const defaultTime = new Date(2000, 1, 1, 23, 59, 59)
 const enumStore = useEnumStore()
@@ -160,13 +161,13 @@ const initData = {
 	propValueSelector: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
-	effectiveStartTime: '',
-	effectiveEndTime: '',
+	effectiveStartTime: null,
+	effectiveEndTime: null,
 	status: 0,
 	remark: '',
 }
 
-const propForm = ref(initData)
+const propForm = ref(cloneDeep(initData))
 
 const fciPropFormRef = ref()
 
@@ -263,7 +264,7 @@ function openPrepare() {
 	loadingRef.value = true
 	fciPropEditDrawer.value = true
 
-	propForm.value = initData
+	propForm.value = cloneDeep(initData)
 
 	if (fciPropFormRef.value) {
 		fciPropFormRef.value.resetFields();
@@ -298,6 +299,8 @@ function openDrawerForAdd(fci: any) {
 	loadFcmProps(fci.fcmId)
 	propForm.value.fciId = fci.id
 	loadingRef.value = false
+
+	console.log(propForm.value)
 }
 
 

@@ -48,6 +48,7 @@ import {ref} from "vue";
 import {addApp, editApp, generateAppCode, getApp} from "@/api/app";
 import {submitForm} from "@/utils/helper";
 import EnumPicker from "@/component/form/EnumPicker.vue";
+import {cloneDeep} from "lodash-es";
 
 const initData = {
 	id: 0,
@@ -59,7 +60,7 @@ const initData = {
 }
 
 // app 表单数据
-const appForm = ref(initData)
+const appForm = ref(cloneDeep(initData))
 
 // app 表单引用
 const appFormRef = ref()
@@ -103,7 +104,7 @@ function openPrepare(appId: number) {
 	if (appFormRef.value) {
 		appFormRef.value.resetFields();
 	}
-	appForm.value = initData
+	appForm.value = cloneDeep(initData)
 
 	if (!appId) {
 		generateAppCode().then(response => {
