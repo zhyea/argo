@@ -101,6 +101,7 @@
 							type="datetime"
 							placeholder="请选择生效开始时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
+							:default-time="defaultStartTime"
 							:disabled="expiredStatusFlag || effectiveStatusFlag"
 							:disabled-date="timeRangeOpt.disabledStartTime"
 						/>
@@ -110,7 +111,7 @@
 							type="datetime"
 							placeholder="请选择生效结束时间"
 							value-format="YYYY-MM-DD HH:mm:ss"
-							:default-time="defaultTime"
+							:default-time="defaultEndTime"
 							:disabled="expiredStatusFlag"
 							:disabled-date="timeRangeOpt.disabledEndTime"
 						/>
@@ -142,7 +143,8 @@ import {getFcm} from "@/api/fcm";
 import {Ref} from "@vue/reactivity";
 import {cloneDeep} from "lodash-es";
 
-const defaultTime = new Date(2000, 1, 1, 23, 59, 59)
+const defaultStartTime = new Date()
+const defaultEndTime = new Date(2000, 1, 1, 23, 59, 59)
 const enumStore = useEnumStore()
 
 const loadingRef = ref(true)
@@ -210,12 +212,13 @@ const timeRangeOpt = {
 	},
 
 	disabledEndTime: (time: Date) => {
+		const timeMillis = time.getTime() + 1000 * 60 * 60 * 24 - 1;
 		let todayEarliest = new Date().setHours(0, 0, 0, 0)
 		if (propForm.value.effectiveStartTime) {
 			const t = new Date(propForm.value.effectiveStartTime).getTime()
-			return !(time.getTime() >= Math.max(todayEarliest, t))
+			return !(timeMillis > Math.max(todayEarliest, t))
 		} else {
-			return !(time.getTime() > todayEarliest)
+			return !(timeMillis >= todayEarliest)
 		}
 	}
 }
