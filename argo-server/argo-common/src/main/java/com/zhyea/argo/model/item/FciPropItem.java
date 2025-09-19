@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @author robin
  */
 @Data
-public class FciPropItem {
+public class FciPropItem extends BaseDataBindRequest {
 
 
 	/**
@@ -44,36 +44,6 @@ public class FciPropItem {
 	 * 数据绑定标记
 	 */
 	private Integer dataBindFlag;
-
-
-	/**
-	 * 数据链接
-	 */
-	private String dataUrl;
-
-
-	/**
-	 * 数据请求方式
-	 */
-	private Integer dataRequestMethod;
-
-
-	/**
-	 * 数据请求参数
-	 */
-	private String dataRequestParams;
-
-
-	/**
-	 * 数据请求头
-	 */
-	private String dataRequestHeaders;
-
-
-	/**
-	 * 属性值选择器
-	 */
-	private String propValueSelector;
 
 
 	/**

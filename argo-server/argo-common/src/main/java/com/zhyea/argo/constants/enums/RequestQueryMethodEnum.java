@@ -8,7 +8,7 @@ import org.chobit.commons.contract.CodeDescEnum;
  * @author robin
  * @since 2025/9/4 22:33
  */
-public enum HttpQueryMethodEnum implements CodeDescEnum {
+public enum RequestQueryMethodEnum implements CodeDescEnum {
 
 
 	/**
@@ -28,7 +28,7 @@ public enum HttpQueryMethodEnum implements CodeDescEnum {
 
 	public final String desc;
 
-	HttpQueryMethodEnum(int code, String desc) {
+	RequestQueryMethodEnum(int code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -45,8 +45,8 @@ public enum HttpQueryMethodEnum implements CodeDescEnum {
 	}
 
 
-	public static HttpQueryMethodEnum codeOf(int code) {
-		for (HttpQueryMethodEnum value : values()) {
+	public static RequestQueryMethodEnum codeOf(int code) {
+		for (RequestQueryMethodEnum value : values()) {
 			if (value.code == code) {
 				return value;
 			}

@@ -1,7 +1,7 @@
 package com.zhyea.argo.model.request.fci;
 
 import com.zhyea.argo.model.request.BaseOperateRequest;
-import com.zhyea.argo.constants.enums.HttpQueryMethodEnum;
+import com.zhyea.argo.constants.enums.RequestQueryMethodEnum;
 import lombok.Data;
 import org.chobit.commons.validation.EnumVal;
 
@@ -24,7 +24,7 @@ public abstract class BaseFciRequest extends BaseOperateRequest {
 	/**
 	 * 数据请求方式
 	 */
-	@EnumVal(enumClass = HttpQueryMethodEnum.class, message = "数据请求header错误")
+	@EnumVal(enumClass = RequestQueryMethodEnum.class, message = "数据请求header错误")
 	private Integer dataRequestMethod;
 
 

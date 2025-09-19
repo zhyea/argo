@@ -32,7 +32,7 @@ public class CommonAction {
 				.add(AppTypeEnum.class)
 				.add(FciUsageScopeEnum.class, FciUsageScopeEnum.GLOBAL.code)
 				.add(DataBindFlagEnum.class)
-				.add(HttpQueryMethodEnum.class);
+				.add(RequestQueryMethodEnum.class);
 
 		return builder.build();
 	}

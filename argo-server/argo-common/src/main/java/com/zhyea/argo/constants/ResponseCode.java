@@ -120,6 +120,10 @@ public enum ResponseCode implements CodeDescEnum {
 	PAGE_CANNOT_BE_DELETED_WITH_FCI(40402, "页面已关联组件，请先解除关联关系"),
 
 
+	/**
+	 * API相关问题
+	 */
+	FCI_PROP_QUERY_ERROR(50100, "查询组件属性失败"),
 
 	;
 
