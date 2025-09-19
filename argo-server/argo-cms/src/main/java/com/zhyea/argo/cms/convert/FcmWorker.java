@@ -1,7 +1,7 @@
 package com.zhyea.argo.cms.convert;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.zhyea.argo.cms.model.item.FcmPropItem;
+import com.zhyea.argo.model.item.FcmPropItem;
 import org.chobit.commons.utils.JsonKit;
 import org.mapstruct.Named;
 

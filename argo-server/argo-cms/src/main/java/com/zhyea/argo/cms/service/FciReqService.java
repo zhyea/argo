@@ -1,7 +1,7 @@
 package com.zhyea.argo.cms.service;
 
 import com.zhyea.argo.cms.convert.FciReqConverter;
-import com.zhyea.argo.cms.model.request.fci.BaseFciRequest;
+import com.zhyea.argo.model.request.fci.BaseFciRequest;
 import com.zhyea.argo.constants.enums.FciReqBindTypeEnum;
 import com.zhyea.argo.data.entity.cms.FciRequestEntity;
 import com.zhyea.argo.data.mapper.cms.FciRequestMapper;

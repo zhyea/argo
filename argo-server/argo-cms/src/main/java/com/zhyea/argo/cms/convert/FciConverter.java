@@ -2,9 +2,9 @@ package com.zhyea.argo.cms.convert;
 
 import com.zhyea.argo.data.dto.FciDto;
 import com.zhyea.argo.data.entity.cms.FciEntity;
-import com.zhyea.argo.cms.model.item.FciItem;
-import com.zhyea.argo.cms.model.request.fci.FciAddRequest;
-import com.zhyea.argo.cms.model.request.fci.FciEditRequest;
+import com.zhyea.argo.model.item.FciItem;
+import com.zhyea.argo.model.request.fci.FciAddRequest;
+import com.zhyea.argo.model.request.fci.FciEditRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

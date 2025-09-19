@@ -1,6 +1,6 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.cms.model.request.fci.BaseFciRequest;
+import com.zhyea.argo.model.request.fci.BaseFciRequest;
 import com.zhyea.argo.constants.enums.FciReqBindTypeEnum;
 import com.zhyea.argo.data.entity.cms.FciRequestEntity;
 import org.mapstruct.Mapper;

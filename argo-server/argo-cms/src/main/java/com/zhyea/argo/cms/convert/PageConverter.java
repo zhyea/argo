@@ -1,9 +1,9 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.cms.model.item.PageItem;
+import com.zhyea.argo.model.item.PageItem;
 import com.zhyea.argo.data.entity.cms.PageEntity;
-import com.zhyea.argo.cms.model.request.page.PageAddRequest;
-import com.zhyea.argo.cms.model.request.page.PageEditRequest;
+import com.zhyea.argo.model.request.page.PageAddRequest;
+import com.zhyea.argo.model.request.page.PageEditRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

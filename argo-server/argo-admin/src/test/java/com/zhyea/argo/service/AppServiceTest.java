@@ -1,7 +1,7 @@
 package com.zhyea.argo.service;
 
 import com.zhyea.argo.TestBase;
-import com.zhyea.argo.cms.model.request.app.AppAddRequest;
+import com.zhyea.argo.model.request.app.AppAddRequest;
 import com.zhyea.argo.cms.service.AppService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

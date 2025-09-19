@@ -2,9 +2,9 @@ package com.zhyea.argo.cms.controller;
 
 
 import com.zhyea.argo.cms.action.FciPropMaintainAction;
-import com.zhyea.argo.cms.model.item.FciPropItem;
-import com.zhyea.argo.cms.model.request.fci.*;
+import com.zhyea.argo.model.item.FciPropItem;
 import com.zhyea.argo.cms.service.FciPropService;
+import com.zhyea.argo.model.request.fci.*;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;

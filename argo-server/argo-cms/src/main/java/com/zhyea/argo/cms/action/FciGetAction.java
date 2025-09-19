@@ -1,8 +1,8 @@
 package com.zhyea.argo.cms.action;
 
-import com.zhyea.argo.cms.model.item.FciItem;
-import com.zhyea.argo.cms.model.item.FciPropItem;
-import com.zhyea.argo.cms.model.item.PageItem;
+import com.zhyea.argo.model.item.FciItem;
+import com.zhyea.argo.model.item.FciPropItem;
+import com.zhyea.argo.model.item.PageItem;
 import com.zhyea.argo.cms.service.FciPropService;
 import com.zhyea.argo.cms.service.FciService;
 import com.zhyea.argo.cms.service.PageService;

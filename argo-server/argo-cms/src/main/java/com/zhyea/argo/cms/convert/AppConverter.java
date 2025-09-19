@@ -1,8 +1,8 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.cms.model.item.AppItem;
-import com.zhyea.argo.cms.model.request.app.AppAddRequest;
-import com.zhyea.argo.cms.model.request.app.AppEditRequest;
+import com.zhyea.argo.model.item.AppItem;
+import com.zhyea.argo.model.request.app.AppAddRequest;
+import com.zhyea.argo.model.request.app.AppEditRequest;
 import com.zhyea.argo.data.entity.cms.AppEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

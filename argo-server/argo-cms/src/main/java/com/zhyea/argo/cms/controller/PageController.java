@@ -1,11 +1,11 @@
 package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.cms.action.PageFciAssembleAction;
-import com.zhyea.argo.cms.model.item.PageFciAssembleItem;
-import com.zhyea.argo.cms.model.item.PageItem;
-import com.zhyea.argo.cms.model.request.fci.FciIdRelateRequest;
-import com.zhyea.argo.cms.model.request.page.*;
+import com.zhyea.argo.model.item.PageFciAssembleItem;
+import com.zhyea.argo.model.item.PageItem;
+import com.zhyea.argo.model.request.fci.FciIdRelateRequest;
 import com.zhyea.argo.cms.service.PageService;
+import com.zhyea.argo.model.request.page.*;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;

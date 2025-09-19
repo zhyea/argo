@@ -3,9 +3,9 @@ package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.cms.action.FciGetAction;
 import com.zhyea.argo.cms.action.FciMaintainAction;
-import com.zhyea.argo.cms.model.item.FciItem;
-import com.zhyea.argo.cms.model.request.fci.*;
+import com.zhyea.argo.model.item.FciItem;
 import com.zhyea.argo.cms.service.FciService;
+import com.zhyea.argo.model.request.fci.*;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;

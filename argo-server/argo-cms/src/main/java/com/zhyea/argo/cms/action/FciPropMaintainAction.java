@@ -1,10 +1,10 @@
 package com.zhyea.argo.cms.action;
 
 import com.zhyea.argo.cms.convert.FciPropConverter;
-import com.zhyea.argo.cms.model.item.FciItem;
-import com.zhyea.argo.cms.model.item.FciPropItem;
-import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
-import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
+import com.zhyea.argo.model.item.FciItem;
+import com.zhyea.argo.model.item.FciPropItem;
+import com.zhyea.argo.model.request.fci.FciPropAddRequest;
+import com.zhyea.argo.model.request.fci.FciPropEditRequest;
 import com.zhyea.argo.cms.service.FciPropService;
 import com.zhyea.argo.cms.service.FciReqService;
 import com.zhyea.argo.cms.service.FciService;

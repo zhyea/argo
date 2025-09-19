@@ -1,8 +1,8 @@
 package com.zhyea.argo.cms.convert;
 
-import com.zhyea.argo.cms.model.item.FciPropItem;
-import com.zhyea.argo.cms.model.request.fci.FciPropAddRequest;
-import com.zhyea.argo.cms.model.request.fci.FciPropEditRequest;
+import com.zhyea.argo.model.item.FciPropItem;
+import com.zhyea.argo.model.request.fci.FciPropAddRequest;
+import com.zhyea.argo.model.request.fci.FciPropEditRequest;
 import com.zhyea.argo.constants.enums.TimeRelateStatusEnum;
 import com.zhyea.argo.data.dto.FciPropDto;
 import com.zhyea.argo.data.entity.cms.FciPropEntity;

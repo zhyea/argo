@@ -1,10 +1,10 @@
 package com.zhyea.argo.cms.controller;
 
-import com.zhyea.argo.cms.model.item.FcmItem;
-import com.zhyea.argo.cms.model.request.fcm.FcmAddRequest;
-import com.zhyea.argo.cms.model.request.fcm.FcmEditRequest;
-import com.zhyea.argo.cms.model.request.fcm.FcmIdRelateRequest;
-import com.zhyea.argo.cms.model.request.fcm.FcmQueryRequest;
+import com.zhyea.argo.model.item.FcmItem;
+import com.zhyea.argo.model.request.fcm.FcmAddRequest;
+import com.zhyea.argo.model.request.fcm.FcmEditRequest;
+import com.zhyea.argo.model.request.fcm.FcmIdRelateRequest;
+import com.zhyea.argo.model.request.fcm.FcmQueryRequest;
 import com.zhyea.argo.cms.service.FcmService;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;

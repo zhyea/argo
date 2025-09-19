@@ -1,6 +1,6 @@
 package com.zhyea.argo.controller;
 
-import com.zhyea.argo.cms.model.request.app.AppIdRelateRequest;
+import com.zhyea.argo.model.request.app.AppIdRelateRequest;
 import com.zhyea.argo.model.request.UserAddRequest;
 import com.zhyea.argo.service.UserOptionsService;
 import com.zhyea.argo.service.UserService;
