@@ -5,7 +5,7 @@ import com.zhyea.argo.model.request.fcm.FcmAddRequest;
 import com.zhyea.argo.model.request.fcm.FcmEditRequest;
 import com.zhyea.argo.model.request.fcm.FcmIdRelateRequest;
 import com.zhyea.argo.model.request.fcm.FcmQueryRequest;
-import com.zhyea.argo.cms.service.FcmService;
+import com.zhyea.argo.biz.service.FcmService;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;

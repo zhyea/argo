@@ -1,4 +1,4 @@
-package com.zhyea.argo.cms.convert;
+package com.zhyea.argo.biz.convert;
 
 import com.zhyea.argo.data.dto.FcmDto;
 import com.zhyea.argo.data.entity.cms.FcmEntity;

@@ -4,9 +4,11 @@ import com.zhyea.argo.api.model.item.FciDetailItem;
 import com.zhyea.argo.api.model.item.FciPropSimpleItem;
 import com.zhyea.argo.api.model.item.PageDetailItem;
 import com.zhyea.argo.api.model.request.PageDetailRequest;
+import com.zhyea.argo.biz.service.FciPropService;
+import com.zhyea.argo.biz.service.FciService;
+import com.zhyea.argo.biz.service.PageService;
 import com.zhyea.argo.constants.enums.HttpQueryMethodEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
-import com.zhyea.argo.data.mapper.cms.PageMapper;
 import com.zhyea.argo.except.ArgoServerException;
 import com.zhyea.argo.model.item.FciItem;
 import com.zhyea.argo.model.item.FciPropItem;
@@ -33,20 +35,20 @@ import static com.zhyea.argo.constants.ResponseCode.ILLEGAL_HTTP_METHOD_ERROR;
 public class PageDetailQueryAction {
 
 
-	private final PageMapper pageMapper;
+	private final PageService pageService;
 	private final FciService fciService;
 	private final FciPropService fciPropService;
 
 	@Autowired
 	public PageDetailQueryAction(PageService pageService, FciService fciService, FciPropService fciPropService) {
-		this.pageMapper = pageService;
+		this.pageService = pageService;
 		this.fciService = fciService;
 		this.fciPropService = fciPropService;
 	}
 
 
 	public PageDetailItem query(PageDetailRequest request) {
-		PageItem pageItem = pageMapper.getByPageCode(request.getPageCode());
+		PageItem pageItem = pageService.getByPageCode(request.getPageCode());
 		// 使用CompletableFuture获取到全部的组件及属性信息
 
 
@@ -60,7 +62,7 @@ public class PageDetailQueryAction {
 
 		List<Object> result = ParallelKit.executeIgnoreErrors(() -> fciService.getById(fciId),
 				() -> fciPropService.findEffectivePropsByFciId(fciId),
-				() -> pageMapper.findFciUsage(fciId));
+				() -> pageService.findFciUsage(fciId));
 
 		FciItem fciItem = null;
 		List<FciPropItem> fciProps = null;

@@ -1,4 +1,4 @@
-package com.zhyea.argo.cms.convert;
+package com.zhyea.argo.biz.convert;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zhyea.argo.model.item.FcmPropItem;

@@ -2,7 +2,7 @@ package com.zhyea.argo.service;
 
 import com.zhyea.argo.TestBase;
 import com.zhyea.argo.model.request.app.AppAddRequest;
-import com.zhyea.argo.cms.service.AppService;
+import com.zhyea.argo.biz.service.AppService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

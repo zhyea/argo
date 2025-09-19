@@ -1,8 +1,8 @@
-package com.zhyea.argo.cms.service;
+package com.zhyea.argo.biz.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhyea.argo.cms.convert.FciPropConverter;
+import com.zhyea.argo.biz.convert.FciPropConverter;
 import com.zhyea.argo.model.item.FciPropItem;
 import com.zhyea.argo.model.request.fci.FciPropAddRequest;
 import com.zhyea.argo.model.request.fci.FciPropEditRequest;

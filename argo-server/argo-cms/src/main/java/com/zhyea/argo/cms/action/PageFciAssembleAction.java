@@ -3,7 +3,7 @@ package com.zhyea.argo.cms.action;
 import com.zhyea.argo.model.item.FciItem;
 import com.zhyea.argo.model.item.PageFciAssembleItem;
 import com.zhyea.argo.model.item.PageItem;
-import com.zhyea.argo.cms.service.PageService;
+import com.zhyea.argo.biz.service.PageService;
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.except.ArgoServerException;
 import org.springframework.beans.factory.annotation.Autowired;

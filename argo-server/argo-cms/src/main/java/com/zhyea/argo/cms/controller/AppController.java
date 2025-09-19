@@ -1,7 +1,7 @@
 package com.zhyea.argo.cms.controller;
 
 import com.zhyea.argo.model.item.AppItem;
-import com.zhyea.argo.cms.service.AppService;
+import com.zhyea.argo.biz.service.AppService;
 import com.zhyea.argo.model.request.app.*;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;

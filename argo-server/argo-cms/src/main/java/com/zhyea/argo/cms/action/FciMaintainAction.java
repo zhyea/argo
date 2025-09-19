@@ -1,15 +1,15 @@
 package com.zhyea.argo.cms.action;
 
-import com.zhyea.argo.cms.convert.FciConverter;
+import com.zhyea.argo.biz.convert.FciConverter;
 import com.zhyea.argo.model.item.FciItem;
 import com.zhyea.argo.model.item.FciPropItem;
 import com.zhyea.argo.model.item.FcmItem;
 import com.zhyea.argo.model.request.fci.FciAddRequest;
 import com.zhyea.argo.model.request.fci.FciEditRequest;
-import com.zhyea.argo.cms.service.FciPropService;
-import com.zhyea.argo.cms.service.FciReqService;
-import com.zhyea.argo.cms.service.FciService;
-import com.zhyea.argo.cms.service.FcmService;
+import com.zhyea.argo.biz.service.FciPropService;
+import com.zhyea.argo.biz.service.FciReqService;
+import com.zhyea.argo.biz.service.FciService;
+import com.zhyea.argo.biz.service.FcmService;
 import com.zhyea.argo.constants.ResponseCode;
 import com.zhyea.argo.constants.enums.DataBindFlagEnum;
 import com.zhyea.argo.constants.enums.FciReqBindTypeEnum;

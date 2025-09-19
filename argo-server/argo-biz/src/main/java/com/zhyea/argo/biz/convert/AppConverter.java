@@ -1,4 +1,4 @@
-package com.zhyea.argo.cms.convert;
+package com.zhyea.argo.biz.convert;
 
 import com.zhyea.argo.model.item.AppItem;
 import com.zhyea.argo.model.request.app.AppAddRequest;

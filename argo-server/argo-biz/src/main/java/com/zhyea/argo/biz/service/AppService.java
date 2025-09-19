@@ -1,8 +1,8 @@
-package com.zhyea.argo.cms.service;
+package com.zhyea.argo.biz.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhyea.argo.cms.convert.AppConverter;
+import com.zhyea.argo.biz.convert.AppConverter;
 import com.zhyea.argo.model.item.AppItem;
 import com.zhyea.argo.model.request.app.AppAddRequest;
 import com.zhyea.argo.model.request.app.AppEditRequest;
@@ -23,6 +23,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * 应用相关业务
+ *
  * @author robin
  */
 @Service
