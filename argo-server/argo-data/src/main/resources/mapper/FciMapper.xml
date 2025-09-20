@@ -15,17 +15,7 @@
         name,
         usage_scope,
         switch_flag,
-        effective_period_type,
-        <if test="null != e.effectiveStartTime">
-            effective_start_time,
-        </if>
-        <if test="null != e.effectiveEndTime">
-            effective_end_time,
-        </if>
         data_bind_flag,
-        <if test="1 == e.dataBindFlag">
-            prop_value_selector,
-        </if>
         operator_code,
         remark
         )values (
@@ -35,17 +25,7 @@
         #{e.name},
         #{e.usageScope},
         #{e.switchFlag},
-        #{e.effectivePeriodType},
-        <if test="null != e.effectiveStartTime">
-            #{e.effectiveStartTime},
-        </if>
-        <if test="null != e.effectiveEndTime">
-            #{e.effectiveEndTime},
-        </if>
         #{e.dataBindFlag},
-        <if test="1 == e.dataBindFlag">
-            #{e.propValueSelector},
-        </if>
         #{e.operatorCode},
         #{e.remark})
     </insert>
@@ -57,15 +37,7 @@
         set `name`=#{e.name},
         usage_scope=#{e.usageScope},
         switch_flag=#{e.switchFlag},
-        effective_period_type=#{e.effectivePeriodType},
-        <if test="null != e.effectiveStartTime">
-            effective_start_time=#{e.effectiveStartTime},
-        </if>
-        <if test="null != e.effectiveEndTime">
-            effective_end_time=#{e.effectiveEndTime},
-        </if>
-        operator_code=#{e.operatorCode},
-        remark=#{e.remark}
+        remark=#{e.remark}, operator_code=#{e.operatorCode}
         where id = #{e.id}
     </update>
 

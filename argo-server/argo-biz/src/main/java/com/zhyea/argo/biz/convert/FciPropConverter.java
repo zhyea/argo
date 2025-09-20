@@ -6,10 +6,7 @@ import com.zhyea.argo.model.request.fci.FciPropEditRequest;
 import com.zhyea.argo.constants.enums.TimeRelateStatusEnum;
 import com.zhyea.argo.data.dto.FciPropDto;
 import com.zhyea.argo.data.entity.cms.FciPropEntity;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
  *
  * @author robin
  */
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {CommonWorker.class})
 public interface FciPropConverter {
 
 
@@ -55,6 +52,7 @@ public interface FciPropConverter {
 	 * @param dto dto信息
 	 * @return item信息
 	 */
+	@Mapping(source = "dataRequestHeaders", target = "dataRequestHeaders", qualifiedByName = "str2Arr")
 	FciPropItem dto2Item(FciPropDto dto);
 
 

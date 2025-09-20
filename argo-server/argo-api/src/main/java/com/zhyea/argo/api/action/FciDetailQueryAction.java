@@ -14,7 +14,7 @@ import com.zhyea.argo.constants.enums.DataBindFlagEnum;
 import com.zhyea.argo.constants.enums.RequestQueryMethodEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.except.ArgoServerException;
-import com.zhyea.argo.model.item.BaseDataBindRequest;
+import com.zhyea.argo.model.item.BaseDataBindReq;
 import com.zhyea.argo.model.item.FciItem;
 import com.zhyea.argo.model.item.FciPropItem;
 import com.zhyea.argo.model.item.PageItem;
@@ -43,7 +43,7 @@ import static org.chobit.commons.utils.StrKit.isBlank;
  */
 @Slf4j
 @Component
-public class PageDetailQueryAction {
+public class FciDetailQueryAction {
 
 
 	private final PageService pageService;
@@ -51,7 +51,7 @@ public class PageDetailQueryAction {
 	private final FciPropService fciPropService;
 
 	@Autowired
-	public PageDetailQueryAction(PageService pageService, FciService fciService, FciPropService fciPropService) {
+	public FciDetailQueryAction(PageService pageService, FciService fciService, FciPropService fciPropService) {
 		this.pageService = pageService;
 		this.fciService = fciService;
 		this.fciPropService = fciPropService;
@@ -80,6 +80,25 @@ public class PageDetailQueryAction {
 		result.setFciList(fciDetailList);
 
 		return result;
+	}
+
+
+	/**
+	 * 查询FCI实例详情
+	 *
+	 * @param fciCode 组件实例编码
+	 * @param request 请求
+	 * @return 组件实例详情
+	 */
+	public FciDetailItem queryFciDetail(String fciCode, HttpServletRequest request) {
+
+		FciItem fciItem = fciService.getByCode(fciCode);
+		if (null == fciItem) {
+			logger.error("FciDetailQueryAction-queryFciDetail, 无效的实例编码 fciCode: {}", fciCode);
+			throw new ArgoServerException(FCI_NOT_EXISTS_ERROR);
+		}
+
+		return queryFciDetail(fciItem.getId(), request);
 	}
 
 
@@ -147,7 +166,7 @@ public class PageDetailQueryAction {
 	}
 
 
-	private HttpReqInfo parseHttpReqInfo(BaseDataBindRequest req, HttpServletRequest httpReq) {
+	private HttpReqInfo parseHttpReqInfo(BaseDataBindReq req, HttpServletRequest httpReq) {
 
 		Map<String, String> srcParams = ServletRequestKit.getParameters(httpReq);
 		Map<String, String> srcHeaders = ServletRequestKit.getHeaders(httpReq);
@@ -161,13 +180,12 @@ public class PageDetailQueryAction {
 	}
 
 
-	private Map<String, String> takeHeaders(String headersConfig, Map<String, String> srcHeaders) {
+	private Map<String, String> takeHeaders(String[] headersConfig, Map<String, String> srcHeaders) {
 		Map<String, String> result = new HashMap<>(8);
-		if (isBlank(headersConfig)) {
+		if (null == headersConfig) {
 			return result;
 		}
-		String[] arr = headersConfig.split(Symbol.COMMA);
-		for (String s : arr) {
+		for (String s : headersConfig) {
 			s = s.trim();
 			if (s.contains(Symbol.COLON)) {
 				String[] kv = s.split(Symbol.COLON);

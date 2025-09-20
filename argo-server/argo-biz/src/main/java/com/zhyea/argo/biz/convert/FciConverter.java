@@ -27,8 +27,6 @@ public interface FciConverter {
 	 * @param request 新增请求对象
 	 * @return 实体对象
 	 */
-	@Mapping(source = "effectiveTimeRange", target = "effectiveStartTime", qualifiedByName = "takeStartTime")
-	@Mapping(source = "effectiveTimeRange", target = "effectiveEndTime", qualifiedByName = "takeEndTime")
 	FciEntity addRequest2Entity(FciAddRequest request);
 
 
@@ -38,8 +36,6 @@ public interface FciConverter {
 	 * @param request 修改请求对象
 	 * @return 实体对象
 	 */
-	@Mapping(source = "effectiveTimeRange", target = "effectiveStartTime", qualifiedByName = "takeStartTime")
-	@Mapping(source = "effectiveTimeRange", target = "effectiveEndTime", qualifiedByName = "takeEndTime")
 	FciEntity modifyRequest2Entity(FciEditRequest request);
 
 
@@ -49,8 +45,6 @@ public interface FciConverter {
 	 * @param entity 实体对象
 	 * @return Item对象
 	 */
-	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
-	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
 	FciItem entity2Item(FciEntity entity);
 
 
@@ -69,8 +63,7 @@ public interface FciConverter {
 	 * @param dto 实体对象
 	 * @return Item对象
 	 */
-	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
-	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
+	@Mapping(source = "dataRequestHeaders", target = "dataRequestHeaders", qualifiedByName = "str2Arr")
 	FciItem dto2Item(FciDto dto);
 
 
@@ -80,7 +73,6 @@ public interface FciConverter {
 	 * @param dtoList 数据传输对象列表
 	 * @return Item对象列表
 	 */
-	@Mapping(source = "effectiveStartTime", target = "effectiveStartTime", qualifiedByName = "ignoreInvalidTime")
-	@Mapping(source = "effectiveEndTime", target = "effectiveEndTime", qualifiedByName = "ignoreInvalidTime")
+	@Mapping(source = "dataRequestHeaders", target = "dataRequestHeaders", qualifiedByName = "str2Arr")
 	List<FciItem> dtoList2ItemList(List<FciDto> dtoList);
 }

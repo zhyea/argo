@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @author robin
  */
 @Data
-public class FciPropItem extends BaseDataBindRequest {
+public class FciPropItem extends BaseDataBindReq {
 
 
 	/**
@@ -44,6 +44,12 @@ public class FciPropItem extends BaseDataBindRequest {
 	 * 数据绑定标记
 	 */
 	private Integer dataBindFlag;
+
+
+	/**
+	 * 属性值选择器
+	 */
+	private String propValueSelector;
 
 
 	/**
@@ -111,5 +117,9 @@ public class FciPropItem extends BaseDataBindRequest {
 	 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime updateTime;
+
+
+
+	private Integer fciDataBindFlag;
 
 }

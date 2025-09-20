@@ -1,11 +1,8 @@
 package com.zhyea.argo.data.entity.cms;
 
-import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
 import com.zhyea.argo.data.entity.BaseEntity;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 /**
  * 组件实例
@@ -48,31 +45,9 @@ public class FciEntity extends BaseEntity {
 	private Integer switchFlag;
 
 	/**
-	 * 组件生效周期类型
-	 * <p>
-	 * see also {@link EffectivePeriodTypeEnum}
-	 */
-	private Integer effectivePeriodType;
-
-	/**
-	 * 组件生效开始时间
-	 */
-	private LocalDateTime effectiveStartTime;
-
-	/**
-	 * 组件生效结束时间
-	 */
-	private LocalDateTime effectiveEndTime;
-
-	/**
 	 * 数据绑定标识
 	 */
 	private Integer dataBindFlag;
-
-	/**
-	 * 数据请求URL
-	 */
-	private String propValueSelector;
 
 	/**
 	 * 备注

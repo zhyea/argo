@@ -1,5 +1,6 @@
 package com.zhyea.argo.biz.convert;
 
+import org.chobit.commons.constans.Symbol;
 import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.utils.JsonKit;
 import org.mapstruct.Named;
@@ -94,4 +95,32 @@ public final class CommonWorker {
 	}
 
 
+	/**
+	 * 字符串转数组
+	 *
+	 * @param src 字符串
+	 * @return 数组
+	 */
+	@Named("str2Arr")
+	public static String[] str2Arr(String src) {
+		if (null == src) {
+			return new String[0];
+		}
+		return src.split(Symbol.COMMA);
+	}
+
+
+	/**
+	 * 数组转字符串
+	 *
+	 * @param src 数组
+	 * @return 字符串
+	 */
+	@Named("arr2str")
+	public static String arr2Str(String[] src) {
+		if (null == src) {
+			return EMPTY;
+		}
+		return String.join(Symbol.COMMA, src);
+	}
 }

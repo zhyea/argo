@@ -1,9 +1,10 @@
 package com.zhyea.argo.cms.controller;
 
 
-import com.zhyea.argo.cms.action.FciPropMaintainAction;
-import com.zhyea.argo.model.item.FciPropItem;
 import com.zhyea.argo.biz.service.FciPropService;
+import com.zhyea.argo.cms.action.FciPropMaintainAction;
+import com.zhyea.argo.cms.action.FciPropQueryAction;
+import com.zhyea.argo.model.item.FciPropItem;
 import com.zhyea.argo.model.request.fci.*;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
@@ -26,13 +27,16 @@ public class FciPropController {
 
 
 	private final FciPropService fciPropService;
-
 	private final FciPropMaintainAction fciPropMaintainAction;
+	private final FciPropQueryAction fciPropQueryAction;
 
 	@Autowired
-	public FciPropController(FciPropService fciPropService, FciPropMaintainAction fciPropMaintainAction) {
+	public FciPropController(FciPropService fciPropService,
+	                         FciPropMaintainAction fciPropMaintainAction,
+	                         FciPropQueryAction fciPropQueryAction) {
 		this.fciPropService = fciPropService;
 		this.fciPropMaintainAction = fciPropMaintainAction;
+		this.fciPropQueryAction = fciPropQueryAction;
 	}
 
 
@@ -68,7 +72,7 @@ public class FciPropController {
 	 */
 	@PostMapping("/get")
 	public FciPropItem get(@RequestBody @Validated FciPropIdRelateRequest request) {
-		return fciPropService.get(request.getPropId());
+		return fciPropQueryAction.getById(request.getPropId());
 	}
 
 

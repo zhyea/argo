@@ -1,7 +1,6 @@
 package com.zhyea.argo.model.item;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
 import lombok.Data;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * @author robin
  */
 @Data
-public class FciItem extends BaseDataBindRequest {
+public class FciItem extends BaseDataBindReq {
 
 
 	/**
@@ -77,28 +76,6 @@ public class FciItem extends BaseDataBindRequest {
 	 * 数据绑定标记
 	 */
 	private Integer dataBindFlag;
-
-
-	/**
-	 * 组件生效周期类型
-	 * <p>
-	 * see also {@link EffectivePeriodTypeEnum}
-	 */
-	private Integer effectivePeriodType;
-
-
-	/**
-	 * 组件生效开始时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime effectiveStartTime;
-
-
-	/**
-	 * 组件生效结束时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime effectiveEndTime;
 
 
 	/**

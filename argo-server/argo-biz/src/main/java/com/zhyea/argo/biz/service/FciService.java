@@ -35,7 +35,7 @@ public class FciService {
 
 
 	@Autowired
-	public FciService(FciMapper fciMapper, FciConverter fciConverter,  FciReqService fciReqService) {
+	public FciService(FciMapper fciMapper, FciConverter fciConverter, FciReqService fciReqService) {
 		this.fciMapper = fciMapper;
 		this.fciConverter = fciConverter;
 		this.fciReqService = fciReqService;
@@ -85,6 +85,18 @@ public class FciService {
 	 */
 	public FciItem getById(Long id) {
 		FciDto dto = fciMapper.getById(id);
+		return fciConverter.dto2Item(dto);
+	}
+
+
+	/**
+	 * 根据code获取组件实例
+	 *
+	 * @param fciCode 组件实例code
+	 * @return 组件实例
+	 */
+	public FciItem getByCode(String fciCode) {
+		FciDto dto = fciMapper.getByCode(fciCode);
 		return fciConverter.dto2Item(dto);
 	}
 

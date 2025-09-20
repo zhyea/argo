@@ -37,5 +37,5 @@ public abstract class BaseFciRequest extends BaseOperateRequest {
 	/**
 	 * 数据请求头
 	 */
-	private String dataRequestHeaders;
+	private String[] dataRequestHeaders;
 }

@@ -1,6 +1,5 @@
 package com.zhyea.argo.data.dto;
 
-import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.SwitchFlagEnum;
 import lombok.Data;
 
@@ -100,32 +99,6 @@ public class FciDto {
 	 * 数据请求头
 	 */
 	private String dataRequestHeaders;
-
-
-	/**
-	 * 组件属性值选择器
-	 */
-	private String propValueSelector;
-
-
-	/**
-	 * 组件生效周期类型
-	 * <p>
-	 * see also {@link EffectivePeriodTypeEnum}
-	 */
-	private Integer effectivePeriodType;
-
-
-	/**
-	 * 组件生效开始时间
-	 */
-	private LocalDateTime effectiveStartTime;
-
-
-	/**
-	 * 组件生效结束时间
-	 */
-	private LocalDateTime effectiveEndTime;
 
 
 	/**

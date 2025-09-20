@@ -3,6 +3,7 @@ package com.zhyea.argo.biz.convert;
 import com.zhyea.argo.model.request.fci.BaseFciRequest;
 import com.zhyea.argo.constants.enums.FciReqBindTypeEnum;
 import com.zhyea.argo.data.entity.cms.FciRequestEntity;
+import org.chobit.commons.constans.Symbol;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
@@ -23,7 +24,7 @@ public interface FciReqConverter {
 		entity.setBindId(id);
 		entity.setDataUrl(request.getDataUrl());
 		entity.setDataRequestMethod(request.getDataRequestMethod());
-		entity.setDataRequestHeaders(request.getDataRequestHeaders());
+		entity.setDataRequestHeaders(String.join(Symbol.COMMA, request.getDataRequestHeaders()));
 		entity.setDataRequestParams(request.getDataRequestParams());
 
 		entity.setOperatorCode(request.getOperatorCode());

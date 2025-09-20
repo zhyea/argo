@@ -1,6 +1,6 @@
 package com.zhyea.argo.api.controller;
 
-import com.zhyea.argo.api.action.PageDetailQueryAction;
+import com.zhyea.argo.api.action.FciDetailQueryAction;
 import com.zhyea.argo.api.model.item.PageDetailItem;
 import com.zhyea.argo.api.model.request.PageDetailRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @ResponseWrapper
 @RestController
 @RequestMapping("/page")
-public class PageController {
+public class PageApiController {
 
 
-	private final PageDetailQueryAction pageQueryAction;
+	private final FciDetailQueryAction pageQueryAction;
 
 	@Autowired
-	public PageController(PageDetailQueryAction pageQueryAction) {
+	public PageApiController(FciDetailQueryAction pageQueryAction) {
 		this.pageQueryAction = pageQueryAction;
 	}
 

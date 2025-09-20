@@ -9,7 +9,7 @@ import lombok.Data;
  * @since 2025/9/19 20:26
  */
 @Data
-public abstract class BaseDataBindRequest {
+public abstract class BaseDataBindReq {
 
 
 	/**
@@ -38,11 +38,5 @@ public abstract class BaseDataBindRequest {
 	/**
 	 * 数据请求头
 	 */
-	private String dataRequestHeaders;
-
-
-	/**
-	 * 属性值选择器
-	 */
-	private String propValueSelector;
+	private String[] dataRequestHeaders;
 }

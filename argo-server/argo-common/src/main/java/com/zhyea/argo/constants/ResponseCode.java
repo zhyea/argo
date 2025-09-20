@@ -93,7 +93,7 @@ public enum ResponseCode implements CodeDescEnum {
 	FCI_PROP_EFFECTIVE_START_TIME_AFTER_NOW(40304, "组件属性生效开始时间不能小于当前时间"),
 	FCI_PROP_EFFECTIVE_END_TIME_AFTER_START(40305, "组件属性生效结束时间需要大于开始时间"),
 
-	//DATA_BIND_URL_IS_EMPTY(40306, "数据链接或者值选择器不能为空"),
+	FCI_PROP_NOT_EXISTS_ERROR(40306, "组件属性不存在"),
 
 	FCI_PROP_EFFECTIVE_DATA_NOT_ALLOW_EDIT(40307, "生效中的配置项不允许修改"),
 	EXPIRED_FCI_PROP_CANNOT_BE_DELETED(40308, "已过期的配置项不允许删除"),

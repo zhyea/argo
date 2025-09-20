@@ -56,7 +56,7 @@ public class FciGetAction {
 
 		FciItem fciItem = null;
 		if (null != result.get(0)) {
-			fciItem = (FciItem) result.getFirst();
+			fciItem = (FciItem) result.get(0);
 			fciItem.setExistsInheritedProps(existsInheritedProps);
 			fciItem.setPageList(pageList);
 		}

@@ -1,8 +1,6 @@
 package com.zhyea.argo.model.request.fci;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zhyea.argo.constants.enums.DataBindFlagEnum;
-import com.zhyea.argo.constants.enums.EffectivePeriodTypeEnum;
 import com.zhyea.argo.constants.enums.FciUsageScopeEnum;
 import com.zhyea.argo.constants.enums.YesOrNo;
 import com.zhyea.argo.tools.Args;
@@ -11,14 +9,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.chobit.commons.contract.Checkable;
 import org.chobit.commons.exception.ParamException;
-import org.chobit.commons.utils.Collections2;
 import org.chobit.commons.validation.EnumVal;
 import org.chobit.commons.validation.WholeCheck;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static com.zhyea.argo.constants.ResponseCode.*;
+import static com.zhyea.argo.constants.ResponseCode.DATA_BIND_URL_IS_BLANK;
+import static com.zhyea.argo.constants.ResponseCode.PROP_DATA_REQUEST_METHOD_IS_NULL;
 
 /**
  * 组件实例新增请求
@@ -74,27 +69,6 @@ public class FciAddRequest extends BaseFciRequest implements Checkable {
 
 
 	/**
-	 * 数据值选择器
-	 */
-	private String propValueSelector;
-
-
-	/**
-	 * 组件生效周期类型
-	 */
-	@EnumVal(enumClass = EffectivePeriodTypeEnum.class, message = "生效周期类型错误")
-	@NotNull(message = "生效周期类型不能为空")
-	private Integer effectivePeriodType;
-
-
-	/**
-	 * 组件生效时间范围
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	List<LocalDateTime> effectiveTimeRange;
-
-
-	/**
 	 * 备注
 	 */
 	private String remark;
@@ -102,25 +76,12 @@ public class FciAddRequest extends BaseFciRequest implements Checkable {
 
 	@Override
 	public boolean check() throws ParamException {
-		if (EffectivePeriodTypeEnum.FIXED_TERM.is(effectivePeriodType)) {
-			Args.check(Collections2.isNotEmpty(effectiveTimeRange) && effectiveTimeRange.size() >= 2, FCI_EFFECTIVE_TIME_IS_EMPTY);
 
-			LocalDateTime effectiveStartTime = effectiveTimeRange.get(0);
-			LocalDateTime effectiveEndTime = effectiveTimeRange.get(1);
-
-			Args.check(null != effectiveStartTime && null != effectiveEndTime, FCI_EFFECTIVE_TIME_IS_EMPTY);
-			// 新增时，开始时间不能<=当前时间
-			Args.check(effectiveStartTime.isAfter(LocalDateTime.now()), FCI_EFFECTIVE_START_TIME_AFTER_NOW);
-			// 结束时间需要大于开始时间
-			Args.check(effectiveEndTime.isAfter(effectiveStartTime), FCI_EFFECTIVE_END_TIME_AFTER_START);
-		}
 
 		if (DataBindFlagEnum.BIND_DATA.is(getDataBindFlag())) {
 			System.out.println(Args.class);
 			Args.checkNotBlank(this.getDataUrl(), DATA_BIND_URL_IS_BLANK);
 			Args.checkNotNull(this.getDataRequestMethod(), PROP_DATA_REQUEST_METHOD_IS_NULL);
-
-			Args.checkNotBlank(propValueSelector, PROP_DATA_VALUE_SELECTOR_IS_BLANK);
 		}
 
 		return true;
