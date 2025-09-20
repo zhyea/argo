@@ -1,18 +1,18 @@
 <template>
 	<el-drawer :title="`${fciForm.id ? '编辑' : '新增'}组件实例 - ${fciForm.name}`"
-	           v-model="fciItemDrawer" :with-header=true size="40%">
+	           v-model="fciItemDrawer" :with-header=true size="50%">
 		<el-container v-loading="loadingRef">
 			<!--表单信息-->
 			<el-form status-icon
 			         label-position="right"
-			         label-width="100px"
+			         label-width="120px"
 			         label-suffix=":"
 			         :model="fciForm" ref="fciFormRef" :rules="fciFormRules" class="fci-form">
 
 				<el-card class="fcm-region">
-					<el-form-item prop="fcmId">
-						<el-input type="hidden" v-model="fciForm.fcmId"/>
-						<el-input type="hidden" v-model="fciForm.appId"/>
+					<el-form-item>
+						<el-input id="fcmId" type="hidden" v-model="fciForm.fcmId"/>
+						<el-input id="appId" type="hidden" v-model="fciForm.appId"/>
 					</el-form-item>
 
 					<el-form-item label="名称" prop="name">
@@ -20,7 +20,7 @@
 					</el-form-item>
 
 					<el-form-item label="使用范围" prop="usageScope">
-						<el-radio-group id="usageScope" v-model="fciForm.usageScope">
+						<el-radio-group v-model="fciForm.usageScope">
 							<el-radio v-for="e in usageScopeEnum"
 							          :value="e[0]">
 								{{ e[1] }}
@@ -35,42 +35,22 @@
 						           inactive-text="否" :inactive-value="0"/>
 					</el-form-item>
 
-					<el-form-item label="生效周期" prop="effectivePeriodType">
-						<el-radio-group id="effectivePeriodType" v-model="fciForm.effectivePeriodType">
-							<el-radio v-for="e in effectivePeriodTypeEnum"
-							          :value="e[0]">
-								{{ e[1] }}
-							</el-radio>
-						</el-radio-group>
-					</el-form-item>
-
-					<el-form-item label="生效时间" prop="effectivePeriodType"
-					              v-if="fciForm.effectivePeriodType === 2">
-						<el-date-picker
-							v-model="fciForm.effectiveTimeRange"
-							type="datetimerange"
-							range-separator="到"
-							start-placeholder="请选择生效开始时间"
-							end-placeholder="请选择生效结束时间"
-							value-format="YYYY-MM-DD HH:mm:ss"/>
-					</el-form-item>
-
-
 					<el-form-item label="数据绑定" prop="dataBindFlag">
 						<el-switch id="dataBindFlag" v-model="fciForm.dataBindFlag"
 						           inline-prompt size="large"
 						           active-text="是" :active-value="1"
 						           inactive-text="否" :inactive-value="0"
+						           :disabled="existsInheritedProps"
 						/>
 					</el-form-item>
 
 					<el-form-item label="数据链接" v-if="1===fciForm.dataBindFlag" prop="dataUrl">
-						<el-input id="name" v-model="fciForm.dataUrl"
-						/>
+						<el-input id="dataUrl" :disabled="existsInheritedProps" v-model="fciForm.dataUrl"/>
 					</el-form-item>
 
-					<el-form-item label="请求method" v-if="1===fciForm.dataBindFlag" prop="effectivePeriodType">
-						<el-radio-group id="dataRequestMethod" v-model="fciForm.dataRequestMethod">
+					<el-form-item label="请求method" v-if="1===fciForm.dataBindFlag" prop="dataRequestMethod">
+						<el-radio-group id="dataRequestMethod" :disabled="existsInheritedProps"
+						                v-model="fciForm.dataRequestMethod">
 							<el-radio v-for="e in dataRequestMethodEnum"
 							          :value="e[0]">
 								{{ e[1] }}
@@ -79,26 +59,21 @@
 					</el-form-item>
 
 					<el-form-item label="请求参数" v-if="1===fciForm.dataBindFlag" prop="dataRequestParams">
-						<el-input id="name" type="textarea" v-model="fciForm.dataRequestParams"
+						<el-input id="dataRequestParams" type="textarea" :disabled="existsInheritedProps"
+						          v-model="fciForm.dataRequestParams"
 						/>
 					</el-form-item>
 
 					<el-form-item label="请求headers" v-if="1===fciForm.dataBindFlag" prop="dataRequestHeaders">
-						<el-input id="name" v-model="fciForm.dataRequestHeaders"
+						<el-input-tag id="dataRequestHeaders" :disabled="existsInheritedProps"
+						              v-model="fciForm.dataRequestHeaders"
 						/>
 					</el-form-item>
-
-					<el-form-item label="值选择器" v-if="1===fciForm.dataBindFlag" prop="propValueSelector">
-						<el-input id="propValue" v-model="fciForm.propValueSelector"
-						/>
-					</el-form-item>
-
 
 					<el-form-item label="备注" prop="remark">
 						<el-input id="remark" type="textarea" v-model="fciForm.remark" :autosize="{ minRows: 4,}"/>
 					</el-form-item>
 				</el-card>
-
 
 				<el-card class="fcm-region">
 					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
@@ -113,7 +88,8 @@
 
 					<div v-for="page in fciUsage" :key="page">
 						<el-row>
-							<el-text truncated><span class="mono-code">{{ page.pageCode }}</span> - {{ page.pageName }}
+							<el-text truncated>
+								<span class="mono-code">{{ page.pageCode }}</span> - {{ page.pageName }}
 							</el-text>
 						</el-row>
 					</div>
@@ -129,7 +105,6 @@ import {ref, computed} from "vue";
 import {submitForm} from "@/utils/helper";
 import {addFci, editFci, getFci} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
-import {fciUsageList} from "@/api/page";
 import {cloneDeep} from "lodash-es";
 
 const enumStore = useEnumStore()
@@ -148,10 +123,7 @@ const initData = {
 	dataUrl: '',
 	dataRequestMethod: 1,
 	dataRequestParams: '',
-	dataRequestHeaders: '',
-	propValueSelector: '',
-	effectivePeriodType: 1,
-	effectiveTimeRange: ['', ''],
+	dataRequestHeaders: [''],
 
 	remark: '',
 }
@@ -177,10 +149,10 @@ const fciFormRules = {
 	dataRequestMethod: [
 		{required: true, message: '数据请求method不可为空', trigger: 'blur'},
 	],
-	propValueSelector: [
-		{required: true, message: '属性值选择器不可为空', trigger: 'blur'},
-	],
 };
+
+
+const existsInheritedProps = ref(false);
 
 // 加载组件实例数据
 const loadFciData = async (fciId: number) => {
@@ -195,9 +167,9 @@ const loadFciData = async (fciId: number) => {
 		if (response && response.data) {
 			const fciData = response.data;
 			fciForm.value = fciData;
-			fciForm.value.effectiveTimeRange = [fciData.effectiveStartTime, fciData.effectiveEndTime];
 
 			fciUsage.value = fciData.pageList;
+			existsInheritedProps.value = fciData.existsInheritedProps;
 
 			loadingRef.value = false
 		}
@@ -209,14 +181,11 @@ const isFciFormSubmitted = ref(false)
 
 
 // 枚举相关信息
-const effectivePeriodTypeEnum = computed(() => {
-	return enumStore.getEnumMap('EffectivePeriodTypeEnum');
-})
 const usageScopeEnum = computed(() => {
 	return enumStore.getEnumMap('FciUsageScopeEnum');
 })
 const dataRequestMethodEnum = computed(() => {
-	return enumStore.getEnumMap('HttpQueryMethodEnum');
+	return enumStore.getEnumMap('RequestQueryMethodEnum');
 })
 
 // 打开组件实例抽屉前的准备

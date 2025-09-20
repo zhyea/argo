@@ -49,13 +49,13 @@ axiosInst.interceptors.response.use(
 		const code = result.code;
 		if (code === 0) {
 			if (result?.authToken) {
-				console.log(`received new authToken:${result.authToken}`)
+				// console.log(`received new authToken:${result.authToken}`)
 				authStore.setToken(result.authToken)
 			}
 			return result;
 		} else if (code === 100 || code === 102 || code === 103) {
 			// 执行跳转到登录页
-			console.log("token was removed")
+			// console.log("token was removed")
 			authStore.removeToken()
 			ROUTER.push({name: ROUTE_NAMES.loginRouteName}).then(() => {
 				console.log('go back to login page')

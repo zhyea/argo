@@ -157,14 +157,16 @@ const initData = {
 const fcmForm = ref(cloneDeep(initData))
 
 
+const fcmPropData = {
+	propKey: '',
+	propType: '',
+	propDesc: '',
+	required: 0,
+}
+
 // fcm 属性表单数据
 const fcmPropForm = ref({
-	props: [{
-		propKey: '',
-		propType: '',
-		propDesc: '',
-		required: 0,
-	}]
+	props: [cloneDeep(fcmPropData)]
 })
 
 
@@ -272,7 +274,7 @@ function openFcmEditDrawer(fcmId: number, appId: number) {
 	}
 
 	fcmForm.value = cloneDeep(initData)
-	fcmPropForm.value.props = []
+	fcmPropForm.value.props = [cloneDeep(fcmPropData)]
 
 	fcmEditDrawer.value = true
 	fcmForm.value.appId = appId
@@ -284,6 +286,8 @@ function openFcmEditDrawer(fcmId: number, appId: number) {
 	// 加载组件模型数据
 	if (fcmId) {
 		loadFcmData(fcmId)
+	} else {
+		loadingRef.value = false
 	}
 }
 
@@ -293,7 +297,7 @@ defineExpose({openFcmEditDrawer})
 
 // 新增fcm属性
 function addFcmProp() {
-	fcmPropForm.value.props.push({})
+	fcmPropForm.value.props.push(cloneDeep(fcmPropData))
 }
 
 // 删除fcm属性

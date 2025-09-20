@@ -1,11 +1,11 @@
 <template>
 	<el-drawer :title="`${propForm.id ? '编辑' : '新增'}实例属性${propForm.id? '-'+ propForm.propKey : '' }`"
-	           v-model="fciPropEditDrawer" :with-header=true size="40%">
+	           v-model="fciPropEditDrawer" :with-header=true size="50%">
 		<el-container v-loading="loadingRef">
 			<!--表单信息-->
 			<el-form status-icon
 			         label-position="right"
-			         label-width="100px"
+			         label-width="110px"
 			         label-suffix=":"
 			         :model="propForm" ref="fciPropFormRef" :rules="fciPropRules" class="fci-form">
 
@@ -34,19 +34,20 @@
 						</el-radio-group>
 					</el-form-item>
 
-					<el-form-item label="属性Value" v-if="0===propForm.dataBindFlag" prop="propValue">
+					<el-form-item label="属性Value" v-if="0===dataBindFlag" prop="propValue">
 						<el-input id="propValue" v-model="propForm.propValue"
 						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
-					<el-form-item label="数据链接" v-if="1===propForm.dataBindFlag" prop="dataUrl">
+					<el-form-item label="数据链接" v-if="1===dataBindFlag && 2!==propForm.dataBindFlag" prop="dataUrl">
 						<el-input id="dataUrl" v-model="propForm.dataUrl"
 						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
-					<el-form-item label="method" v-if="1===propForm.dataBindFlag" prop="effectivePeriodType">
+					<el-form-item label="method" v-if="1===dataBindFlag && 2!==propForm.dataBindFlag"
+					              prop="effectivePeriodType">
 						<el-radio-group id="dataRequestMethod" v-model="propForm.dataRequestMethod"
 						                :disabled="expiredStatusFlag || effectiveStatusFlag">
 							<el-radio v-for="e in dataRequestMethodEnum"
@@ -56,19 +57,21 @@
 						</el-radio-group>
 					</el-form-item>
 
-					<el-form-item label="请求参数" v-if="1===propForm.dataBindFlag" prop="dataRequestParams">
+					<el-form-item label="请求参数" v-if="1===dataBindFlag && 2!==propForm.dataBindFlag"
+					              prop="dataRequestParams">
 						<el-input id="dataRequestParams" type="textarea" v-model="propForm.dataRequestParams"
 						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
-					<el-form-item label="请求headers" v-if="1===propForm.dataBindFlag" prop="dataRequestHeaders">
-						<el-input id="dataRequestHeaders" v-model="propForm.dataRequestHeaders"
-						          :disabled="expiredStatusFlag || effectiveStatusFlag"
+					<el-form-item label="请求headers" v-if="1===dataBindFlag && 2!==propForm.dataBindFlag"
+					              prop="dataRequestHeaders">
+						<el-input-tag id="dataRequestHeaders" v-model="propForm.dataRequestHeaders"
+						              :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
-					<el-form-item label="值选择器" v-if="1===propForm.dataBindFlag || 2===propForm.dataBindFlag"
+					<el-form-item label="值选择器" v-if="1===dataBindFlag || 2===propForm.dataBindFlag"
 					              prop="propValueSelector">
 						<el-input id="propValueSelector" v-model="propForm.propValueSelector"
 						          :readonly="expiredStatusFlag || effectiveStatusFlag"
@@ -137,13 +140,13 @@
 
 import {ref, computed} from "vue";
 import {submitForm} from "@/utils/helper";
-import {addFciProp, editFciProp, getFciProp} from "@/api/fci";
+import {addFciProp, editFciProp, getFci, getFciProp} from "@/api/fci";
 import {useEnumStore} from "@/store/enum";
 import {getFcm} from "@/api/fcm";
 import {Ref} from "@vue/reactivity";
 import {cloneDeep} from "lodash-es";
 
-const defaultStartTime = new Date()
+const defaultStartTime = new Date(2000, 1, 1, 0, 0, 0)
 const defaultEndTime = new Date(2000, 1, 1, 23, 59, 59)
 const enumStore = useEnumStore()
 
@@ -159,7 +162,7 @@ const initData = {
 	dataUrl: '',
 	dataRequestMethod: 1,
 	dataRequestParams: '',
-	dataRequestHeaders: '',
+	dataRequestHeaders: [],
 	propValueSelector: '',
 	switchFlag: 1,
 	effectivePeriodType: 1,
@@ -228,6 +231,13 @@ const fixedPropDisabledFlag: Ref<boolean> = ref(false)
 const expiredStatusFlag: Ref<boolean> = ref(false)
 const effectiveStatusFlag: Ref<boolean> = ref(false)
 const pendingStatusFlag: Ref<boolean> = ref(false)
+const fciDataBindFlag: Ref<number> = ref(0)
+const dataBindFlag = computed(() => {
+	if (propForm.value.dataBindFlag === 2) {
+		return fciDataBindFlag.value
+	}
+	return propForm.value.dataBindFlag
+})
 
 
 // 加载组件实例数据
@@ -241,6 +251,8 @@ async function loadFciPropData(propId: number) {
 		const propData = response.data;
 		propForm.value = propData;
 		const status = propData.status;
+
+		fciDataBindFlag.value = propData.fciDataBindFlag;
 
 		expiredStatusFlag.value = (status === 1)
 		effectiveStatusFlag.value = (status === 2)
@@ -258,7 +270,7 @@ const effectivePeriodTypeEnum = computed(() => {
 })
 
 const dataRequestMethodEnum = computed(() => {
-	return enumStore.getEnumMap('HttpQueryMethodEnum');
+	return enumStore.getEnumMap('RequestQueryMethodEnum');
 })
 
 
@@ -297,13 +309,17 @@ async function openDrawerForEdit(fciId: number) {
 
 
 // 打开组件实例抽屉-用于新增
-function openDrawerForAdd(fci: any) {
+async function openDrawerForAdd(fci: any) {
 	openPrepare()
-	loadFcmProps(fci.fcmId)
+	await loadFcmProps(fci.fcmId)
+
+	const fciResponse = await getFci(fci.id)
+	if (fciResponse && fciResponse.data) {
+		fciDataBindFlag.value = fciResponse.data.dataBindFlag
+	}
+
 	propForm.value.fciId = fci.id
 	loadingRef.value = false
-
-	console.log(propForm.value)
 }
 
 
@@ -328,12 +344,11 @@ function submitFciPropForm() {
 
 const fcmProps: Ref<any[]> = ref([])
 
-function loadFcmProps(fcmId: number) {
-	getFcm(fcmId).then(response => {
-		if (response && response.data) {
-			fcmProps.value = response.data.props;
-		}
-	})
+async function loadFcmProps(fcmId: number) {
+	const response = await getFcm(fcmId);
+	if (response && response.data) {
+		fcmProps.value = response.data.props;
+	}
 }
 
 
