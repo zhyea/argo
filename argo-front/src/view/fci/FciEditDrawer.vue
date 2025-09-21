@@ -20,7 +20,7 @@
 					</el-form-item>
 
 					<el-form-item label="使用范围" prop="usageScope">
-						<el-radio-group v-model="fciForm.usageScope">
+						<el-radio-group v-model="fciForm.usageScope" :disabled="isFciUsedInPage">
 							<el-radio v-for="e in usageScopeEnum"
 							          :value="e[0]">
 								{{ e[1] }}
@@ -76,7 +76,9 @@
 				</el-card>
 
 				<el-card class="fcm-region">
-					<el-button type="primary" :disabled="isFciFormSubmitted" @click="submitFciForm">提交</el-button>
+					<el-button type="primary" :disabled="isFciFormSubmitted"
+					           @click="submitFciForm">提交
+					</el-button>
 				</el-card>
 
 				<el-card class="fcm-region" v-if="fciUsage && fciUsage.length > 0">
@@ -132,6 +134,9 @@ const fciForm = ref(cloneDeep(initData))
 
 const fciUsage = ref<any[]>()
 const fciFormRef = ref()
+const isFciUsedInPage = computed(() => {
+	return fciUsage.value && fciUsage.value.length > 0
+})
 
 const fciFormRules = {
 	name: [

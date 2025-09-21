@@ -74,7 +74,7 @@
 					<el-form-item label="值选择器" v-if="1===dataBindFlag || 2===propForm.dataBindFlag"
 					              prop="propValueSelector">
 						<el-input id="propValueSelector" v-model="propForm.propValueSelector"
-						          :readonly="expiredStatusFlag || effectiveStatusFlag"
+						          :disabled="expiredStatusFlag || effectiveStatusFlag"
 						/>
 					</el-form-item>
 
