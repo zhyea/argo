@@ -1,11 +1,11 @@
 package com.zhyea.argo.biz.convert;
 
-import com.zhyea.argo.model.item.FciPropItem;
-import com.zhyea.argo.model.request.fci.FciPropAddRequest;
-import com.zhyea.argo.model.request.fci.FciPropEditRequest;
 import com.zhyea.argo.constants.enums.TimeRelateStatusEnum;
 import com.zhyea.argo.data.dto.FciPropDto;
 import com.zhyea.argo.data.entity.cms.FciPropEntity;
+import com.zhyea.argo.model.item.FciPropItem;
+import com.zhyea.argo.model.request.fci.FciPropAddRequest;
+import com.zhyea.argo.model.request.fci.FciPropEditRequest;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -46,16 +46,6 @@ public interface FciPropConverter {
 	FciPropItem entity2ItemSimply(FciPropEntity entity);
 
 
-	/**
-	 * dto转item
-	 *
-	 * @param dto dto信息
-	 * @return item信息
-	 */
-	@Mapping(source = "dataRequestHeaders", target = "dataRequestHeaders", qualifiedByName = "str2Arr")
-	FciPropItem dto2Item(FciPropDto dto);
-
-
 	@Named("entity2Item")
 	default FciPropItem entity2Item(FciPropEntity entity) {
 		if (null == entity) {
@@ -82,6 +72,44 @@ public interface FciPropConverter {
 	 */
 	@IterableMapping(qualifiedByName = "entity2Item")
 	List<FciPropItem> listEntity2Item(List<FciPropEntity> entityList);
+
+
+	/**
+	 * dto转item
+	 *
+	 * @param dto dto信息
+	 * @return item信息
+	 */
+	@Mapping(source = "dataRequestHeaders", target = "dataRequestHeaders", qualifiedByName = "str2Arr")
+	FciPropItem dto2ItemSimply(FciPropDto dto);
+
+
+	@Named("dto2Item")
+	default FciPropItem dto2Item(FciPropDto dto) {
+		if (null == dto) {
+			return null;
+		}
+
+		FciPropItem item = dto2ItemSimply(dto);
+		TimeRelateStatusEnum statusEnum =
+				TimeRelateStatusEnum.analyze(item.getEffectivePeriodType(), item.getEffectiveStartTime(), item.getEffectiveEndTime());
+		if (null == statusEnum) {
+			return item;
+		}
+		item.setStatus(statusEnum.getCode());
+		item.setStatusDesc(statusEnum.getDesc());
+		return item;
+	}
+
+
+	/**
+	 * 实体列表转组件实例信息列表
+	 *
+	 * @param entityList 实体列表
+	 * @return 组件实例信息列表
+	 */
+	@IterableMapping(qualifiedByName = "dto2Item")
+	List<FciPropItem> listDto2Item(List<FciPropDto> entityList);
 
 
 	/**

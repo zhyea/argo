@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -106,6 +105,7 @@ public final class ParallelKit {
 					return null;
 				}
 			}, executor);
+
 			futures.add(future);
 		}
 
@@ -120,7 +120,6 @@ public final class ParallelKit {
 			// 收集非空结果
 			return futures.stream()
 					.map(CompletableFuture::join)
-					.filter(Objects::nonNull)
 					.collect(Collectors.toList());
 
 		} catch (Exception e) {

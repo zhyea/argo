@@ -86,9 +86,9 @@ public class FciPropService {
         PageResult<FciPropItem> result = new PageResult<>();
 
         try (Page<FciEntity> page = PageHelper.startPage(request.getPageNo(), request.getPageSize())) {
-            List<FciPropEntity> list = propMapper.findInPage(request.getFciId(), request.getKeyword());
+            List<FciPropDto> list = propMapper.findInPage(request.getFciId(), request.getKeyword());
 
-            result.setData(propConverter.listEntity2Item(list));
+            result.setData(propConverter.listDto2Item(list));
             result.setPageNo(page.getPageNum());
             result.setPageSize(page.getPageSize());
             result.setTotal(page.getTotal());
@@ -105,8 +105,8 @@ public class FciPropService {
      * @return 组件属性列表
      */
     public List<FciPropItem> findEffectivePropsByFciId(Long fciId) {
-        List<FciPropEntity> list = propMapper.findEffectiveByFciId(fciId);
-        return propConverter.listEntity2Item(list);
+        List<FciPropDto> list = propMapper.findEffectiveByFciId(fciId);
+        return propConverter.listDto2Item(list);
     }
 
 
@@ -117,8 +117,8 @@ public class FciPropService {
      * @return 待生效的组件属性列表
      */
     public List<FciPropItem> findInEffectAndPendingByFciId(Long fciId) {
-        List<FciPropEntity> list = propMapper.findInEffectAndPendingByFciId(fciId);
-        return propConverter.listEntity2Item(list);
+        List<FciPropDto> list = propMapper.findInEffectAndPendingByFciId(fciId);
+        return propConverter.listDto2Item(list);
     }
 
 
@@ -130,8 +130,8 @@ public class FciPropService {
      * @return 组件属性
      */
     public List<FciPropItem> findByPropKey(Long fciId, String propKey) {
-        List<FciPropEntity> list = propMapper.findByPropKey(fciId, propKey);
-        return propConverter.listEntity2Item(list);
+        List<FciPropDto> list = propMapper.findByPropKey(fciId, propKey);
+        return propConverter.listDto2Item(list);
     }
 
 

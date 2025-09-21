@@ -58,25 +58,25 @@ public interface FciPropMapper {
 	 * @param keyword 关键字
 	 * @return 组件属性记录
 	 */
-	List<FciPropEntity> findInPage(@Param("fciId") Long fciId, @Param("keyword") String keyword);
+	List<FciPropDto> findInPage(@Param("fciId") Long fciId, @Param("keyword") String keyword);
 
 
-    /**
-     * 根据组件id获取当前生效中的组件属性记录
-     *
-     * @param fciId 组件id
-     * @return 组件属性记录
-     */
-    List<FciPropEntity> findEffectiveByFciId(@Param("fciId") Long fciId);
+	/**
+	 * 根据组件id获取当前生效中的组件属性记录
+	 *
+	 * @param fciId 组件id
+	 * @return 组件属性记录
+	 */
+	List<FciPropDto> findEffectiveByFciId(@Param("fciId") Long fciId);
 
 
-    /**
-     * 根据组件id获取当前有效的组件属性记录
-     *
-     * @param fciId 组件id
-     * @return 组件属性记录
-     */
-    List<FciPropEntity> findInEffectAndPendingByFciId(@Param("fciId") Long fciId);
+	/**
+	 * 根据组件id获取当前有效的组件属性记录
+	 *
+	 * @param fciId 组件id
+	 * @return 组件属性记录
+	 */
+	List<FciPropDto> findInEffectAndPendingByFciId(@Param("fciId") Long fciId);
 
 
 	/**
@@ -86,7 +86,7 @@ public interface FciPropMapper {
 	 * @param propKey 属性key
 	 * @return 组件属性记录
 	 */
-	List<FciPropEntity> findByPropKey(@Param("fciId") Long fciId, @Param("propKey") String propKey);
+	List<FciPropDto> findByPropKey(@Param("fciId") Long fciId, @Param("propKey") String propKey);
 
 
 	/**

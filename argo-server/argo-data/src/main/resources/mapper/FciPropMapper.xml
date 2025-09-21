@@ -5,7 +5,7 @@
 <mapper namespace="com.zhyea.argo.data.mapper.cms.FciPropMapper">
 
 
-    <resultMap id="QueryResultMap" type="com.zhyea.argo.data.entity.cms.FciPropEntity">
+    <resultMap id="QueryResultMap" type="com.zhyea.argo.data.dto.FciPropDto">
         <result column="effective_start_time" jdbcType="TIMESTAMP" property="effectiveStartTime"
                 typeHandler="com.zhyea.argo.data.type.NullTimeHandler"/>
         <result column="effective_end_time" jdbcType="TIMESTAMP" property="effectiveEndTime"
@@ -73,12 +73,12 @@
         from (
 
         select * from ag_cms_fci_prop
-        where deleted=0 and fci_id=#{fciId} and switch_flag=1 and effective_period_type=1
+        where deleted=0 and fci_id=#{fciId} and effective_period_type=1
 
         union all
 
         select * from ag_cms_fci_prop
-        where deleted=0 and fci_id=#{fciId} and switch_flag=1 and effective_period_type=2
+        where deleted=0 and fci_id=#{fciId} and effective_period_type=2
         and (effective_start_time &lt; now() and effective_end_time &gt;= now())
 
         )tmp

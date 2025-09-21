@@ -102,14 +102,17 @@ public enum ResponseCode implements CodeDescEnum {
 	FCI_EFFECTIVE_TIME_IS_EMPTY(40311, "组件实例生效时间错误"),
 	FCI_EFFECTIVE_START_TIME_AFTER_NOW(40312, "组件实例生效开始时间不能小于当前时间"),
 	FCI_EFFECTIVE_END_TIME_AFTER_START(40313, "组件实例生效结束时间需要大于开始时间"),
+	FCI_IS_CLOSED(40314, "组件实例没有启用"),
+	EXISTS_INHERITED_FCI_PROPS(40315, "存在继承组件实例数据绑定关系的属性"),
+	USAGE_SCOPE_CANNOT_BE_MODIFIED_WHEN_USED(40316, "组件被修改后不允许再修改使用范围"),
+	INHERITED_FCI_PROP_CANNOT_BE_MODIFIED(40316, "不允许修改组件数据绑定信息"),
+
 
 	DATA_BIND_URL_IS_BLANK(40360, "数据链接或者值选择器不能为空"),
 	PROP_DATA_REQUEST_METHOD_IS_NULL(40361, "数据请求方式不能为空"),
 	PROP_DATA_REQUEST_PARAMS_IS_BLANK(40362, "数据请求参数不能为空"),
 	PROP_DATA_REQUEST_HEADERS_IS_BLANK(40363, "数据请求header不能为空"),
 	PROP_DATA_VALUE_SELECTOR_IS_BLANK(40364, "数据值选择器不能为空"),
-
-	EXISTS_INHERITED_FCI_PROPS(40365, "存在继承组件实例数据绑定关系的属性"),
 
 
 	/**

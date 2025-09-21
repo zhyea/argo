@@ -37,10 +37,44 @@ public final class Args {
 	}
 
 	/**
-	 * 校验参数是否为空，为空则抛出空指针异常
+	 * 校验参数是否相等，为空则抛出空指针异常
 	 */
 	public static void checkEquals(String str,
 	                               String other,
+	                               ResponseCode responseCode) {
+		if (!Objects.equals(str, other)) {
+			throw new ArgoServerException(responseCode);
+		}
+	}
+
+	/**
+	 * 校验参数是否相等，为空则抛出空指针异常
+	 */
+	public static void checkEquals(Integer str,
+	                               Integer other,
+	                               ResponseCode responseCode) {
+		if (!Objects.equals(str, other)) {
+			throw new ArgoServerException(responseCode);
+		}
+	}
+
+	/**
+	 * 校验参数是否相等，为空则抛出空指针异常
+	 */
+	public static void checkEquals(Double str,
+	                               Double other,
+	                               ResponseCode responseCode) {
+		if (!Objects.equals(str, other)) {
+			throw new ArgoServerException(responseCode);
+		}
+	}
+
+
+	/**
+	 * 校验参数是否相等，为空则抛出空指针异常
+	 */
+	public static void checkEquals(Long str,
+	                               Long other,
 	                               ResponseCode responseCode) {
 		if (!Objects.equals(str, other)) {
 			throw new ArgoServerException(responseCode);

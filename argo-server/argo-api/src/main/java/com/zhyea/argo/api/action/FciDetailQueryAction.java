@@ -69,6 +69,8 @@ public class FciDetailQueryAction {
 
 		// 使用CompletableFuture获取到全部的组件及属性信息
 		List<FciItem> fciList = pageService.findAvailableFci(pageItem.getAppId(), pageItem.getPageId());
+		fciList = fciList.stream().filter(e -> YesOrNo.YES.is(e.getSwitchFlag())).toList();
+
 		if (Collections2.isEmpty(fciList)) {
 			return result;
 		}
@@ -94,8 +96,13 @@ public class FciDetailQueryAction {
 
 		FciItem fciItem = fciService.getByCode(fciCode);
 		if (null == fciItem) {
-			logger.error("FciDetailQueryAction-queryFciDetail, 无效的实例编码 fciCode: {}", fciCode);
+			logger.error("FciDetailQueryAction-queryFciDetail, 无有效实例 fciCode: {}", fciCode);
 			throw new ArgoServerException(FCI_NOT_EXISTS_ERROR);
+		}
+
+		if (YesOrNo.YES.isNot(fciItem.getSwitchFlag())) {
+			logger.error("FciDetailQueryAction-queryFciDetail, 禁用的组件实例编fciCode: {}", fciCode);
+			throw new ArgoServerException(FCI_IS_CLOSED);
 		}
 
 		return queryFciDetail(fciItem.getId(), request);
@@ -210,7 +217,7 @@ public class FciDetailQueryAction {
 		for (String s : arr) {
 			String[] kv = s.split(Symbol.EQUAL);
 			if (kv.length < 2) {
-				logger.error("PageDetailQueryAction-parseParams propId:{}, 参数配置错误:{}", s, propId);
+				logger.error("FciDetailQueryAction-parseParams propId:{}, 参数配置错误:{}", s, propId);
 				continue;
 			}
 
@@ -229,7 +236,7 @@ public class FciDetailQueryAction {
 				String p = value.substring(1, value.length() - 1);
 				result.put(key, p);
 			} else {
-				logger.error("PageDetailQueryAction-parseParams propId:{}, 无法识别的配置: {}", propId, s);
+				logger.error("FciDetailQueryAction-parseParams propId:{}, 无法识别的配置: {}", propId, s);
 			}
 		}
 
