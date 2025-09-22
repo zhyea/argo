@@ -73,6 +73,8 @@
         <if test="null != keyword and keyword != ''">
             and fci.remark like concat('%', #{keyword}, '%')
         </if>
+
+        order by fci.create_time desc
     </select>
 
 

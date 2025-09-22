@@ -11,7 +11,7 @@
         values
         (
         #{e.scope},
-        #{e.appId, typeHandler=com.zhyea.argo.data.type.NullIntHandler},
+        #{e.appId, typeHandler=com.zhyea.argo.data.type.NullBigIntHandler},
         #{e.name},
         #{e.icon, typeHandler=com.zhyea.argo.data.type.NullStringHandler},
         #{e.type},
