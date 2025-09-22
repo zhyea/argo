@@ -85,7 +85,7 @@ public class FciController {
 	 */
 	@PostMapping("/delete")
 	public boolean delete(@RequestBody @Validated FciIdRelateRequest request) {
-		return fciService.deleteById(request.getFciId());
+		return maintainAction.delete(request.getFciId());
 	}
 
 

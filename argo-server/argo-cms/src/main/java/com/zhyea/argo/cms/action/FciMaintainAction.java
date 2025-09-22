@@ -157,4 +157,23 @@ public class FciMaintainAction {
 	}
 
 
+	public boolean delete(Long id) {
+		FciItem item = fciService.getById(id);
+		if (null == item) {
+			throw new ArgoServerException(ResponseCode.FCI_NOT_EXISTS_ERROR);
+		}
+		List<PageItem> pageItems = pageService.findFciUsage(id);
+		if (Collections2.isNotEmpty(pageItems)) {
+			throw new ArgoServerException(ResponseCode.FCI_CANNOT_BE_DELETED_WHEN_USED);
+		}
+
+		List<FciPropItem> props = fciPropService.findEffectivePropsByFciId(id);
+		if (Collections2.isNotEmpty(props)) {
+			throw new ArgoServerException(ResponseCode.FCI_CANNOT_BE_DELETED_WHEN_PROPS_EFFECTIVE);
+		}
+
+		return fciService.deleteById(id);
+	}
+
+
 }
