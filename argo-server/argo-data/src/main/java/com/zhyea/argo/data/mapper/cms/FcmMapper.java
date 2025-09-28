@@ -62,6 +62,16 @@ public interface FcmMapper {
 
 
 	/**
+	 * 根据应用id统计组件模型
+	 *
+	 * @param appId 应用id
+	 * @return 统计结果
+	 */
+	@Select("select count(id) from ag_cms_fcm where app_id=#{appId}")
+	long countByAppId(@Param("appId") Long appId);
+
+
+	/**
 	 * 获取所有组件模型
 	 *
 	 * @return 组件模型列表

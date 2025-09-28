@@ -37,11 +37,8 @@ public class FcmService {
 
 
 	private final FcmMapper fcmMapper;
-
 	private final FcmConverter fcmConverter;
-
 	private final FciMapper fciMapper;
-
 	private final AppMapper appMapper;
 
 
@@ -199,5 +196,15 @@ public class FcmService {
 		return MD5.encode(json);
 	}
 
+
+	/**
+	 * 根据应用id统计组件模型数量
+	 *
+	 * @param appId 应用id
+	 * @return 组件模型数量
+	 */
+	public long countByAppId(Long appId) {
+		return fcmMapper.countByAppId(appId);
+	}
 
 }

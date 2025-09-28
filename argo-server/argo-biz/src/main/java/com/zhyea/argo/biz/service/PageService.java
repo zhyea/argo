@@ -245,4 +245,15 @@ public class PageService {
 		List<FciEntity> list = pageFciMapper.findByPageId(pageId);
 		return fciConverter.entityList2ItemList(list);
 	}
+
+
+	/**
+	 * 根据应用id统计应用页面数量
+	 *
+	 * @param appId 应用id
+	 * @return 应用页面数量
+	 */
+	public long countByAppId(Long appId) {
+		return pageMapper.countByAppId(appId);
+	}
 }

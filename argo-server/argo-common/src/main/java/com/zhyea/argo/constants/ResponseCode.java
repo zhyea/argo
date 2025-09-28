@@ -73,6 +73,9 @@ public enum ResponseCode implements CodeDescEnum {
 	 */
 	APP_DUPLICATE_ERROR(40100, "应用已存在"),
 	APP_ABSENT_ERROR(40101, "应用不存在"),
+	APP_CANNOT_BE_DELETED_WITH_PAGE(40102, "已绑定页面，无法删除应用"),
+	APP_CANNOT_BE_DELETED_WITH_FCM(40103, "已绑定组件模型，无法删除应用"),
+	APP_CANNOT_BE_DELETED_WITH_FCI(40104, "已绑定组件实例，无法删除应用"),
 
 
 	/**
@@ -115,8 +118,6 @@ public enum ResponseCode implements CodeDescEnum {
 	PROP_DATA_REQUEST_PARAMS_IS_BLANK(40352, "数据请求参数不能为空"),
 	PROP_DATA_REQUEST_HEADERS_IS_BLANK(40353, "数据请求header不能为空"),
 	PROP_DATA_VALUE_SELECTOR_IS_BLANK(40354, "数据值选择器不能为空"),
-
-
 
 
 	/**

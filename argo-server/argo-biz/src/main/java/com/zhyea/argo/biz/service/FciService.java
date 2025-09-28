@@ -147,4 +147,13 @@ public class FciService {
 	}
 
 
+	/**
+	 * 根据应用id查询组件实例数量
+	 *
+	 * @param appId 应用id
+	 * @return 组件实例数量
+	 */
+	public long countByAppId(Long appId) {
+		return fciMapper.countByAppId(appId);
+	}
 }

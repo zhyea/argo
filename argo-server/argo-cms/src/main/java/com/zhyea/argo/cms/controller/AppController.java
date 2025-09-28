@@ -1,7 +1,8 @@
 package com.zhyea.argo.cms.controller;
 
-import com.zhyea.argo.model.item.AppItem;
 import com.zhyea.argo.biz.service.AppService;
+import com.zhyea.argo.cms.action.AppMaintainAction;
+import com.zhyea.argo.model.item.AppItem;
 import com.zhyea.argo.model.request.app.*;
 import org.chobit.commons.model.response.PageResult;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
@@ -22,11 +23,13 @@ import java.util.List;
 public class AppController {
 
 
-	public final AppService appService;
+	private final AppService appService;
+	private final AppMaintainAction appMaintainAction;
 
 	@Autowired
-	public AppController(AppService appService) {
+	public AppController(AppService appService, AppMaintainAction appMaintainAction) {
 		this.appService = appService;
+		this.appMaintainAction = appMaintainAction;
 	}
 
 	/**
@@ -73,7 +76,7 @@ public class AppController {
 	 */
 	@PostMapping("/delete")
 	public boolean deleteById(@RequestBody @Validated AppIdRelateRequest request) {
-		return appService.delete(request.getAppId());
+		return appMaintainAction.delete(request.getAppId());
 	}
 
 

@@ -88,4 +88,14 @@ public interface FciMapper {
 	@Select("select count(id) from ag_cms_fci where deleted=0 and fcm_id=#{fcmId}")
 	int countByFcmId(@Param("fcmId") Long fcmId);
 
+
+	/**
+	 * 根据应用id查询组件实例数量
+	 *
+	 * @param appId 应用id
+	 * @return 组件实例数量
+	 */
+	@Select("select count(id) from ag_cms_fci where deleted=0 and app_id= #{appId}")
+	long countByAppId(@Param("appId") Long appId);
+
 }
