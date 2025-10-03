@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @ResponseWrapper
 @RestController
-@RequestMapping("/page")
+@RequestMapping("/api/page")
 public class PageApiController {
 
 
