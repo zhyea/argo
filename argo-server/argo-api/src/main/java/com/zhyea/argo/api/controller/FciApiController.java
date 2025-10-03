@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @ResponseWrapper
 @RestController
-@RequestMapping("/fci")
+@RequestMapping("/api/fci")
 public class FciApiController {
 
 
