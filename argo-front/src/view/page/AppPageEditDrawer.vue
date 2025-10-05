@@ -16,7 +16,7 @@
 					</el-form-item>
 
 					<el-form-item label="页面代码" prop="pageCode">
-						<el-input id="pageCode" readonly v-model="appPageForm.pageCode"/>
+						<el-input id="pageCode" disabled=true v-model="appPageForm.pageCode"/>
 					</el-form-item>
 
 					<el-form-item label="页面名称" prop="pageName">
