@@ -19,6 +19,10 @@
 						<el-input id="name" v-model="fciForm.name"/>
 					</el-form-item>
 
+					<el-form-item label="组件编码" prop="fciCode">
+						<el-input id="fciCode" disabled=true v-model="fciForm.fciCode"/>
+					</el-form-item>
+
 					<el-form-item label="使用范围" prop="usageScope">
 						<el-radio-group v-model="fciForm.usageScope" :disabled="isFciUsedInPage">
 							<el-radio v-for="e in usageScopeEnum"
@@ -119,6 +123,7 @@ const initData = {
 	fcmId: 0,
 	appId: 0,
 	name: '',
+	fciCode: '',
 	usageScope: 2,
 	switchFlag: 1,
 	dataBindFlag: 0,
