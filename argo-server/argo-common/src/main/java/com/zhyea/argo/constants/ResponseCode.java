@@ -66,6 +66,9 @@ public enum ResponseCode implements CodeDescEnum {
 	 */
 	USER_LOGIN_INFO_ERROR(30000, "用户名或密码错误"),
 	CONFIRM_PASSWORD_NOT_MATCH(30001, "确认密码与密码不一致"),
+	USER_NOT_FOUND(30002, "用户不存在"),
+	USERNAME_ALREADY_EXISTS(30003, "用户名已存在"),
+	CURRENT_PASSWORD_ERROR(30004, "当前密码错误"),
 
 
 	/**

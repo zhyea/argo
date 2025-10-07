@@ -1,6 +1,7 @@
 import fcmRoutes from '@/view/fcm/routes'
 import {appMaintainRoutes, appSubRoutes} from '@/view/app/routes'
 import appPageRoutes from '@/view/page/routes'
+import userRoutes from '@/view/user/routes'
 
 
 export default [
@@ -14,6 +15,7 @@ export default [
 		children: [
 			...appMaintainRoutes,
 			...fcmRoutes,
+			...userRoutes,
 		],
 	}, {
 		name: 'Login',
