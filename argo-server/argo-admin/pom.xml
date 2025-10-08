@@ -47,6 +47,12 @@
             <artifactId>zhy-spring-boot-autoconfigure</artifactId>
         </dependency>
 
+        <!--aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!--validator-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

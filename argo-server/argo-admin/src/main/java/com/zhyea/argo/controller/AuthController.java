@@ -1,6 +1,7 @@
 package com.zhyea.argo.controller;
 
 import com.zhyea.argo.action.UserLoginAction;
+import com.zhyea.argo.cms.annotation.OperationLog;
 import com.zhyea.argo.model.request.UserLoginRequest;
 import com.zhyea.argo.tools.auth.AuthContext;
 import org.chobit.spring.autoconfigure.rw.ResponseWrapper;
@@ -28,12 +29,14 @@ public class AuthController {
 	}
 
 
+	@OperationLog(type = "用户认证", description = "用户登录", recordParams = false, recordResult = false)
 	@PostMapping("/login")
 	public String login(@RequestBody @Validated UserLoginRequest request) throws Exception {
 		return loginAction.doLogin(request.getUsername(), request.getPassword());
 	}
 
 
+	@OperationLog(type = "用户认证", description = "用户登出", recordParams = false, recordResult = false)
 	@PostMapping("/logout")
 	public boolean logout() {
 		AuthContext.clear();

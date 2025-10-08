@@ -4,6 +4,7 @@ import lombok.Data;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,7 +16,8 @@ import java.io.Serializable;
 public class UserLoginRequest implements Serializable {
 
 
-	private static final long serialVersionUID = -5351030703447170573L;
+	@Serial
+    private static final long serialVersionUID = -5351030703447170573L;
 
 
 	/**
