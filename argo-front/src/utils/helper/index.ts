@@ -13,6 +13,7 @@ import {useTagStore} from "@/store/tag";
 import {Router} from "vue-router";
 import {cloneDeep} from "lodash-es";
 import menuItems from "@/view/home/menu";
+import moment from "moment";
 
 
 /**
@@ -249,4 +250,10 @@ export async function goToApp(appId: number, router: Router) {
 	tagStore.clearTags();
 	await router.push({path: '/app/' + appId});
 	//router.go(0);
+}
+
+
+export function formatDate(time: number) {
+	// 格式化当前时间
+	return moment(time).format('YYYY-MM-DD HH:mm:ss');
 }
