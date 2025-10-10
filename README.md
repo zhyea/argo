@@ -10,7 +10,7 @@ Argo 是一个前端组件管理系统。目前Argo可以提供如下能力：
 
 # License
 
-[GNU GENERAL PUBLIC LICENSE](https://raw.githubusercontent.com/zhyea/argo/refs/heads/main/LICENSE)
+[Apache 2.0 PUBLIC LICENSE](https://raw.githubusercontent.com/zhyea/argo/refs/heads/main/LICENSE)
 
 # Credits
 
